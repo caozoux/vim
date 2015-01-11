@@ -30,7 +30,7 @@ set rtp+=$GOROOT/misc/vim
 " 显示相关  
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-set cul "高亮光标所在行
+"set cul "高亮光标所在行
 "set cuc
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
 set go=             " 不要图形按钮  
@@ -229,7 +229,9 @@ set completeopt=preview,menu
 "自动保存
 set autowrite
 "set ruler                   " 打开状态栏标尺
-"set cursorline              " 突出显示当前行
+set cursorline              " 突出显示当前行
+hi CursorLine  cterm=NONE   ctermbg=yellow ctermfg=white
+hi CursorColumn cterm=NONE ctermbg=yellow ctermfg=white
 "set magic                   " 设置魔术
 set guioptions-=T           " 隐藏工具栏
 set guioptions-=m           " 隐藏菜单栏
