@@ -1,5 +1,5 @@
 "inoremap ( ()<LEFT>
-inoremap [ []<LEFT>
+"inoremap [ []<LEFT>
 "inoremap { {}<LEFT> 
 "inoremap { {<Enter><Enter>}<UP><RIGHT>
 
@@ -26,7 +26,7 @@ map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpda
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
-set tags+=/home/zoucao/bin/tag/kernel/tags
+set tags+=/home/wrsadmin/bin/tag/ti_kernel3.14x/tags
 "set tags+=/home/sdh/caozoux/r44b/linux/kernel/tags
 "set tags+=/home/sdh/caozoux/tags
 "
@@ -45,6 +45,7 @@ let Tlist_Inc_Winwidth=0
 "-- WinManager setting --
 let g:winManagerWindowLayout='FileExplorer|TagList'
 
+
 " -- MiniBufferExplorer --
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
@@ -62,6 +63,7 @@ if has("cscope")
    elseif $CSCOPE_DB != ""        
         cs add $CSCOPE_DB        
    endif
+   "cscope -Rbq
    cs add /home/sdh/caozoux/r44b/linux/kernel/cscope.out
    set csverb    
 endif
@@ -93,10 +95,17 @@ let showmarks_ignore_type = "hqm"
 let showmarks_hlline_lower = 1
 let showmarks_hlline_upper = 1 
 
-set expandtab
+"vimwiki
+let g:vimwiki_use_mouse = 1
+let g:vimwiki_list = [{'path': '~/.vim/vimwiki/',
+            \ 'path_html': '~/.vim/vimwiki/html/',
+            \ 'html_header': '~/.vim/vimwiki/template/header.tpl',}]
+
+"set expandtab
 set tabstop=4
 set shiftwidth=4
-set softtabstop=4
+"tab = 4 space
+"set softtabstop=4
 set autoindent
 set smartindent
 "显示换行符
@@ -117,7 +126,7 @@ autocmd FileType python　set omnifunc=pythoncomplete#Complete
 autocmd FileType python runtime! autoload/pythoncomplete.vim
 
 "set list if filetype is patch 
-autocmd FileType diff set list
+"autocmd FileType diff set list
 
 " run file .py
 map <F6> :make clean<CR><CR><CR>
@@ -125,3 +134,12 @@ map <F7> :make<CR><CR><CR> :copen<CR><CR>
 "map <F8> :make bootimage<CR><CR><CR> :copen<CR><CR>
 map <F9> :cn<CR>
 map <F2> :w<CR><CR><CR>
+
+map <C_c> <ESC>
+map <C_x> <ESC>:wq
+inoremap <C-j> <DOWN>
+inoremap <C-k> <UP>
+inoremap <C-h> <LEFT>
+inoremap <C-l> <RIGHT>
+inoremap <C-d> <RIGHT><DEL>
+map <C-m> <ESC>"ap<ESC>
