@@ -142,4 +142,4 @@ inoremap <C-k> <UP>
 inoremap <C-h> <LEFT>
 inoremap <C-l> <RIGHT>
 inoremap <C-d> <RIGHT><DEL>
-map <C-m> <ESC>"ap<ESC>
+map <C-n> <ESC>"ap<ESC>
