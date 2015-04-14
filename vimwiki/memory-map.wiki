@@ -1,0 +1,12 @@
+在平台的Linux启动过程中，平台底层源码会初始化一个IOTABLE。
+通常的调用堆栈如下: 
+machine_XXX.map_io()-> 
+iotable_init() -> 
+arch/arm/mm/mmu.c:alloc_init_section()
+
+第二种情况
+----------
+驱动通过ioremap_XXX()(定义位于"arch/arm/include/asm/io.h")把物理地址映射成为虚拟地址。通过阅读代码'arch/arm/mm/ioremap.c:__arm_ioremap_pfn()'，发现其流程大致如下：首先通过'get_vm_area(size, VM_IOREMAP)'获取一个空闲的虚拟内存区域，然后通过remap_area_section()把物理地址映射到这片内存区域。 对比mmu.c:alloc_init_section() 和 ioremap.c:remap_area_sections()，发现他们的工作内容基本一致，唯一的区别就是每次ioremap返回的虚拟地址，是随机不固定的。
+第三种情况
+----------
+在NOMMU的情况下，物理地址就是虚拟地址，"arm/arm/mm/nommu.c:__arm_ioremap()"，此函数直接返回物理地址。

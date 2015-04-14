@@ -1,0 +1,125 @@
+/ {
+    compatible = "acme,coyotes-revenge";
+    #address-cells = <1>;
+    #size-cells = <1>;
+    interrupt-parent = <&intc>;
+
+    cpus {
+        #address-cells = <1>;
+        #size-cells = <0>;
+        cpu@0 {
+            compatible = "arm,cortex-a9";
+            reg = <0>;
+        };
+        cpu@1 {
+            compatible = "arm,cortex-a9";
+            reg = <1>;
+        };
+    };
+
+    serial@101f0000 {
+        compatible = "arm,pl011";
+        reg = <0x101f0000 0x1000 >;
+        interrupts = < 1 0 >;
+    };
+
+    serial@101f2000 {
+        compatible = "arm,pl011";
+        reg = <0x101f2000 0x1000 >;
+        interrupts = < 2 0 >;
+    };
+
+    gpio@101f3000 {
+        compatible = "arm,pl061";
+        reg = <0x101f3000 0x1000
+               0x101f4000 0x0010>;
+        interrupts = < 3 0 >;
+    };
+
+    intc: interrupt-controller@10140000 {
+        compatible = "arm,pl190";
+        reg = <0x10140000 0x1000 >;
+        interrupt-controller;
+        #interrupt-cells = <2>;
+    };
+
+    spi@10115000 {
+        compatible = "arm,pl022";
+        reg = <0x10115000 0x1000 >;
+        interrupts = < 4 0 >;
+    };
+
+    external-bus {
+        #address-cells = <2>
+        #size-cells = <1>;
+        ranges = <0 0  0x10100000   0x10000     // Chipselect 1, Ethernet
+                  1 0  0x10160000   0x10000     // Chipselect 2, i2c controller
+                  2 0  0x30000000   0x1000000>; // Chipselect 3, NOR Flash
+
+        ethernet@0,0 {
+            compatible = "smc,smc91c111";
+            reg = <0 0 0x1000>;
+            interrupts = < 5 2 >;
+        };
+
+        i2c@1,0 {
+            compatible = "acme,a1234-i2c-bus";
+            #address-cells = <1>;
+            #size-cells = <0>;
+            reg = <1 0 0x1000>;
+            interrupts = < 6 2 >;
+            rtc@58 {
+                compatible = "maxim,ds1338";
+                reg = <58>;
+                interrupts = < 7 3 >;
+            };
+        };
+
+        flash@2,0 {
+            compatible = "samsung,k8f1315ebm", "cfi-flash";
+            reg = <2 0 0x4000000>;
+        };
+    };
+};
+roott结点"/"的compatible 属性compatible = "acme,coyotes-revenge";定义了系统的名称，它的组织形式为：<manufacturer>,<model>。Linux内核透过root结点"/"的compatible 属性即可判断它启动的是什么machine。
+在.dts文件的每个设备，都有一个compatible 属性，compatible属性用户驱动和设备的绑定。compatible 属性是一个字符串的列表，列表中的第一个字符串表征了结点代表的确切设备，形式为"<manufacturer>,<model>"，其后的字符串表征可兼容的其他设备。可以说前面的是特指，后面的则涵盖更广的范围。如在arch/arm/boot/dts/vexpress-v2m.dtsi中的Flash结点：
+
+flash@0,00000000 {
+     compatible = "arm,vexpress-flash", "cfi-flash";
+     reg = <0 0x00000000 0x04000000>,
+     <1 0x00000000 0x04000000>;
+     bank-width = <4>;
+ };
+
+ == compatible ==
+    flash@0,00000000 {  
+     compatible = "arm,vexpress-flash", "cfi-flash";  
+     reg = <0 0x00000000 0x04000000>,  
+     <1 0x00000000 0x04000000>;  
+     bank-width = <4>;  
+    }; 
+        ompatible属性的第2个字符串"cfi-flash"明显比第1个字符串"arm,vexpress-flash"涵盖的范围更广。
+    再比如，Freescale MPC8349 SoC含一个串口设备，它实现了国家半导体（National Semiconductor）的ns16550 寄存器接口。则MPC8349串口设备的compatible属性为compatible = "fsl,mpc8349-uart", "ns16550"。其中，fsl,mpc8349-uart指代了确切的设备， ns16550代表该设备与National Semiconductor 的16550 UART保持了寄存器兼容。
+    接下来root结点"/"的cpus子结点下面又包含2个cpu子结点，描述了此machine上的2个CPU，并且二者的compatible 属性为"arm,cortex-a9"。
+    注意cpus和cpus的2个cpu子结点的命名，它们遵循的组织形式为：<name>[@<unit-address>]，<>中的内容是必选项，[]中的则为可选项。name是一个ASCII字符串，用于描述结点对应的设备类型，如3com Ethernet适配器对应的结点name宜为ethernet，而不是3com509。如果一个结点描述的设备有地址，则应该给出@unit-address。多个相同类型设备结点的name可以一样，只要unit-address不同即可，如本例中含有cpu@0、cpu@1以及serial@101f0000与serial@101f2000这样的同名结点。设备的unit-address地址也经常在其对应结点的reg属性中给出。ePAPR标准给出了结点命名的规范。
+
+== reg ==
+    <name>[@<unit-address>]
+    可寻址的设备使用如下信息来在Device Tree中编码地址信息：
+
+    reg
+    #address-cells
+    #size-cells
+        address为1个或多个32位的整型（即cell），而length则为cell的列表或者为空（若#size-cells = 0）。address 和 length 字段是可变长的，父结点的#address-cells和#size-cells分别决定了子结点的reg属性的address和length字段的长度
+       
+== range ==
+        ranges = <0 0  0x10100000   0x10000     // Chipselect 1, Ethernet
+                  1 0  0x10160000   0x10000     // Chipselect 2, i2c controller
+                  2 0  0x30000000   0x1000000>; // Chipselect 3, NOR Flash
+        anges是地址转换表，其中的每个项目是一个子地址、父地址以及在子地址空间的大小的映射。映射表中的子地址、父地址分别采用子地址空间的#address-cells和父地址空间的#address-cells大小。对于本例而言，子地址空间的#address-cells为2，父地址空间的#address-cells值为1，因此0 0  0x10100000   0x10000的前2个cell为external-bus后片选0上偏移0，第3个cell表示external-bus后片选0上偏移0的地址空间被映射到CPU的0x10100000位置，第4个cell表示映射的大小为0x10000。ranges的后面2个项目的含义可以类推。
+        
+== interrupt ==
+#interrupt-cells – 与#address-cells 和 #size-cells相似，它表明连接此中断控制器的设备的interrupts属性的cell大小
+interrupt-parent – 设备结点透过它来指定它所依附的中断控制器的phandle，当结点没有指定interrupt-parent 时，则从父级结点继承。
+interrupts – 用到了中断的设备结点透过它指定中断号、触发方法等，具体这个属性含有多少个cell，由它依附的中断控制器结点的#interrupt-cells属性决定。而具体每个cell又是什么含义，一般由驱动的实现决定
+

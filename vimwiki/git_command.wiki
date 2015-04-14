@@ -1,0 +1,6 @@
+* am
+* commit
+* branch
+* checkout
+* request-pull
+*

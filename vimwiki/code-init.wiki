@@ -1,0 +1,73 @@
+* kernel start
+== struct data ==
+    447 DT_MACHINE_START(VEXPRESS_DT, "ARM-Versatile Express")
+    448     .dt_compat  = v2m_dt_match, 
+    449     .smp        = smp_ops(vexpress_smp_ops),
+    450     .smp_init   = smp_init_ops(vexpress_smp_init_ops),
+    451     .map_io     = v2m_dt_map_io, 
+    452     .init_early = v2m_dt_init_early,
+    453     .init_machine   = v2m_dt_init, 
+    454 MACHINE_END      
+== dumpstack ==
+=== v2m_dt_map_io ===
+    [    0.000000] [<800150ec>] (unwind_backtrace) from [<80011fec>] (show_stack+0x10/0x14)
+    [    0.000000] [<80011fec>] (show_stack) from [<8044cb54>] (dump_stack+0x70/0x8c)
+    [    0.000000] [<8044cb54>] (dump_stack) from [<805d37c8>] (v2m_dt_map_io+0x18/0x78)
+    [    0.000000] [<805d37c8>] (v2m_dt_map_io) from [<805d24d4>] (paging_init+0x7d0/0x994)
+    [    0.000000] [<805d24d4>] (paging_init) from [<805cee80>] (setup_arch+0x444/0x8e4)
+    [    0.000000] [<805cee80>] (setup_arch) from [<805cc81c>] (start_kernel+0x7c/0x364)
+    [    0.000000] [<805cc81c>] (start_kernel) from [<80008074>] (0x80008074)
+
+    static struct map_desc v2m_io_desc[] __initdata = { 
+        {   
+            .virtual    = V2M_PERIPH,
+            .pfn        = __phys_to_pfn(V2M_PA_CS7),
+            .length     = SZ_128K,
+            .type       = MT_DEVICE,
+        },  
+    };
+    
+    v2m_dt_map_io(void)
+    {
+        const char *map = NULL;
+
+        of_scan_flat_dt(v2m_dt_scan_memory_map, &map);
+
+        if (map && strcmp(map, "rs1") == 0)
+            iotable_init(&v2m_rs1_io_desc, 1);
+        else
+            iotable_init(v2m_io_desc, ARRAY_SIZE(v2m_io_desc));
+
+#if defined(CONFIG_SMP)
+        vexpress_dt_smp_map_io();
+#endif
+    }
+
+=== v2m_dt_init_early ===
+    [    0.000000] [<800150ec>] (unwind_backtrace) from [<80011fec>] (show_stack+0x10/0x14)
+    [    0.000000] [<80011fec>] (show_stack) from [<8044cb54>] (dump_stack+0x70/0x8c)
+    [    0.000000] [<8044cb54>] (dump_stack) from [<805d3734>] (v2m_dt_init_early+0x10/0x8c)
+    [    0.000000] [<805d3734>] (v2m_dt_init_early) from [<805cf248>] (setup_arch+0x80c/0x8e4)
+    [    0.000000] [<805cf248>] (setup_arch) from [<805cc81c>] (start_kernel+0x7c/0x364)
+    [    0.000000] [<805cc81c>] (start_kernel) from [<80008074>] (0x80008074)
+
+===v2m_dt_init_early===
+    [    0.000000] [<800150ec>] (unwind_backtrace) from [<80011fec>] (show_stack+0x10/0x14)
+    [    0.000000] [<80011fec>] (show_stack) from [<8044cb54>] (dump_stack+0x70/0x8c)
+    [    0.000000] [<8044cb54>] (dump_stack) from [<80022024>] (warn_slowpath_common+0x64/0x88)
+    [    0.000000] [<80022024>] (warn_slowpath_common) from [<80022064>] (warn_slowpath_null+0x1c/0x24)
+    [    0.000000] [<80022064>] (warn_slowpath_null) from [<805d3778>] (v2m_dt_init_early+0x54/0x8c)
+    [    0.000000] [<805d3778>] (v2m_dt_init_early) from [<805cf248>] (setup_arch+0x80c/0x8e4)
+    [    0.000000] [<805cf248>] (setup_arch) from [<805cc81c>] (start_kernel+0x7c/0x364)
+    [    0.000000] [<805cc81c>] (start_kernel) from [<80008074>] (0x80008074)
+
+=== v2m_dt_init ===
+    nd_backtrace) from [<80011fec>] (show_stack+0x10/0x14)
+    [    0.074189] [<80011fec>] (show_stack) from [<8044cb54>] (dump_stack+0x70/0x8c)
+    [    0.074257] [<8044cb54>] (dump_stack) from [<805d354c>] (v2m_dt_init+0x8/0x30)
+    [    0.074296] [<805d354c>] (v2m_dt_init) from [<805ce600>] (customize_machine+0x1c/0x40)
+    [    0.074315] [<805ce600>] (customize_machine) from [<80008848>] (do_one_initcall+0xc4/0x178)
+    [    0.074344] [<80008848>] (do_one_initcall) from [<805ccc74>] (kernel_init_freeable+0x170/0x240)
+    [    0.074362] [<805ccc74>] (kernel_init_freeable) from [<80448758>] (kernel_init+0x8/0xec)
+    [    0.074378] [<80448758>] (kernel_init) from [<8000ee78>] (ret_from_fork+0x14/0x3c)
+

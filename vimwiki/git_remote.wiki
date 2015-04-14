@@ -1,0 +1,3 @@
+* brach git push
+= git push $branch origin =
+= git push -u =
