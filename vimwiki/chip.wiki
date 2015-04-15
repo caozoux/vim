@@ -1,0 +1,2 @@
+= struct irq_chip_generic *gc; =
+= struct irq_chip_type *ct; =
