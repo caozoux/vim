@@ -64,7 +64,7 @@ if has("cscope")
         cs add $CSCOPE_DB        
    endif
    "cscope -Rbq
-   cs add /home/sdh/caozoux/r44b/linux/kernel/cscope.out
+   cs add /home/wrsadmin/bin/tag/ti_kernel3.14x/cscope.out
    set csverb    
 endif
 map <F4> :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
@@ -125,6 +125,8 @@ set ofu=syntaxcomplete
 autocmd FileType python　set omnifunc=pythoncomplete#Complete 
 autocmd FileType python runtime! autoload/pythoncomplete.vim
 
+au BufNewFile,BufRead *.script,	setf script
+
 "set list if filetype is patch 
 "autocmd FileType diff set list
 
@@ -133,13 +135,17 @@ map <F6> :make clean<CR><CR><CR>
 map <F7> :make<CR><CR><CR> :copen<CR><CR>
 "map <F8> :make bootimage<CR><CR><CR> :copen<CR><CR>
 map <F9> :cn<CR>
-map <F2> :w<CR><CR><CR>
+map <F1> :w<CR><CR><CR>
 
 map <C_c> <ESC>
-map <C_x> <ESC>:wq
+map <C-x><C-x> <ESC>:wq<CR>
+map <C-x><C-a> <ESC>:q!<CR>
+"fold function
 inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>
 inoremap <C-h> <LEFT>
 inoremap <C-l> <RIGHT>
 inoremap <C-d> <RIGHT><DEL>
-map <C-n> <ESC>"ap<ESC>
+"map <C-m> <ESC>"ap<ESC> == entry
+map <C-n> <ESC>"ap<ESC> 
+
