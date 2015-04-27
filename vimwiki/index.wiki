@@ -1,7 +1,9 @@
-* [[Tasks]]
+[[*]] [[Tasks]]
 * [[ProjectGutenberg]]
 * [[kernel]]
 * [[shell]]
 * [[git]]
 * [[english]]
+* [[vim]]
+* [[work-env]]
 

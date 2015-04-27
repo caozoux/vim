@@ -4,7 +4,7 @@
 
 * memory
     * [[memory-map]]
-    
+
 * irq
 	在linux里，中断处理分为顶半（top half），底半(bottom half)，在顶半里处理优先
 	级比较高的事情，要求占用中断时间尽量的短，在处理完成后，就激活底半，有底半处
@@ -16,6 +16,8 @@
 	是在process上下文，因此可以执行可能sleep的操作。
 	* [[chip]]
 	* [[thread_irq]]
+	* [[gpio-irq]]
+	* [[irq-disabe]]
 * sdio
 	* bus,driver,device
 		sdio_bus_match
@@ -41,3 +43,11 @@
 				return ret;
 			}
 		= sdio_remove_func =
+* [[kernel-config]]
+* [[RCU]]
+   数据同步,RCU适用于需要频繁的读取数据，而相应修改数据并不多的情景
+* [[wifi]]
+* [[resource]]
+* [[mem_region]]
+* [[gpio]]
+* [[spinlock]]
