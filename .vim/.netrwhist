@@ -1,3 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/home/zoucao/work/cach/D0i3/BaytrailF4DC56AFsleep_wakuplog'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/export/disk1T1/bsp_work/wrlinux/wrlinux7/meta/kernel-3.14.x/meta/cfg/kernel-cache/features/ti'
+let g:netrw_dirhist_2='/export/disk1T1/bsp_work/wrlinux/wrlinux7/meta/kernel-3.14.x/meta/cfg/kernel-cache/bsp/ti-am335x'
+let g:netrw_dirhist_3='/export/disk1T1/bsp_work/TI_AM335X/kernel-3.14.x/drivers/cpuidle'
+let g:netrw_dirhist_4='/home/wrsadmin/work/w-linx/wrlinux-x-new/wrlinux-x/layers/wr-bsps/fsl-t2xxx'
+let g:netrw_dirhist_5='/export/disk1T1/bsp_work/wrlinux/wrlinux6/prj/ti-am335x/bitbake_build/tmp/work/ti_am335x-wrs-linux-gnueabi/linux-windriver/3.10-r0/linux/arch/arm/mach-omap2'
+let g:netrw_dirhist_6='/home/wrsadmin/github/melinux/driver_module/testdriver/gpio'
+let g:netrw_dirhist_7='/export/disk1T1/bsp_work/TI_AM335X/kernel-3.14.x/drivers/of'
+let g:netrw_dirhist_8='/home/wrsadmin/github/linux-stable/drivers/gpio'
