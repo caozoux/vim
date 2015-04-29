@@ -1,0 +1,9 @@
+:help ins-completion
+:help compl-omni
+:help 'omnifunc'
+:help i_CTRL-X_CTRL-O
+:help ins-completion-menu
+:help popupmenu-keys
+:help 'completeopt'
+:help compl-omni-filetypes
+:help omnicppcomplete.txt

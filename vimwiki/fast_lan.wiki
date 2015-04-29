@@ -1,0 +1,140 @@
+
+	:let {variable} = {expression}
+
+	:while {condition}
+	:  {statements}
+	:endwhile
+
+	:for i in range(1, 4)
+	:  echo "count is" i
+	:endfor
+	
+
+	b:name		variable local to a buffer
+	w:name		variable local to a window
+	g:name		global variable (also in a function)
+	v:name		variable predefined by Vim
+
+	:unlet s:count
+	:unlet! s:count
+	
+
+	:if !exists("s:call_count")
+	:  let s:call_count = 0
+	:endif
+	:let s:call_count = s:call_count + 1
+	:echo "called" s:call_count "times"
+	
+	
+	\t		<Tab>
+	\n		<NL>, line break
+	\r		<CR>, <Enter>
+	\e		<Esc>
+	\b		<BS>, backspace
+	\"		"
+	\\		\, backslash
+	\<Esc>		<Esc>
+	\<C-W>		CTRL-W
+	
+
+	a + b		add
+	a - b		subtract
+	a * b		multiply
+	a / b		divide
+	a % b		modulo
+	
+
+	:if {condition}
+	   {statements}
+	:endif
+	
+
+	:if {condition}
+	   {statements}
+	:else
+	   {statements}
+	:endif
+	
+
+	:if {condition}
+	   {statements}
+	:elseif {condition}
+	   {statements}
+	:endif
+	
+
+	a == b		equal to
+	a != b		not equal to
+	a >  b		greater than
+	a >= b		greater than or equal to
+	a <  b		less than
+	a <= b		less than or equal to
+	
+
+	:if str =~ " "
+	:  echo "str contains a space"
+	:endif
+	:if str !~ '\.$'
+	:  echo "str does not end in a full stop"
+	:endif
+	
+
+	:continue		Jump back to the start of the while loop; the
+				loop continues.
+	:break			Jump forward to the ":endwhile"; the loop is
+				discontinued.
+				
+	
+	":execute" command allows executing the result of an expression.  This is a
+	very powerful way to build commands and execute them.
+   	An example is to jump to a tag, which is contained in a variable: >
+
+	:execute "tag " . tag_name
+	
+
+	:call search("Date: ", "W")
+	:let line = getline(".")
+	:let repl = substitute(line, '\a', "*", "g")
+	:call setline(".", repl)
+	
+
+
+	:let alist = ['aap', 'mies', 'noot']
+	:let alist = []
+	:call add(alist, 'foo')
+	:call add(alist, 'bar')
+	:echo alist
+	:echo alist + ['foo', 'bar']
+<	['foo', 'bar', 'foo', 'bar'] ~
+
+Or, if you want to extend a List directly: >
+
+	:let alist = ['one']
+	:call extend(alist, ['two', 'three'])
+	:echo alist
+<	['one', 'two', 'three'] ~
+
+Notice that using add() will have a different effect: >
+
+	:let alist = ['one']
+	:call add(alist, ['two', 'three'])
+	:echo alist
+<	['one', ['two', 'three']] ~
+
+	:let alist = ['one', 'two', 'three']
+	:for n in alist
+	:  echo n
+	:endfor
+	
+
+
+
+	:let uk2nl = {'one': 'een', 'two': 'twee', 'three': 'drie'}
+	
+
+
+	:try
+	:   read ~/templates/pascal.tmpl
+	:catch /E484:/
+	:   echo "Sorry, the Pascal template file cannot be found."
+	:endtry

@@ -1,0 +1,76 @@
+ Yue,
+
+Please help merge the following patch for WRL7 kernel to enable fsl-b4xxx bsp.
+There are 2 parts in this pull-request.
+
+1.fsl-sdk 1.7 related patch
+
+fsl-b4xxx bsp is based on fsl sdk 1.7, the bsp should have same kernel patch as sdk 1.7.
+
+Please create branches for fsl-b4xxx:
+
+standard/fsl/sdk-1-7/fsl-b4xxx
+based on standard/fsl/sdk-1-7/base
+
+standard/preempt-rt/fsl/sdk-1-7/fsl-t2xxx
+based on standard/preempt-rt/fsl/sdk-1-7/base
+
+standard/cgl/fsl/sdk-1-7/fsl-t2xxx
+based on standard/cgl/fsl/sdk-1-7/base
+
+Then apply following kernel patch for all sdk 1.7 related branch.
+
+The following changes since commit 8aa5e473084505ce2236a566c3a6a1a923d44dc9:
+
+  Merge branch 'standard/base' into standard/fsl/sdk-1-7/base (2015-04-03 09:59:31 -0400)
+
+are available in the git repository at:
+
+
+  pek-git.wrs.com:/git/users/ljiang0/kernel-3.14.x standard/fsl/sdk-1-7/base
+
+for you to fetch changes up to 409cbc590976d2b86957ff004d9150df670558e2:
+
+  powerpc:dts:b4qds:Adjust the NOR flash size to 64M (2015-04-14 13:47:28 +0800)
+
+----------------------------------------------------------------
+Jiang Lu (2):
+      powerpc:dts:b4qds:Add missing devices in dts
+      powerpc:dts:b4qds:Adjust the NOR flash size to 64M
+
+ arch/powerpc/boot/dts/b4qds.dtsi | 74 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 73 insertions(+), 1 deletion(-)
+
+
+2.meta
+The following changes since commit 33c7737209af4fc4639687eaf9f1b6e71adfae72:
+
+  enable powerclamp for broadwell-DE (2015-03-30 13:24:45 +0800)
+
+are available in the git repository at:
+
+  pek-git.wrs.com:/git/users/ljiang0/kernel-3.14.x meta
+
+for you to fetch changes up to 6563ac5e59da5f4462f8d4a585c8d27f132b87ef:
+
+  meta:Add fsl-b4xxx bsp (2015-04-14 11:08:53 +0800)
+
+----------------------------------------------------------------
+Jiang Lu (1):
+      meta:Add fsl-b4xxx bsp
+
+ meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx-cgl.scc        |  10 ++++++++
+ meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx-preempt-rt.scc |  10 ++++++++
+ meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx-standard.scc   |  10 ++++++++
+ meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx.cfg            | 156 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx.scc            |   9 +++++++
+ 5 files changed, 195 insertions(+)
+ create mode 100644 meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx-cgl.scc
+ create mode 100644 meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx-preempt-rt.scc
+ create mode 100644 meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx-standard.scc
+ create mode 100644 meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx.cfg
+ create mode 100644 meta/cfg/kernel-cache/bsp/fsl-b4xxx/fsl-b4xxx.scc
+
+
+Thanks
+Jiang Lu 

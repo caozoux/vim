@@ -1,0 +1,50 @@
+* struct [[gpio_chip]]
+* [[gpio_sysfs]]
+* init-achitectur
+	[<c0017f1c>] (unwind_backtrace) from [<c0012dbc>] (show_stack+0x20/0x24)
+	[<c0012dbc>] (show_stack) from [<c0817654>] (dump_stack+0x74/0xcc)
+	[<c0817654>] (dump_stack) from [<c03d8dc4>] (gpiochip_add+0x24/0x2fc)
+	[<c03d8dc4>] (gpiochip_add) from [<c03dc2b0>] (omap_gpio_probe+0x424/0x71c)
+	[<c03dc2b0>] (omap_gpio_probe) from [<c0492bdc>] (platform_drv_probe+0x28/0x58)
+	[<c0492bdc>] (platform_drv_probe) from [<c04914c0>] (driver_probe_device+0x124/0x24c)
+	[<c04914c0>] (driver_probe_device) from [<c04916d8>] (__device_attach+0x50/0x54)
+	[<c04916d8>] (__device_attach) from [<c048f848>] (bus_for_each_drv+0x54/0x9c)
+	[<c048f848>] (bus_for_each_drv) from [<c0491350>] (device_attach+0x80/0x98)
+	[<c0491350>] (device_attach) from [<c0490918>] (bus_probe_device+0x94/0xb8)
+	[<c0490918>] (bus_probe_device) from [<c048eaa0>] (device_add+0x3f8/0x4fc)
+	[<c048eaa0>] (device_add) from [<c05d2d38>] (of_device_add+0x40/0x48)
+	[<c05d2d38>] (of_device_add) from [<c05d3460>] (of_platform_device_create_pdata+0x88/0xc0)
+	[<c05d3460>] (of_platform_device_create_pdata) from [<c05d358c>] (of_platform_bus_create+0xf4/0x178)
+	[<c05d358c>] (of_platform_bus_create) from [<c05d35e8>] (of_platform_bus_create+0x150/0x178)
+	[<c05d35e8>] (of_platform_bus_create) from [<c05d367c>] (of_platform_populate+0x6c/0xac)
+	[<c05d367c>] (of_platform_populate) from [<c0b818d8>] (pdata_quirks_init+0x3c/0x4c)
+	[<c0b818d8>] (pdata_quirks_init) from [<c0b8169c>] (omap_generic_init+0x14/0x20)
+	[<c0b8169c>] (omap_generic_init) from [<c0b73008>] (customize_machine+0x24/0x48)
+	[<c0b73008>] (customize_machine) from [<c0008a40>] (do_one_initcall+0xfc/0x158)
+	[<c0008a40>] (do_one_initcall) from [<c0b6fd7c>] (kernel_init_freeable+0x1ac/0x2b4)
+	[<c0b6fd7c>] (kernel_init_freeable) from [<c0810a58>] (kernel_init+0x18/0xfc)
+	[<c0810a58>] (kernel_init) from [<c000eed8>] (ret_from_fork+0x14/0x20)
+
+
+* achitctectur
+	= blank =
+	    bank->chip.request = omap_gpio_request;
+		bank->chip.free = omap_gpio_free;    
+		bank->chip.direction_input = gpio_input;
+		bank->chip.get = gpio_get;
+		bank->chip.direction_output = gpio_output;
+		bank->chip.set_debounce = gpio_debounce;
+		bank->chip.set = gpio_set;
+		bank->chip.to_irq = omap_gpio_to_irq;
+		if (bank->is_mpuio) {
+			bank->chip.label = "mpuio";
+			if (bank->regs->wkup_en)  
+				bank->chip.dev = &omap_mpuio_device.dev;
+			bank->chip.base = OMAP_MPUIO(0);
+		} else {
+			bank->chip.label = "gpio";
+			bank->chip.base = gpio;
+			gpio += bank->width;
+		}
+		bank->chip.ngpio = bank->width;
+		gpiochip_add(&bank->chip); 

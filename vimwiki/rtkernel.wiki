@@ -1,0 +1,13 @@
+= spin_lock_irqsave(lock, flags) =                                                                                                                            
+    do {                         \                                                                                                                                            
+        typecheck(unsigned long, flags);     \                                                                                                                                
+        flags = 0;               \                                                                                                                                            
+        spin_lock(lock);             \                                                                                                                                        
+    } while (1)
+
+= spin_lock =
+	static inline void spin_lock(spinlock_t *lock) 
+	{
+		raw_spin_lock(&lock->rlock);
+	}
+

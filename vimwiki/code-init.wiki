@@ -1,4 +1,5 @@
 * kernel start
+	* [[DT_MACHINE_START-MACHINE_START]]
 	* [[of_propert]]
 == struct data ==
     447 DT_MACHINE_START(VEXPRESS_DT, "ARM-Versatile Express")
@@ -19,13 +20,13 @@
     [    0.000000] [<805cee80>] (setup_arch) from [<805cc81c>] (start_kernel+0x7c/0x364)
     [    0.000000] [<805cc81c>] (start_kernel) from [<80008074>] (0x80008074)
 
-    static struct map_desc v2m_io_desc[] __initdata = { 
-        {   
+    static struct map_desc v2m_io_desc[] __initdata = {
+        {
             .virtual    = V2M_PERIPH,
             .pfn        = __phys_to_pfn(V2M_PA_CS7),
             .length     = SZ_128K,
             .type       = MT_DEVICE,
-        },  
+        },
     };
     
     v2m_dt_map_io(void)

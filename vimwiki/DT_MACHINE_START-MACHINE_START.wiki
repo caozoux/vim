@@ -1,0 +1,59 @@
+= DT_MACHINE_START =
+	DT_MACHINE_START(VEXPRESS_DT, "ARM-Versatile Express")
+		.dt_compat  = v2m_dt_match,
+		.smp        = smp_ops(vexpress_smp_ops),
+		.smp_init   = smp_init_ops(vexpress_smp_init_ops),
+		.map_io     = v2m_dt_map_io,
+		.init_early = v2m_dt_init_early,
+		.init_machine   = v2m_dt_init,
+	MACHINE_END
+
+= MACHINE_START =
+	MACHINE_START(VEXPRESS, "ARM-Versatile Express")
+		.atag_offset    = 0x100,
+		.smp        = smp_ops(vexpress_smp_ops),
+		.map_io     = v2m_map_io,
+		.init_early = v2m_init_early,
+		.init_irq   = v2m_init_irq,
+		.init_time  = v2m_timer_init,
+		.init_machine   = v2m_init,
+	MACHINE_END
+= create platform bus/dev/drv = 
+== int of_platform_populate(struct device_node *root, ==
+			const struct of_device_id *matches,
+			const struct of_dev_auxdata *lookup,
+			struct device *parent)
+ * of_platform_populate() - Populate platform_devices from device tree data
+ * @root: parent of the first level to probe or NULL for the root of the tree
+ * @matches: match table, NULL to use the default
+ * @lookup: auxdata table for matching id and platform_data with device nodes
+ * @parent: parent to hook devices from, NULL for toplevel
+ *
+ * Similar to of_platform_bus_probe(), this function walks the device tree
+ * and creates devices from nodes.  It differs in that it follows the modern
+ * convention of requiring all device nodes to have a 'compatible' property,
+ * and it is suitable for creating devices which are children of the root
+ * node (of_platform_bus_probe will only create children of the root which
+ * are selected by the @matches argument).
+ *
+ * New board support should be using this function instead of
+ * of_platform_bus_probe().
+ *
+ * Returns 0 on success, < 0 on failure.
+{
+	struct device_node *child;
+	int rc = 0;
+
+	root = root ? of_node_get(root) : of_find_node_by_path("/");
+	if (!root)
+		return -EINVAL;
+
+	for_each_child_of_node(root, child) {
+		rc = of_platform_bus_create(child, matches, lookup, parent, true);
+		if (rc)
+			break;
+	}
+
+	of_node_put(root);
+	return rc;
+}

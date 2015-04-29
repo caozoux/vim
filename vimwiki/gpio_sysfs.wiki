@@ -1,0 +1,1 @@
+/sys/class/export与unexport 控制的gpio的映射，可以控制其方向、高低及触发方式输入echo N > /sys/class/gpio/export

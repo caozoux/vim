@@ -1,0 +1,24 @@
+local_irq_enable->arch_local_irq_disable->arch_local_irq_restore
+
+arch/arm/include/asm/irqflags.h
+138 static inline unsigned long arch_local_save_flags(void)
+139 {
+140     unsigned long flags;
+141     asm volatile(
+142         "   mrs %0, " IRQMASK_REG_NAME_R "  @ local_save_flags"
+143         : "=r" (flags) : : "memory", "cc");
+144     return flags;
+145 }   
+146 
+147 /*
+148  * restore saved IRQ & FIQ state
+149  */ 
+150 static inline void arch_local_irq_restore(unsigned long flags)
+151 {       
+152     asm volatile(
+153         "   msr " IRQMASK_REG_NAME_W ", %0  @ local_irq_restore"
+154         :
+155         : "r" (flags)
+156         : "memory", "cc");
+157 }
+

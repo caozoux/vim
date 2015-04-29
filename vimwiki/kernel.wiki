@@ -51,3 +51,5 @@
 * [[mem_region]]
 * [[gpio]]
 * [[spinlock]]
+* [[smp]]
+* [[dbg]]
