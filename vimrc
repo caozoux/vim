@@ -21,6 +21,14 @@ let OmniCpp_DisplayMode=1
 let OmniCpp_ShowScopeInAbbr=1
 let OmniCpp_ShowAccess=1 
 
+
+"supertab
+let g:SuperTabRetainCompletionType=2
+" 0 - 不记录上次的补全方式
+" " 1 - 记住上次的补全方式,直到用其他的补全命令改变它
+" " 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
+let g:SuperTabDefaultCompletionType="<C-X><C-O>"
+
 "--ctags setting--
 map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
@@ -149,3 +157,5 @@ inoremap <C-d> <RIGHT><DEL>
 "map <C-m> <ESC>"ap<ESC> == entry
 map <C-n> <ESC>"ap<ESC> 
 
+"unmap <C-m>
+"inoremap <C-;> <TAB>
