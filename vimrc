@@ -1,4 +1,4 @@
-"inoremap ( ()<LEFT>
+
 "inoremap [ []<LEFT>
 "inoremap { {}<LEFT> 
 "inoremap { {<Enter><Enter>}<UP><RIGHT>
@@ -140,6 +140,9 @@ map <F1> :w<CR><CR><CR>
 map <C_c> <ESC>
 map <C-x><C-x> <ESC>:wq<CR>
 map <C-x><C-a> <ESC>:q!<CR>
+map <C-x><C-f> <ESC>zf%
+map <C-x><C-f>f <ESC>zr
+
 "fold function
 inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>
