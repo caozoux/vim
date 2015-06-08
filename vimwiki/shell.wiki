@@ -1,1 +1,3 @@
 * [[sed_command]] 
+* 检查是否异步
+	 cat /proc/slabinfo | grep kio

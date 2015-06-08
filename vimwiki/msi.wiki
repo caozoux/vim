@@ -1,0 +1,47 @@
+printkble_msix
+zz pci_msi_check_device
+zz pci_msix_table_size
+zz msix_capability_init
+zz msix_map_region
+zz msix_setup_entries
+zz alloc_msi_entry
+zz alloc_msi_entry
+zz alloc_msi_entry
+zz default_setup_msi_irqs
+zz write_msi_msg
+zz __write_msi_msg
+zz write_msi_msg
+zz __write_msi_msg
+zz write_msi_msg
+zz __write_msi_msg
+zz msix_program_entries
+zz msix_mask_irq
+zz __msix_mask_irq
+zz msix_mask_irq
+zz __msix_mask_irq
+zz msix_mask_irq
+zz __msix_mask_irq
+zz pci_intx_for_msi
+e1000e 0000:00:00.0: eth4: (PCI Express:2.5GT/s:Width x1) 00:1b:21:39:b2:d8
+e1000e 0000:00:00.0: eth4: Intel(R) PRO/1000 Network Connection
+e1000e 0000:00:00.0: eth4: MAC: 3, PHY: 8, PBA No: E42641-005
+
+
+zz pci_enable_msi_block
+zz pci_msi_check_device
+zz arch_msi_check_device
+zz msi_capability_init
+zz msi_set_enable
+zz alloc_msi_entry
+zz msi_capable_mask
+zz msi_mask
+zz msi_mask_irq
+zz __msi_mask_irq
+zz arch_setup_msi_irqs
+zz arch_setup_msi_irq
+---> set up msi irq
+zz write_msi_msg
+zz __write_msi_msg
+zz populate_msi_syfs
+zz pci_intx_for_msi
+zz msi_set_enable

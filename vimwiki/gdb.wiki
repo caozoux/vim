@@ -1,0 +1,14 @@
+(gdb) break 16 <-------------------- 设置断点，在源程序第16行处。 
+info break <-------------------- 查看断点信息。
+r <--------------------- 运行程序，run命令简写 
+n <--------------------- 单条语句执行，next命令简写。
+(gdb) c <--------------------- 继续运行程序，continue命令简写。 
+(gdb) p i <--------------------- 打印变量i的值，print命令简写。 
+(gdb) bt <--------------------- 查看函数堆栈。
+(gdb) finish <--------------------- 退出函数。 
+
+
+set  args -> set the args to the app
+show args -> show the args
+
+http://blog.csdn.net/dadalan/article/details/3758025

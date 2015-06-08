@@ -6,4 +6,7 @@
 * [[english]]
 * [[vim]]
 * [[work-env]]
+* [[Makefile]]
+* [[gdb]]
+* [[linux_program]]
 

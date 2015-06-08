@@ -146,8 +146,8 @@ map <F9> :cn<CR>
 map <F1> :w<CR><CR><CR>
 
 map <C_c> <ESC>
-map <C-x><C-x> <ESC>:wq<CR>
-map <C-x><C-a> <ESC>:q!<CR>
+map <C-x><C-x> <ESC>:w<CR>
+map <C-x><C-a> <ESC>:wq<CR>
 "fold function
 inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>

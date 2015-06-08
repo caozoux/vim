@@ -1,0 +1,1 @@
+/wrlinux/configure --enable-board=ti-am335x --enable-kernel=standard --enable-rootfs=glibc_std --enable-jobs=16 

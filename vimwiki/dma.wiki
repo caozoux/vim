@@ -1,0 +1,68 @@
+* edma
+= emda =
+== edma mode ==
+（1） CPU发起的EDMA数据传输（非同步方式）：需要传输时，CPU设置ESR寄存器的相应位为1，从而触发一个EDMA事件的产生，事件对应的通道参数被送往地址硬件并且完成相应的处理，这种非同步方式的实时数据传输无需设定EER寄存器；
+（2）事件触发方式EDMA数据传输（同步方式）：ER寄存器保存外设发送过来的事件，一旦CPU设置EER寄存器的相应位为1后，ER中的事件才会提交给事件编码器（Event Encoder），并且进一步引起相关的传输参数的发送给地址产生硬件；如果EER中对应于某事件的位没有置1，则ER寄存器中的事件将保留，一旦置1则触发EDMA的传输，这种特性可以应用到EDMA Chain传输，需要EER和CCER结合使用。
+PS:ESR：事件位置寄存器；EER：事件使能寄存器
+[[EDMA有两种类型的数据传输：1D和2D的（OPT.2DS和OPT.DDS标示源地址和目的地址的数据传输类型，即有4种组合方式）。]]
+EDMA传输过程的源/目的地址的修改：在每次同步事件触发EDMA数据传输，并且传输完成后，需要对源/目的地址进行更新；地址的更新方式由SUM/DUM进行设定，并且和2DS、2DD以及FS是密切相关的。
+== arch/arm/common/edma.c ==
+/* Resource alloc/free:  dma channels, parameter RAM slots */
+
+ /**
+ * edma_alloc_channel - allocate DMA channel and paired parameter RAM
+ * @channel: specific channel to allocate; negative for "any unmapped channel"
+ * @callback: optional; to be issued on DMA completion or errors
+ * @data: passed to callback
+ * @eventq_no: an EVENTQ_* constant, used to choose which Transfer
+ *	Controller (TC) executes requests using this channel.  Use
+ *	EVENTQ_DEFAULT unless you really need a high priority queue.
+ *
+ * This allocates a DMA channel and its associated parameter RAM slot.
+ * use of hardware events mapped to that channel.  When the channel will
+ * be used only for software triggering or event chaining, channels not
+ * mapped to hardware events (or mapped to unused events) are preferable.
+ *
+ * DMA transfers start from a channel using edma_start(), or by
+ * chaining.  When the transfer described in that channel's parameter RAM
+ * slot completes, that slot's data may be reloaded through a link.
+ *
+ * DMA errors are only reported to the @callback associated with the
+ * channel driving that transfer, but transfer completion callbacks can
+ * be sent to another channel under control of the TCC field in
+ * the option word of the transfer's parameter RAM set.  Drivers must not
+ * use DMA transfer completion callbacks for channels they did not allocate.
+ * (The same applies to TCC codes used in transfer chaining.)
+ *
+ * Returns the number of the channel, else negative errno.
+ */
+ 
+
+* ofdma
+ CPU: 0 PID: 1 Comm: systemd Not tainted 3.14.29ltsi-rt22-WR7.0.0.0_preempt-rt #93
+ [<c0017860>] (unwind_backtrace) from [<c0013d24>] (show_stack+0x20/0x24)
+ [<c0013d24>] (show_stack) from [<c080a3b4>] (dump_stack+0x24/0x28)
+ [<c080a3b4>] (dump_stack) from [<c00224b0>] (edma_alloc_channel+0x2c/0x238)
+ [<c00224b0>] (edma_alloc_channel) from [<c03e2010>] (edma_alloc_chan_resources+0x48/0xe0)
+ [<c03e2010>] (edma_alloc_chan_resources) from [<c03df49c>] (dma_chan_get+0x60/0xf4)
+ [<c03df49c>] (dma_chan_get) from [<c03e0744>] (__dma_request_channel+0x114/0x250)
+ [<c03e0744>] (__dma_request_channel) from [<c03e1514>] (of_dma_simple_xlate+0x50/0x64)
+ [<c03e1514>] (of_dma_simple_xlate) from [<c03e1704>] (of_dma_request_slave_channel+0x120/0x1dc)
+ [<c03e1704>] (of_dma_request_slave_channel) from [<c03df618>] (dma_request_slave_channel_reason+0x44/0x54)
+ [<c03df618>] (dma_request_slave_channel_reason) from [<c03df640>] (dma_request_slave_channel+0x18/0x24)
+ [<c03df640>] (dma_request_slave_channel) from [<c0419838>] (serial8250_request_dma+0x80/0x2ec)
+ [<c0419838>] (serial8250_request_dma) from [<c0418db0>] (serial8250_do_startup+0x274/0x940)
+ [<c0418db0>] (serial8250_do_startup) from [<c041ac40>] (omap_8250_startup+0x7c/0x14c)
+ [<c041ac40>] (omap_8250_startup) from [<c04194a0>] (serial8250_startup+0x24/0x30)
+ [<c04194a0>] (serial8250_startup) from [<c0413f74>] (uart_startup.part.9+0x64/0x1c4)
+ [<c0413f74>] (uart_startup.part.9) from [<c0414a68>] (uart_open+0x10c/0x198)
+ [<c0414a68>] (uart_open) from [<c03f7594>] (tty_open+0x170/0x608)
+ [<c03f7594>] (tty_open) from [<c014912c>] (chrdev_open+0xcc/0x18c)
+ [<c014912c>] (chrdev_open) from [<c0142e44>] (do_dentry_open+0x1e8/0x2b8)
+ [<c0142e44>] (do_dentry_open) from [<c0143438>] (finish_open+0x44/0x5c)
+ [<c0143438>] (finish_open) from [<c01526ec>] (do_last.isra.42+0x700/0xc98)
+ [<c01526ec>] (do_last.isra.42) from [<c0152d48>] (path_openat+0xc4/0x64c)
+ [<c0152d48>] (path_openat) from [<c015426c>] (do_filp_open+0x3c/0x98)
+ [<c015426c>] (do_filp_open) from [<c01440d0>] (do_sys_open+0x114/0x1d8)
+ [<c01440d0>] (do_sys_open) from [<c01441c0>] (SyS_open+0x2c/0x30)
+ [<c01441c0>] (SyS_open) from [<c000f840>] (ret_fast_syscall+0x0/0x30)

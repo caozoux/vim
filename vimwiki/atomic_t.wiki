@@ -1,0 +1,3 @@
+= func =
+ extern atomic_t         kgdb_active; 
+atomic_read

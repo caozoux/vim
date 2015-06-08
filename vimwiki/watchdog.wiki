@@ -1,0 +1,100 @@
+* work
+	zz omap_wdt_start
+	zz omap_wdt_set_timer
+	zz omap_wdt_reload
+	zz omap_wdt_enable
+	zz omap_wdt_ping
+	zz omap_wdt_reload
+	zz omap_wdt_stop
+	zz omap_wdt_disable
+
+	[<bf000324>] (omap_wdt_disable [omap_wdt]) from [<bf000520>] (omap_wdt_stop+0x4c/0x70 [omap_wdt])
+	[<bf000520>] (omap_wdt_stop [omap_wdt]) from [<c0519e40>] (watchdog_stop+0x58/0xa8)
+	[<c0519e40>] (watchdog_stop) from [<c0519f58>] (watchdog_release+0xc8/0xe8)
+	[<c0519f58>] (watchdog_release) from [<c01393e0>] (__fput+0xa4/0x260)
+	[<c01393e0>] (__fput) from [<c0139600>] (____fput+0x18/0x1c)
+	[<c0139600>] (____fput) from [<c0057f84>] (task_work_run+0xa4/0xd0)
+	[<c0057f84>] (task_work_run) from [<c0012300>] (do_work_pending+0xd4/0xd8)
+	[<c0012300>] (do_work_pending) from [<c000ed20>] (work_pending+0xc/0x20)
+
+* watchdog user api
+	while (1) {
+		ioctl(fd, WDIOC_KEEPALIVE, 0);
+		sleep(10);
+	}
+	
+    int timeout = 45;
+    ioctl(fd, WDIOC_SETTIMEOUT, &timeout);
+    printf("The timeout was set to %d seconds\n", timeout);
+    
+    ioctl(fd, WDIOC_GETTIMEOUT, &timeout);
+    printf("The timeout was is %d seconds\n", timeout);
+    
+Note that the pretimeout is the number of seconds before the time
+when the timeout will go off.  It is not the number of seconds until
+    pretimeout = 10;
+    ioctl(fd, WDIOC_SETPRETIMEOUT, &pretimeout);
+    ioctl(fd, WDIOC_GETPRETIMEOUT, &timeout);
+    printf("The pretimeout was is %d seconds\n", timeout);
+    ioctl(fd, WDIOC_GETTIMELEFT, &timeleft);
+    printf("The timeout was is %d seconds\n", timeleft);
+    
+All watchdog drivers are required return more information about the system,
+some do temperature, fan and power level monitoring, some can tell you
+the reason for the last reboot of the system.  The GETSUPPORT ioctl is
+available to ask what the device can do:
+
+	struct watchdog_info ident;
+	ioctl(fd, WDIOC_GETSUPPORT, &ident);
+
+the fields returned in the ident struct are:
+
+        identity		a string identifying the watchdog driver
+	firmware_version	the firmware version of the card if available
+	options			a flags describing what the device supports
+
+	WDIOF_OVERHEAT		Reset due to CPU overheat
+	WDIOF_FANFAULT		Fan failed
+	WDIOF_EXTERN1		External relay 1
+	WDIOF_EXTERN2		External relay 2
+	WDIOF_POWERUNDER	Power bad/power fault
+	WDIOF_CARDRESET		Card previously reset the CPU
+	WDIOF_POWEROVER		Power over voltage
+	
+	WDIOF_KEEPALIVEPING	Keep alive ping reply
+	WDIOF_SETTIMEOUT	Can set/get the timeout
+	WDIOF_PRETIMEOUT	Pretimeout (in seconds), get/set
+
+* data
+	/** struct watchdog_ops - The watchdog-devices operations
+	 *
+	 * @owner:	The module owner.
+	 * @start:	The routine for starting the watchdog device.
+	 * @stop:	The routine for stopping the watchdog device.
+	 * @ping:	The routine that sends a keepalive ping to the watchdog device.
+	 * @status:	The routine that shows the status of the watchdog device.
+	 * @set_timeout:The routine for setting the watchdog devices timeout value.
+	 * @get_timeleft:The routine that get's the time that's left before a reset.
+	 * @ref:	The ref operation for dyn. allocated watchdog_device structs
+	 * @unref:	The unref operation for dyn. allocated watchdog_device structs
+	 * @ioctl:	The routines that handles extra ioctl calls.
+	 *
+	 * The watchdog_ops structure contains a list of low-level operations
+	 * that control a watchdog device. It also contains the module that owns
+	 * these operations. The start and stop function are mandatory, all other
+	 * functions are optonal.
+	 */
+	struct watchdog_ops {
+		struct module *owner;
+		/* mandatory operations */
+		int (*start)(struct watchdog_device *);
+		int (*stop)(struct watchdog_device *);
+		/* optional operations */
+		int (*ping)(struct watchdog_device *);
+		unsigned int (*status)(struct watchdog_device *);
+		int (*set_timeout)(struct watchdog_device *, unsigned int);
+		unsigned int (*get_timeleft)(struct watchdog_device *);
+		void (*ref)(struct watchdog_device *);
+		void (*unref)(struct watchdog_device *);
+		long (*ioctl)(struct watchdog_device *, unsigned int, unsigned long);
+	};

@@ -1,0 +1,18 @@
+* files
+** modules.alias
+** modules.builtin
+** modules.dep
+	依赖关系
+** Linux内核模块自动加载机制 .
+http://www.cnblogs.com/image-eye/archive/2011/08/19/2145858.html
+当总线驱动程序为扫描到的设备建立设备对象时，会初始化kobject对象，并把它连接到设备树中，同时会调用kobject_uevent()把这个(添加新设备的)事件，以及相关信息(包括设备的VendorID,DeviceID等信息。)通过netlink发送到用户态中。在用户态的udevd检测到这个事件，就可以根据这些信息，打开/lib/modules/uname-r/modules.alias文件，根据
+
+alias pci:v000010ECd00008138sv*sd*bc*sc*i* 8139too
+
+得知这个新扫描到的设备驱动模块为8139too。于是modprobe就知道要加载8139too这个模块了，同时modprobe根据 modules.dep文件发现，8139too依赖于mii.ko，如果mii.ko没有加载，modprobe就先加载mii.ko，接着再加载 8139too.ko。
+
+** MODULE_DEVICE_TABLE
+该宏生成一个名为__mod_pci_device_table的局部变量，该变量指向第二个参数。内核构建时，depmod程序会在所有模块中搜索符号__mod_pci_device_table，把数据（设备列表）从模块中抽出，添加到映射文件/lib/modules/KERNEL_VERSION/modules.pcimap中，当depmod结束之后，所有的PCI设备连同他们的模块名字都被该文件列出。当内核告知热插拔系统一个新的PCI设备被发现时，热插拔系统使用modules.pcimap文件来找寻恰当的驱动程序。 
+
+MODULE_DEVICE_TABLE的第一个参数是设备的类型，如果是USB设备，那自然是usb（如果是PCI设备，那将是pci，这两个子系统用同一个宏来注册所支持的设备）。后面一个参数是设备表，这个设备表的最后一个元素是空的，用于标识结束。例：假如代码定义了USB_SKEL_VENDOR_ID是 0xfff0，USB_SKEL_PRODUCT_ID是0xfff0，也就是说，当有一个设备接到集线器时，usb子系统就会检查这个设备的 vendor ID和product ID，如果他们的值是0xfff0时，那么子系统就会调用这个模块作为设备的驱动
+	 

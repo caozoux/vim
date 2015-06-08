@@ -1,3 +1,7 @@
 * dynamic
 	EXTRA_CFLAGS += -DDEBUG
+	cflags-y := -DDEBUG
 	
+* early_printk
+	init/main.c
+	pr_notice("Kernel command line: %s\n", boot_command_line);

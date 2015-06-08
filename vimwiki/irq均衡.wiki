@@ -1,0 +1,2 @@
+echo f > /proc/irq/117/smp_affinity
+--> all cpu work well
