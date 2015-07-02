@@ -2,3 +2,4 @@
 * [[fast_lan]]
 * [[debug-script]]
 * [[complete]]
+* [[cscope]]

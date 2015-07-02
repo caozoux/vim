@@ -45,3 +45,9 @@ zz __write_msi_msg
 zz populate_msi_syfs
 zz pci_intx_for_msi
 zz msi_set_enable
+
+
+= msi interrupt =
+msi interrupt is triget by software interrupt.
+
+pci_msi_write()-> data.address data.data, the address tells the pci device the address that it should write, the data tell the device the value it should write when it want triget a interrupt

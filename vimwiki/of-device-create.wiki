@@ -1,0 +1,36 @@
+201 static struct platform_device *of_platform_device_create_pdata(                                                
+202                     struct device_node *np,                                                                    
+203                     const char *bus_id,                                                                        
+204                     void *platform_data,                                                                       
+205                     struct device *parent)                                                                     
+206 {            
+207     struct platform_device *dev;                                                                               
+208                                                                                                                
+209     if (!of_device_is_available(np))                                                                           
+210         return NULL;                                                                                           
+211                                                                                                                
+212     dev = of_device_alloc(np, bus_id, parent);                                                                 
+213     if (!dev)                                                                                                  
+214         return NULL;                                                                                           
+215                                                                                                                
+216 #if defined(CONFIG_MICROBLAZE)                                                                                 
+217     dev->archdata.dma_mask = 0xffffffffUL;                                                                     
+218 #endif                                                                                                         
+219     dev->dev.coherent_dma_mask = DMA_BIT_MASK(32);                                                             
+220     if (!dev->dev.dma_mask)                                                                                    
+221         dev->dev.dma_mask = &dev->dev.coherent_dma_mask;                                                       
+222     dev->dev.bus = &platform_bus_type;                                                                         
+223     dev->dev.platform_data = platform_data;                                                                    
+224                                                                                                                
+225     /* We do not fill the DMA ops for platform devices by default.                                             
+226      * This is currently the responsibility of the platform code                                               
+227      * to do such, possibly using a device notifier                                                            
+228      */                                                                                                        
+229                                                                                                                
+230     if (of_device_add(dev) != 0) {                                                                             
+231         platform_device_put(dev);                                                                              
+232         return NULL;                                                                                           
+233     }                                                                                                          
+234                                                                                                                
+235     return dev;                                                                                                
+236 }        

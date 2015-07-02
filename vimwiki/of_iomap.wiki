@@ -1,0 +1,5 @@
+6       node = of_find_compatible_node(NULL, NULL, "arm,vexpress-sysreg");
+347     if (node) {
+348         vexpress_sysreg_base = of_iomap(node, 0);
+349         vexpress_sysreg_setup(node);
+350     }

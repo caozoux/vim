@@ -1,0 +1,2 @@
+/export/pxeboot/vlm-boards/21233
+128.224.165.20

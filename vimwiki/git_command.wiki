@@ -3,4 +3,5 @@
 * branch
 * checkout
 * request-pull
-*
+* [[merge]]
+* [[format-patch]]

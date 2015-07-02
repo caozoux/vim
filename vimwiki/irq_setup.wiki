@@ -1,0 +1,46 @@
+irq_set_chained_handler
+
+struct irq_chip armada_msi_irq_chip = {
+	170     .name           = "axp_msi_irq",
+	171     .irq_ack        = armada_msi_nop,
+	172     .irq_enable         = unmask_msi_irq,
+	173     .irq_disable        = mask_msi_irq,
+	174     .irq_mask       = mask_msi_irq,
+	175     .irq_unmask         = unmask_msi_irq,
+	176 #ifdef CONFIG_SMP
+	177     .irq_set_affinity   = armada_msi_set_affinity,
+	178 #endif
+	179 };
+
+irq_set_chip_and_handler(irq, &armada_msi_irq_chip, handle_edge_irq);
+#irq的硬件操作
+
+
+<------------------分配irq 号
+   /* Register IRQ sources */
+    for (irq = 0; irq < IRQ_AURORA_MSI_START ; irq++) {
+        irq_set_chip(irq, &axp_irq_chip);
+        irq_set_chip_data(irq, 0); 
+        irq_set_handler(irq, handle_level_irq);
+        irq_set_status_flags(irq,IRQ_LEVEL);
+#ifdef CONFIG_SMP
+    /* Network Per CPU IRQ are treated as shared IRQs */
+        if ((irq < MAX_PER_CPU_IRQ_NUMBER) && (irq != IRQ_AURORA_MP) &&
+            ((irq < IRQ_AURORA_GBE0_FIC) || (irq > IRQ_AURORA_GBE3_SIC))) {
+            irq_set_chip_and_handler(irq, &axp_irq_chip,
+                handle_percpu_devid_irq);
+            irq_set_percpu_devid(irq);
+        }
+#endif
+        set_irq_flags(irq, IRQF_VALID);
+    }   
+
+#ifdef CONFIG_SMP
+    /* Set the default affinity to the boot cpu. */
+    cpumask_clear(irq_default_affinity);
+    cpumask_set_cpu(smp_processor_id(), irq_default_affinity);
+
+    axp_ipi_init();
+#endif
+    axp_gpio_init();
+

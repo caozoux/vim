@@ -34,8 +34,9 @@ map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpda
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
-set tags+=/home/wrsadmin/bin/tag/ti_kernel3.14x/tags
-"set tags+=/home/sdh/caozoux/r44b/linux/kernel/tags
+"set tags+=/home/wrsadmin/bin/tag/ti_kernel3.14x/tags
+set tags+=/home/wrsadmin/bin/tag/common/tags
+set tags+=/home/wrsadmin/bin/tag/common/driver-of
 "set tags+=/home/sdh/caozoux/tags
 "
 "-- Taglist setting --
@@ -72,7 +73,7 @@ if has("cscope")
         cs add $CSCOPE_DB        
    endif
    "cscope -Rbq
-   cs add /home/wrsadmin/bin/tag/ti_kernel3.14x/cscope.out
+   "cs add /home/wrsadmin/bin/tag/ti_kernel3.14x/cscope.out
    set csverb    
 endif
 map <F4> :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>

@@ -1,0 +1,22 @@
+irq_domain_add_legacy() - Allocate and register a legacy revmap irq_domain.                                                                                                                      
+153  * @of_node: pointer to interrupt controller's device tree node.                                                                                                                                    
+154  * @size: total number of irqs in legacy mapping                                                                                                                                                    
+155  * @first_irq: first number of irq block assigned to the domain                                                                                                                                     
+156  * @first_hwirq: first hwirq number to use for the translation. Should normally                                                                                                                     
+157  *               be '0', but a positive integer can be used if the effective                                                                                                                        
+158  *               hwirqs numbering does not begin at zero.                                                                                                                                           
+159  * @ops: map/unmap domain callbacks                                                                                                                                                                 
+160  * @host_data: Controller private data pointer                                                                                                                                                      
+161  *                                                                                                                                                                                                  
+162  * Note: the map() callback will be called before this function returns                                                                                                                             
+163  * for all legacy interrupts except 0 (which is always the invalid irq for                                                                                                                          
+164  * a legacy controller).                                                                                                                                                                            
+165  */                                                                                                                                                                                                 
+166 struct irq_domain *irq_domain_add_legacy(struct device_node *of_node,                                                                                                                               
+167                      unsigned int size,                                                                                                                                                             
+168                      unsigned int first_irq,                                                                                                                                                        
+169                      irq_hw_number_t first_hwirq,                                                                                                                                                   
+170                      const struct irq_domain_ops *ops,                                                                                                                                              
+171                      void *host_data)                                                                                                                                                               
+172 {                           
+<------------------------create line irq desc

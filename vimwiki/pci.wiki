@@ -1,1 +1,3 @@
 * [[msi]]
+* [[pci-init]] 
+* [[pci-host]]

@@ -1,0 +1,3 @@
+SOCKS Host: localhost port: 9195
+No Proxy for:
+127.0.0.1

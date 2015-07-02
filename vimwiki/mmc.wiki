@@ -1,0 +1,9 @@
+# mke2fs /dev/mmcblk0p2
+# mkdir /mnt/sd
+# mount /dev/mmcblk0p2 /mnt/sd
+# tar -xfj fsl-p10xx-glibc-xxx-xxx-dist.tar.bz2 --numeric-owner \
+	/mnt/sd
+# cp fsl-p10xx-uImage-WRX.yxx_standard /mnt/sd/boot/uImage
+# cp p1010rdb_36b.dtb /mnt/sda1/boot
+# umount /mnt/sd
+# root=/dev/mmcblk0 rw console=ttyS0,115200 rootwait
