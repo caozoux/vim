@@ -8,5 +8,6 @@
 * [[work-env]]
 * [[Makefile]]
 * [[gdb]]
+* [[gcc]]
 * [[linux_program]]
 

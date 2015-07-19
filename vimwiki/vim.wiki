@@ -3,3 +3,4 @@
 * [[debug-script]]
 * [[complete]]
 * [[cscope]]
+* [[filetype]]

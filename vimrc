@@ -134,7 +134,7 @@ set ofu=syntaxcomplete
 autocmd FileType python　set omnifunc=pythoncomplete#Complete 
 autocmd FileType python runtime! autoload/pythoncomplete.vim
 
-au BufNewFile,BufRead *.script,	setf script
+au BufRead,BufNewFile *.patch set filetype=patch
 
 "set list if filetype is patch 
 "autocmd FileType diff set list

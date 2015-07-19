@@ -1,0 +1,5 @@
+# show curren filetype
+set filetype
+
+# enable file type
+au BufRead,BufNewFile *.mini set filetype=mini
