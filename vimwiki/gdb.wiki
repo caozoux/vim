@@ -12,3 +12,5 @@ set  args -> set the args to the app
 show args -> show the args
 
 http://blog.csdn.net/dadalan/article/details/3758025
+
+* [[gdb参数]]

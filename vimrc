@@ -35,8 +35,9 @@ imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :Tli
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
 "set tags+=/home/wrsadmin/bin/tag/ti_kernel3.14x/tags
-set tags+=/home/wrsadmin/bin/tag/common/tags
-set tags+=/home/wrsadmin/bin/tag/common/driver-of
+set tags+=/home/wrsadmin/bin/tag/common/linux_base-tags
+set tags+=/home/wrsadmin/bin/tag/common/driver_common/tags
+set tags+=/home/wrsadmin/bin/tag/common/linux_base_plat
 "set tags+=/home/sdh/caozoux/tags
 "
 "-- Taglist setting --
@@ -74,6 +75,7 @@ if has("cscope")
    endif
    "cscope -Rbq
    "cs add /home/wrsadmin/bin/tag/ti_kernel3.14x/cscope.out
+   cs add /home/wrsadmin/bin/cscope/cscope.out
    set csverb    
 endif
 map <F4> :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>

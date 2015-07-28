@@ -1,0 +1,10 @@
+cd ~/x264
+make uninstall
+make distclean
+./configure --enable-static --disable-opencl
+make
+make install
+
+
+git remote:
+origin	git://git.videolan.org/x264.git (fetch)

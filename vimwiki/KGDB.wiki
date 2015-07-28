@@ -1,3 +1,5 @@
+* [[startkgbd]]
+
 bitbake_build/tmp/sysroots/x86_64-linux/usr/bin/agent-proxy 4440^4441 0 /dev/ttyS0,115200
 telnet localhost 4440
 target remote localhost:4441

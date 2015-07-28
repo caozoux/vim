@@ -1,0 +1,6 @@
+git remote :
+origin	git://source.ffmpeg.org/ffmpeg.git (fetch)
+
+
+configure with h264:
+ ./configure --enable-shared --enable-gpl --enable-libx264  --extra-cflags=-I/usr/local/include --extra-ldflags=-L-L/usr/local/lib

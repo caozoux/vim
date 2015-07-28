@@ -5,6 +5,7 @@
 
 * memory
     * [[memory-map]]
+    * [[内存泄露]]
 
 * irq
 	在linux里，中断处理分为顶半（top half），底半(bottom half)，在顶半里处理优先
@@ -64,3 +65,6 @@
 * [[module-install]]
 * [[pci]]
 * [[bootcmd]]
+* [[workqueue]]
+* [[clk]]
+* [[platform-data]]
