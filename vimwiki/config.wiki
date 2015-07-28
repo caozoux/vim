@@ -1,0 +1,1 @@
+cat /proc/config.gz | gzip -d | grep KMEM

@@ -1,0 +1,2 @@
+* ignore file type
+	~/.onedrive/ignore_v2.ini

@@ -1,0 +1,15 @@
+# We trigger additional mismatches with less inlining
+# ifdef CONFIG_DEBUG_SECTION_MISMATCH
+# KBUILD_CFLAGS += $(call cc-option, -fno-inline-functions-called-once)
+# endif
+#
+# CONFIG_DEBUG_SECTION_MISMATCH这个宏本来是检测代码/数据段类型属性不匹配的，定义后同时有个功能是禁止将只有一个地方调用的函数变为inline函数。
+#
+#
+# ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
+# KBUILD_CFLAGS    += -Os
+# else
+# KBUILD_CFLAGS    += -O1
+# endif
+#
+# CONFIG_CC_OPTIMIZE_FOR_SIZE默认是不定义的，所以修改红色部分为-O1，优化级别为1级，只做基本的优化。

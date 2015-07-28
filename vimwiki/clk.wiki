@@ -1,0 +1,8 @@
+* [[clk-api]]
+* 通过一个宏DEFINE_CLK_RLX将这个clk_ops赋值给struct clk结构体中的ops
+* 每个struct clk应该对应一个struct clk_lookup结构，有了他，就可以通过设备名或者时钟源的名字来找到相应的struct clk结构，链表操作位于/drivers/clk/clkdev.c
+  将每一个clk_lookup通过clkdev_add注册到系统中，其实在clkdev_add函数中是这么实现的
+  就是将lookup节点添加到一个clocks为头的链表中去，其实相当于将struct clk添加到clocks链表中。
+* clk_get、clk_enable
+  通过/drivers/clk/clkdev.c文件中的clk_find函数在上面的clocks链表中找到匹配的clk_lookup，从而找到对应的struct clk，并返回struct clk
+  /drivers/clk/clk.c中的clk_enable最终调用的是clk中ops里的方法。

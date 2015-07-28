@@ -1,3 +1,9 @@
 SOCKS Host: localhost port: 9195
 No Proxy for:
 127.0.0.1
+
+ssh -D 9195 -qtfnN czou@ala-tuxlab.wrs.com
+proxy:
+SOCKS HOST: localhost 9195
+	SOCKS v5
+localhost, 127.0.0.1

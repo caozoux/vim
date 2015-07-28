@@ -1,0 +1,2 @@
+RM_APPENDED_DTB:
+使能device tree

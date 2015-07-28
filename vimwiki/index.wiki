@@ -1,4 +1,3 @@
-[[*]] [[Tasks]]
 * [[ProjectGutenberg]]
 * [[kernel]]
 * [[shell]]
@@ -10,4 +9,8 @@
 * [[gdb]]
 * [[gcc]]
 * [[linux_program]]
+* [[commad]]
+* [[ctags-cscope]]
+* [[video-audio]]
+* [[configure]]
 

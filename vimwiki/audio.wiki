@@ -1,0 +1,8 @@
+For HDMI
+
+omxplayer -o hdmi video.mp4
+
+For 3.5mm audio jack
+
+omxplayer -o local video.mp4
+

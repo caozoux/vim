@@ -1,0 +1,3 @@
+MACHINE_START -> 
+http://blog.csdn.net/sehrich/article/details/7208752
+machine_is_s3c410()        (machine_arch_type == MACH_TYPE_S3C2410)
