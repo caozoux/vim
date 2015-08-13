@@ -1,0 +1,11 @@
+int generic_handle_irq(unsigned int irq)
+309 {
+310         struct irq_desc *desc = irq_to_desc(irq);
+311 
+312         if (!desc)
+313                 return -EINVAL;
+314         generic_handle_irq_desc(irq, desc); ----->irq_set_chained_handler() 定义
+315         return 0;
+316 }
+317 EXPORT_SYMBOL_GPL(generic_handle_irq);
+318 

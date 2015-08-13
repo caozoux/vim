@@ -1,0 +1,28 @@
+* dump_stack
+[<c066e008>] (dump_stack+0x20/0x24) from [<c0069d1c>] (orion_nfc_irq_pio+0x2c/0x64)
+[<c0069d1c>] (orion_nfc_irq_pio+0x2c/0x64) from [<c00e56e0>] (handle_irq_event_percpu+0xb8/0x42c)
+[<c00e56e0>] (handle_irq_event_percpu+0xb8/0x42c) from [<c00e5aa0>] (handle_irq_event+0x4c/0x6c)
+[<c00e5aa0>] (handle_irq_event+0x4c/0x6c) from [<c00e8698>] (handle_level_irq+0xc4/0x10c)
+[<c00e8698>] (handle_level_irq+0xc4/0x10c) from [<c00e4db0>] (generic_handle_irq+0x44/0x54)
+[<c00e4db0>] (generic_handle_irq+0x44/0x54) from [<c000f7f0>] (handle_IRQ+0x68/0xbc)
+[<c000f7f0>] (handle_IRQ+0x68/0xbc) from [<c0008490>] (asm_do_IRQ+0x18/0x1c)
+[<c0008490>] (asm_do_IRQ+0x18/0x1c) from [<c0678914>] (__irq_svc+0x34/0x108)
+
+
+* set smp irq:
+ .irq_set_affinity   = armada_msi_set_affinity,
+
+ int armada_msi_set_affinity(struct irq_data *d, const struct cpumask *mask_val,bool force)
+ 158 {
+
+	199     cpumask_copy(d->affinity, mask_val);                                                          
+	200     d->node = cpumask_first(mask_val);                                                            
+	201     temp = MV_REG_READ(CPU_INT_SOURCE_CONTROL_REG(IRQ_AURORA_SHARE_INB_DB0));                     
+	202     temp &= ~0xf;                                                                                 
+	203     temp |= (*cpus_addr(*mask_val) & 0x0f) ;                                                      
+	204     printk("zz %s temp:%08x\n", __func__, temp);                                                  
+	205                                                                                                   
+	206     MV_REG_WRITE(CPU_INT_SOURCE_CONTROL_REG(IRQ_AURORA_SHARE_INB_DB0), temp);                     
+	207 #endif                                                                                            
+	208     return 0;                                                                                     
+	209 }        

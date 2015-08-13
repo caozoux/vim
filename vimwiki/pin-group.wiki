@@ -1,0 +1,56 @@
+nclude <linux/pinctrl/pinctrl.h>
+ 131 
+ 132 struct foo_group {
+ 133     const char *name;
+ 134     const unsigned int *pins;
+ 135     const unsigned num_pins;
+ 136 };
+ 137 
+ 138 static const unsigned int spi0_pins[] = { 0, 8, 16, 24 };
+ 139 static const unsigned int i2c0_pins[] = { 24, 25 };
+ 140 
+ 141 static const struct foo_group foo_groups[] = {
+ 142     {
+ 143         .name = "spi0_grp",
+ 144         .pins = spi0_pins,
+ 145         .num_pins = ARRAY_SIZE(spi0_pins),
+ 146     },
+ 147     {
+ 148         .name = "i2c0_grp",
+ 149         .pins = i2c0_pins,
+ 150         .num_pins = ARRAY_SIZE(i2c0_pins),
+ 151     },
+ 152 };
+ 153 
+ 154 
+ 155 static int foo_get_groups_count(struct pinctrl_dev *pctldev)
+ 156 {
+ 157     return ARRAY_SIZE(foo_groups);
+ 158 }
+ 159 
+ 160 static const char *foo_get_group_name(struct pinctrl_dev *pctldev,
+ 161                        unsigned selector)
+ 162 {
+ 163     return foo_groups[selector].name;
+ 164 }
+ 165 
+ 166 static int foo_get_group_pins(struct pinctrl_dev *pctldev, unsigned selector,
+ 167                    unsigned ** const pins,
+ 168                    unsigned * const num_pins)
+ 169 {
+ 170     *pins = (unsigned *) foo_groups[selector].pins;
+ 171     *num_pins = foo_groups[selector].num_pins;
+ 172     return 0;
+ 173 }
+ 174 
+ 175 static struct pinctrl_ops foo_pctrl_ops = {
+ 176     .get_groups_count = foo_get_groups_count,
+ 177     .get_group_name = foo_get_group_name,
+ 178     .get_group_pins = foo_get_group_pins,
+ 179 };
+
+ static struct pinctrl_desc foo_desc = {
+ 183        ...
+ 184        .pctlops = &foo_pctrl_ops,
+ 185 };
+

@@ -1,5 +1,7 @@
 * struct [[gpio_chip]]
 * [[gpio_sysfs]]
+* [[pinctrl]]
+* [[single-pinctrl]]
 * init-achitectur
 	[<c0017f1c>] (unwind_backtrace) from [<c0012dbc>] (show_stack+0x20/0x24)
 	[<c0012dbc>] (show_stack) from [<c0817654>] (dump_stack+0x74/0xcc)

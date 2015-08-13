@@ -1,0 +1,27 @@
+61 const struct pinctrl_pin_desc foo_pins[] = {
+  62       PINCTRL_PIN(0, "A8"),
+  63       PINCTRL_PIN(1, "B8"),
+  64       PINCTRL_PIN(2, "C8"),
+  65       ...
+  66       PINCTRL_PIN(61, "F1"),
+  67       PINCTRL_PIN(62, "G1"),
+  68       PINCTRL_PIN(63, "H1"),
+  69 };
+  70 
+  71 static struct pinctrl_desc foo_desc = {
+  72     .name = "foo",
+  73     .pins = foo_pins,
+  74     .npins = ARRAY_SIZE(foo_pins),
+  75     .maxpin = 63,
+  76     .owner = THIS_MODULE,
+  77 };
+  78 
+  79 int __init foo_probe(void)
+  80 {
+  81     struct pinctrl_dev *pctl;
+  82 
+  83     pctl = pinctrl_register(&foo_desc, <PARENT>, NULL);
+  84     if (!pctl)
+  85         pr_err("could not register foo pin driver\n");
+  86 }
+

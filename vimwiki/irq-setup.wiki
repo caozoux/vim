@@ -1,9 +1,10 @@
 * [[irq_setup]]
-
+* [[generic_handle_irq]]
+* [[handle_level_irq]]
+* handle_irq_event
+* handle_irq_event_percpu
 
 [8:entry-macro.S][9:entry-armv.S][10:entry-macro-multi.S]
-
-
 
   arch_irq_handler_default                                                                                                                                      
   7     get_irqnr_preamble r6, lr                                                                                                                                             
@@ -49,53 +50,11 @@
  45     .endm       
  
 
-[<c0011398>] (dump_backtrace+0x0/0x118) from [<c04d887c>] (dump_stack+0x18/0x20)
- r6:fbc21000 r5:f2039ec8 r4:fbc21fff r3:c005b5e0
- [<c04d8864>] (dump_stack+0x0/0x20) from [<c005b5f8>] (armada_msi_irq_handler+0x18/0x64)
- [<c005b5e0>] (armada_msi_irq_handler+0x0/0x64) from [<c009f76c>] (generic_handle_irq+0x2c/0x44)
-  r4:00000001
-  [<c009f740>] (generic_handle_irq+0x0/0x44) from [<c000e600>] (handle_IRQ+0x80/0xc4)
-  [<c000e580>] (handle_IRQ+0x0/0xc4) from [<c00081b0>] (asm_do_IRQ+0x10/0x18)
-   r5:20000113 r4:c006edbc
-   [<c00081a0>] (asm_do_IRQ+0x0/0x18) from [<c04e0874>] (__irq_svc+0x34/0xe8)
-   Exception stack(0xf2039e00 to 0xf2039e48)
-
-   Backtrace:
-   [<c0011398>] (dump_backtrace+0x0/0x118) from [<c04d887c>] (dump_stack+0x18/0x20)
-    r6:00000007
-	ADDRCONF(NETDEV_UP): eth6: link is not ready
-	8021q: adding VLAN 0 to HW filter on device eth6
-	 r5:00000000 r4:00000000 r3:00000005
-	 [<c04d8864>] (dump_stack+0x0/0x20) from [<c00130b0>] (handle_IPI+0x134/0x18c)
-	 [<c0012f7c>] (handle_IPI+0x0/0x18c) from [<c0008368>] (do_IPI+0x10/0x18)
-	  r6:fbc21000 r5:80000013 r4:c04e0324 r3:c0075658
-	  [<c0008358>] (do_IPI+0x0/0x18) from [<c04e0874>] (__irq_svc+0x34/0xe8)
-	  Exception stack(0xf229be88 to 0xf229bed0)
-
-
-
-	  [<c0011398>] (dump_backtrace+0x0/0x118) from [<c04d89fc>] (dump_stack+0x18/0x20)
-	   r6:c067e9c0 r5:00000060 r4:f2002c00 r3:00000001
-	   [<c04d89e4>] (dump_stack+0x0/0x20) from [<c005b66c>] (test_irq_handler+0x34/0x44)
-	   [<c005b638>] (test_irq_handler+0x0/0x44) from [<c00a0050>] (handle_irq_event_percpu+0x38/0x160)
-	   [<c00a0018>] (handle_irq_event_percpu+0x0/0x160) from [<c00a01c0>] (handle_irq_event+0x48/0x6c)
-	   [<c00a0178>] (handle_irq_event+0x0/0x6c) from [<c00a2ca8>] (handle_level_irq+0xdc/0x10c)
-	    r6:fbc21000 r5:00000000 r4:c067e9c0 r3:00022000
-		[<c00a2bcc>] (handle_level_irq+0x0/0x10c) from [<c009f898>] (generic_handle_irq+0x2c/0x44)
-		 r4:00000060 r3:c00a2bcc
-		 [<c009f86c>] (generic_handle_irq+0x0/0x44) from [<c000e600>] (handle_IRQ+0x80/0xc4)
-		 [<c000e580>] (handle_IRQ+0x0/0xc4) from [<c00081b0>] (asm_do_IRQ+0x10/0x18)
-		  r5:20000113 r4:c005ae64
-		  [<c00081a0>] (asm_do_IRQ+0x0/0x18) from [<c04e09f4>] (__irq_svc+0x34/0xe8)
-		  Exception stack(0xc0679f08 to 0xc0679f50)
-		  9f00:                   0003ec72 00000fa0 00000000 50e3e0e4 c25162b0 00000002
-		  9f20: c068f89c 00000000 0000406a 562f5842 00000000 c0679f74 0f539c38 c0679f50
-		  9f40: c008c7b4 c005ae64 20000113 ffffffff
-		  [<c005adf4>] (armadaxp_enter_idle+0x0/0xa4) from [<c03d2454>] (cpuidle_idle_call+0xb4/0x148)
-		   r5:c0678000 r4:c25162b0
-		   [<c03d23a0>] (cpuidle_idle_call+0x0/0x148) from [<c000ea94>] (cpu_idle+0x80/0xd4)
-		    r7:c0689eac r6:c04e842c r5:c06b21c4 r4:c0678000
-			[<c000ea14>] (cpu_idle+0x0/0xd4) from [<c04cb914>] (rest_init+0x64/0x80)
-			 r7:c0689ea4 r6:c2513380 r5:c066ec1c r4:c0686394
-			 [<c04cb8b0>] (rest_init+0x0/0x80) from [<c0642830>] (start_kernel+0x2b4/0x308)
-			 [<c064257c>] (start_kernel+0x0/0x308) from [<00008040>] (0x8040)
+[<c005b638>] (test_irq_handler+0x0/0x44) from [<c00a0050>] (handle_irq_event_percpu+0x38/0x160)
+[<c00a0018>] (handle_irq_event_percpu+0x0/0x160) from [<c00a01c0>] (handle_irq_event+0x48/0x6c)
+[<c00a0178>] (handle_irq_event+0x0/0x6c) from [<c00a2ca8>] (handle_level_irq+0xdc/0x10c)
+r6:fbc21000 r5:00000000 r4:c067e9c0 r3:00022000
+[<c00a2bcc>] (handle_level_irq+0x0/0x10c) from [<c009f898>] (generic_handle_irq+0x2c/0x44)
+r4:00000060 r3:c00a2bcc
+[<c009f86c>] (generic_handle_irq+0x0/0x44) from [<c000e600>] (handle_IRQ+0x80/0xc4)
+[<c000e580>] (handle_IRQ+0x0/0xc4) from [<c00081b0>] (asm_do_IRQ+0x10/0x18)

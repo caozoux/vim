@@ -1,0 +1,20 @@
+handle_simple_irq();  
+handle_level_irq();  电平中断流控处理程序
+handle_edge_irq();  边沿触发中断流控处理程序
+handle_fasteoi_irq();  需要eoi的中断处理器使用的中断流控处理程序
+handle_percpu_irq();  该irq只有单个cpu响应时使用的流控处理程序
+
+
+中断通用逻辑层  该层实现了对中断系统几个重要数据的管理，并提供了一系列的辅助管理函数。同时，该层还实现了中断线程的实现和管理，共享中断和嵌套中断的实现和管理，另外它还提供了一些接口函数，它们将作为硬件封装层和中断流控层以及驱动程序API层之间的桥梁，例如以下API：
+generic_handle_irq();
+irq_to_desc();
+irq_set_chip();
+irq_set_chained_handler();
+
+
+驱动程序API  该部分向驱动程序提供了一系列的API，用于向系统申请/释放中断，打开/关闭中断，设置中断类型和中断唤醒系统的特性等操作。驱动程序的开发者通常只会使用到这一层提供的这些API即可完成驱动程序的开发工作，其他的细节都由另外几个软件层较好地“隐藏”起来了，驱动程序开发者无需再关注底层的实现，这看起来确实是一件美妙的事情，不过我认为，要想写出好的中断代码，还是花点时间了解一下其他几层的实现吧。其中的一些API如下：
+enable_irq();
+disable_irq();
+disable_irq_nosync();
+request_threaded_irq();
+irq_set_affinity();

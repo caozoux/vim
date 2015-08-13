@@ -1,0 +1,27 @@
+tatic int foo_pin_config_group_set (struct pinctrl_dev *pctldev,
+ 251             unsigned selector,
+ 252             unsigned long config)
+ 253 {
+ 254     ...
+ 255 }
+ 256 
+ 257 static struct pinconf_ops foo_pconf_ops = {
+ 258     .pin_config_get = foo_pin_config_get,
+ 259     .pin_config_set = foo_pin_config_set,
+ 260     .pin_config_group_get = foo_pin_config_group_get,
+ 261     .pin_config_group_set = foo_pin_config_group_set,
+ 262 };
+ 263 
+ 264 /* Pin config operations are handled by some pin controller */
+ 265 static struct pinctrl_desc foo_desc = {
+ 266     ...
+ 267     .confops = &foo_pconf_ops,
+ 268 };
+ 269 
+ 270 Since some controllers have special logic for handling entire groups of pins
+ 271 they can exploit the special whole-group pin control function. The
+ 272 pin_config_group_set() callback is allowed to return the error code -EAGAIN,
+ 273 for groups it does not want to handle, or if it just wants to do some
+ 274 group-level handling and then fall through to iterate over all pins, in which
+ 275 case each individual pin will be treated by separate pin_config_set() calls as
+ 276 well.

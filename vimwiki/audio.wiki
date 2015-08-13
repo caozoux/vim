@@ -6,3 +6,5 @@ For 3.5mm audio jack
 
 omxplayer -o local video.mp4
 
+
+pcm设备中的C代表card，D代表device，c代表capture，p代表playback。当我们新增一个pcm声卡C的值会+1，D还是从0开始，可能只有c（pcmC1D0c 例如麦克风），可能只有p（pcmC1D0p 例如音响），可能同时存在c和p（pcmC1D0c pcmC1D0p ）。
