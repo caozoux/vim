@@ -1,0 +1,1 @@
+user_debug=1 或者 user_debug=31

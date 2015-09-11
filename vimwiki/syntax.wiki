@@ -1,0 +1,5 @@
+execute command:
+execute "normal Inew text \<Esc>"
+
+echo line('.')  当前行
+echo line('$')  整个buffer行

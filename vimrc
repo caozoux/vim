@@ -34,11 +34,9 @@ map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpda
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
-"set tags+=/home/wrsadmin/bin/tag/ti_kernel3.14x/tags
-set tags+=/home/wrsadmin/bin/tag/common/linux_base-tags
-set tags+=/home/wrsadmin/bin/tag/common/driver_common/tags
+set tags+=/home/wrsadmin/bin/tag/common/out/linux_base-tags
+set tags+=/home/wrsadmin/bin/tag/common/out/driver_common-tags
 set tags+=/home/wrsadmin/bin/tag/common/linux_base_plat
-"set tags+=/home/sdh/caozoux/tags
 "
 "-- Taglist setting --
 let Tlist_Ctags_Cmd='ctags'
@@ -67,17 +65,22 @@ if has("cscope")
    set csprg=/usr/bin/cscope     
    set csto=0                   
    set cst                     
-   set cscopequickfix=s-,c-,d-,i-,t-,e-   
+   set cscopequickfix=s-,c-,d-,i-,t-,e-
+   set nocsverb
    if filereadable("cscope.out")   
        cs add cscope.out        
    elseif $CSCOPE_DB != ""        
         cs add $CSCOPE_DB        
    endif
-   "cscope -Rbq
-   "cs add /home/wrsadmin/bin/tag/ti_kernel3.14x/cscope.out
-   cs add /home/wrsadmin/bin/cscope/cscope.out
-   set csverb    
+   cs add /home/wrsadmin/bin/tag/cscope.out
+   set csverb
+   let Cscope_OpenQuickfixWindow = 0
 endif
+
+set tags+=/home/wrsadmin/bin/tag/common/out/linux_base-tags
+set tags+=/home/wrsadmin/bin/tag/common/out/driver_common-tags
+set tags+=/home/wrsadmin/bin/tag/common/linux_base_plat
+
 map <F4> :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
 imap <F4> <ESC>:cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
 
@@ -145,12 +148,11 @@ au BufRead,BufNewFile *.patch set filetype=patch
 map <F6> :make clean<CR><CR><CR>
 map <F7> :make<CR><CR><CR> :copen<CR><CR>
 "map <F8> :make bootimage<CR><CR><CR> :copen<CR><CR>
+map <F8>> :cp<CR>
 map <F9> :cn<CR>
 map <F1> :w<CR><CR><CR>
 
 map <C_c> <ESC>
-map <C-x><C-x> <ESC>:w<CR>
-map <C-x><C-a> <ESC>:wq<CR>
 "fold function
 inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>
@@ -160,5 +162,12 @@ inoremap <C-d> <RIGHT><DEL>
 "map <C-m> <ESC>"ap<ESC> == entry
 map <C-n> <ESC>"ap<ESC> 
 
-"unmap <C-m>
-"inoremap <C-;> <TAB>
+map <C-x>w <ESC>:w<CR>
+map <C-x>x <ESC>:wq<CR>
+map <C-x>q <ESC>:q!<CR>
+map <C-x>z <ESC>:call Me_zf_funcs(1)<CR>
+map <C-x>p <ESC>:call Me_pr_func1(1)<CR>
+map <C-x>q <ESC>:q!<CR>
+
+"runtime /home/wrsadmin/github/vim/wind.vim
+highlight Folded ctermfg=0 ctermbg=7

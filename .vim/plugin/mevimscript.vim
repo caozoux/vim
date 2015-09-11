@@ -31,3 +31,18 @@ function! Me_pr_func2(type)
 	let s:count=1
 	execute "normal is:count ESC>"
 endfunction " 
+
+function! Me_Tag(TagType)
+	if a:TagType == "kernel"
+		set tags&
+		set tags+=/home/wrsadmin/bin/tag/common/out/linux_base-tags
+		set tags+=/home/wrsadmin/bin/tag/common/out/driver_common-tags
+		set tags+=/home/wrsadmin/bin/tag/common/linux_base_plat
+		cs reset
+   		cs add /home/wrsadmin/bin/tag/cscope.out
+	elseif a:TagType == "user"
+	endif
+	for tagname in a:tags
+		echo tagname
+	endfor
+endfunction

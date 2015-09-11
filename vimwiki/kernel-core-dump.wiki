@@ -1,0 +1,5 @@
+
+arm-none-eabi-objdump -Dz -S vmlinux >linux.dump
+
+KBUILD_CFLAGS   := -g -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
+最后执行“arm-none-eabi-objdump -Dz-S vmlinux >linux.dump”，由于加入了-g编译参数

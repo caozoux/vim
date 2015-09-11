@@ -1,0 +1,36 @@
+	{
+		printk("r0:%08x " 
+			   "r1:%08x "
+			   "r2:%08x "
+			   "r3:%08x "
+			   "r4:%08x "
+			   "r5:%08x \n"
+			   "r6:%08x "
+			   "r7:%08x "
+			   "r8:%08x "
+			   "r9:%08x "
+			   "r10:%08x \n"
+			   "fp:%08x "
+			   "ip:%08x "
+			   "sp:%08x "
+			   "lr:%08x "
+			   "pc:%08x \n",
+				regs->uregs[0],
+				regs->uregs[1],
+				regs->uregs[2],
+				regs->uregs[3],
+				regs->uregs[4],
+				regs->uregs[5],
+				regs->uregs[6],
+				regs->uregs[7],
+				regs->uregs[8],
+				regs->uregs[9],
+				regs->uregs[10],
+				regs->uregs[11],
+				regs->uregs[12],
+				regs->uregs[13],
+				regs->uregs[14],
+				regs->uregs[15]
+				);
+	}
+

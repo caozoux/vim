@@ -1,0 +1,6 @@
+driver g_audio
+
+test command:
+time arecord -f dat -r 64000 -D hw:1,0 test.wav -v
+
+applay test.wav
