@@ -30,7 +30,7 @@ set tags+=/home/zoucao/bin/tag/kernel/tags
 "set tags+=/home/sdh/caozoux/r44b/linux/kernel/tags
 "set tags+=/home/sdh/caozoux/tags
 "
-"-- Taglist setting --
+""-- Taglist setting --
 let Tlist_Ctags_Cmd='ctags'
 let Tlist_Use_Right_Window=1 
 let Tlist_Show_One_File=0
