@@ -1,0 +1,54 @@
++               if(current->pid == 1) {
+	+                       report_bug(regs->ARM_pc, regs);
+	+               }
+
+
+static void dump_instr(const char *lvl, struct pt_regs *regs)
+{
+	unsigned long addr = instruction_pointer(regs);
+	
+	
+
+
+reg0-reg15
+include/generated/asm-offsets.h:27:#define S_R0 0 /* offsetof(struct pt_regs, ARM_r0)	@ */
+include/generated/asm-offsets.h:28:#define S_R1 4 /* offsetof(struct pt_regs, ARM_r1)	@ */
+include/generated/asm-offsets.h:29:#define S_R2 8 /* offsetof(struct pt_regs, ARM_r2)	@ */
+include/generated/asm-offsets.h:30:#define S_R3 12 /* offsetof(struct pt_regs, ARM_r3)	@ */
+include/generated/asm-offsets.h:31:#define S_R4 16 /* offsetof(struct pt_regs, ARM_r4)	@ */
+include/generated/asm-offsets.h:32:#define S_R5 20 /* offsetof(struct pt_regs, ARM_r5)	@ */
+include/generated/asm-offsets.h:33:#define S_R6 24 /* offsetof(struct pt_regs, ARM_r6)	@ */
+include/generated/asm-offsets.h:34:#define S_R7 28 /* offsetof(struct pt_regs, ARM_r7)	@ */
+include/generated/asm-offsets.h:35:#define S_R8 32 /* offsetof(struct pt_regs, ARM_r8)	@ */
+include/generated/asm-offsets.h:36:#define S_R9 36 /* offsetof(struct pt_regs, ARM_r9)	@ */
+include/generated/asm-offsets.h:37:#define S_R10 40 /* offsetof(struct pt_regs, ARM_r10)	@ */
+include/generated/asm-offsets.h:38:#define S_FP 44 /* offsetof(struct pt_regs, ARM_fp)	@ */
+include/generated/asm-offsets.h:39:#define S_IP 48 /* offsetof(struct pt_regs, ARM_ip)	@ */
+include/generated/asm-offsets.h:40:#define S_SP 52 /* offsetof(struct pt_regs, ARM_sp)	@ */
+include/generated/asm-offsets.h:41:#define S_LR 56 /* offsetof(struct pt_regs, ARM_lr)	@ */
+include/generated/asm-offsets.h:42:#define S_PC 60 /* offsetof(struct pt_regs, ARM_pc)	@ */
+include/generated/asm-offsets.h:43:#define S_PSR 64 /* offsetof(struct pt_regs, ARM_cpsr)	@ */
+include/generated/asm-offsets.h:44:#define S_OLD_R0 68 /* offsetof(struct pt_regs, ARM_ORIG_r0)	@ */
+
+defineARM_lruregs[14]/*寄存器，返回地址link*/
+#defineARM_spuregs[13]/*栈指针类似于,的x86esp*/
+#defineARM_ipuregs[12]/*暂存sp没什么大用,*/
+#defineARM_fp uregs[11]/* 栈帧指针类似
+
+
+panic log:
+pc : [<b6e330f8>]    lr : [<b6e339e4>]    psr: 200b0010
+sp : bec0e740  ip : b6f43c78  fp : bec0e7c4
+r10: b6f43970  r9 : 00000000  r8 : 00000000
+r7 : 00000000  r6 : 00000004  r5 : b6f43970  r4 : 00000000
+r3 : 00000002  r2 : b6bf24c0  r1 : 00000002  r0 : 00000010
+Flags: nzCv  IRQs on  FIQs on  Mode USER_32  ISA ARM  Segment user
+Control: 10c5387d  Table: 8f2e4019  DAC: 00000015
+
+Exception stack(0xcf8d1fb0 to 0xcf8d1ff8)
+1fa0:                                     00000010 00000002 b6bf24c0 00000002
+1fc0: 00000000 b6f43970 00000004 00000000 00000000 00000000 b6f43970 bec0e7c4
+1fe0: b6f43c78 bec0e740 b6e339e4 b6e330f8 200b0010 ffffffff
+systemd-udevd (103): undefined instruction: pc=b6ec0f94
+
+r0-r15 save to the start bec0e740

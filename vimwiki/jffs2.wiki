@@ -1,0 +1,1 @@
+nandwrite -p /dev/mtd3 <image dir>/rootfs.jffs2

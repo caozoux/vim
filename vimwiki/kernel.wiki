@@ -72,3 +72,7 @@
 * [[clk]]
 * [[platform-data]]
 * [[kernel-bootcmd]]
+* [[cpuidle]]
+* [[panic]]
+* [[mm]]
+* [[task]]

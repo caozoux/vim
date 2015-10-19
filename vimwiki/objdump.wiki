@@ -1,0 +1,5 @@
+objdump -D file
+gdb symbol-file file-name
+
+
+epc- so.address

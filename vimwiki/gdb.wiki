@@ -14,3 +14,7 @@ show args -> show the args
 http://blog.csdn.net/dadalan/article/details/3758025
 
 * [[gdb参数]]
+* [[coredump]]
+* [[gdb-server]]
+* [[objdump]]
+* [[gdb_useful_command]]

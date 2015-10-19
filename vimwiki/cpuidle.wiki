@@ -1,0 +1,12 @@
+    int cpuidle_register(struct cpuidle_driver *drv,
+ 27                             const struct cpumask *const coupled_cpus);
+ 28 extern int cpuidle_unregister(struct cpuidle_driver *drv);
+ 29 extern int cpuidle_register_driver(struct cpuidle_driver *drv);
+ 30 extern void cpuidle_unregister_driver(struct cpuidle_driver *drv);
+ 31 extern int cpuidle_register_device(struct cpuidle_device *dev);
+ 32 extern void cpuidle_unregister_device(struct cpuidle_device *dev);
+ 33 
+ 34 extern void cpuidle_pause_and_lock(void);
+ 35 extern void cpuidle_resume_and_unlock(void);
+ 36 extern int cpuidle_enable_device(struct cpuidle_device *dev);
+ 37 extern void cpuidle_disable_device(struct cpuidle_device *dev);

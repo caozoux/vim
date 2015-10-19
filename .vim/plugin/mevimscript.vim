@@ -5,10 +5,18 @@ function! Me_zf_funcs(type)
 	let s:count = 0
 
 	call search("{")
+	"execute "normal }}\<ESC>"
 	let b:r_start = line('.') " first search {, recoard the line for checking the end of while loop
-	execute "normal zf% \<ESC>"
+	echo b:r_start
+	execute "normal zf% j\<ESC>"
 
 	while 1
+		let b:r_cur = line('.') "check if zd is the end of file, if it is, break the loop
+		execute "normal j\<ESC>"
+		if line('.') == b:r_cur
+			break
+		endif
+
 		call search("{")
 		if line('.') <= b:r_start
 			"end loop
@@ -16,6 +24,7 @@ function! Me_zf_funcs(type)
 		endif
 		execute "normal zf% j\<ESC>"
 		let s:count += 1
+
 	endwhile
 	"echo s:count
 endfunction " 
@@ -28,8 +37,7 @@ endfunction "
 
 
 function! Me_pr_func2(type)
-	let s:count=1
-	execute "normal is:count ESC>"
+	execute "normal oprintk(\"zz \%s \\n\", __func__);\<ESC>"
 endfunction " 
 
 function! Me_Tag(TagType)

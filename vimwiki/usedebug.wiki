@@ -1,1 +1,1 @@
-user_debug=1 或者 user_debug=31
+user_debug=1 或者 user_debug=31 -> CONFIG_DEBUG_USER

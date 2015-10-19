@@ -1,0 +1,4 @@
+queue_delayed_work
+INIT_DELAYED_WORK(&ddata->gpio_wq, pd_gpio_detect);
+cancel_delayed_work(&ddata->gpio_wq);
+ queue_delayed_work(system_wq, &data->gpio_wq, 10 *HZ);

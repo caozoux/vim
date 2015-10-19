@@ -1,0 +1,1 @@
+info functions --> show all function symbol and its address
