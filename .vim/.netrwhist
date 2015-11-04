@@ -1,6 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/export/disk1T1/bsp_work/review/ti-omap3/patch_0914_v1/patch'
 let g:netrw_dirhist_2='/export/disk1T1/bsp_work/TI_AM335X/TI_SDK/ti-am35x_sdk6/board-support/u-boot-omap3/tools'
 let g:netrw_dirhist_3='/home/wrsadmin/github/linux-stable/Documentation/devicetree'
 let g:netrw_dirhist_4='/export/disk1T1/bsp_work/wrlinux/wrlinux7/gitserver/kernel-3.14.x/ti-omap3'
+let g:netrw_dirhist_5='/var/lib/tftpboot/rootfs_sato/etc/systemd/user'
+let g:netrw_dirhist_6='/export/disk1T1/bsp_work/IOT-REV2/sdk/QorIQ-SDK-V1.8-20150619-RDS-20150810-yocto/meta-fsl-arm/recipes-kernel/kernel-module-mcc'
+let g:netrw_dirhist_7='/export/disk1T1/bsp_work/IOT-REV2/sdk/Freescale-Linux-SDK-for-LS1021A-IOT-Rev2-v0.4-SOURCE-20150907-yocto/Freescale-Linux-SDK-for-LS1021A-IOT-Rev2-v0.4-20150907-yocto.iso/meta-fsl-arm'

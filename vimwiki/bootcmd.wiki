@@ -10,3 +10,6 @@
         pr_info("zzbootcmd:%s \n", boot_command_line);
  
         /* Initialize {size,address}-cells info */
+        
+
+

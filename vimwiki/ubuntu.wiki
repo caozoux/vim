@@ -1,0 +1,2 @@
+root ALL = NOPASSWD: /usr/bin/apt-get  
+sudo /usr/sbin/visudo

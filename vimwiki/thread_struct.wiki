@@ -1,0 +1,10 @@
+
+ 39 struct thread_struct {
+ 40                                                         /* fault info     */
+ 41         unsigned long           address;
+ 42         unsigned long           trap_no;
+ 43         unsigned long           error_code;
+ 44                                                         /* debugging      */
+ 45         struct debug_info       debug;
+ 46 };
+ 47 

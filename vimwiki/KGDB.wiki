@@ -4,8 +4,10 @@ bitbake_build/tmp/sysroots/x86_64-linux/usr/bin/agent-proxy 4440^4441 0 /dev/tty
 telnet localhost 4440
 target remote localhost:4441
 
+or for tty:
+agent-proxy 4440^4441 0 /dev/ttyS0,115200
 
-/buildarea2/dxyw/BTS-ti-am335x-rt-glibc_std/lxbuilds/TI-AM335x-EVM_platform_up/ti-am335x-preempt-rt-glibc-std/wrlinux/bitbake_build/tmp/sysroots/x86_64-linux/usr/bin/agent-proxe 6660^6661 128.224.162.217 4440
+[[/buildarea2/dxyw/BTS-ti-am335x-rt-glibc_std/lxbuilds/TI-AM335x-EVM_platform_up/ti-am335x-preempt-rt-glibc-std/wrlinux/bitbake_build/tmp/sysroots/x86_64-linux/usr/bin/agent-proxe]] 6660^6661 128.224.162.217 4440
 
 
 
@@ -90,7 +92,7 @@ KGDB or $3#33 for KDB
 ---------- gdb side : target remote 128.224.178.244:6661 ----------
 
  
-(gdb) target remote 128.224.178.244:6661
+(gdb) target remote [[128.224.178.244:6661]]
 Remote debugging using 128.224.178.244:6661
 0xc00af560 in arch_kgdb_breakpoint ()
     at /buildarea2/dxyw/BTS-ti-am335x-rt-glibc_std/lxbuilds/TI-AM335x-EVM_platform_up/ti-am335x-preempt-rt-glibc-std/wrlinux/bitbake_build/tmp/work/ti_am335x-wrs-linux-gnueabi/linux-windriver/3.14-r0/linux/arch/arm/include/asm/outercache.h:103

@@ -13,3 +13,6 @@
 * [[ctags-cscope]]
 * [[video-audio]]
 * [[configure]]
+* [[python]]
+* [[net-config]]
+* [[ubuntu]]

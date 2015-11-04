@@ -1,0 +1,38 @@
+1.环境变量
+复制代码 代码如下:
+
+import os  
+var=123或var='123'
+os.environ['var']=str(var)  #environ的键值必须是字符串   
+os.system('echo $var')  
+
+2.字符串连接
+复制代码 代码如下:
+
+import os  
+path='/root/a.txt'
+var=[1]  
+var='bash'
+os.system('echo ' + path)                  #注意echo后有空格   
+os.system('echo ' + str(var[0]))  
+os.system('echo ' + var + ' /root/c.sh') #注意echo后和/root前有空格   
+
+
+3.通过管道
+复制代码 代码如下:
+
+import os  
+var='123'
+os.popen('wc -c', 'w').write(var)  
+
+
+4.通过文件
+复制代码 代码如下:
+
+output = open('/tmp/mytxt', 'w')  
+output.write(S)      #把字符串S写入文件   
+output.writelines(L) #将列表L中所有的行字符串写到文件中   
+output.close()  
+
+
+http://www.jb51.net/article/43500.htm

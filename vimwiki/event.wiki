@@ -1,0 +1,2 @@
+kobject_uevent_env
+ kobject_uevent_env(&sii902x->client->dev.kobj, KOBJ_CHANGE, envp);

@@ -1,0 +1,13 @@
+route add default gw 128.224.162.1 netmask 0.0.0.0 
+
+route del -net 128.224.162.0  netmask 255.255.255.0 dev eth0
+route add -net 128.224.162.0  netmask 255.255.255.0 dev eth0
+
+
+* wlan
+408 WiFi:
+409     # rfkill unblock wlan
+410     # ifconfig wlan0 up 
+411     # iwlist  wlan0  scanning
+412     # iwconfig wlan0 essid your_essid_host
+413     # dhclient wlan0

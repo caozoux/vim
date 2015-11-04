@@ -1,0 +1,2 @@
+ late_initcall(ip_auto_config);
+
