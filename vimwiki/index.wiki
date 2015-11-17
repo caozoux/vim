@@ -16,3 +16,5 @@
 * [[python]]
 * [[net-config]]
 * [[ubuntu]]
+* [[tools]]
+* [[systemd]]

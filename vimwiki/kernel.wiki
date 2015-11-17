@@ -80,3 +80,5 @@
 * [[kernel-ipv4]]
 * [[event]]
 * [[kgdb-kernel]]
+* [[bluetooh]]
+* [[etherne_driver]]

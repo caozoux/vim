@@ -1,0 +1,12 @@
+http://blog.chinaunix.net/uid-21556133-id-122081.html
+
+
+modprobe bridge
+brctl addbr br0
+
+brctl addif br0 eth1
+ ip link set br0 up
+ ip addr add 10.1.1.18/16 brd + dev br0
+route add default gw 10.1.1.1 dev cr0
+
+* [[multiple-ether-config]]

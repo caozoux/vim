@@ -1,0 +1,11 @@
+brctl addbr br0
+ifconfig eth0 0.0.0.0
+ifconfig eth1 0.0.0.0
+ifconfig eth2 0.0.0.0
+ifconfig br0 up
+brctl addif br0 eth0
+brctl addif br0 eth1
+brctl addif br0 eth2
+
+dhclient br0 or set the ip addr -> ifconfig bri0 10.10.8.85 broadcast 10.10.255.255
+

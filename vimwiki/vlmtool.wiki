@@ -1,0 +1,6 @@
+/folk/vlm/commandline/vlmTool getAttr -t 22465 port
+vlmTool getAttr -t 20590 all
+
+------> Terminal Server	: 128.224.165.88
+------> Terminal Server Port: 2
+telnet 128.224.165.88 2000+2

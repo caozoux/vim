@@ -1,0 +1,5 @@
+* MiniDLNA
+MiniDLNA is server software with the aim of being fully compliant with DLNA/UPnP clients. The MiniDNLA daemon serves media files (music, pictures, and video) to clients on a network. Example clients include applications such as totem and xbmc, and devices such as portable media players, smartphones, and televisions. 
+
+* VRRPd
+VRRPd is an implementation of VRRPv2 as specified in rfc2338. It run in userspace for linux. In short, VRRP is a protocol which elects a master server on a LAN. If the master fails, a backup server takes over. 

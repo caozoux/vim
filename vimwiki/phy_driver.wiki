@@ -1,0 +1,49 @@
+[    3.932167] CPU: 1 PID: 1 Comm: swapper/0 Not tainted 3.14.39ltsi-rt37-WR7.0.0.0_preempt-rt+ #142
+[    3.932183] [<80018740>] (unwind_backtrace) from [<80012e04>] (show_stack+0x20/0x24)
+[    3.932194] [<80012e04>] (show_stack) from [<8072c158>] (dump_stack+0x74/0xcc)
+[    3.932204] [<8072c158>] (dump_stack) from [<80492828>] (phy_device_create+0x3c/0x324)
+[    3.932213] [<80492828>] (phy_device_create) from [<80492bc4>] (get_phy_device+0xb4/0x1ec)
+[    3.932222] [<80492bc4>] (get_phy_device) from [<8057c42c>] (of_mdiobus_register_phy+0x4c/0x134)
+[    3.932233] [<8057c42c>] (of_mdiobus_register_phy) from [<8057c650>] (of_mdiobus_register+0x13c/0x1f0)
+[    3.932243] [<8057c650>] (of_mdiobus_register) from [<8049aa68>] (fsl_pq_mdio_probe+0x1b4/0x298)
+[    3.932254] [<8049aa68>] (fsl_pq_mdio_probe) from [<80431088>] (platform_drv_probe+0x28/0x58)
+[    3.932264] [<80431088>] (platform_drv_probe) from [<8042f970>] (driver_probe_device+0x10c/0x230)
+[    3.932273] [<8042f970>] (driver_probe_device) from [<8042fb30>] (__driver_attach+0x9c/0xa0)
+[    3.932282] [<8042fb30>] (__driver_attach) from [<8042de24>] (bus_for_each_dev+0x64/0x98)
+[    3.932291] [<8042de24>] (bus_for_each_dev) from [<8042f430>] (driver_attach+0x2c/0x30)
+[    3.932299] [<8042f430>] (driver_attach) from [<8042f058>] (bus_add_driver+0xe8/0x1e4)
+[    3.932308] [<8042f058>] (bus_add_driver) from [<80430254>] (driver_register+0x88/0x104)
+[    3.932318] [<80430254>] (driver_register) from [<80430f8c>] (__platform_driver_register+0x58/0x6c)
+[    3.932329] [<80430f8c>] (__platform_driver_register) from [<80a03c08>] (fsl_pq_mdio_driver_init+0x18/0x20)
+[    3.932339] [<80a03c08>] (fsl_pq_mdio_driver_init) from [<80008920>] (do_one_initcall+0xfc/0x158)
+[    3.932348] [<80008920>] (do_one_initcall) from [<809cfdc4>] (kernel_init_freeable+0x1ac/0x2b4)
+[    3.932356] [<809cfdc4>] (kernel_init_freeable) from [<8072481c>] (kernel_init+0x18/0xfc)
+[    3.932366] [<8072481c>] (kernel_init) from [<8000eed8>] (ret_from_fork+0x14/0x20)
+
+
+1267 /**
+1268  * phy_driver_register - register a phy_driver with the PHY layer
+1269  * @new_driver: new phy_driver to register
+1270  */
+1271 int phy_driver_register(struct phy_driver *new_driver)
+1272 {
+1273     int retval;
+1274 
+1275     new_driver->driver.name = new_driver->name;
+1276     new_driver->driver.bus = &mdio_bus_type;
+1277     new_driver->driver.probe = phy_probe;
+1278     new_driver->driver.remove = phy_remove;
+1279 
+1280     retval = driver_register(&new_driver->driver);
+1281     if (retval) {
+1282         pr_err("%s: Error %d in registering driver\n",
+1283                new_driver->name, retval);
+284 
+1285         return retval;
+1286     }
+1287 
+1288     pr_debug("%s: Registered new driver\n", new_driver->name);
+1289 
+1290     return 0;
+1291 }
+
