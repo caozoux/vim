@@ -1,0 +1,5 @@
+struct page
+在系统内存映射中表示一个硬件页的结构.
+struct page *virt_to_page(void *kaddr);
+void *page_address(struct page *page);
+struct page *pfn_to_page(int pfn);

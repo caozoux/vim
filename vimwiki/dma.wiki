@@ -66,3 +66,6 @@ EDMA传输过程的源/目的地址的修改：在每次同步事件触发EDMA�
  [<c015426c>] (do_filp_open) from [<c01440d0>] (do_sys_open+0x114/0x1d8)
  [<c01440d0>] (do_sys_open) from [<c01441c0>] (SyS_open+0x2c/0x30)
  [<c01441c0>] (SyS_open) from [<c000f840>] (ret_fast_syscall+0x0/0x30)
+ 
+
+ * [[dma-api]]

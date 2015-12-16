@@ -1,0 +1,2 @@
+Kconfig
+source "arch/arm/mach-s3c64xx/Kconfig"

@@ -1,2 +1,5 @@
 root ALL = NOPASSWD: /usr/bin/apt-get  
 sudo /usr/sbin/visudo
+
+
+sudo chown nobody:nogroup /var/nfs

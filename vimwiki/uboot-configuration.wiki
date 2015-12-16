@@ -1,0 +1,32 @@
+1 add defautle configuration
+arm-linux-gnueabi-gcc -DDO_DEPS_ONLY \
+		-g  -Os   -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -I/home/zoucao/github/u-boot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/lib/gcc-cross/arm-linux-gnueabi/4.7/include -pipe  -DCONFIG_ARM -D__ARM__ -marm -mno-thumb-interwork -mabi=aapcs-linux -march=armv5t -Wall -Wstrict-prototypes -fno-stack-protector -Wno-format-nonliteral -Wno-format-security -fstack-usage   \
+		-o lib/asm-offsets.s lib/asm-offsets.c -c -S
+In file included from /home/zoucao/github/u-boot/include/common.h:117:0,
+                 from lib/asm-offsets.c:18:
+/home/zoucao/github/u-boot/include/flash.h:36:14: error: ‘CONFIG_SYS_MAX_FLASH_SECT’ undeclared here (not in a function)
+In file included from /home/zoucao/github/u-boot/include/image.h:49:0,
+                 from /home/zoucao/github/u-boot/include/common.h:118,
+                 from lib/asm-offsets.c:18:
+/home/zoucao/github/u-boot/include/asm/u-boot.h:50:17: error: ‘CONFIG_NR_DRAM_BANKS’ undeclared here (not in a function)
+In file included from /home/zoucao/github/u-boot/include/common.h:988:0,
+                 from lib/asm-offsets.c:18:
+/home/zoucao/github/u-boot/include/environment.h:148:21: error: ‘CONFIG_ENV_SIZE’ undeclared here (not in a function)
+
+
+/home/zoucao/github/u-boot/include/flash.h:36:14: error: ‘CONFIG_SYS_MAX_FLASH_SECT’ undeclared here (not in a function)
+------------------->
+#define CONFIG_SYS_NO_FLASH
+or #define CONFIG_SYS_MAX_FLASH_SECT 
+
+
+/home/zoucao/github/u-boot/include/asm/u-boot.h:50:17: error: ‘CONFIG_NR_DRAM_BANKS’ undeclared here (not in a function)
+------------------->
+14 #define CONFIG_NR_DRAM_BANKS        1
+15 #define CONFIG_SYS_SDRAM_BASE       0x00000000
+16 #define CONFIG_SYS_TEXT_BASE        0x00008000
+17 #define CONFIG_SYS_UBOOT_BASE       CONFIG_SYS_TEXT_BASE
+
+
+/home/zoucao/github/u-boot/include/environment.h:148:21: error: ‘CONFIG_ENV_SIZE’ undeclared here (not in a function)
+#define CONFIG_ENV_SIZE			SZ_16K

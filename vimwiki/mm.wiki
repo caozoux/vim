@@ -1,1 +1,9 @@
 * [[mm_struct]]
+* [[page]]
+* 
+*
+*
+
+
+unsigned long order = get_order(size);
+page = alloc_pages(gfp, order);

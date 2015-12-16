@@ -3,3 +3,5 @@
 	 cat /proc/slabinfo | grep kio
 * [[文件判断]]
 * [[16进制-ubuntu]]
+* shell 返回值 $?
+* [[data]] 

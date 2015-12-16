@@ -1,0 +1,64 @@
+
+为了正确进行DMA 传输，必须进行必要的cache 操作。 cache 操作主要分为 invalidate (作废) 和 writeback (写回) ，有时也将两着放在一起使用。
+以linux 下对DMA 操作的函数为例：
+参考：kernel/arch/arm/mm/dma-mapping.c
+ 
+ /*
+  * Make an area consistent for devices.
+  *  * Note: Drivers should NOT use this function directly, as it will break
+  *   * platforms with CONFIG_DMABOUNCE.
+  *    * Use the driver DMA support - see dma-mapping.h (dma_sync_*)
+  *     */
+ *     void dma_cache_maint(const void *start, size_t size, int direction)
+ *     {
+
+1. DMA 从外设读取数据到供处理器使用时，可先进性invalidate 操作。这样将迫使处理器在读取cache中的数据时，先从内存中读取数据到缓存，保证缓存和内存中数据的一致性。
+2. DMA 向外设写入由处理器提供的数据时，可先进性writeback 操作。这样可以DMA传输数据之前先将缓存中的数据写回到内存中。
+如果不清楚DMA 操作的方向，也可先同时进行invalidate 和writeback 操作。操作的结果等同于invalidate 和 writeback 操作效果的和。
+
+static void __dma_clear_buffer(struct page *page, size_t size)
+{
+	/*
+	 * Ensure that the allocated pages are zeroed, and that any data
+	 * lurking in the kernel direct-mapped region is invalidated.
+	 */
+	if (PageHighMem(page)) {
+		phys_addr_t base = __pfn_to_phys(page_to_pfn(page));
+		phys_addr_t end = base + size;
+		while (size > 0) {
+			void *ptr = kmap_atomic(page);
+			memset(ptr, 0, PAGE_SIZE);
+			dmac_flush_range(ptr, ptr + PAGE_SIZE);
+			kunmap_atomic(ptr);
+			page++;
+			size -= PAGE_SIZE;
+		}
+		outer_flush_range(base, end);
+	} else {
+		void *ptr = page_address(page);
+		memset(ptr, 0, size);
+		dmac_flush_range(ptr, ptr + size); --------->cpu_cache.dma_flush_range
+		outer_flush_range(__pa(ptr), __pa(ptr) + size);
+	}
+}
+
+static struct page *__dma_alloc_buffer(struct device *dev, size_t size, gfp_t gfp)
+{
+	unsigned long order = get_order(size);
+	struct page *page, *p, *e;
+
+	page = alloc_pages(gfp, order);
+	if (!page)
+		return NULL;
+
+	/*
+	 * Now split the huge page and free the excess pages
+	 */
+	split_page(page, order);
+	for (p = page + (size >> PAGE_SHIFT), e = page + (1 << order); p < e; p++)
+		__free_page(p);
+
+	__dma_clear_buffer(page, size);
+
+	return page;
+}
