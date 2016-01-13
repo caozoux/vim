@@ -26,6 +26,7 @@
 	* [[irq-domain]]
 	* [[irq-desc]]
 	* [[smp_irq]]
+	* [[except]]
 * sdio
 	* bus,driver,device
 		sdio_bus_match
@@ -83,4 +84,7 @@
 * [[bluetooh]]
 * [[etherne_driver]]
 * [[build]]
-*
+* [[kernel-arch-setup]]
+* [[init-main-c]]
+* [[assemble]]
+* [[cach]]

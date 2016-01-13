@@ -1,3 +1,5 @@
 /wrlinux/configure --enable-board=ti-am335x --enable-kernel=standard --enable-rootfs=glibc_std --enable-jobs=16 
 * [[bitbake]]
 * [[wrlinux_config]]
+* DVD
+	/lpg-build/cdc/fast_prod/wrlinux70RCPL/RCPL0005_LX04/

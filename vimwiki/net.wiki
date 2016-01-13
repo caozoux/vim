@@ -1,3 +1,4 @@
 * [[firefox]]
 * [[server-nfs]]
 * [[vnc]]
+* [[proxy]]

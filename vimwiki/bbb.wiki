@@ -1,0 +1,5 @@
+
+
+bootcmd=mmc rescan ; fatload mmc 0 81000000 uImage ;
+setenv bootargs console=ttyO0,115200n8 androidboot.console=ttyO0 mem=512M root=/dev/nfs nfsroot=128.224.162.241:/var/lib/tftpboot/rootfs_andr/android_rootfs/ rw rootwait init=/init ip=dhcp
+ bootm 81000000

@@ -1,0 +1,3 @@
+* armv7
+	Shareability
+	Cacheability

@@ -1,0 +1,10 @@
+	b	lowlevel_init
+	bl	_main
+	-> bl  board_init_f_mem
+	-> bl  board_init_f -> init_sequence_f 平台差不多被初始化了
+	-> b   relocate_code __image_copy_start  __image_copy_end
+	-> bl  relocate_vectors
+	-> bl  c_runtime_cpu_setup
+	-> bl  coloured_LED_init
+	-> bl  red_led_on
+	-> ldr pc, =board_init_r 

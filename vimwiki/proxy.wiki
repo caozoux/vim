@@ -1,0 +1,15 @@
+export all_proxy=socks5://127.0.0.1:9195
+export http_proxy="127.0.0.1:9195"
+export https__proxy="127.0.0.1:9195"
+
+
+git config --global --add http.proxy localhost:9195
+git config --global --add http.sslVerify false
+
+
+export HTTP_PROXY=127.0.0.1:9195
+export HTTP_PROXYS=127.0.0.1:9195
+
+export HTTP_PROXY=http://czou:3333czou@ala-tuxlab.wrs.com:9195
+export HTTPS_PROXY=http://czou:3333czou@ala-tuxlab.wrs.com:9195
+

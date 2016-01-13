@@ -1,0 +1,50 @@
+arch/arm/kernel/calls.S
+arch/arm/kernel/entry-common.S
+arch/arm/kernel/entry-v7m.S
+arch/arm/kernel/head-nommu.S
+arch/arm/kernel/iwmmxt.S
+arch/arm/kernel/sigreturn_codes.S
+arch/arm/kernel/debug.S
+arch/arm/kernel/entry-ftrace.S
+arch/arm/kernel/fiqasm.S
+arch/arm/kernel/head.S
+9 /*
+ 60  * Kernel startup entry point.
+ 61  * ---------------------------
+ 62  *
+ 63  * This is normally called from the decompressor code.  The requirements
+ 64  * are: MMU = off, D-cache = off, I-cache = dont care, r0 = 0,
+ 65  * r1 = machine nr, r2 = atags or dtb pointer.
+ 66  *
+ 67  * This code is mostly position independent, so if you link the kernel at
+ 68  * 0xc0008000, you call this at __pa(0xc0008000).
+ 69  *
+ 70  * See linux/arch/arm/tools/mach-types for the complete list of machine
+ 71  * numbers for r1.
+ 72  *
+ 73  * We're trying to keep crap to a minimum; DO NOT add any machine specific
+ 74  * crap here - that's what the boot loader (or in extreme, well justified
+ 75  * circumstances, zImage) is for.
+ 76  */
+
+arch/arm/kernel/psci-call.S
+arch/arm/kernel/sleep.S
+arch/arm/kernel/entry-armv.S
+-------------->Interrupt handling.
+9     .macro  irq_handler
+  40 #ifdef CONFIG_MULTI_IRQ_HANDLER
+  41     ldr r1, =handle_arch_irq
+  ----------->set_handle_irq ---> irq domain ---> handle_domain_irq ---> find_domain_map ---> generate irq
+  42     mov r0, sp
+  43     adr lr, BSYM(9997f)
+  44     ldr pc, [r1]
+  45 #else
+  46     arch_irq_handler_default
+  47 #endif
+
+
+arch/arm/kernel/entrn-header.S
+arch/arm/kernel/head-common.S
+arch/arm/kernel/hyp-stub.S
+arch/arm/kernel/relocate_kernel.S
+arch/arm/kernel/vmlinux.lds.S
