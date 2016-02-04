@@ -1,1 +1,2 @@
 * [[python-and-shell-with-vairible]]
+* [[study]]

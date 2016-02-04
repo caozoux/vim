@@ -1,1 +1,2 @@
 kgdboc=ttyO0,115200 kgdbwait   ---> kgdb
+

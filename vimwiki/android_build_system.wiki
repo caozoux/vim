@@ -1,3 +1,5 @@
+* [[machine_config]]
 NSTALLED_RAMDISK_TARGET): $(MKBOOTFS) $(INTERNAL_RAMDISK_FILES) | $(MINIGZIP)
  $(call pretty,"Target ram disk: $@")
  $(hide) $(MKBOOTFS) $(TARGET_ROOT_OUT) | $(MINIGZIP) > $@
+

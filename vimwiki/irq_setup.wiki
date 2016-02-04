@@ -44,3 +44,6 @@ irq_set_chip_and_handler(irq, &armada_msi_irq_chip, handle_edge_irq);
 #endif
     axp_gpio_init();
 
+2. irq number generate
+	handle_arch_irq = mdesc->handle_irq;
+	//here handle_arch_irq will create new irq numbers based on platform handle_irq, then call handle_IRQ
