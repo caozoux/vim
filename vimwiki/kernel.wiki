@@ -7,6 +7,7 @@
 * memory
     * [[memory-map]]
     * [[内存泄露]]
+    * [[mmu]]
 
 * irq
 	* [[irq_layer]] 
@@ -27,6 +28,7 @@
 	* [[irq-desc]]
 	* [[smp_irq]]
 	* [[except]]
+	* [[irq_type]]
 * sdio
 	* bus,driver,device
 		sdio_bus_match
@@ -88,3 +90,6 @@
 * [[init-main-c]]
 * [[assemble]]
 * [[cach]]
+* [[rtc]]
+* [[kexe-kdump]]
+* [[tty-console-serial]]

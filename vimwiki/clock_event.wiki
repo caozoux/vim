@@ -1,0 +1,23 @@
+
+clockevents_config_and_register(&clockevent_generic, clk_get_rate(timer_clk),
+
+ 78 static struct clock_event_device clockevent_generic = {
+ 79     .name       = "generic_timer",
+ 80     .features   = CLOCK_EVT_FEAT_ONESHOT,
+ 81     .set_mode   = generic_set_mode,
+ 82     .set_next_event = generic_set_next_event,
+ 83     .rating     = 200,
+ 84 };
+
+ 96 static irqreturn_t omap2_gp_timer_interrupt(int irq, void *dev_id)
+ 97 {
+ 98     u32 reg;
+ 99     struct clock_event_device *evt = &clockevent_generic;
+100     reg = __raw_readl(dmt_base_reg +IRQSTATUS);
+101     //early_print("%s %08x\n", __func__, reg);
+102     evt->event_handler(evt); ----> 更新系统时钟数据, jiffies and so on
+103     __raw_writel(reg, dmt_base_reg+IRQSTATUS);
+104     return IRQ_HANDLED;
+105 }
+
+

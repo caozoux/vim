@@ -414,7 +414,7 @@ Cache Bit     Buffer Bit     Page attribute
 164         add     r5, r5, r0                      @ phys __enable_mmu
 165         add     r6, r6, r0                      @ phys __enable_mmu_end
 166         mov     r5, r5, lsr #20  ＠通过R5值的高12位(右移20位),得到kernel的section基址(从上面的图可以看出),并存储到r6中.因为当前是通过运行时地址得到的kernel的section地址,因而是物理地址.
-167         mov     r6, r6, lsr #20  
+167         mov     r6, r6, lsr #20
 168 
 169 1:      orr     r3, r7, r5, lsl #20             @ r3 = r7 | (r5 << 20);flags + kernel base得到页表中需要设置的值.
 170         str     r3, [r4, r5, lsl #2]            @ identity mapping

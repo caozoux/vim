@@ -5,7 +5,47 @@
 * early_printk
 	init/main.c
 	pr_notice("Kernel command line: %s\n", boot_command_line);
+
+	assemble	
+		arch/arm/include/debug/imx.S
+			.macro  addruart, rp, rv, tmp
+			ldr \rp, =UART_PADDR    @ physical
+			ldr \rv, =UART_VADDR    @ virtual
+			.endm
 	
+		arch/arm/kernel/head.S
+			277 #ifdef CONFIG_DEBUG_LL
+			278 #if !defined(CONFIG_DEBUG_ICEDCC) && !defined(CONFIG_DEBUG_SEMIHOSTING)
+			279     /*
+			280      * Map in IO space for serial debugging.
+			281      * This allows debug messages to be output
+			282      * via a serial console before paging_init.
+			283      */
+			284     addruart r7, r3, r0
+			285 
+			286     mov r3, r3, lsr #SECTION_SHIFT
+			287     mov r3, r3, lsl #PMD_ORDER
+			288 
+			289     add r0, r4, r3
+			290     mov r3, r7, lsr #SECTION_SHIFT
+			291     ldr r7, [r10, #PROCINFO_IO_MMUFLAGS] @ io_mmuflags
+			292     orr r3, r7, r3, lsl #SECTION_SHIFT
+	
+		DEBUG_UART_PHYS
+		arch/arm/Kconfig.debug:1336
+		DEBUG_UART_8250_SHIFT
+		DEBUG_UART_8250_WORD
+		DEBUG_UART_8250
+		
+		arch/arm/Kconfig.debug->
+			1271 config DEBUG_LL_INCLUDE ->选择debug.S的汇编文件
+					......
+					default "debug/omap2plus.S" if DEBUG_OMAP2PLUS_UART
+						1336 config DEBUG_UART_PHYS
+							default 0x00100a00 if DEBUG_NETX_UART ->设置debug的PHY 地址
+						1442 config DEBUG_UART_VIRT
+							default 0xe0000a00 if DEBUG_NETX_UART
+
 * cmdline
 * [[usedebug]]
 * [[kernel-core-dump]]

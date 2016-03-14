@@ -1,0 +1,40 @@
+Documentation/serial/driver
+
+struct generic_uart {
+	struct uart_port port;
+	struct timer_list tmr;
+	unsigned int sigs;  /* Local copy of line sigs */
+	unsigned short imr; /* Local IMR mirror */
+}
+
+ 58 static struct uart_driver generic_uart_driver = {
+ 59     .owner      = THIS_MODULE,
+ 60     .driver_name    = DRV_NAME,
+ 61     .dev_name   = "ttyO",
+ 62     .major      = SERIAL_GENERIC_MAJOR,
+ 63     .minor      = SERIAL_GENERIC_MINOR,
+ 64     .nr     = 1,
+ 65     .cons       = &generic_uart_console,
+ 66 };
+
+ 68 static struct console generic_uart_console = {
+ 69     .name   = "ttyO",
+ 70     .write  = generic_uart_console_write,
+ 71     .device = uart_console_device,
+ 72     .setup  = generic_uart_console_setup,
+ 73     .flags  = CON_PRINTBUFFER,
+ 74     .index  = -1,
+ 75     .data   = &generic_uart_driver,
+ 76 };
+
+port->mapbase
+port->line
+port->mapbase
+port->irq
+port->type = PORT_ALTERA_UART;
+port->iotype = SERIAL_IO_MEM;
+port->ops = &generic_uart_ops;
+port->flags = UPF_BOOT_AUTOCONF;
+port->dev = &pdev->dev;
+uart_add_one_port(&generic_uart_driver, port); ---> init console
+

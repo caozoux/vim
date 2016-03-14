@@ -4,3 +4,13 @@ origin	git://source.ffmpeg.org/ffmpeg.git (fetch)
 
 configure with h264:
  ./configure --enable-shared --enable-gpl --enable-libx264  --extra-cflags=-I/usr/local/include --extra-ldflags=-L-L/usr/local/lib
+ 
+ ffmpeg -f fbdev -framerate 10 -i /dev/fb0 out.avi -> connsole recoard
+ ./ffmpeg -f x11grab -s xga -r 10 -i :0.0+0+0 wheer.avi   -> x11 screen recoard
+ 
+
+ debug config:
+ ./configure --disable-yasm  --enable-debug --disable-stripping  --disable-optimizations
+ 
+
+mplayer -demuxer rawvideo -rawvideo w=1920:h=1080 output.yuv --> play video file .yuv
