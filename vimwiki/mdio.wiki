@@ -1,0 +1,61 @@
+
+mdiobus_register
+--> bus->reset(bus) : phy_mask will be modified in operation func reset(bus)
+	129     /* get phy mask from the alive register */
+	130     phy_mask = __raw_readl(&data->regs->alive); --> read the reg
+	131     if (phy_mask) {
+
+	for (i = 0; i < PHY_MAX_ADDR; i++) {
+		if ((bus->phy_mask & (1 << i)) == 0) {
+			struct phy_device *phydev;
+			phydev = mdiobus_scan(bus, i);
+			
+-->	mdiobus_scan
+	phydev = get_phy_device(bus, addr, false);
+		{///read the mdio bus reg
+		 299     /* Grab the bits from PHYIR1, and put them in the upper half */
+		 300     phy_reg = mdiobus_read(bus, addr, MII_PHYSID1);
+		 301     if (phy_reg < 0)
+		 302         return -EIO;
+		 303 
+		 304     *phy_id = (phy_reg & 0xffff) << 16;
+		 305 
+		 306     /* Grab the bits from PHYIR2, and put them in the lower half */
+		 307     phy_reg = mdiobus_read(bus, addr, MII_PHYSID2);
+		 308     if (phy_reg < 0)
+		 309         return -EIO;
+		 310 
+		 311     *phy_id |= (phy_reg & 0xffff);	
+		 	return phy_device_create(bus, addr, phy_id, is_c45, &c45_ids); --> create phy device
+		 }
+		
+	if (IS_ERR(phydev) || phydev == NULL)
+		return phydev;
+
+	err = phy_device_register(phydev);
+	
+
+
+* functions
+	mdiobus_alloc_size
+    _devm_mdiobus_free
+    devm_mdiobus_match
+    devm_mdiobus_alloc_size
+    devm_mdiobus_free
+    mdiobus_release
+    of_mdio_bus_match
+    of_mdio_find_bus
+    mdiobus_register
+    mdiobus_unregister
+    mdiobus_free
+    mdiobus_scan
+    mdiobus_read
+    mdiobus_write
+    mdio_bus_match
+    mdio_bus_phy_may_suspend
+    mdio_bus_suspend
+    mdio_bus_resume
+    mdio_bus_restore
+    phy_id_show
+    mdio_bus_init
+    mdio_bus_exit

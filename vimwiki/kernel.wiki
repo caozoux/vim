@@ -29,7 +29,7 @@
 	* [[smp_irq]]
 	* [[except]]
 	* [[irq_type]]
-* sdio
+* [[sdio]]
 	* bus,driver,device
 		sdio_bus_match
 		sdio_bus_uevent
@@ -93,3 +93,6 @@
 * [[rtc]]
 * [[kexe-kdump]]
 * [[tty-console-serial]]
+* [[hid]]
+* [[timer]]
+* [[list]]

@@ -1,0 +1,1 @@
+mmc_gpiod_request_cd -> get cd gpio

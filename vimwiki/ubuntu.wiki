@@ -3,3 +3,11 @@ sudo /usr/sbin/visudo
 
 
 sudo chown nobody:nogroup /var/nfs
+
+
+screen config:
+delet the default bink k CRTL+a to CRTL+J
+touch ~/.screenrc , and add the context 		         
+ defescape ^Jj
+ escape ^Jj
+

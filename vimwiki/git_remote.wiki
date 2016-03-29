@@ -14,3 +14,7 @@
 	git tag -d Remote_Systems_Operation
 	用push, 删除远程tag
 	git push origin :refs/tags/Remote_Systems_Operation
+	
+
+	git reset --hard <commit_id>
+	git push origin HEAD --force

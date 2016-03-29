@@ -1,0 +1,16 @@
+* call trace for generic hid
+         hexdump-471   [000] ....1..   302.343984: hidraw_open <-chrdev_open
+         hexdump-471   [000] ....1..   302.344024: usbhid_power <-hidraw_open
+         hexdump-471   [000] ....1..   302.344031: usbhid_get_power <-usbhid_power
+         hexdump-471   [000] ....1..   302.344057: usbhid_open <-hidraw_open
+         hexdump-471   [000] ....1..   302.344068: hid_start_in <-usbhid_open
+         hexdump-471   [000] ....1..   302.402684: hidraw_ioctl <-do_vfs_ioctl
+         hexdump-471   [000] ....1..   302.402775: hidraw_read <-__vfs_read
+ irq/191-4740000-317   [000] ....1..   304.541264: hid_irq_in <-__usb_hcd_giveback_urb
+ irq/191-4740000-317   [000] ....1..   304.547065: hid_input_report <-hid_irq_in
+ irq/191-4740000-317   [000] ....1..   304.547082: hid_report_raw_event <-hid_input_report
+ irq/191-4740000-317   [000] ....1..   304.547090: hidraw_report_event <-hid_report_raw_event
+ irq/191-4740000-317   [000] ....1..   304.547178: hidinput_report_event <-hid_report_raw_event
+ irq/191-4740000-317   [000] ....1..   304.547193: hid_check_keys_pressed <-hid_irq_in
+         hexdump-471   [000] ....1..   304.560049: hidraw_read <-__vfs_read
+         hexdump-471   [000] ....1..   306.116952: hidraw_release <-__fput
