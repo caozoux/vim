@@ -169,6 +169,8 @@ map <C-x>z <ESC>:call Me_zf_funcs(1)<CR>
 map <C-x>p <ESC>:call Me_pr_func1(1)<CR> 
 map <C-n> <ESC>:call Me_pr_func2(1)<CR>
 map <C-x>q <ESC>:q!<CR>
+map <c-x>f <ESC>o <C-R>=MbufComplete()<CR>
+inoremap <c-a> <ESC>:call MjumpBuff()<CR>
 
 "runtime /home/wrsadmin/github/vim/wind.vim
 highlight Folded ctermfg=0 ctermbg=7
