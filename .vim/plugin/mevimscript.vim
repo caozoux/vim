@@ -101,23 +101,8 @@ function! MjumpBuff()
 	execute ":buffer " cur_line
 endfunc
 
-function! Msleep()
-	let cur_line = getline(line("."))
-	let old_len=strlen(cur_line)
-	let new_line=strlen(getline(line(".")))
-	while new_line == old_len
-		sleep 100m
-		let old_len=strlen(cur_line)
-		let new_line=strlen(getline(line(".")))
-	endwhile
-	"call complete(b:position,s:mbuf_list)
-	return ''
-endfunc
-
 func! MbufComplete()
-	"let b:position = col('.')
 	call MscanBuf()
-	"sleep 100m
 	let b:position = col('.')
 	call complete(b:position,s:mbuf_list)
 	return ''
@@ -127,8 +112,8 @@ func! MscanBuf()
 	let i = 0
 	while i < argc()
 		"call add(b:mbuf_list, argv(i))
-		call add(s:mbuf_list, argv(i))
-		echo argv(i)
+		if filereadable(argv(i))
+			call add(s:mbuf_list, argv(i))
 		let i=i+1
 	endwhile
 endfunc
