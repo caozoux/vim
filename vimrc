@@ -1,7 +1,58 @@
-"inoremap ( ()<LEFT>
-"inoremap [ []<LEFT>
-"inoremap { {}<LEFT> 
-"inoremap { {<Enter><Enter>}<UP><RIGHT>
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+let g:UltiSnipsSnippetDirectories=['UltiSnips']
+let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+let g:UltiSnipsExpandTrigger = 'ii'
+let g:UltiSnipsListSnippets = '<C-tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-tab>'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 
 "-- omnicppcomplete setting --
@@ -34,9 +85,9 @@ map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpda
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
-set tags+=/home/wrsadmin/bin/tag/common/out/linux_base-tags
-set tags+=/home/wrsadmin/bin/tag/common/out/driver_common-tags
-set tags+=/home/wrsadmin/bin/tag/common/linux_base_plat
+set tags+=/home/zoucao/github/shell/ctag/linux_base-tags
+set tags+=/home/zoucao/github/shell/ctag//driver_common-tags
+set tags+=/home/zoucao/bin/tag/common/linux_base_plat
 "
 "-- Taglist setting --
 let Tlist_Ctags_Cmd='ctags'
@@ -72,14 +123,11 @@ if has("cscope")
    elseif $CSCOPE_DB != ""        
         cs add $CSCOPE_DB        
    endif
-   cs add /home/wrsadmin/bin/tag/cscope.out
+   cs add ~/github/shell/cscope/cscope.out
    set csverb
    let Cscope_OpenQuickfixWindow = 0
 endif
 
-set tags+=/home/wrsadmin/bin/tag/common/out/linux_base-tags
-set tags+=/home/wrsadmin/bin/tag/common/out/driver_common-tags
-set tags+=/home/wrsadmin/bin/tag/common/linux_base_plat
 
 map <F4> :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
 imap <F4> <ESC>:cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
@@ -111,9 +159,9 @@ let showmarks_hlline_upper = 1
 
 "vimwiki
 let g:vimwiki_use_mouse = 1
-let g:vimwiki_list = [{'path': '~/.vim/vimwiki/',
-            \ 'path_html': '~/.vim/vimwiki/html/',
-            \ 'html_header': '~/.vim/vimwiki/template/header.tpl',}]
+"let g:vimwiki_list = [{'path': '~/.vim/vimwiki/',
+"            \ 'path_html': '~/.vim/vimwiki/html/',
+"            \ 'html_header': '~/.vim/vimwiki/template/header.tpl',}]
 
 "set expandtab
 set tabstop=4
@@ -141,10 +189,7 @@ autocmd FileType python runtime! autoload/pythoncomplete.vim
 
 au BufRead,BufNewFile *.patch set filetype=patch
 
-"set list if filetype is patch 
-"autocmd FileType diff set list
 
-" run file .py
 map <F6> :make clean<CR><CR><CR>
 map <F7> :make<CR><CR><CR> :copen<CR><CR>
 "map <F8> :make bootimage<CR><CR><CR> :copen<CR><CR>
@@ -168,9 +213,12 @@ map <C-x>z <ESC>:call Me_zf_funcs(1)<CR>
 "print the _func_+/_func_-
 map <C-x>p <ESC>:call Me_pr_func1(1)<CR> 
 map <C-n> <ESC>:call Me_pr_func2(1)<CR>
+map <C-x>1 <ESC>:call Me_pr_func3(1)<CR>
 map <C-x>q <ESC>:q!<CR>
+
 map <c-x>f <ESC>o <C-R>=MbufComplete()<CR>
 inoremap <c-a> <ESC>:call MjumpBuff()<CR>
 
 "runtime /home/wrsadmin/github/vim/wind.vim
 highlight Folded ctermfg=0 ctermbg=7
+
