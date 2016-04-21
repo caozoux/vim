@@ -9,3 +9,11 @@
 * [[jffs2]]
 * [[vlmtool]]
 * [[ubuntu]]
+
+
+work follow:
+1. ear:
+2. ready ear package to /folk/ip-group/SrcDrop/PD/LinuxPD/BSPs/Linux2016Q1&Q2_BSPs/WRLinux8/RCPL05/US76894_ti-am335x
+3. submit the ites to http://ip/Disclosureform/tabid/79/Default.aspx,
+4. set test request in Rally
+5. send request test in bsp group mail

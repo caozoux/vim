@@ -39,7 +39,12 @@ let g:UltiSnipsListSnippets = '<C-tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-tab>'
 
-" All of your Plugins must be added before the following line
+"ccal line indentation
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#09AA08'
+let g:indentLine_char = '│'
+
+"t All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -198,6 +203,9 @@ map <F9> :cn<CR>
 map <F1> :w<CR><CR><CR>
 
 map <C_c> <ESC>
+inoremap { {<ESC>o}<ESC>ko
+vnoremap c "+y
+vnoremap p "+p
 "fold function
 inoremap <C-j> <DOWN>
 inoremap <C-k> <UP>
@@ -211,12 +219,12 @@ map <C-x>x <ESC>:wq<CR>
 map <C-x>q <ESC>:q!<CR>
 map <C-x>z <ESC>:call Me_zf_funcs(1)<CR>
 "print the _func_+/_func_-
-map <C-x>p <ESC>:call Me_pr_func1(1)<CR> 
+"map <C-x>p <ESC>:call Me_pr_func1(1)<CR> 
 map <C-n> <ESC>:call Me_pr_func2(1)<CR>
-map <C-x>1 <ESC>:call Me_pr_func3(1)<CR>
+"map <C-x>1 <ESC>:call Me_pr_func3(1)<CR>
 map <C-x>q <ESC>:q!<CR>
 
-map <c-x>f <ESC>o <C-R>=MbufComplete()<CR>
+"map <c-x>f <ESC>o <C-R>=MbufComplete()<CR>
 inoremap <c-a> <ESC>:call MjumpBuff()<CR>
 
 "runtime /home/wrsadmin/github/vim/wind.vim

@@ -52,7 +52,7 @@ arm linux boot的主线可以概括为以下几个步骤:
 1. 确定 processor type
 2. 确定 machine type
 3.检查参数合法性
-4. 创建页表   
+4. 创建页表
 5. 调用平台特定的__cpu_flush函数        (在struct proc_info_list中)                         
 6. 开启mmu
 7. 切换数据
@@ -63,7 +63,7 @@ arm linux boot的主线可以概括为以下几个步骤:
     对于vmlinux.lds.S,这是ld script文件,此文件的格式和汇编及C程序都不同,本文不对ld script作过多的介绍,只对内核中用到的内容进行讲解,关于ld的详细内容可以参考ld.info
     这里的ENTRY(stext) 表示程序的入口是在符号stext.
     而符号stext是在arch/arm/kernel/head.S中定义的:
-下面我们将arm linux boot的主要代码列出来进行一个概括的介绍,然后,我们会逐个的进行详细的讲解. 
+下面我们将arm linux boot的主要代码列出来进行一个概括的介绍,然后,我们会逐个的进行详细的讲解.
 在arch/arm/kernel/head.S中 74 - 94 行,是arm linux boot的主代码:
 
  74         __HEAD
