@@ -24,3 +24,5 @@
 * [[android]]
 * [[qemu]]
 * [[mysql]]
+* [[java]]
+* [[web]]

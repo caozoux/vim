@@ -23,21 +23,27 @@ Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+Plugin 'othree/html5.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'spf13/PIV'
+Plugin 'ervandew/supertab'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/ListToggle'
+
 
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 let g:UltiSnipsExpandTrigger = 'ii'
 let g:UltiSnipsListSnippets = '<C-tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<S-tab>'
+"let g:UltiSnipsJumpForwardTrigger = '<tab>'
+"let g:UltiSnipsJumpBackwardTrigger = '<S-tab>'
 
 "ccal line indentation
 let g:indentLine_color_term = 239
@@ -203,14 +209,9 @@ map <F9> :cn<CR>
 map <F1> :w<CR><CR><CR>
 
 map <C_c> <ESC>
-inoremap { {<ESC>o}<ESC>ko
 vnoremap c "+y
 vnoremap p "+p
 "fold function
-inoremap <C-j> <DOWN>
-inoremap <C-k> <UP>
-inoremap <C-h> <LEFT>
-inoremap <C-l> <RIGHT>
 inoremap <C-d> <RIGHT><DEL>
 "map <C-m> <ESC>"ap<ESC> == entry
 

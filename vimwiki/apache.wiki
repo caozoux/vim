@@ -1,0 +1,10 @@
+1. modify the default web dir
+
+<Directory /home/zoucao/work/web/>
+	Options Indexes FollowSymLinks
+	AllowOverride None
+	Require all granted
+</Directory>
+
+/etc/apache2/sites-available/000-default.conf
+DocumentRoot /home/zoucao/work/web/
