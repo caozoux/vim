@@ -3,3 +3,6 @@
 * [[wrlinux_config]]
 * DVD
 	/lpg-build/cdc/fast_prod/wrlinux70RCPL/RCPL0005_LX04/
+	
+
+CONFIG_FHANDLE=y
