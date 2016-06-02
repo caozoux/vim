@@ -96,9 +96,6 @@ map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpda
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
-set tags+=/home/zoucao/github/shell/ctag/linux_base-tags
-set tags+=/home/zoucao/github/shell/ctag//driver_common-tags
-set tags+=/home/zoucao/bin/tag/common/linux_base_plat
 "
 "-- Taglist setting --
 let Tlist_Ctags_Cmd='ctags'
@@ -230,4 +227,5 @@ inoremap <c-a> <ESC>:call MjumpBuff()<CR>
 
 "runtime /home/wrsadmin/github/vim/wind.vim
 highlight Folded ctermfg=0 ctermbg=7
+map <C-x>v <ESC>:call Patch_vsplit_open()<CR>
 

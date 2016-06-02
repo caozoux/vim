@@ -1,0 +1,5 @@
+* substr
+elseif (substr($file, -4) == '.php') {
+* jump
+  header("Location:result/index.htm");
+  

@@ -9,6 +9,7 @@
 * [[jffs2]]
 * [[vlmtool]]
 * [[ubuntu]]
+* [[yocto]]
 
 
 work follow:

@@ -1,0 +1,3 @@
+i2cdetect -l
+
+i2cget -f -y 1 0x001a 

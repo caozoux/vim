@@ -13,3 +13,4 @@
         
 
 
+ __setup("dhcpclass=", vendor_class_identifier_setup);

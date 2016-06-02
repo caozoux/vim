@@ -1,0 +1,33 @@
+           aplay-724   [000] .......   224.887570: snd_open <-chrdev_open
+           aplay-724   [000] .......   224.887583: snd_ctl_open <-snd_open
+           aplay-724   [000] .......   224.887588: snd_lookup_minor_data <-snd_ctl_open
+           aplay-724   [000] .......   224.887592: snd_card_file_add <-snd_ctl_open
+           aplay-724   [000] .......   224.887601: snd_card_unref <-snd_ctl_open
+           aplay-724   [000] .......   224.887675: snd_ctl_ioctl <-do_vfs_ioctl
+           aplay-724   [000] .......   224.887710: snd_ctl_release <-__fput
+           aplay-724   [000] .......   224.887731: snd_ctl_empty_read_queue <-snd_ctl_release
+           aplay-724   [000] .......   224.887737: snd_card_file_remove <-snd_ctl_release
+           aplay-724   [000] .......   224.887741: snd_card_unref <-snd_card_file_remove
+
+
+play-724   [000] .......   224.911343: snd_pcm_playback_open <-snd_open
+           aplay-724   [000] .......   224.911346: snd_lookup_minor_data <-snd_pcm_playback_open
+           aplay-724   [000] .......   224.911350: snd_pcm_open <-snd_pcm_playback_open
+           aplay-724   [000] .......   224.911353: snd_card_file_add <-snd_pcm_open
+           aplay-724   [000] .......   224.911359: snd_pcm_open_substream <-snd_pcm_open
+           aplay-724   [000] .......   224.911363: snd_pcm_attach_substream <-snd_pcm_open_substream
+           aplay-724   [000] .......   224.911372: snd_malloc_pages <-snd_pcm_attach_substream
+           aplay-724   [000] .......   224.911387: snd_malloc_pages <-snd_pcm_attach_substream
+           aplay-724   [000] .......   224.911397: snd_pcm_hw_constraints_init <-snd_pcm_open_substream
+           
+
+           aplay-724   [000] .......   224.911558: snd_dmaengine_pcm_open <-dmaengine_pcm_open
+           aplay-724   [000] .......   224.911561: snd_pcm_hw_constraint_integer <-snd_dmaengine_pcm_open
+           aplay-724   [000] .......   224.912033: snd_pcm_rate_mask_intersect <-soc_pcm_init_runtime_hw
+           aplay-724   [000] .......   224.912038: snd_pcm_limit_hw_rates <-soc_pcm_init_runtime_hw
+
+           aplay-724   [000] .......   224.912179: snd_pcm_common_ioctl1 <-snd_pcm_playback_ioctl1
+           aplay-724   [000] .......   224.912182: snd_pcm_info_user <-snd_pcm_common_ioctl1
+           aplay-724   [000] .......   224.912186: snd_pcm_info <-snd_pcm_info_user
+           aplay-724   [000] .......   224.912193: snd_pcm_lib_ioctl <-soc_pcm_ioctl
+           aplay-724   [000] .......   224.912208: snd_pcm_playback_ioctl <-do_vfs_io

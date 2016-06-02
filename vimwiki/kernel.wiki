@@ -96,4 +96,5 @@
 * [[hid]]
 * [[timer]]
 * [[list]]
+* [[audio_driver]]
 * [[bitmap]]

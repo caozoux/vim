@@ -1,4 +1,4 @@
-root ALL = NOPASSWD: /usr/bin/apt-get  
+[[root]] ALL = NOPASSWD: /usr/bin/apt-get  
 sudo /usr/sbin/visudo
 
 
@@ -11,3 +11,6 @@ touch ~/.screenrc , and add the context
  defescape ^Jj
  escape ^Jj
 
+
+
+mount -t cifs -o uid=1000,gid=1000,username=XXX   //128.224.176.171/ubuntuShare  /mnt/win7share

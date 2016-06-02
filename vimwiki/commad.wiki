@@ -1,6 +1,9 @@
 * [[/proc]]
 * lsblk
-* 
+* [[command_audio]] 
 *
 
 sudo sh ./altera-linux/bin/make_sdimage.sh -k zImage,socfpga.dtb,soc_system.rbf,u-boot.scr -p preloader-mkpimage.bin -b u-boot-socfpga_arria5.img -r /tmp/rootfs -o /tmp/sd_image.bin -g 2G
+
+
+[[*command_i2c]]

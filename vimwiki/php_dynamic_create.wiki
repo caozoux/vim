@@ -1,0 +1,9 @@
+* array
+  array_merge
+     $classes = array_merge($classes, $this->getClassesFromDir($path.$file.'/', $host_mode));
+        $classes = array_merge(
+            $this->getClassesFromDir('classes/'),
+            $this->getClassesFromDir('controllers/'),
+            $this->getClassesFromDir('Adapter/'),
+            $this->getClassesFromDir('Core/')
+        );

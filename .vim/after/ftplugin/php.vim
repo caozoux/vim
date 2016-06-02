@@ -78,13 +78,14 @@ function! AutoChar2()
 	   endif
 endfunction
 
+"auto patern for '('
 function! AutoChar3()
-        let pat = '[(]'
+        let pat = '($'
         let save_cursor = getpos('.')
         let result = matchstr(getline(save_cursor[1]), pat)
         if (search(pat, 'c', save_cursor[1]))
-        	:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-           normal! a)
+           	normal! a);
+        	:call cursor(save_cursor[1], save_cursor[2]+1, save_cursor[3])
 	   endif
 endfunction
 

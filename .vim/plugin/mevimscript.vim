@@ -30,19 +30,6 @@ function! Me_zf_funcs(type)
 	"echo s:count
 endfunction " 
 
-function! Me_pr_func1(type)
-	execute "normal koprintk(\"zz \%s +\\n\", __func__);\<ESC>j\<ESC>"
-	execute "normal oprintk(\"zz \%s -\\n\", __func__);\<ESC>k\<ESC>"
-endfunction 
-
-function! Me_auto_for(type)
-	execute "normal ofor (i=0; i<; i++)\<ESC>o{\<ESC>o\<ESC>o}\<ESC>"
-endfunction 
-
-function! Me_auto_if(type)
-	execute "normal oif ( ) {\<ESC>o\<ESC>o}\<ESC>"
-endfunction 
-
 function! Me_pr_func2(type)
 	execute "normal oprintk(\"zz \%s \\n\", __func__);\<ESC>"
 endfunction 
@@ -118,6 +105,21 @@ func! MscanBuf()
 	endwhile
 endfunc
 
+"fast open the patch modify file
+func! Patch_vsplit_open()
+	let b:r_cur = getline(".")
+	let b:postion = match(b:r_cur, "+++ b/")
+	if (b:postion == 0)
+		let b:f_name = strpart(b:r_cur, 6)
+		execute ":vsplit " b:f_name
+	endif
+
+endfunc
+
+func! Tag_kernel_set()
+	set tags+=/home/zoucao/github/shell/ctag/linux_base-tags
+endfunc
+
 func! MeDbg()
-	call MjumpBuff()
+	call Patch_vsplit_open()
 endfunc

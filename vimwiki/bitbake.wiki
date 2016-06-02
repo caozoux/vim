@@ -1,1 +1,11 @@
 make bbs -> setup bitbake
+
+bitbake Package -c listtasks  
+显示所有操作
+
+* debug:
+		python:
+			bb.debug bb.error
+		shell:
+			
+

@@ -1,2 +1,8 @@
 * [[编译优化]]
 * [[dtb]]
+
+
+
+cat /proc/config.gz | gzip -d > /home/config
+
+
