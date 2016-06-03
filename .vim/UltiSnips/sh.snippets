@@ -1,0 +1,25 @@
+snippet if
+if [ ${1:tx} ]
+then
+fi
+endsnippet
+
+snippet wh
+while [ ${1:tx} ]
+do
+done
+endsnippet
+
+snippet re
+read -p "${1:tx}(y/n):"  answer
+if [ $answer = "y" ]
+then
+
+fi
+endsnippet
+
+snippet fu
+function ${1:funName} ()
+{
+}
+endsnippet

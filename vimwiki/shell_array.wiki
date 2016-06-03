@@ -1,0 +1,14 @@
+a=(1 2 3 4 5)
+
+数组读取与赋值
+echo ${#a[@]} -> 5
+echo ${a[2]} -> 2
+echo ${a[*]} -> all array
+a[1]=100 
+unset a[1]   -> remove index 1
+分片:
+	[chengmo@centos5 ~]$ echo ${a[@]:0:3}
+	1 2 3
+替换:
+	[chengmo@centos5 ~]$ echo ${a[@]/3/100}
+	1 2 100 4 5

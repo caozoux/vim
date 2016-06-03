@@ -229,3 +229,25 @@ inoremap <c-a> <ESC>:call MjumpBuff()<CR>
 highlight Folded ctermfg=0 ctermbg=7
 map <C-x>v <ESC>:call Patch_vsplit_open()<CR>
 
+"let g:EclimTodoSearchExtensions = ['java', 'py', 'php', 'jsp', 'xml', 'html']
+"set autcompletion for Eclim
+let g:SuperTabDefaultCompletionType = 'context'
+let g:acp_behaviorJavaEclimLength = 3
+
+"function MeetsForJavaEclim(context)
+"  return g:acp_behaviorJavaEclimLength >= 0 &&
+"        \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
+"endfunction
+
+function MeetsForJavaEclim(context)
+endfunction
+
+let g:acp_behavior = {
+    \ 'java': [{
+      \ 'command': "\<c-x>\<c-u>",
+      \ 'completefunc' : 'eclim#java#complete#CodeComplete',
+      \ 'meets'        : 'MeetsForJavaEclim',
+    \ }]
+  \ }
+
+"let  g:acp_behaviorJavaEclimLength = g:acp_behaviorJavaEclimLength
