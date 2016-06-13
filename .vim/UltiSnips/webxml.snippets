@@ -1,0 +1,26 @@
+snippet <se
+<servlet>
+	<servlet-name> ${1:servletClass}</servlet-name>
+	<servlet-class> ${2:servletClass}</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>$1</servlet-name>
+	<url-pattern>/$1</url-pattern>
+</servlet-mapping>
+
+endsnippet
+
+snippet <fi
+<filter>
+	<filter-name> ${1:name} </filter-name>
+	<filter-class> </filter-class>
+	<init-param>
+		<param-name> ${2:param} </param-name>
+		<param-value>${3:value} </param-value>
+	</init-param>
+</filter>
+	<filter-mapping>
+		<filter-name>$1</filter-name>
+		<url-patter>/${4:filter.jsp}</url-pattern>
+	</filter-mapping>
+endsnippet
