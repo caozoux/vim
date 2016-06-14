@@ -106,6 +106,7 @@ func! MscanBuf()
 endfunc
 
 "fast open the patch modify file
+"like :+++ b/drivrs/base/core.c
 func! Patch_vsplit_open()
 	let b:r_cur = getline(".")
 	let b:postion = match(b:r_cur, "+++ b/")
@@ -113,13 +114,89 @@ func! Patch_vsplit_open()
 		let b:f_name = strpart(b:r_cur, 6)
 		execute ":vsplit " b:f_name
 	endif
-
 endfunc
+
+function! AutoBlacker()
+		if (&paste)
+			return
+		endif
+        let pat = ') {'
+        let save_cursor = getpos('.')
+		let new_position= save_cursor[1] + 1
+        let result = matchstr(getline(save_cursor[1]), pat)
+        if (search(pat, 'b', save_cursor[1]))
+           normal! o}
+           normal! ko    
+			":call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
+        	:call cursor(new_position, save_cursor[2], save_cursor[3])
+		else 
+			:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
+		endif
+endfunction
+
+function! AutoChar1()
+		if (&paste)
+			return
+		endif
+        let pat = '[/[]'
+        let save_cursor = getpos('.')
+        let result = matchstr(getline(save_cursor[1]), pat)
+        if (search(pat, 'c', save_cursor[1]))
+        	:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
+           normal! a]
+	   endif
+endfunction
+
+function! AutoChar2()
+		if (&paste)
+			return
+		endif
+        let pat = '["]'
+        let save_cursor = getpos('.')
+        let result = matchstr(getline(save_cursor[1]), pat)
+        if (search(pat, 'c', save_cursor[1]))
+        	:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
+           normal! a"
+	   endif
+endfunction
+
+"auto patern for '('
+function! AutoChar3()
+		if (&paste)
+			return
+		endif
+
+        let pat = '($'
+        let save_cursor = getpos('.')
+        let result = matchstr(getline(save_cursor[1]), pat)
+        if (search(pat, 'c', save_cursor[1]))
+           	normal! a)
+        	:call cursor(save_cursor[1], save_cursor[2]+1, save_cursor[3])
+	   endif
+endfunction
+
+
+"auto patern for '('
+function! AutoChar4()
+		if (&paste)
+			return
+		endif
+
+        normal! $a;
+endfunction
+
+inoremap { {<ESC>:call AutoBlacker()<CR>
+inoremap [ [<ESC>:call AutoChar1()<CR>i
+inoremap " "<ESC>:call AutoChar2()<CR>i
+inoremap ( (<ESC>:call AutoChar3()<CR>i
+inoremap ;  <ESC>:call  AutoChar4()<CR>i
 
 func! Tag_kernel_set()
 	set tags+=/home/zoucao/github/shell/ctag/linux_base-tags
 endfunc
 
 func! MeDbg()
-	call Patch_vsplit_open()
+	echo g:paste
 endfunc
+
+
