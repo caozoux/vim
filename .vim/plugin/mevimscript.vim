@@ -166,13 +166,13 @@ function! AutoChar3()
 			return
 		endif
 
-        let pat = '($'
+        let pat = '('
         let save_cursor = getpos('.')
         let result = matchstr(getline(save_cursor[1]), pat)
         if (search(pat, 'c', save_cursor[1]))
            	normal! a)
         	:call cursor(save_cursor[1], save_cursor[2]+1, save_cursor[3])
-	   endif
+	    endif
 endfunction
 
 
@@ -182,7 +182,16 @@ function! AutoChar4()
 			return
 		endif
 
-        normal! $a;
+        let pat = 'for'
+        let save_cursor = getpos('.')
+        let result = matchstr(getline(save_cursor[1]), pat)
+
+        if (search(pat, 'c', save_cursor[1]))
+			return
+		else
+            normal! $a;
+            normal! o
+		endif
 endfunction
 
 inoremap { {<ESC>:call AutoBlacker()<CR>

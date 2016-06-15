@@ -1,3 +1,14 @@
 * bb package build 
   fetch
   unpack
+  
+
+* add debug information
+  bberror --> shell
+  bbdebug
+  bbinfo
+  
+  bb.error --> python
+  bb.debug
+  bb.info
+
