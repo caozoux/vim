@@ -252,3 +252,4 @@ let g:acp_behavior = {
   \ }
 
 "let  g:acp_behaviorJavaEclimLength = g:acp_behaviorJavaEclimLength
+let g:user_emmet_expandabbr_key = '<C-k>'

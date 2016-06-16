@@ -17,4 +17,7 @@ function! InsertHtmlTag()
         endif
         :call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
 endfunction
-inoremap > <ESC>:call InsertHtmlTag()<CR>a
+""inoremap > <ESC>:call InsertHtmlTag()<CR>a
+if hasmapto(';')
+ iunmap ;
+endif
