@@ -31,7 +31,9 @@ function! Me_zf_funcs(type)
 endfunction " 
 
 function! Me_pr_func2(type)
+	execute "set paste"
 	execute "normal oprintk(\"zz \%s \\n\", __func__);\<ESC>"
+	execute "set nopaste"
 endfunction 
 
 function! Me_Tag(TagType)
@@ -130,6 +132,7 @@ function! AutoBlacker()
 			":call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
         	:call cursor(new_position, save_cursor[2], save_cursor[3])
 		else 
+           normal! a}
 			:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
 		endif
 endfunction
@@ -194,7 +197,7 @@ function! AutoChar4()
 		endif
 endfunction
 
-inoremap { {<ESC>:call AutoBlacker()<CR>
+inoremap { {<ESC>:call AutoBlacker()<CR>i
 inoremap [ [<ESC>:call AutoChar1()<CR>i
 inoremap " "<ESC>:call AutoChar2()<CR>i
 inoremap ( (<ESC>:call AutoChar3()<CR>i

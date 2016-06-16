@@ -34,7 +34,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'spf13/PIV'
 Plugin 'ervandew/supertab'
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'mattn/emmet-vim'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'Valloric/ListToggle'
 
 
