@@ -229,6 +229,7 @@ inoremap <c-a> <ESC>:call MjumpBuff()<CR>
 "runtime /home/wrsadmin/github/vim/wind.vim
 highlight Folded ctermfg=0 ctermbg=7
 map <C-x>v <ESC>:call Patch_vsplit_open()<CR>
+map <C-v> <ESC>"+p
 
 "let g:EclimTodoSearchExtensions = ['java', 'py', 'php', 'jsp', 'xml', 'html']
 "set autcompletion for Eclim
@@ -253,3 +254,4 @@ let g:acp_behavior = {
 
 "let  g:acp_behaviorJavaEclimLength = g:acp_behaviorJavaEclimLength
 let g:user_emmet_expandabbr_key = '<C-k>'
+let g:acp_behaviorKeywordLength = 3
