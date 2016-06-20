@@ -1,5 +1,5 @@
 set dictionary-=~/.vim/after/ftplugin/html_funclist.txt dictionary+=~/.vim/after/ftplugin/html_funclist.txt
-set iskeyword+=.,(
+set iskeyword+=>
 set complete-=k complete+=k
 
 autocmd BufNewFile *  setlocal filetype=html

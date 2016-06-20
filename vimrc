@@ -18,8 +18,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -35,7 +33,16 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'spf13/PIV'
 Plugin 'ervandew/supertab'
 Plugin 'mattn/emmet-vim'
-"Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
+" javascript
+Plugin 'pangloss/vim-javascript'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'heavenshell/vim-jsdoc', {'for': ['javascript', 'jsx']}
+Plugin 'burnettk/vim-angular'
+Plugin 'mxw/vim-jsx' 
+Plugin 'marijnh/tern_for_vim'
+
 Bundle 'Valloric/ListToggle'
 
 
@@ -97,7 +104,6 @@ map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpda
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
-"
 "-- Taglist setting --
 let Tlist_Ctags_Cmd='ctags'
 let Tlist_Use_Right_Window=1 
@@ -137,6 +143,43 @@ if has("cscope")
    let Cscope_OpenQuickfixWindow = 0
 endif
 
+
+" ----------------------------------------------------------------------------
+" YouCompleteMe
+" ----------------------------------------------------------------------------
+let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_complete_in_strings = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_key_list_select_completion = ['<Tab>', '<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+let g:ycm_semantic_triggers =  {
+            \   'c' : ['->', '.'],
+            \   'objc' : ['->', '.'],
+            \   'ocaml' : ['.', '#'],
+            \   'cpp,objcpp' : ['->', '.', '::'],
+            \   'perl' : ['->'],
+            \   'php' : ['->', '::', '(', 'use ', 'namespace ', '\'],
+            \   'cs,java,typescript,d,python,perl6,scala,vb,elixir,go' : ['.', 're!(?=[a-zA-Z]{3,4})'],
+            \   'html': ['<', '"', '</', ' '],
+            \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
+            \   'ruby' : ['.', '::'],
+            \   'lua' : ['.', ':'],
+            \   'erlang' : [':'],
+            \   'haskell' : ['.', 're!.'],
+            \   'scss,css': [ 're!^\s{2,4}', 're!:\s+' ],
+            \   'javascript': ['.', 're!(?=[a-zA-Z]{3,4})'],
+            \ }
+
+" ----------------------------------------------------------------------------
+" syntastic
+" ----------------------------------------------------------------------------
+let g:syntastic_error_symbol='✘'
+let g:syntastic_warning_symbol='❗'
+let g:syntastic_style_error_symbol='»'
+let g:syntastic_style_warning_symbol='•'
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_highlighting = 0
+let g:syntastic_javascript_checkers = ['eslint']
 
 map <F4> :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
 imap <F4> <ESC>:cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
