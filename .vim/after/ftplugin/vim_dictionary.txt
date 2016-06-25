@@ -11,14 +11,14 @@ strtrans() 将一个字符串转换为可显示形式 a
 tolower() 将一个字符串转换为小写
 toupper() 将一个字符串转换为大写
 match() 返回一个搜索在一个字符串中出现的位置
-matchend() 同 match(), 但从后往前搜索
-matchstr() 同 match, 但返回匹配到的目标串
-matchlist() 同 matchstr, 同时将匹配的子模式一并返回
+matchend() 同 match(),但从后往前搜索
+matchstr() 同 match,但返回匹配到的目标串
+matchlist() 同 matchstr,同时将匹配的子模式一并返回
 stridx() 一个子串初次出现在母串中的位置
 strridx() 一个子串最后一次出现在母串中的位置
 strlen() 求字符串长度
 substitute() 字符串替换
-submatch() 得到一次":substitute"操作中的匹配到的一个子模式 b
+submatch() 得到一次":substitute"操作中的匹配到的一个子模式b
 strpart() 得到一个字符串的子串
 expand() 扩展特殊的关键字
 iconv() 转变文字编码
@@ -67,17 +67,17 @@ min() 求字典中的最小值
 count() 统计一个值出现在次数
 float2nr() 浮点数转换为整数
 abs() 对浮点数求绝对值(同样适用于整数)
-round() 四舍五入 a
+round() 四舍五入a
 ceil() 向上舍入
 floor() 向下舍入
 trunc() 截除小数点后的部分
-log10() 以 10 为底的对数
-pow() x 的 y 次方幂
+log10() 以1为底的对数
+pow() x 的y次方幂
 sqrt() 求平方根
-sin() 三角函数 sine
-cos() 三角函数 cosine
-atan() 三角函数 arc tangent
-type() 变量的类型,返回 0 为数字, 1 为字符串 a
+sin() 三角函数sine
+cos() 三角函数cosine
+atan() 三角函数
+type() 变量的类型,返回0为数字,1为字符串a
 islocked() 检查变量是否被锁住
 function() 由指定名字的函数返回该函数的引用
 getbufvar() 得到指定缓冲中的变量
@@ -89,35 +89,35 @@ setwinvar() 为指定窗口设置变量
 settabvar() 为指定的标签页设置变量
 settabwinvar() 设置指定窗口和标签页中的变量
 garbagecollect() 执行内存的自动垃圾回收
-col() 得到光标或一个 mark 所在的列号
-virtcol() 得到光标或一个 mark 所在屏幕上的列位置
-line() 得到光标或一个 mark 所在的行号
-wincol() 当前光标在当前窗口坐标中的列号 a
+col() 得到光标或一个mar 所在的列号
+virtcol() 得到光标或一个mark所在屏幕上的列位置
+line() 得到光标或一个mark所在的行号
+wincol() 当前光标在当前窗口坐标中的列号a
 winline() 当前光标在当前窗口坐标中的行号
 cursor() 将光标置于指定的行列
 getpos() 得到指定的光标或位置标记等的位置信息
 setpos() 设置指定的光标或位置标记等的位置信息
-byte2line() 得到该文件中第 N 个字节位于第几行
+byte2line() 得到该文件中第N个字节位于第几行
 line2byte() 同上面的相反,求得指定行的首字符位于文件中的字节偏移
-diff_filler() 得到 diff 模式下指定行前面被填充的行数
+diff_filler() 得到diff模式下指定行前面被填充的行数
 getline() 从当前缓冲区中得到指定行的内容,或是存储多行文本的列表
 setline() 将缓冲区某行的内容替换为指定内容
 append() 将指定的行,或指定的列表中的各行追加到当前缓冲区中由参数指定的行之后
 indent() 得到指定行的缩进量
-cindent() 根据 C 语言风格得到的指定行以空格个数统计的缩进量
-lispindent() 根据 Lisp 语言风格得到的指定行以空格个数统计的缩进量
+cindent() 根据C语言风格得到的指定行以空格个数统计的缩进量
+lispindent() 根据Lisp语言风格得到的指定行以空格个数统计的缩进量
 nextnonblank() 返回指定行及指定行之后的第一个非空行
 prevnonblank() 返回指定行及指定行之前的第一个非空行
 search() 查找下一个正则表达式
 searchpos() 查找一个模式的匹配
 searchpair() 在由开始/中间/结束三元素组成的语言结构中查找这三种元素
-searchpairpos() 同 searchpair()但返回值为行号和列索引组成的列表
+searchpairpos() 同searchpair()但返回值为行号和列索引组成的列表
 searchdecl() 得到一个变量的声明所在的行
 glob() 扩展文件名通配符
 globpath() 同上,但可以指定一系列的目录
 findfile() 在指定的目录列表中查找文件
 finddir() 在指定的目录列表中查找目录
-resolve() 返回 MS-Windows 上一个链接所指向的目标
+resolve() 返回MS-Windows上一个链接所指向的目标
 fnamemodify() 返回文件名的各种形式 a
 pathshorten() 返回一个路径各部分被缩简为单个字母的路径名
 simplify() 不改变路径本身的情况下简化其表示
@@ -134,7 +134,7 @@ tempname() 得到一个临时文件名
 mkdir() 创建新目录
 delete() 删除文件
 rename() 文件更名
-system() 执行一个 SHELL 命令
+system() 执行一个SHELL命令
 hostname() 当前系统的主机名
 readfile() 将一个文件的各行读入一个列表
 writefile() 将一个列表中的各行写入文件
@@ -142,7 +142,7 @@ getftime() 得到指定文件的最后修改时间
 localtime() 获取当前时间
 strftime() 将时间转换为字符串形式
 reltime() 得到当前的或已逝的精确时间值
-reltimestr() 把 reltime()返回的值转换为字串表示
+reltimestr() 把reltime()返回的值转换为字串表示
 argc() 返回参数列表中的参数个数
 argidx() 参数列表中的当前索引号
 argv() 返回参数列表中指定索引号的参数
@@ -162,9 +162,9 @@ getcmdline() 得到当前的命令行
 getcmdpos() 得到命令行中当前光标的位置
 setcmdpos() 设置命令行中当前光标的位置
 getcmdtype() 返回当前命令的类型
-getqflist() 将 quickfix 窗口中各项作为列表返回
-setqflist() 修改一个 quickfix 列表
-getloclist() 将 location 窗口中的各项作为列表返回 a
+getqflist() 将quickfix窗口中各项作为列表返回
+setqflist() 修改一个quickfix列表
+getloclist() 将location窗口中的各项作为列表返回 a
 setloclist() 修改一个 location 列表
 omplete() 设置找到的匹配项
 complete_add() 添加一个匹配项
@@ -173,21 +173,21 @@ pumvisible() 检查弹出菜单是否已显示
 foldclosed()
 folding-functions 检查指定行是否位于一个处于关闭状态的折行内
 foldclosedend() 同上,返回的是折行的尾行行号
-foldlevel() 返回指定行的折行层级,没有定义折行时返回 0
+foldlevel() 返回指定行的折行层级,没有定义折行时返回0
 foldtext() 生成一个关闭的折行所显示的文本 a
 foldtextresult() 得到一个折叠起来的折行的显示文本
-clearmatches() 清除由 matchadd() 和 :match 命令定义的所有匹配
-getmatches() 获取由 matchadd() 和 :match 命令定义的所有匹配
+clearmatches() 清除由matchadd()和:match命令定义的所有匹配
+getmatches() 获取由matchadd()和:match命令定义的所有匹配
 hlexists() 检查一个语法高亮项是否存在
-hlID() 返回一个语法高亮项的 ID
-synID() 返回指定位置的语法 ID
-synIDattr() 返回某语法 ID 的指定属性
-synIDtrans() 得到某语法项最终应用了其颜色定义的那种语法的 ID
-diff_hlID() 得到 diff 下指定位置的高亮 ID
+hlID() 返回一个语法高亮项的ID
+synID() 返回指定位置的语法ID
+synIDattr() 返回某语法ID的指定属性
+synIDtrans() 得到某语法项最终应用了其颜色定义的那种语法的ID
+diff_hlID() 得到diff下指定位置的高亮ID
 matchadd() 定义一个语法高亮的模式(一个匹配)
-matcharg() 得到:match 的参数信息
-matchdelete() 删除一个由 matchadd() 或 :match 命令定义的匹配
-setmatches() 恢复由 getmatches() 保存的匹配列表
+matcharg() 得到:match的参数信息
+matchdelete() 删除一个由matchadd()或:match命令定义的匹配
+setmatches() 恢复由getmatches()保存的匹配列表
 spellbadword() 定义当前光标处或其后的拼写有误的字词
 spellsuggest() 返回建议的改正词条
 soundfold() 返回读音近似的词
@@ -199,42 +199,39 @@ browse() 打开一个文件选择对话框
 browsedir() 打开一个目录选择对话框
 confirm() 让用户确认一组选择
 getchar() 让用户输入一个字符
-getcharmod() 得到最后一次输入字符时的修饰键 a
+getcharmod() 得到最后一次输入字符时的修饰键
 input() 从用户那要一行内容
 inputlist() 让用户从一个列表中选取其中一项
 inputsecret() 同上,但不回显输入的内容
 inputdialog() 让用户在一个对话框里输入
-inputsave() 保存并清空预输入的内容 b
-inputrestore() 恢复由 inputsave()保存下的预输入内容
+inputsave() 保存并清空预输入的内容
+inputrestore() 恢复由inputsave()保存下的预输入内容
 serverlist() 返回服务器名字列表
 remote_send() 向指定服务器发送命令字符
 remote_expr() 在服务器求值一个表达式
 server2client() 向客户端发送一个回应
 remote_peek() 检查是否收到来自服务器的回应
 remote_read() 从服务器读取回应信息
-foreground() 将 Vim 窗口移到前台
-remote_foreground() 将 Vim 服务器窗口移至前台
+foreground() 将Vim窗口移到前台
+remote_foreground() 将Vim 服务器窗口移至前台
 winheight() 返回指定窗口的高度,单位为字符
 winwidth() 返回指定窗口的宽度,单位为字符
-winrestcmd() return command to restore window sizes
-winsaveview() get view of current window
-winrestview() restore saved view of current window
 mode() 返回当前的编辑模式
-visualmode() 返回最近一次使用的 Visual 子模式
+visualmode() 返回最近一次使用的Visual子模式
 hasmapto() 检查是否有一个键被定义为指定的内容
 mapcheck() 检查一个映射是否存在
 maparg() 返回一个映射的右部,即它所被映射的内容
 exists() 检查一个变量或函数等是否被定义
 has() 检查当前的 Vim 是否支持某个特性
-cscope_connection() 检查是否存在某个 cscope 连接
+cscope_connection() 检查是否存在某个cscope连接
 changenr() 得到最近一次修改的编号
 did_filetype() 检查是否一个设置文件类型的自动命令已被执行过
 eventhandler() 检查当前脚本是否因事件触发而被调用
 libcall() 调用外部共享库中的一个函数
-libcallnr() 同上,但用于返回 int 的函数
+libcallnr() 同上,但用于返回int的函数
 getreg() 返回寄存器的内容
-getregtype() 返回寄存器中所保存的文本的类型 a
+getregtype() 返回寄存器中所保存的文本的类型
 setreg() 设置一个寄存器的内容和内容的类型
-taglist() 返回匹配的 tags 列表
-tagfiles() 返回 tags 文件列表
-mzeval() 求值 MzScheme 的表达式
+taglist() 返回匹配的tags 列表
+tagfiles() 返回tags文件列表
+mzeval() 求值MzScheme的表达式
