@@ -1,6 +1,5 @@
 let s:count=0
 let s:r_start=0 " check the while back to the start of buffer
-let s:mbuf_list=[] " check the while back to the start of buffer
 function! Me_zf_funcs(type)
 	" 折叠c文件所有函数和数据
 	let s:count = 0
@@ -53,58 +52,27 @@ endfunction
 
 "custom complete mem popup
 
-let s:custom_list = ["for (i=0; i<; i++) {","spangle","frizzle"]
-func! CustomComplete()
-	echom 'move to start of last word'
-	normal b
-	echom 'select word under cursor'
-	let b:word = expand('<cword>')
-	echom '->'.b:word.'<-'
-	echom 'save position'
-	let b:position = col('.')
-	echom '->'.b:position.'<-'
-	normal e
-	normal l
-	echom 'move to end of word'
-
-	let b:matches = []
-
-
-	echom 'begin checking for completion'
-	for item in s:custom_list
-	echom 'checking '
-	echom '->'.item.'<-'      
-			if(match(item,'^'.b:word)==0)
-			echom 'adding to matches'
-			echom '->'.item.'<-'      
-			call add(b:matches,item)
-			endif
-	endfor
-	call complete(b:position, b:matches)
-
-	return ''
-endfunc
 function! MjumpBuff()
 	let cur_line = getline(line("."))
 	execute ":u"
 	execute ":buffer " cur_line
 endfunc
 
-func! MbufComplete()
-	call MscanBuf()
+func! MVimFuncComplete()
+	let stylesheet = readfile("/home/zoucao/.vim/after/ftplugin/vim_dictionary.txt")
+	normal b
+	let b:matches = []
+	let b:dbg_a= []
 	let b:position = col('.')
-	call complete(b:position,s:mbuf_list)
+	let b:word = expand('<cword>') "get current word"
+	for item in stylesheet
+		if(match(item,'^'.b:word)==0)
+			call add(b:matches,item)
+		endif
+	endfor
+	echom b:word
+	call complete(b:position,b:matches)
 	return ''
-endfunc
-
-func! MscanBuf()
-	let i = 0
-	while i < argc()
-		"call add(b:mbuf_list, argv(i))
-		if filereadable(argv(i))
-			call add(s:mbuf_list, argv(i))
-		let i=i+1
-	endwhile
 endfunc
 
 "fast open the patch modify file
@@ -119,82 +87,81 @@ func! Patch_vsplit_open()
 endfunc
 
 function! AutoBlacker()
-		if (&paste)
-			return
-		endif
-        let pat = ') {'
-        let save_cursor = getpos('.')
-		let new_position= save_cursor[1] + 1
-        let result = matchstr(getline(save_cursor[1]), pat)
-        if (search(pat, 'b', save_cursor[1]))
-           normal! o}
-           normal! ko    
-			":call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-        	:call cursor(new_position, save_cursor[2], save_cursor[3])
-		else 
-           normal! a}
-			:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-		endif
+	if (&paste)
+		return
+	endif
+	let pat = ') {'
+	let save_cursor = getpos('.')
+	let new_position= save_cursor[1] + 1
+	let result = matchstr(getline(save_cursor[1]), pat)
+	if (search(pat, 'b', save_cursor[1]))
+	   normal! o}
+	   normal! ko    
+		":call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
+		:call cursor(new_position, save_cursor[2], save_cursor[3])
+	else 
+	   normal! a}
+		:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
+	endif
 endfunction
 
 function! AutoChar1()
-		if (&paste)
-			return
-		endif
-        let pat = '[/[]'
-        let save_cursor = getpos('.')
-        let result = matchstr(getline(save_cursor[1]), pat)
-        if (search(pat, 'c', save_cursor[1]))
-        	:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-           normal! a]
-	   endif
+	if (&paste)
+		return
+	endif
+	let pat = '[/[]'
+	let save_cursor = getpos('.')
+	let result = matchstr(getline(save_cursor[1]), pat)
+	if (search(pat, 'c', save_cursor[1]))
+		:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
+	   normal! a]
+   endif
 endfunction
 
 function! AutoChar2()
-		if (&paste)
-			return
-		endif
-        let pat = '["]'
-        let save_cursor = getpos('.')
-        let result = matchstr(getline(save_cursor[1]), pat)
-        if (search(pat, 'c', save_cursor[1]))
-        	:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-           normal! a"
-	   endif
+	if (&paste)
+		return
+	endif
+	let pat = '["]'
+	let save_cursor = getpos('.')
+	let result = matchstr(getline(save_cursor[1]), pat)
+	if (search(pat, 'c', save_cursor[1]))
+		:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
+	   normal! a"
+   	endif
 endfunction
 
 "auto patern for '('
 function! AutoChar3()
-		if (&paste)
-			return
-		endif
+	if (&paste)
+		return
+	endif
 
-        let pat = '('
-        let save_cursor = getpos('.')
-        let result = matchstr(getline(save_cursor[1]), pat)
-        if (search(pat, 'c', save_cursor[1]))
-           	normal! a)
-        	:call cursor(save_cursor[1], save_cursor[2]+1, save_cursor[3])
-	    endif
+	let pat = '('
+	let save_cursor = getpos('.')
+	let result = matchstr(getline(save_cursor[1]), pat)
+	if (search(pat, 'c', save_cursor[1]))
+		normal! a)
+		:call cursor(save_cursor[1], save_cursor[2]+1, save_cursor[3])
+	endif
 endfunction
-
 
 "auto patern for '('
 function! AutoChar4()
-		if (&paste)
-			return
-		endif
+	if (&paste)
+		return
+	endif
 
-        let pat = 'for'
-        let save_cursor = getpos('.')
-        let result = matchstr(getline(save_cursor[1]), pat)
+	let pat = 'for'
+	let save_cursor = getpos('.')
+	let result = matchstr(getline(save_cursor[1]), pat)
 
-        if (search(pat, 'c', save_cursor[1]))
-			return
-		else
-            normal! $a;
-            normal! o
-		endif
+	if (search(pat, 'c', save_cursor[1]))
+		return
+	else
+		normal! $a;
+		normal! o
+	endif
 endfunction
 
 inoremap { {<ESC>:call AutoBlacker()<CR>i

@@ -1,0 +1,240 @@
+nr2char() 得到一个 ASCII 值对应的字符
+char2nr() 得到一个字符的 ASCII 码值
+str2nr() 转换一个字符串为数字
+str2float() 转换一个字符串为浮点数
+printf() 根据%转换符格式化一个字串
+escape() 返回一个字符串以\转义符表达式的形式
+shellescape() 返回一个给 shell 命令使用的转义字符串
+fnameescape() 返回一个给 Vim 命令使用的转义后的文件名字符串
+tr() 将给定串的字符从一个字符集合转换到对应的另一个字符集合
+strtrans() 将一个字符串转换为可显示形式 a
+tolower() 将一个字符串转换为小写
+toupper() 将一个字符串转换为大写
+match() 返回一个搜索在一个字符串中出现的位置
+matchend() 同 match(), 但从后往前搜索
+matchstr() 同 match, 但返回匹配到的目标串
+matchlist() 同 matchstr, 同时将匹配的子模式一并返回
+stridx() 一个子串初次出现在母串中的位置
+strridx() 一个子串最后一次出现在母串中的位置
+strlen() 求字符串长度
+substitute() 字符串替换
+submatch() 得到一次":substitute"操作中的匹配到的一个子模式 b
+strpart() 得到一个字符串的子串
+expand() 扩展特殊的关键字
+iconv() 转变文字编码
+byteidx() 返回给定字符在字串中的字节索引
+repeat() 将给定定串重复多次
+eval() 求值一个字符串表达式
+get() 得到指定下标的列表项,下标越界也不报错
+len() 得到一个列表中列表项的个数
+empty() 检查一个列表是否为空
+insert() 向列表中新插入一项
+add() 向列表追加一项
+extend() 向列表追加另一列表
+remove() 从列表中移除一或多项
+copy() 浅复制一个列表
+deepcopy() 完全复制一个列表
+filter() 从列表中移除指定项
+map() 根据指定规则改变每个列表项的值
+sort() 将一个列表排序
+reverse() 将一个列表反序
+split() 将一个字串分割为一个列表
+join() 将一个列表中的各项粘合成一个字串
+range() 返回一个数字序列形成的列表
+string() 返回一个列表的字串表示形式
+call() 以一个列表中各项为参数调用一个函数
+index() 返回列表中某个列表项的索引
+max() 求各个列表项的最大值
+min() 求各个列表项的最小值
+count() 统计列表中某一列表项出现的次数
+repeat() 将列表重复多次
+get() 得到字典中指定健的条目的值,如果指定健不存在也不报告错误
+len() 得到字典条目的个数
+has_key() 检查字典中是否包含某个指定健值的条目
+empty() 检查字典是否为空
+remove() 从字典中移除某个指定健的条目
+extend() 向一个字典中加入另一个字典的条目
+filter() 根据指定条件移除字典中匹配的条目
+map() 按指定规则改变字典中的每个条目
+keys() 得到字典中各个健形成的列表
+values() 得到字典中各个值形成的列表
+items() 得到字典中以每个键-值对组成的列表的列表
+copy() 浅复制一个字典
+deepcopy() 完全复制一个字典
+string() 字典的字符串表示
+max() 求字典中的最大值
+min() 求字典中的最小值
+count() 统计一个值出现在次数
+float2nr() 浮点数转换为整数
+abs() 对浮点数求绝对值(同样适用于整数)
+round() 四舍五入 a
+ceil() 向上舍入
+floor() 向下舍入
+trunc() 截除小数点后的部分
+log10() 以 10 为底的对数
+pow() x 的 y 次方幂
+sqrt() 求平方根
+sin() 三角函数 sine
+cos() 三角函数 cosine
+atan() 三角函数 arc tangent
+type() 变量的类型,返回 0 为数字, 1 为字符串 a
+islocked() 检查变量是否被锁住
+function() 由指定名字的函数返回该函数的引用
+getbufvar() 得到指定缓冲中的变量
+setbufvar() 为指定缓冲区设定变量值
+getwinvar() 得到指定窗口的变量
+gettabvar() 得到指定标签页的变量
+gettabwinvar() 得到指定窗口和标签页中的变量
+setwinvar() 为指定窗口设置变量
+settabvar() 为指定的标签页设置变量
+settabwinvar() 设置指定窗口和标签页中的变量
+garbagecollect() 执行内存的自动垃圾回收
+col() 得到光标或一个 mark 所在的列号
+virtcol() 得到光标或一个 mark 所在屏幕上的列位置
+line() 得到光标或一个 mark 所在的行号
+wincol() 当前光标在当前窗口坐标中的列号 a
+winline() 当前光标在当前窗口坐标中的行号
+cursor() 将光标置于指定的行列
+getpos() 得到指定的光标或位置标记等的位置信息
+setpos() 设置指定的光标或位置标记等的位置信息
+byte2line() 得到该文件中第 N 个字节位于第几行
+line2byte() 同上面的相反,求得指定行的首字符位于文件中的字节偏移
+diff_filler() 得到 diff 模式下指定行前面被填充的行数
+getline() 从当前缓冲区中得到指定行的内容,或是存储多行文本的列表
+setline() 将缓冲区某行的内容替换为指定内容
+append() 将指定的行,或指定的列表中的各行追加到当前缓冲区中由参数指定的行之后
+indent() 得到指定行的缩进量
+cindent() 根据 C 语言风格得到的指定行以空格个数统计的缩进量
+lispindent() 根据 Lisp 语言风格得到的指定行以空格个数统计的缩进量
+nextnonblank() 返回指定行及指定行之后的第一个非空行
+prevnonblank() 返回指定行及指定行之前的第一个非空行
+search() 查找下一个正则表达式
+searchpos() 查找一个模式的匹配
+searchpair() 在由开始/中间/结束三元素组成的语言结构中查找这三种元素
+searchpairpos() 同 searchpair()但返回值为行号和列索引组成的列表
+searchdecl() 得到一个变量的声明所在的行
+glob() 扩展文件名通配符
+globpath() 同上,但可以指定一系列的目录
+findfile() 在指定的目录列表中查找文件
+finddir() 在指定的目录列表中查找目录
+resolve() 返回 MS-Windows 上一个链接所指向的目标
+fnamemodify() 返回文件名的各种形式 a
+pathshorten() 返回一个路径各部分被缩简为单个字母的路径名
+simplify() 不改变路径本身的情况下简化其表示
+executable() 检查一个可执行程序是否存在
+filereadable() 检查文件的可读性
+filewritable() 检查文件是否可写
+getfperm() 返回文件的许可位
+getftype() 返回文件的类型
+isdirectory() 检查一个目录是否存在
+getfsize() 得到文件大小
+getcwd() 返回当前工作目录
+haslocaldir() 判断当前窗口是否设定了本地目录
+tempname() 得到一个临时文件名
+mkdir() 创建新目录
+delete() 删除文件
+rename() 文件更名
+system() 执行一个 SHELL 命令
+hostname() 当前系统的主机名
+readfile() 将一个文件的各行读入一个列表
+writefile() 将一个列表中的各行写入文件
+getftime() 得到指定文件的最后修改时间
+localtime() 获取当前时间
+strftime() 将时间转换为字符串形式
+reltime() 得到当前的或已逝的精确时间值
+reltimestr() 把 reltime()返回的值转换为字串表示
+argc() 返回参数列表中的参数个数
+argidx() 参数列表中的当前索引号
+argv() 返回参数列表中指定索引号的参数
+bufexists() 检查一个缓冲区是否存在
+buflisted() 检查一个缓冲区是否存在并且位于缓冲区列表中
+bufloaded() 检查一个缓冲区是否存在并被载入
+bufname() 返回指定缓冲区号所对应的缓冲区名字
+bufnr() 返回指定缓冲区名字所对应的缓冲区号
+tabpagebuflist() 得到指定页签中的缓冲区列表
+tabpagenr() 得到指定页签的编号
+tabpagewinnr() 对指定页签的 winnr()函数
+winnr() 返回当前窗口的窗口号
+bufwinnr() 得到指定缓冲区所在的窗口号,没有对应窗口时返回-1
+winbufnr() 返回指定窗口中所编辑的缓冲区的号码
+getbufline() 从指定缓冲区中取得指定行作为列表变量返回
+getcmdline() 得到当前的命令行
+getcmdpos() 得到命令行中当前光标的位置
+setcmdpos() 设置命令行中当前光标的位置
+getcmdtype() 返回当前命令的类型
+getqflist() 将 quickfix 窗口中各项作为列表返回
+setqflist() 修改一个 quickfix 列表
+getloclist() 将 location 窗口中的各项作为列表返回 a
+setloclist() 修改一个 location 列表
+omplete() 设置找到的匹配项
+complete_add() 添加一个匹配项
+complete_check() 检查当前补全是否应该被放弃
+pumvisible() 检查弹出菜单是否已显示
+foldclosed()
+folding-functions 检查指定行是否位于一个处于关闭状态的折行内
+foldclosedend() 同上,返回的是折行的尾行行号
+foldlevel() 返回指定行的折行层级,没有定义折行时返回 0
+foldtext() 生成一个关闭的折行所显示的文本 a
+foldtextresult() 得到一个折叠起来的折行的显示文本
+clearmatches() 清除由 matchadd() 和 :match 命令定义的所有匹配
+getmatches() 获取由 matchadd() 和 :match 命令定义的所有匹配
+hlexists() 检查一个语法高亮项是否存在
+hlID() 返回一个语法高亮项的 ID
+synID() 返回指定位置的语法 ID
+synIDattr() 返回某语法 ID 的指定属性
+synIDtrans() 得到某语法项最终应用了其颜色定义的那种语法的 ID
+diff_hlID() 得到 diff 下指定位置的高亮 ID
+matchadd() 定义一个语法高亮的模式(一个匹配)
+matcharg() 得到:match 的参数信息
+matchdelete() 删除一个由 matchadd() 或 :match 命令定义的匹配
+setmatches() 恢复由 getmatches() 保存的匹配列表
+spellbadword() 定义当前光标处或其后的拼写有误的字词
+spellsuggest() 返回建议的改正词条
+soundfold() 返回读音近似的词
+histadd() 向历史列表中加入条目
+histdel() 从历史列表中删除条目
+histget() 从历史列表中得到一个条目
+histnr() 得到历史列表中记录个数
+browse() 打开一个文件选择对话框
+browsedir() 打开一个目录选择对话框
+confirm() 让用户确认一组选择
+getchar() 让用户输入一个字符
+getcharmod() 得到最后一次输入字符时的修饰键 a
+input() 从用户那要一行内容
+inputlist() 让用户从一个列表中选取其中一项
+inputsecret() 同上,但不回显输入的内容
+inputdialog() 让用户在一个对话框里输入
+inputsave() 保存并清空预输入的内容 b
+inputrestore() 恢复由 inputsave()保存下的预输入内容
+serverlist() 返回服务器名字列表
+remote_send() 向指定服务器发送命令字符
+remote_expr() 在服务器求值一个表达式
+server2client() 向客户端发送一个回应
+remote_peek() 检查是否收到来自服务器的回应
+remote_read() 从服务器读取回应信息
+foreground() 将 Vim 窗口移到前台
+remote_foreground() 将 Vim 服务器窗口移至前台
+winheight() 返回指定窗口的高度,单位为字符
+winwidth() 返回指定窗口的宽度,单位为字符
+winrestcmd() return command to restore window sizes
+winsaveview() get view of current window
+winrestview() restore saved view of current window
+mode() 返回当前的编辑模式
+visualmode() 返回最近一次使用的 Visual 子模式
+hasmapto() 检查是否有一个键被定义为指定的内容
+mapcheck() 检查一个映射是否存在
+maparg() 返回一个映射的右部,即它所被映射的内容
+exists() 检查一个变量或函数等是否被定义
+has() 检查当前的 Vim 是否支持某个特性
+cscope_connection() 检查是否存在某个 cscope 连接
+changenr() 得到最近一次修改的编号
+did_filetype() 检查是否一个设置文件类型的自动命令已被执行过
+eventhandler() 检查当前脚本是否因事件触发而被调用
+libcall() 调用外部共享库中的一个函数
+libcallnr() 同上,但用于返回 int 的函数
+getreg() 返回寄存器的内容
+getregtype() 返回寄存器中所保存的文本的类型 a
+setreg() 设置一个寄存器的内容和内容的类型
+taglist() 返回匹配的 tags 列表
+tagfiles() 返回 tags 文件列表
+mzeval() 求值 MzScheme 的表达式
