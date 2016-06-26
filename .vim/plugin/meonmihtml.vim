@@ -1,8 +1,3 @@
-if exists("b:did_ftplugin")
-  ""set omnifunc=Htmlomnicomplete
-  "finish
-endif
-let b:did_ftplugin = 1
 
 ""set dictionary-=~/.vim/after/ftplugin/html_funclist.txt dictionary+=~/.vim/after/ftplugin/html_funclist.txt
 ""set iskeyword+=>
@@ -44,5 +39,5 @@ function! Htmlftpinit()
 	let s:htmlomnilist= readfile("/home/zoucao/.vim/after/ftplugin/html_funclist.txt")
 endfunc
 
-set omnifunc=Htmlomnicomplete
+""set omnifunc=Htmlomnicomplete
 call Htmlftpinit()

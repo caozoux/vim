@@ -1,7 +1,9 @@
-if exists("b:did_ftplugin")
-  finish
-endif
-let b:did_ftplugin = 1
+""if exists("b:did_ftplugin") && b:adid_ftplugin == 1
+""  echoe b:adid_ftplugin
+""  finish
+""endif
+""let b:adid_ftplugin = 0
+
 
 "set dictionary-=~/.vim/after/ftplugin/vim_dictionary.txt dictionary+=~/.vim/after/ftplugin/vim_dictionary.txt
 "set iskeyword+=>
@@ -11,20 +13,11 @@ let s:vimfunclist=[]
 function! Vimomnicomplete(findstart, base)
     if a:findstart == 1
 		let line = getline('.')
-		let idx = col('.')
-		while idx > 0
-			let idx -= 1
-			let c = line[idx]
-			if c =~ '\w'
-				continue
-			elseif ! c =~ '\.'
-				let idx = -1
-				break
-			else
-				break
-			endif
+		let start = col('.') - 1
+		while start > 0 && line[start - 1] =~# '[a-zA-Z0-9:_\@\-\<\>]'
+		  let start -= 1
 		endwhile
-     	return idx
+		return start
 
     "findstart = 0 when we need to return the list of completions
     else
@@ -35,20 +28,9 @@ function! Vimomnicomplete(findstart, base)
         let line = getline('.')
         let idx = col('.')
         let cword = ''
-        while idx > 0
-            let idx -= 1
-            let c = line[idx]
-            if c =~ '\w' || c =~ '\.'
-                let cword = c . cword
-                continue
-            elseif strlen(cword) > 0 || idx == 0
-                break
-            endif
-        endwhile
-		echo cword
 		for item in s:vimfunclist
 			let linesplit = split(item, " ")
-			if (match(linesplit[0],'^'.cword)==0)
+			if (match(linesplit[0],'^'.a:base)==0)
 				call extend(retOmnilist, [{"word":linesplit[0], "kind":linesplit[1], "info":"null"}])
 			endif
 		endfor
@@ -77,10 +59,9 @@ function! Vimaa()
 endfunction
 
 func! Vimftpinit()
-	echoe "vimftpinit"
 	let s:vimfunclist= readfile("/home/zoucao/.vim/after/ftplugin/vim_dictionary.txt")
+	let b:adid_ftplugin = 1
 endfunc
 
-set omnifunc=Vimomnicomplete
+""set omnifunc=Vimomnicomplete
 call Vimftpinit()
-
