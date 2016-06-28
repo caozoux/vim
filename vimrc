@@ -160,7 +160,7 @@ let g:ycm_semantic_triggers =  {
             \   'perl' : ['->'],
             \   'php' : ['->', '::', '(', 'use ', 'namespace ', '\'],
             \   'cs,java,typescript,d,python,perl6,scala,vb,elixir,go' : ['.', 're!(?=[a-zA-Z]{3,4})'],
-            \   'html': ['<', '"', '</', ' '],
+            \   'html': ['<', '"', '</'],
             \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
             \   'ruby' : ['.', '::'],
             \   'lua' : ['.', ':'],

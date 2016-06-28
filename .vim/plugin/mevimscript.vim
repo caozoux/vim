@@ -90,7 +90,7 @@ function! AutoBlacker()
 	if (&paste)
 		return
 	endif
-	let pat = ') {'
+	let pat = '[^=] {'
 	let save_cursor = getpos('.')
 	let new_position= save_cursor[1] + 1
 	let result = matchstr(getline(save_cursor[1]), pat)

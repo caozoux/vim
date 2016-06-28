@@ -1,1 +1,1 @@
-set omnifunc=Htmlomnicomplete
+set omnifunc=Vimomnicomplete
