@@ -169,6 +169,7 @@ let g:ycm_semantic_triggers =  {
             \   'scss,css': [ 're!^\s{2,4}', 're!:\s+' ],
             \   'javascript': ['.', 're!(?=[a-zA-Z]{3,4})'],
             \ }
+let g:acp_behaviorKeywordLength = 3
 
 " ----------------------------------------------------------------------------
 " syntastic
@@ -296,5 +297,6 @@ let g:acp_behavior = {
   \ }
 
 "let  g:acp_behaviorJavaEclimLength = g:acp_behaviorJavaEclimLength
-let g:user_emmet_expandabbr_key = '<C-k>'
-let g:acp_behaviorKeywordLength = 3
+let g:user_emmet_expandabbr_key = '<C-e>'
+"let g:user_emmet_expandabbr_key='<Tab>'
+"imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
