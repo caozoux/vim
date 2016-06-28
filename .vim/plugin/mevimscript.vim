@@ -122,12 +122,24 @@ function! AutoChar2()
 	if (&paste)
 		return
 	endif
-	let pat = '["]'
+	let pat = '"'
 	let save_cursor = getpos('.')
 	let result = matchstr(getline(save_cursor[1]), pat)
 	if (search(pat, 'c', save_cursor[1]))
+		let linetxt = getline(save_cursor[1])
+		let cnt=0
+		let ret=-1
+		while 1
+			let ret = match(linetxt,"\"",ret+1)
+			if ret == -1
+				break
+			endif
+			let cnt += 1
+		endwhile
+		if cnt%2 != 0
+			normal! a"
+		endif
 		:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-	   normal! a"
    	endif
 endfunction
 
@@ -164,11 +176,11 @@ function! AutoChar4()
 	endif
 endfunction
 
-inoremap { {<ESC>:call AutoBlacker()<CR>i
-inoremap [ [<ESC>:call AutoChar1()<CR>i
+"inoremap { {<ESC>:call AutoBlacker()<CR>i
+"inoremap [ [<ESC>:call AutoChar1()<CR>i
 inoremap " "<ESC>:call AutoChar2()<CR>i
-inoremap ( (<ESC>:call AutoChar3()<CR>i
-inoremap ;  <ESC>:call  AutoChar4()<CR>i
+"inoremap ( (<ESC>:call AutoChar3()<CR>i
+"inoremap ;  <ESC>:call  AutoChar4()<CR>i
 
 func! Tag_kernel_set()
 	set tags+=/home/zoucao/github/shell/ctag/linux_base-tags
