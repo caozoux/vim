@@ -6,3 +6,4 @@
 * [[filetype]]
 * [[syntax]]
 * [[script]]
+* [[vim-event]]

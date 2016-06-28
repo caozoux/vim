@@ -1,3 +1,4 @@
+style=" 内嵌css
 <!--...--> 定义注释
 <!DOCTYPE> 定义文档类型。
 <a> 定义锚。
@@ -155,6 +156,17 @@ border-right-color 设置右边框的颜色。(CSS_边框属性)
 border-right-style 设置右边框的样式。(CSS_边框属性)
 border-right-width 设置右边框的宽度。(CSS_边框属性)
 border-style 设置四条边框的样式。(CSS_边框属性)
+border-style:none 定义无边框。
+border-style:hidden 与"none"相同不过应用于表时除外，对于表，hidden用于解决边框冲突。
+border-style:dotted	定义点状边框。在大多数浏览器中呈现为实线。
+border-style:dashed 定义虚线在大多数浏览器中呈现为实线。
+border-style:solid 定义实线。
+border-style:double 定义双线。双线的宽度等于border-width 的值。
+border-style:groove 定义3D凹槽边框。其效果取决于border-color的值。
+border-style:ridge 定义3D垄状边框。其效果取决于border-color的值。
+border-style:inset 定义3Dinset 边框。其效果取决于border-color的值。
+border-style:outset 定义3Doutset 边框。其效果取决于border-color的值。
+border-style:inherit 规定应该从父元素继承边框样式。
 border-top 在一个声明中设置所有的上边框属性。(CSS_边框属性)
 border-top-color 设置上边框的颜色。(CSS_边框属性)
 border-top-style 设置上边框的样式。(CSS_边框属性)
