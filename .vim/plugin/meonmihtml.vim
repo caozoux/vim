@@ -1,7 +1,7 @@
 
-""set dictionary-=~/.vim/after/ftplugin/html_funclist.txt dictionary+=~/.vim/after/ftplugin/html_funclist.txt
-""set iskeyword+=>
-""set complete-=k complete+=k
+"set dictionary-=~/.vim/after/ftplugin/html_dictionary.txt dictionary+=~/.vim/after/ftplugin/html_dictionary.txt
+"set iskeyword+=_
+"set complete-=k complete+=k
 
 ""autocmd BufNewFile *  setlocal filetype=html
 let s:htmlomnilist=[]
@@ -26,8 +26,11 @@ function! Htmlomnicomplete(findstart, base)
 			let linesplit = split(item, " ")
 			if !empty(linesplit)
 				if (match(linesplit[0],'^'.a:base)==0)
-					""echoe linesplit[0] linesplit[1]
-					call extend(retOmnilist, [{"word":linesplit[0], "kind":linesplit[1], "info":"info"}])
+					if len(linesplit) > 1
+						call extend(retOmnilist, [{"word":linesplit[0], "kind":linesplit[1], "info":"info"}])
+					else	
+						call extend(retOmnilist, [{"word":linesplit[0], "kind":"null", "info":"info"}])
+					endif
 				endif
 			endif
 		endfor
