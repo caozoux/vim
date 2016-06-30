@@ -176,6 +176,28 @@ function! AutoChar4()
 	endif
 endfunction
 
+function! MeFastFormatPrintk()
+	normal! ^
+	let save_cursor = getpos('.')
+	let linetxt = getline(line('.'))
+	let wordlist = split(linetxt[save_cursor[0]:], ' ')
+	let showcontext=["printk(\"zz %s "]
+	let wordextend=[]
+	for item in wordlist
+		call add(wordextend, item)
+		call add(wordextend, ":%08x ")
+	endfor
+	call add(wordextend, "\\n\",__func__")
+	for item in wordlist
+		call add(wordextend, " ,(u32)")
+		call add(wordextend, item)
+	endfor
+	call add(wordextend, ");")
+	call extend(showcontext,wordextend)
+	call append(line('.'), join(showcontext, ''))
+	execute "d"
+endfunction
+
 "inoremap { {<ESC>:call AutoBlacker()<CR>i
 "inoremap [ [<ESC>:call AutoChar1()<CR>i
 inoremap " "<ESC>:call AutoChar2()<CR>i
@@ -187,7 +209,7 @@ func! Tag_kernel_set()
 endfunc
 
 func! MeDbg()
-	echo g:paste
+	call MeFastFormatPrintk()
 endfunc
 
 
