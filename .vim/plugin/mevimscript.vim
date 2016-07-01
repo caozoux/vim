@@ -176,13 +176,26 @@ function! AutoChar4()
 	endif
 endfunction
 
+"通过空格字符，快速生成printk
 function! MeFastFormatPrintk()
 	normal! ^
 	let save_cursor = getpos('.')
 	let linetxt = getline(line('.'))
-	let wordlist = split(linetxt[save_cursor[0]:], ' ')
-	let showcontext=["printk(\"zz %s "]
+	let idx =0
+	while idx < strlen(linetxt)
+		if linetxt[idx] =~ '\w'
+            break
+		else
+			let idx += 1
+		endif
+	endwhile
+	let wordlist = split(strpart(linetxt, idx))
+	let showcontext=[]
 	let wordextend=[]
+	if idx > 0
+		call add(showcontext,strpart(linetxt, 0, idx))
+	endif
+	call extend(showcontext,["printk(\"zz %s "])
 	for item in wordlist
 		call add(wordextend, item)
 		call add(wordextend, ":%08x ")
