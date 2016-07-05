@@ -177,7 +177,46 @@ function! AutoChar4()
 endfunction
 
 "通过空格字符，快速生成printk
-function! MeFastFormatPrintk()
+function! MeFastFormatPrintk(start, end, type)
+	normal! ^
+	let save_cursor = getpos('.')
+	let linetxt = getline(line('.'))
+	let idx =0
+	while idx < strlen(linetxt)
+		if linetxt[idx] =~ '\w'
+            break
+		else
+			let idx += 1
+		endif
+	endwhile
+	let wordlist = split(strpart(linetxt, idx))
+	let showcontext=[]
+	let wordextend=[]
+	if idx > 0
+		call add(showcontext,strpart(linetxt, 0, idx))
+	endif
+	"call extend(showcontext,["printk(\"zz %s "])
+	call extend(showcontext,[a:start])
+	for item in wordlist
+		call add(wordextend, item)
+		call add(wordextend, ":%08x ")
+	endfor
+	call add(wordextend, "\\n\",__func__")
+	for item in wordlist
+		"call add(wordextend, " ,(u32)")
+		call add(wordextend, a:type)
+		call add(wordextend, item)
+	endfor
+	"call add(wordextend, ");")
+	call add(wordextend, a:end)
+	call extend(showcontext,wordextend)
+	call append(line('.'), join(showcontext, ''))
+	execute "d"
+endfunction
+
+"通过空格字符，快速生成linePatarn 的结构
+"参数$@, $1 ,$2,$....
+function! MeFastFormatLine(linePatarn)
 	normal! ^
 	let save_cursor = getpos('.')
 	let linetxt = getline(line('.'))
@@ -210,7 +249,6 @@ function! MeFastFormatPrintk()
 	call append(line('.'), join(showcontext, ''))
 	execute "d"
 endfunction
-
 "inoremap { {<ESC>:call AutoBlacker()<CR>i
 "inoremap [ [<ESC>:call AutoChar1()<CR>i
 inoremap " "<ESC>:call AutoChar2()<CR>i
