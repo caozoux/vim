@@ -42,9 +42,10 @@ Plugin 'heavenshell/vim-jsdoc', {'for': ['javascript', 'jsx']}
 Plugin 'burnettk/vim-angular'
 Plugin 'mxw/vim-jsx' 
 Plugin 'marijnh/tern_for_vim'
-
-Bundle 'Valloric/ListToggle'
-
+Plugin 'davidhalter/jedi-vim'   "python autocomplete plugin 
+Plugin 'jnurmine/Zenburn'       "color config
+Plugin 'altercation/vim-colors-solarized' "color config
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}   "powerline
 
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
@@ -223,14 +224,15 @@ set shiftwidth=4
 "set softtabstop=4
 set autoindent
 set smartindent
-"显示换行符
-"set list
 
 set nocompatible
+let python_highlight_all=1
 syntax on
 
 set number
 set autowrite
+set clipboard=unnamed
+set clipboard=unnamedplus
 
 filetype plugin indent on
 autocmd FileType python setlocal et sta sw=4 sts=4
@@ -273,7 +275,8 @@ inoremap <c-a> <ESC>:call MjumpBuff()<CR>
 "runtime /home/wrsadmin/github/vim/wind.vim
 highlight Folded ctermfg=0 ctermbg=7
 map <C-x>v <ESC>:call Patch_vsplit_open()<CR>
-map <C-v> <ESC>"+p
+"map <C-x> <ESC>"+p
+map <C-x>c <ESC>"+p
 
 "let g:EclimTodoSearchExtensions = ['java', 'py', 'php', 'jsp', 'xml', 'html']
 "set autcompletion for Eclim
