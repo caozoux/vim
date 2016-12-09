@@ -100,7 +100,7 @@ let g:SuperTabRetainCompletionType=2
 " " 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
-"--ctags setting--
+"----------------------------------ctags setting------------------------------
 map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags=tags
@@ -117,17 +117,18 @@ let Tlist_Inc_Winwidth=0
 
 
 
-"-- WinManager setting --
+"------------------------- WinManager setting -----------------------------
 let g:winManagerWindowLayout='FileExplorer|TagList'
 
 
-" -- MiniBufferExplorer --
+"------------------------- MiniBufferExplorer -----------------------------
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 "let g:miniBufExplMapCTabSwitchWindows = 1
 let g:miniBufExplModSelTarget = 1 
 
+"------------------------------- cscope ------------------------------------
 if has("cscope")
    set csprg=/usr/bin/cscope     
    set csto=0                   
@@ -142,6 +143,25 @@ if has("cscope")
    cs add ~/github/shell/cscope/cscope.out
    set csverb
    let Cscope_OpenQuickfixWindow = 0
+
+    map <F4> :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
+	imap <F4> <ESC>:cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
+
+	"get the declare
+	nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	"get the define
+	nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+	"get the function called
+	nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+	"get the specific string
+	nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+	" egrep mode find
+	nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+	" find specific file name
+	nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+	nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	" find the number of called function in this function
+	nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
 
@@ -183,27 +203,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_javascript_checkers = ['eslint']
 
-map <F4> :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
-imap <F4> <ESC>:cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
-
-"get the declare
-nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-"get the define
-nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-"get the function called
-nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-"get the specific string
-nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-" egrep mode find
-nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-" find specific file name
-nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-" find the number of called function in this function
-nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-
-"showmark set
+"--------------------------------showmark set---------------------------------
 " Enable ShowMarks
 let showmarks_enable = 1
 let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -211,13 +211,13 @@ let showmarks_ignore_type = "hqm"
 let showmarks_hlline_lower = 1
 let showmarks_hlline_upper = 1 
 
-""powerline
+"-------------------------------- powerline --------------------------------------
 set guifont=PowerlineSymbols\ for\ Powerline
 set nocompatible
 set t_Co=256
 let g:Powerline_symbols = 'fancy'
 
-"vimwiki
+"-------------------------------- vimwiki ------------------------------------
 let g:vimwiki_use_mouse = 1
 "let g:vimwiki_list = [{'path': '~/.vim/vimwiki/',
 "            \ 'path_html': '~/.vim/vimwiki/html/',
@@ -240,16 +240,24 @@ set autowrite
 set clipboard=unnamed
 set clipboard=unnamedplus
 
-filetype plugin indent on
-autocmd FileType python setlocal et sta sw=4 sts=4
-filetype plugin on
-let g:pydiction_location='~/.vim/after/ftplugin/pydiction/complete-dict'
-set ofu=syntaxcomplete
-autocmd FileType python　set omnifunc=pythoncomplete#Complete 
-autocmd FileType python runtime! autoload/pythoncomplete.vim
+"----------------------------- highlight ----------------------------------
+highlight Folded ctermfg=0 ctermbg=7
+set cursorline
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white  
+colorscheme zenburn
+
+"---------------------------------------------------------------------------
+"  now use jedi for python complete, forget it
+"---------------------------------------------------------------------------
+"filetype plugin indent on
+"autocmd FileType python setlocal et sta sw=4 sts=4
+"filetype plugin on
+"let g:pydiction_location='~/.vim/after/ftplugin/pydiction/complete-dict'
+"set ofu=syntaxcomplete
+"autocmd FileType python　set omnifunc=pythoncomplete#Complete 
+"autocmd FileType python runtime! autoload/pythoncomplete.vim
 
 au BufRead,BufNewFile *.patch set filetype=patch
-
 
 map <F6> :make clean<CR><CR><CR>
 map <F7> :make<CR><CR><CR> :copen<CR><CR>
@@ -261,27 +269,17 @@ map <F1> :w<CR><CR><CR>
 map <C_c> <ESC>
 vnoremap c "+y
 vnoremap p "+p
-"fold function
 inoremap <C-d> <RIGHT><DEL>
-"map <C-m> <ESC>"ap<ESC> == entry
 
 map <C-x>w <ESC>:w<CR>
 map <C-x>x <ESC>:wq<CR>
 map <C-x>q <ESC>:q!<CR>
 map <C-x>z <ESC>:call Me_zf_funcs(1)<CR>
-"print the _func_+/_func_-
-"map <C-x>p <ESC>:call Me_pr_func1(1)<CR> 
-map <C-n> <ESC>:call Me_pr_func2(1)<CR>
-"map <C-x>1 <ESC>:call Me_pr_func3(1)<CR>
+map <C-n>  <ESC>:call Me_pr_func2(1)<CR>
 map <C-x>q <ESC>:q!<CR>
 
-"map <c-x>f <ESC>o <C-R>=MbufComplete()<CR>
-inoremap <c-a> <ESC>:call MjumpBuff()<CR>
-
 "runtime /home/wrsadmin/github/vim/wind.vim
-highlight Folded ctermfg=0 ctermbg=7
 map <C-x>v <ESC>:call Patch_vsplit_open()<CR>
-"map <C-x> <ESC>"+p
 map <C-x>c <ESC>"+p
 
 "let g:EclimTodoSearchExtensions = ['java', 'py', 'php', 'jsp', 'xml', 'html']
