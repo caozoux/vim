@@ -42,7 +42,8 @@ Plugin 'heavenshell/vim-jsdoc', {'for': ['javascript', 'jsx']}
 Plugin 'burnettk/vim-angular'
 Plugin 'mxw/vim-jsx' 
 Plugin 'marijnh/tern_for_vim'
-Plugin 'davidhalter/jedi-vim'   "python autocomplete plugin 
+"Plugin 'tpope/vim-pathogen'
+"Plugin 'davidhalter/jedi-vim'   "python autocomplete plugin 
 Plugin 'jnurmine/Zenburn'       "color config
 Plugin 'altercation/vim-colors-solarized' "color config
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}   "powerline
@@ -79,7 +80,7 @@ filetype plugin indent on    " required
 imap <F3> <C-X><C-O>
 "imap <F2> <C-X><C-I>
 imap <F2> <C-X><C-I>
-set completeopt=menu,menuone
+"set completeopt=menu,menuone
 let OmniCpp_MayCompleteDot = 1 
 let OmniCpp_MayCompleteArrow = 1 
 let OmniCpp_MayCompleteScope = 1
