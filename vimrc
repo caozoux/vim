@@ -211,6 +211,12 @@ let showmarks_ignore_type = "hqm"
 let showmarks_hlline_lower = 1
 let showmarks_hlline_upper = 1 
 
+""powerline
+set guifont=PowerlineSymbols\ for\ Powerline
+set nocompatible
+set t_Co=256
+let g:Powerline_symbols = 'fancy'
+
 "vimwiki
 let g:vimwiki_use_mouse = 1
 "let g:vimwiki_list = [{'path': '~/.vim/vimwiki/',
