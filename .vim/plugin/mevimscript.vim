@@ -59,7 +59,7 @@ function! MjumpBuff()
 endfunc
 
 func! MVimFuncComplete()
-	let stylesheet = readfile("/home/zoucao/.vim/after/ftplugin/vim_dictionary.txt")
+	let stylesheet = readfile("/home/wrsadmin/.vim/after/ftplugin/vim_dictionary.txt")
 	normal b
 	let b:matches = []
 	let b:dbg_a= []
@@ -216,7 +216,7 @@ endfunction
 
 "通过空格字符，快速生成linePatarn 的结构
 "参数$@, $1 ,$2,$....
-function! MeFastFormatLine(linePatarn)
+function! MeFastFormatLine()
 	normal! ^
 	let save_cursor = getpos('.')
 	let linetxt = getline(line('.'))
@@ -249,14 +249,22 @@ function! MeFastFormatLine(linePatarn)
 	call append(line('.'), join(showcontext, ''))
 	execute "d"
 endfunction
+
+"fast to mask lines in the end by add markchar
+function! MefastMakslines(markchar)
+	let cmd ="s/\(\s*\)/\1#/"
+	execute cmd
+endfunction
+
 "inoremap { {<ESC>:call AutoBlacker()<CR>i
 "inoremap [ [<ESC>:call AutoChar1()<CR>i
-inoremap " "<ESC>:call AutoChar2()<CR>i
+""inoremap " "<ESC>:call AutoChar2()<CR>i
 "inoremap ( (<ESC>:call AutoChar3()<CR>i
 "inoremap ;  <ESC>:call  AutoChar4()<CR>i
 
+
 func! Tag_kernel_set()
-	set tags+=/home/zoucao/github/shell/ctag/linux_base-tags
+	set tags+=/home/wrsadmin/github/shell/ctag/linux_base-tags
 endfunc
 
 func! MeDbg()
