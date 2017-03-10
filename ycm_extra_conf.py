@@ -49,6 +49,7 @@ flags = [
 '-isystem',
 '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include',
 '-I/home/zoucao/cach/libse/include',
+'-I/home/zoucao/github/qt_prj/start_guid/widgetMainW',
 '-DQT_CORE_LIB',
 '-DQT_GUI_LIB',
 '-DQT_NETWORK_LIB',

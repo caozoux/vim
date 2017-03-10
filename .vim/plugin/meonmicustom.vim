@@ -59,6 +59,6 @@ function! CustomAddOmniDictionary(filename)
 	call add(s:customfilelist, a:filename)
 endfunc
 
-call CustomAddOmniDictionary("/home/zoucao/Downloads/test_dictionary.txt")
+"call CustomAddOmniDictionary("/home/zoucao/Downloads/test_dictionary.txt")
 call Customftpinit()
 imap <c-_>o <c-r>=Customcallomni()<CR>

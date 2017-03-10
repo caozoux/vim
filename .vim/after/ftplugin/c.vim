@@ -4,3 +4,4 @@ call omni#cpp#complete#Init()
 inoremap <c-d> <ESC>:call MeFastFormatLine()<CR>
 inoremap <f7> <ESC>:cn<CR>
 inoremap <f8> <ESC>:cp<CR>
+inoremap { {<ESC>o}<ESC>ko

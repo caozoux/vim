@@ -30,9 +30,15 @@ function! Me_zf_funcs(type)
 endfunction " 
 
 function! Me_pr_func2(type)
-	execute "set paste"
-	execute "normal oprintk(\"zz \%s \\n\", __func__);\<ESC>"
-	execute "set nopaste"
+	normal o 
+	let save_cursor = getpos('.')
+	let cur_line = getline(save_cursor[1])
+	"let change_line = substitute(cur_line,"$","printk(\"zz \%s \\n\", __func__);\",0)
+	let change_line = substitute(cur_line,"$","printk(\"zz \%s \\n\", __func__);",0)
+	call setline(save_cursor[1], change_line)
+	"execute "set paste"
+	"execute "normal oprintk(\"zz \%s \\n\", __func__);\<ESC>"
+	"execute "set nopaste"
 endfunction 
 
 function! Me_Tag(TagType)
@@ -105,25 +111,20 @@ function! AutoBlacker()
 	endif
 endfunction
 
-function! AutoChar1()
-	if (&paste)
-		return
-	endif
-	let pat = '[/[]'
-	let save_cursor = getpos('.')
-	let result = matchstr(getline(save_cursor[1]), pat)
-	if (search(pat, 'c', save_cursor[1]))
-		:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-	   normal! a]
-   endif
-endfunction
-
-function! AutoChar2()
-	if (&paste)
-		return
-	endif
+function! AutoChar2(s_partn, e_partn)
 	let pat = '"'
 	let save_cursor = getpos('.')
+	let cur_line = getline(save_cursor[1])
+	let cur_char = cur_line[save_cursor[2]]
+	let inser_str= "t"
+	if (cur_char == a:e_partn)
+		normal! a
+	else
+		execute "normal a".a:s_partn.a:e_partn
+		"normal! a""
+	endif
+	return
+
 	let result = matchstr(getline(save_cursor[1]), pat)
 	if (search(pat, 'c', save_cursor[1]))
 		let linetxt = getline(save_cursor[1])
@@ -141,39 +142,6 @@ function! AutoChar2()
 		endif
 		:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
    	endif
-endfunction
-
-"auto patern for '('
-function! AutoChar3()
-	if (&paste)
-		return
-	endif
-
-	let pat = '('
-	let save_cursor = getpos('.')
-	let result = matchstr(getline(save_cursor[1]), pat)
-	if (search(pat, 'c', save_cursor[1]))
-		normal! a)
-		:call cursor(save_cursor[1], save_cursor[2]+1, save_cursor[3])
-	endif
-endfunction
-
-"auto patern for '('
-function! AutoChar4()
-	if (&paste)
-		return
-	endif
-
-	let pat = 'for'
-	let save_cursor = getpos('.')
-	let result = matchstr(getline(save_cursor[1]), pat)
-
-	if (search(pat, 'c', save_cursor[1]))
-		return
-	else
-		normal! $a;
-		normal! o
-	endif
 endfunction
 
 "通过空格字符，快速生成printk
@@ -256,12 +224,7 @@ function! MefastMakslines(markchar)
 	execute cmd
 endfunction
 
-"inoremap { {<ESC>:call AutoBlacker()<CR>i
-"inoremap [ [<ESC>:call AutoChar1()<CR>i
-""inoremap " "<ESC>:call AutoChar2()<CR>i
-"inoremap ( (<ESC>:call AutoChar3()<CR>i
-"inoremap ;  <ESC>:call  AutoChar4()<CR>i
-
+"inoremap [ <ESC>:call AutoChar2('[', ']')<CR>i
 
 func! Tag_kernel_set()
 	set tags+=/home/wrsadmin/github/shell/ctag/linux_base-tags

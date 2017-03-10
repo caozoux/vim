@@ -4,88 +4,88 @@ select * from test2 where name='czou';
 grant select,insert,update,delete on *.* to test2@localhost identified by "abc";
 
 * 建立一个名为xhkdb的数据库
-create database xhkdb;
+	create database xhkdb;
 * 例2：创建数据库并分配用户
-①CREATE DATABASE 数据库名;
-②GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER ON 数据库名.* TO user@localhost IDENTIFIED BY '密码';
-③SET PASSWORD FOR '数据库名'@'localhost' = OLD_PASSWORD('密码');
+	①CREATE DATABASE 数据库名;
+	②GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER ON 数据库名.* TO user@localhost IDENTIFIED BY '密码';
+	③SET PASSWORD FOR '数据库名'@'localhost' = OLD_PASSWORD('密码');
 
 * 命令：drop database <数据库名>
-例如：删除名为 xhkdb的数据库
-mysql> drop database xhkdb;
-例子2：删除一个不确定存在的数据库
-drop database if exists drop_database;
-mysql> create table MyClass( id int(4) not null primary key auto_increment, name char(20) not null, sex int(4) not null default '0', degree double(16,2));
+	例如：删除名为 xhkdb的数据库
+	mysql> drop database xhkdb;
+	例子2：删除一个不确定存在的数据库
+	drop database if exists drop_database;
+	mysql> create table MyClass( id int(4) not null primary key auto_increment, name char(20) not null, sex int(4) not null default '0', degree double(16,2));
 * 删除数据表
-mysql> drop table MyClass; 
+	mysql> drop table MyClass; 
 
 * 表插入数据
-insert into <表名> [( <字段名1>[,..<字段名n > ])] values ( 值1 )[, ( 值n )]
-mysql> insert into MyClass values(1,'Tom',96.45),(2,'Joan',82.99), (2,'Wang', 96.59);
+	insert into <表名> [( <字段名1>[,..<字段名n > ])] values ( 值1 )[, ( 值n )]
+	mysql> insert into MyClass values(1,'Tom',96.45),(2,'Joan',82.99), (2,'Wang', 96.59);
 
 *  查询表中的数据
-mysql> select * from MyClass;
-2）、查询前几行数据
-mysql> select * from MyClass order by id limit 0,2;
+	mysql> select * from MyClass;
+	2）、查询前几行数据
+	mysql> select * from MyClass order by id limit 0,2;
 
 * 删除表中数据
-mysql> delete from MyClass where id=1;
+	mysql> delete from MyClass where id=1;
 
 * 修改表中数据
-例子1：单表的MySQL UPDATE语句：
-   UPDATE [LOW_PRIORITY] [IGNORE] tbl_name SET col_name1=expr1 [, col_name2=expr2 ...] [WHERE where_definition] [ORDER BY ...] [LIMIT row_count]
+	例子1：单表的MySQL UPDATE语句：
+	   UPDATE [LOW_PRIORITY] [IGNORE] tbl_name SET col_name1=expr1 [, col_name2=expr2 ...] [WHERE where_definition] [ORDER BY ...] [LIMIT row_count]
 
-例子2：多表的UPDATE语句af
-UPDATE [LOW_PRIORITY] [IGNORE] table_references SET col_name1=expr1 [, col_name2=expr2 ...] [WHERE where_definition]
+	例子2：多表的UPDATE语句af
+	UPDATE [LOW_PRIORITY] [IGNORE] table_references SET col_name1=expr1 [, col_name2=expr2 ...] [WHERE where_definition]
 
 * 增加字段
-加索引
-   mysql> alter table 表名 add index 索引名 (字段名1[，字段名2 …]);
-例子： mysql> alter table employee add index emp_name (name);
+	加索引
+	   mysql> alter table 表名 add index 索引名 (字段名1[，字段名2 …]);
+	例子： mysql> alter table employee add index emp_name (name);
 
-加主关键字的索引
-  mysql> alter table 表名 add primary key (字段名);
-例子： mysql> alter table employee add primary key(id);
+	加主关键字的索引
+	  mysql> alter table 表名 add primary key (字段名);
+	例子： mysql> alter table employee add primary key(id);
 
-加唯一限制条件的索引
-   mysql> alter table 表名 add unique 索引名 (字段名);
-例子： mysql> alter table employee add unique emp_name2(cardnumber);
+	加唯一限制条件的索引
+	   mysql> alter table 表名 add unique 索引名 (字段名);
+	例子： mysql> alter table employee add unique emp_name2(cardnumber);
 
-删除某个索引
-   mysql> alter table 表名 drop index 索引名;
-例子： mysql>alter table employee drop index emp_name;
+	删除某个索引
+	   mysql> alter table 表名 drop index 索引名;
+	例子： mysql>alter table employee drop index emp_name;
 
-增加字段：
-mysql> ALTER TABLE table_name ADD field_name field_type;
+	增加字段：
+	mysql> ALTER TABLE table_name ADD field_name field_type;
 
-修改原字段名称及类型：
-mysql> ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;
+	修改原字段名称及类型：
+	mysql> ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;
 
-删除字段：
-MySQL ALTER TABLE table_name DROP field_name; 
+	删除字段：
+	MySQL ALTER TABLE table_name DROP field_name; 
 
 
 * 修改表名
-mysql> rename table MyClass to YouClass;
+	mysql> rename table MyClass to YouClass;
 
 * 备份数据库
-1.导出整个数据库
-导出文件默认是存在mysql\bin目录下
-    mysqldump -u 用户名 -p 数据库名 > 导出的文件名
-    mysqldump -u user_name -p123456 database_name > outfile_name.sql
+	1.导出整个数据库
+	导出文件默认是存在mysql\bin目录下
+		mysqldump -u 用户名 -p 数据库名 > 导出的文件名
+		mysqldump -u user_name -p123456 database_name > outfile_name.sql
 
-2.导出一个表
-    mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
-    mysqldump -u user_name -p database_name table_name > outfile_name.sql
+	2.导出一个表
+		mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
+		mysqldump -u user_name -p database_name table_name > outfile_name.sql
 
-3.导出一个数据库结构
-    mysqldump -u user_name -p -d –add-drop-table database_name > outfile_name.sql
-    -d 没有数据 –add-drop-table 在每个create语句之前增加一个drop table
+	3.导出一个数据库结构
+		mysqldump -u user_name -p -d –add-drop-table database_name > outfile_name.sql
+		-d 没有数据 –add-drop-table 在每个create语句之前增加一个drop table
 
-4.带语言参数导出
-    mysqldump -uroot -p –default-character-set=latin1 –set-charset=gbk –skip-opt database_name > outfile_name.sql
+	4.带语言参数导出
+		mysqldump -uroot -p –default-character-set=latin1 –set-charset=gbk –skip-opt database_name > outfile_name.sql
 
-例如，将aaa库备份到文件back_aaa中：
-　　[root@test1 root]# cd　/home/data/mysql
-　　[root@test1 mysql]# mysqldump -u root -p --opt aaa > back_aaa
+	例如，将aaa库备份到文件back_aaa中：
+	　　[root@test1 root]# cd　/home/data/mysql
+	　　[root@test1 mysql]# mysqldump -u root -p --opt aaa > back_aaa
 

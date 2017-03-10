@@ -1,16 +1,17 @@
 [[root]] ALL = NOPASSWD: /usr/bin/apt-get  
 sudo /usr/sbin/visudo
-
-
 sudo chown nobody:nogroup /var/nfs
 
+* screnn-configuretion
+  screen config:
+  delet the default bink k CRTL+a to CRTL+J
+  touch ~/.screenrc , and add the context 		         
+    defescape ^Jj
+    escape ^Jj
 
-screen config:
-delet the default bink k CRTL+a to CRTL+J
-touch ~/.screenrc , and add the context 		         
- defescape ^Jj
- escape ^Jj
-
-
-
-mount -t cifs -o uid=1000,gid=1000,username=XXX   //128.224.176.171/ubuntuShare  /mnt/win7share
+* mount-windows-share
+  mount -t cifs -o uid=1000,gid=1000,username=XXX   //128.224.176.171/ubuntuShare  /mnt/win7share
+  
+* Disbalbe-t440-ptouchpad
+  synclient AreaBottomEdge=100
+ 

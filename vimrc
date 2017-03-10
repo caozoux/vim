@@ -47,6 +47,7 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'jnurmine/Zenburn'       "color config
 Plugin 'altercation/vim-colors-solarized' "color config
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}   "powerline
+Plugin 'pboettch/vim-cmake-syntax' "cmake syntax
 
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
@@ -169,28 +170,6 @@ endif
 " ----------------------------------------------------------------------------
 " YouCompleteMe
 " ----------------------------------------------------------------------------
-let g:ycm_autoclose_preview_window_after_completion = 1
-"let g:ycm_complete_in_strings = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_key_list_select_completion = ['<Tab>', '<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:ycm_semantic_triggers =  {
-            \   'c' : ['->', '.'],
-            \   'objc' : ['->', '.'],
-            \   'ocaml' : ['.', '#'],
-            \   'cpp,objcpp' : ['->', '.', '::'],
-            \   'perl' : ['->'],
-            \   'php' : ['->', '::', '(', 'use ', 'namespace ', '\'],
-            \   'cs,java,typescript,d,python,perl6,scala,vb,elixir,go' : ['.', 're!(?=[a-zA-Z]{3,4})'],
-            \   'html': ['<', '"', '</'],
-            \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
-            \   'ruby' : ['.', '::'],
-            \   'lua' : ['.', ':'],
-            \   'erlang' : [':'],
-            \   'haskell' : ['.', 're!.'],
-            \   'scss,css': [ 're!^\s{2,4}', 're!:\s+' ],
-            \   'javascript': ['.', 're!(?=[a-zA-Z]{3,4})'],
-            \ }
 let g:acp_behaviorKeywordLength = 3
 
 " ----------------------------------------------------------------------------
@@ -266,6 +245,10 @@ map <F7> :make<CR><CR><CR> :copen<CR><CR>
 map <F8>> :cp<CR>
 map <F9> :cn<CR>
 map <F1> :w<CR><CR><CR>
+inoremap [ <ESC>a[]<ESC>ha
+inoremap " <ESC>a""<ESC>ha
+inoremap ' <ESC>a''<ESC>ha
+inoremap ( <ESC>a()<ESC>ha
 
 map <C_c> <ESC>
 vnoremap c "+y
@@ -285,7 +268,23 @@ map <C-x>c <ESC>"+p
 
 "let g:EclimTodoSearchExtensions = ['java', 'py', 'php', 'jsp', 'xml', 'html']
 "set autcompletion for Eclim
+"
 let g:SuperTabDefaultCompletionType = 'context'
+"youcompleteme  默认tab  s-tab 和自动补全冲突
+"let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion=['<c-p>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+
+let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
+let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
+"nnoremap <leader>lo :lopen<CR> "open locationlist
+"nnoremap <leader>lc :lclose<CR>    "close locationlist
+inoremap <leader><leader> <C-x><C-o>
 let g:acp_behaviorJavaEclimLength = 3
 
 "function MeetsForJavaEclim(context)
