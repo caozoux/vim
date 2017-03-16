@@ -39,7 +39,9 @@ function! Htmlomnicomplete(findstart, base)
 endfunction
 
 function! Htmlftpinit()
-	let s:htmlomnilist= readfile("/home/zoucao/.vim/after/ftplugin/html_funclist.txt")
+	let home=system("echo $HOME")
+	let home=strpart(home,0, len(home)-1)
+	let s:htmlomnilist= readfile(home . "/.vim/after/ftplugin/html_funclist.txt")
 endfunc
 
 ""set omnifunc=Htmlomnicomplete

@@ -23,7 +23,7 @@ function! Vimomnicomplete(findstart, base)
     else
 		""let retOmnilist =[{"word":"abc","kind":"vasfasf","info":"变量"}, {"word":"eee","info":"也是变量"}]
 		let retOmnilist =[]
-		""let stylesheet = readfile("/home/zoucao/.vim/after/ftplugin/vim_dictionary.txt")
+		""let stylesheet = readfile($HOME+"/.vim/after/ftplugin/vim_dictionary.txt")
 
         let line = getline('.')
         let idx = col('.')
@@ -49,7 +49,7 @@ function! VimMDb()
 endfunction
 
 function! Vimaa()
-	let stylesheet = readfile("/home/zoucao/.vim/after/ftplugin/vim_dictionary.txt")
+	let stylesheet = readfile($HOME+"/.vim/after/ftplugin/vim_dictionary.txt")
 	for item in stylesheet
 		let test = split(item)
 		for itemal in test 
@@ -59,8 +59,10 @@ function! Vimaa()
 endfunction
 
 func! Vimftpinit()
-	let s:vimfunclist= readfile("/home/zoucao/.vim/after/ftplugin/vim_dictionary.txt")
-	let b:adid_ftplugin = 1
+	let home=system("echo $HOME")
+	let home=strpart(home,0, len(home)-1)
+	let s:vimfunclist= readfile(home . "/.vim/after/ftplugin/vim_dictionary.txt")
+	"let b:adid_ftplugin = 1
 endfunc
 
 ""set omnifunc=Vimomnicomplete
