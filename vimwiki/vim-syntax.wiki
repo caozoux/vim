@@ -1,0 +1,70 @@
+syntax match xIdentifier /\w*\s=/
+highlight link xIdentifier Type
+
+syntax match xIdentifier /\w*\./
+
+
+
+
+
+
+
+
+
+
+
+
+
+:syntax region xString start=/"/ end=/"/
+
+syntax region xIdentifier start=/\./ skip=/\.(/ end=/(/
+syntax region xIdentifier start=/\./ end=/(/
+
+
+
+String  red
+
+
+
+highlight link xComment Type
+highlight link xPreProc String
+syntax region xComment start=/%/ end=/$/ contained
+syntax region xPreProc start=/#/ end=/$/ contains=xComment keepend
+
+
+
+highlight link xComment Type
+highlight link xPreProc String
+highlight link xObj String
+
+syntax match xObj /w*\./  
+syntax match xComment /\.\w*/ skip=/\.(/  contained
+syntax region xComment start=/\./ end=/\.(/ contained
+syntax region xPreProc start=/\./ end=/$/ contains=xComment keepend
+
+
+highlight link xThen Function
+highlight link xIf String
+highlight link xIfCondition Type
+:syntax match xIf /if/ nextgroup=xIfCondition skipwhite
+:syntax match xIfCondition /([^)]*)/ contained nextgroup=xThen skipwhite
+:syntax match xThen /then/ contained
+
+
+
+syntax region xInside matchgroup=xParen start=/(/ matchgroup=xParenEnd end=/)/ 
+syntax region xInside matchgroup=xParen start=/(/ end=/)/
+highlight link xInside Type
+
+
+
+highlight link cWhile Function
+highlight link cFor String
+highlight link cCondNest Type
+syntax region cCondNest start=/(/ end=/)/ contained transparent
+syntax region cWhile matchgroup=cWhile start=/while\s*(/ end=/)/  contains=cCondNest
+syntax region cFor matchgroup=cFor start=/for\s*(/ end=/)/ contains=cCondNest
+
+if (foo == bar)
+highlight link xCond Type
+syntax region xCond start=/if\s*(/ms=e+1 end=/)/me=s-1

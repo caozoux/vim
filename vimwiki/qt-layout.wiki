@@ -1,0 +1,5 @@
+QHBoxLayout *topLeftLayout_2 = new QHBoxLayout;
+QGridLayout *mainLayout = new QGridLayout;
+QVBoxLayout *leftLayout = new QVBoxLayout;
+leftLayout->addLayout(topLeftLayout_3);
+setLayout(mainLayout);
