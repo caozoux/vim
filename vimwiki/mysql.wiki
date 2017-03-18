@@ -1,3 +1,5 @@
+* englishWordtable
+  create table englishWords( id int(4) not null primary key auto_increment, name char(64) not null, weblink char(128) not null, chinese char(32) not null, audio MEDIUMBLOB);
 select * from test2 where name='czou';
 
 增加一个用户test2密码为abc,让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作（localhost指本地主机，即MYSQL数据库所在的那台主机），这样用户即使用知道test2的密码，他也无法从internet上直接访问数据库，只能通过MYSQL主机上的web页来访问了。

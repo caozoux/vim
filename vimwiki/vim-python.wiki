@@ -1,0 +1,42 @@
+1 language
+	1 python:
+	===========
+	
+	1.1 in vim function
+		function! IcecreamInitialize()
+		python << EOF
+		class StrawberryIcecream:
+			def __call__(self):
+				print 'EAT ME'
+		EOF
+		endfunction
+
+	1.2 command line	
+		:python import sys
+		:python print(sys.version)
+	
+	1.3 pydo
+		当前buffer每行执行pydo语句，并且被pydo return替换	
+			:pydo return "%s\t%d" % (line[::-1], len(line))
+			for examples:
+					12
+					2i2
+					aaa3
+				after pydon:
+					21	2
+					2i2	3
+					3aaa	4
+			:pydo if line: return "%3d: %s" % (linenr, line)
+		
+	1.4 pyfile
+		:pyfile myscript.py
+		
+	1.5 full-py
+		:python from vim import *
+		:python from string import upper
+		:python current.line = upper(current.line)
+		:python print "Hello"
+		:python str = current.buffer[0] buffer[0] ---> 0 is line 0, 1 is line 1 in vim buffer
+		
+	2 python-vim mode:
+	==================

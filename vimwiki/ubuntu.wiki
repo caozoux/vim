@@ -15,3 +15,7 @@ sudo chown nobody:nogroup /var/nfs
 * Disbalbe-t440-ptouchpad
   synclient AreaBottomEdge=100
  
+* modify-ssh-default-port
+  vi /etc/ssh/sshd_config 
+  Port 22  <----modify
+  /etc/init.d/sshd restart

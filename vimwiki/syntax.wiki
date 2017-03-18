@@ -3,3 +3,107 @@ execute "normal Inew text \<Esc>"
 
 echo line('.')  当前行
 echo line('$')  整个buffer行
+
+* syntax-language
+	1. syntax define 
+	================
+	1.1 base language	
+	-----------------
+		keyword match regions
+		syntax list:  列出当前高亮的所有规则，对于写自己的syntax规则非常有用
+		syntax case match: 强制match? 可能有些默认是不match的
+		syntax case ignore: 强制取消match
+		highlight link xType Type:  规则复用, xType 和 Type一样
+		setlocal iskeyword+=- :     修改ketword的定义，默认-.这些标点为一个word的结束判断，这里修改它
+		
+
+	1.2 Keyword
+	-----------------
+		syntax keyword {group} {keyword} ...
+		syntax keyword xStatement n[ext]:    n ne nex next都算xStatement监管
+		
+		For example:
+			syntax keyword xType int long char
+			syntax keyword xStatement if then else endif
+
+	1.2 Match
+	-----------------
+		syntax match xIdentifier /\<\l\+\>/
+			
+	1.3 Regions
+	-----------------
+		syntax region xString start=/"/ end=/"/
+		syntax region xString start=/"/ skip=/\\"/ end=/"/   "A string with a double quote (\") in it", 忽视\"符号
+	
+	1.nested
+	-----------------
+		syntax keyword xTodo TODO contained    contained制定这个keyword是嵌套的
+		syntax match xComment /%.*/ contains=xTodo
+
+	1.1  contains
+	-----------------
+		syntax region xComment start=/%/ end=/$/ contained
+		syntax region xBlock start=/{/ end=/}/ contains=xBlock 嵌套region的{ } 语句
+
+	1.2  keepend
+	-----------------
+		防止嵌套是超出嵌套范围, keepend指定嵌套是在end范围之内的
+		
+	1.3 Following groups
+	-----------------
+		更负责的嵌套
+		if (condition) then ~
+		高亮的语句	
+		:syntax match xIf /if/ nextgroup=xIfCondition skipwhite
+		:syntax match xIfCondition /([^)]*)/ contained nextgroup=xThen skipwhite
+		:syntax match xThen /then/ contained
+		
+	1.4 other groups
+	-----------------
+
+		1.4.1  match inside group
+			:syntax region xInside start=/(/ end=/)/
+			:syntax region xInside matchgroup=xParen start=/(/ end=/)/
+	
+		1.4.2  match inside group
+			syntax region xInside matchgroup=xParen start=/(/
+				\ matchgroup=xParenEnd end=/)/
+			syntax region xInside matchgroup=xParen start=/(/
+				\ matchgroup=xParenEnd end=/)/
+				
+	1.4 transfer
+	-----------------
+		处理while中的(), 但是区分while中的for *():
+		:syntax region cWhile matchgroup=cWhile start=/while\s*(/ end=/)/
+			\ contains=cCondNest
+		:syntax region cFor matchgroup=cFor start=/for\s*(/ end=/)/
+			\ contains=cCondNest
+		:syntax region cCondNest start=/(/ end=/)/ contained transparent
+		
+	1.5 offset
+	-----------------
+		高亮if中的(conftext), 但是去掉if()，利用ms	
+		syntax region xCond start=/if\s*(/ms=e+1 end=/)/me=s-1
+		
+	1.6 oneline
+	-----------------
+		但行处理
+		syntax region xIfThen start=/if/ end=/then/ oneline
+		
+	1.7 oneline and next lines
+	--------------------------
+		高亮两行
+		#define SPAM  spam spam spam \
+				bacon and spam
+				
+		syntax region xPreProc start=/^#/ end=/$/
+			\ contains=xLineContinue,xPreProcEnd
+		syntax match xPreProcEnd excludenl /end$/ contained
+		syntax match xLineContinue "\\$" contained
+		
+	1.8 cluster
+	--------------------------
+		syntax cluster xState contains=xNumber,xIdent
+		syntax match xFor /^for.*/ contains=@xState
+		syntax match xIf /^if.*/ contains=@xState
+		syntax match xWhile /^while.*/ contains=@xState

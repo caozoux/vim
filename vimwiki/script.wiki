@@ -7,5 +7,6 @@ script-variable    s:     Local to a :source'ed Vim script.
 function-argument  a:     Function argument (only inside a function).
 vim-variable         v:   Global, predefined by Vim.
 
-
 connect string with "str1 . str2" 
+
+* [[vim-python]]

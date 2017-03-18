@@ -14,3 +14,7 @@
 
 
  __setup("dhcpclass=", vendor_class_identifier_setup);
+ 
+
+ * ubifs-bootcmd
+   console=ttyO0,115200n8 root=ubi0:rootfs rw ubi.mtd=NAND.file-system,2048 rootfstype=ubifs [[rootwait=1]]

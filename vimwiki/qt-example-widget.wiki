@@ -1,13 +1,4 @@
-* desktop
-	screenshot: 
-	    QPixmap originalPixmap;
-    	QLabel *screenshotLabel;  ---> QLabel show the pixmap
-		QScreen *screen = QGuiApplication::primaryScreen();
-		screenshotLabel->setPixmap(originalPixmap.scaled(screenshotLabel->size(),
-												 Qt::KeepAspectRatio,
-												 Qt::SmoothTransformation));
-	systray:
-		how to add icon and set back app like youdao
-    	iconComboBox->addItem(QIcon(":/images/trash.png"), tr("Trash"));
+* [[qt-example-desktop]]
+* [[qt-example-dialog]]
     	
 
