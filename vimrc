@@ -48,6 +48,7 @@ Plugin 'jnurmine/Zenburn'       "color config
 Plugin 'altercation/vim-colors-solarized' "color config
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}   "powerline
 Plugin 'pboettch/vim-cmake-syntax' "cmake syntax
+Plugin 'vim-scripts/Conque-GDB'
 
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
@@ -217,6 +218,7 @@ syntax on
 
 set number
 set autowrite
+set autoread
 set clipboard=unnamed
 set clipboard=unnamedplus
 
@@ -240,7 +242,8 @@ colorscheme zenburn
 au BufRead,BufNewFile *.patch set filetype=patch
 
 map <F6> :make clean<CR><CR><CR>
-map <F7> :make<CR><CR><CR> :copen<CR><CR>
+"map <F7> :make<CR><CR><CR> :copen<CR><CR>
+map <F7> :call MakeSelect() <CR><CR>
 "map <F8> :make bootimage<CR><CR><CR> :copen<CR><CR>
 map <F8>> :cp<CR>
 map <F9> :cn<CR>
@@ -261,6 +264,8 @@ map <C-x>q <ESC>:q!<CR>
 map <C-x>z <ESC>:call Me_zf_funcs(1)<CR>
 map <C-n>  <ESC>:call Me_pr_func2(1)<CR>
 map <C-x>q <ESC>:q!<CR>
+map <C-x>l <ESC>:sourc ~/.vim/plugin/metest.vim<CR>
+map <C-x>k <ESC>:call PyMeTest()<CR>
 
 "runtime /home/wrsadmin/github/vim/wind.vim
 map <C-x>v <ESC>:call Patch_vsplit_open()<CR>
