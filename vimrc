@@ -219,6 +219,8 @@ syntax on
 set number
 set autowrite
 set autoread
+au CursorHold * checktime
+
 set clipboard=unnamed
 set clipboard=unnamedplus
 
