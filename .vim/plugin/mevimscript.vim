@@ -29,41 +29,6 @@ function! Me_zf_funcs(type)
 	"echo s:count
 endfunction " 
 
-function! Me_pr_func2(type)
-	normal o 
-	let save_cursor = getpos('.')
-	let cur_line = getline(save_cursor[1])
-	"let change_line = substitute(cur_line,"$","printk(\"zz \%s \\n\", __func__);\",0)
-	let change_line = substitute(cur_line,"$","printk(\"zz \%s \\n\", __func__);",0)
-	call setline(save_cursor[1], change_line)
-	"execute "set paste"
-	"execute "normal oprintk(\"zz \%s \\n\", __func__);\<ESC>"
-	"execute "set nopaste"
-endfunction 
-
-function! Me_Tag(TagType)
-	if a:TagType == "kernel"
-		set tags&
-		set tags+=/home/wrsadmin/bin/tag/common/out/linux_base-tags
-		set tags+=/home/wrsadmin/bin/tag/common/out/driver_common-tags
-		set tags+=/home/wrsadmin/bin/tag/common/linux_base_plat
-		cs reset
-   		cs add /home/wrsadmin/bin/tag/cscope.out
-	elseif a:TagType == "user"
-	endif
-	for tagname in a:tags
-		echo tagname
-	endfor
-endfunction
-
-"custom complete mem popup
-
-function! MjumpBuff()
-	let cur_line = getline(line("."))
-	execute ":u"
-	execute ":buffer " cur_line
-endfunc
-
 func! MVimFuncComplete()
 	let stylesheet = readfile("/home/wrsadmin/.vim/after/ftplugin/vim_dictionary.txt")
 	normal b
@@ -111,41 +76,9 @@ function! AutoBlacker()
 	endif
 endfunction
 
-function! AutoChar2(s_partn, e_partn)
-	let pat = '"'
-	let save_cursor = getpos('.')
-	let cur_line = getline(save_cursor[1])
-	let cur_char = cur_line[save_cursor[2]]
-	let inser_str= "t"
-	if (cur_char == a:e_partn)
-		normal! a
-	else
-		execute "normal a".a:s_partn.a:e_partn
-		"normal! a""
-	endif
-	return
-
-	let result = matchstr(getline(save_cursor[1]), pat)
-	if (search(pat, 'c', save_cursor[1]))
-		let linetxt = getline(save_cursor[1])
-		let cnt=0
-		let ret=-1
-		while 1
-			let ret = match(linetxt,"\"",ret+1)
-			if ret == -1
-				break
-			endif
-			let cnt += 1
-		endwhile
-		if cnt%2 != 0
-			normal! a"
-		endif
-		:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-   	endif
-endfunction
-
-"通过空格字符，快速生成printk
-function! MeFastFormatPrintk(start, end, type)
+"通过空格字符，快速生成linePatarn 的结构
+"参数$@, $1 ,$2,$....
+function! MeFastFormatLineV2(printStr, dataStr)
 	normal! ^
 	let save_cursor = getpos('.')
 	let linetxt = getline(line('.'))
@@ -163,8 +96,7 @@ function! MeFastFormatPrintk(start, end, type)
 	if idx > 0
 		call add(showcontext,strpart(linetxt, 0, idx))
 	endif
-	"call extend(showcontext,["printk(\"zz %s "])
-	call extend(showcontext,[a:start])
+	call add(showcontext, a:printStr)
 	for item in wordlist
 		call add(wordextend, item)
 		call add(wordextend, ":%08x ")
@@ -172,44 +104,7 @@ function! MeFastFormatPrintk(start, end, type)
 	call add(wordextend, "\\n\",__func__")
 	for item in wordlist
 		"call add(wordextend, " ,(u32)")
-		call add(wordextend, a:type)
-		call add(wordextend, item)
-	endfor
-	"call add(wordextend, ");")
-	call add(wordextend, a:end)
-	call extend(showcontext,wordextend)
-	call append(line('.'), join(showcontext, ''))
-	execute "d"
-endfunction
-
-"通过空格字符，快速生成linePatarn 的结构
-"参数$@, $1 ,$2,$....
-function! MeFastFormatLine()
-	normal! ^
-	let save_cursor = getpos('.')
-	let linetxt = getline(line('.'))
-	let idx =0
-	while idx < strlen(linetxt)
-		if linetxt[idx] =~ '\w'
-            break
-		else
-			let idx += 1
-		endif
-	endwhile
-	let wordlist = split(strpart(linetxt, idx))
-	let showcontext=[]
-	let wordextend=[]
-	if idx > 0
-		call add(showcontext,strpart(linetxt, 0, idx))
-	endif
-	call extend(showcontext,["printk(\"zz %s "])
-	for item in wordlist
-		call add(wordextend, item)
-		call add(wordextend, ":%08x ")
-	endfor
-	call add(wordextend, "\\n\",__func__")
-	for item in wordlist
-		call add(wordextend, " ,(u32)")
+		call add(wordextend, a:dataStr)
 		call add(wordextend, item)
 	endfor
 	call add(wordextend, ");")
@@ -219,19 +114,12 @@ function! MeFastFormatLine()
 endfunction
 
 "fast to mask lines in the end by add markchar
-function! MefastMakslines(markchar)
+function! MefastMarklines(markchar)
 	let cmd ="s/\(\s*\)/\1#/"
 	execute cmd
 endfunction
 
-"inoremap [ <ESC>:call AutoChar2('[', ']')<CR>i
-
-func! Tag_kernel_set()
-	set tags+=/home/wrsadmin/github/shell/ctag/linux_base-tags
-endfunc
-
 func! MeDbg()
 	call MeFastFormatPrintk()
 endfunc
-
 
