@@ -29,7 +29,7 @@ function! Vimomnicomplete(findstart, base)
         let idx = col('.')
         let cword = ''
 		for item in s:vimfunclist
-			let linesplit = split(item, " ")
+			let linesplit = split(item, "\t")
 			if (match(linesplit[0],'^'.a:base)==0)
 				call extend(retOmnilist, [{"word":linesplit[0], "kind":linesplit[1], "info":"null"}])
 			endif
