@@ -1,0 +1,278 @@
+css#animation	所有动画属性的简写属性，除了animation-play-state属性。(CSS3_动画属性)
+css#animation-name	规定@keyframes动画的名称。(CSS3_动画属性)
+css#animation-duration	规定动画完成一个周期所花费的秒或毫秒。(CSS3_动画属性)
+css#animation-timing-function	规定动画的速度曲线。(CSS3_动画属性)
+css#animation-delay	规定动画何时开始。(CSS3_动画属性)
+css#animation-iteration-count	规定动画被播放的次数。(CSS3_动画属性)
+css#animation-direction	规定动画是否在下一周期逆向地播放。(CSS3_动画属性)
+css#animation-play-state	规定动画是否正在运行或暂停。(CSS3_动画属性)
+css#animation-fill-mode	规定对象动画时间之外的状态。(CSS3_动画属性)
+css#CSS_背景属性（Background）
+css#background	在一个声明中设置所有的背景属性。(CSS_背景属性)
+css#background-attachment	设置背景图像是否固定或者随着页面的其余部分滚动。(CSS_背景属性)
+css#background-color	设置元素的背景颜色。(CSS_背景属性)
+css#background-image	设置元素的背景图像。(CSS_背景属性)
+css#background-position	设置背景图像的开始位置。(CSS_背景属性)
+css#background-repeat	设置是否及如何重复背景图像。(CSS_背景属性)
+css#background-clip	规定背景的绘制区域。(CSS_背景属性)
+css#background-origin	规定背景图片的定位区域。(CSS_背景属性)
+css#background-size	规定背景图片的尺寸。(CSS_背景属性)
+css#CSS_边框属性（Border和Outline）
+css#border	在一个声明中设置所有的边框属性。(CSS_边框属性)
+css#border-bottom	在一个声明中设置所有的下边框属性。(CSS_边框属性)
+css#border-bottom-color	设置下边框的颜色。(CSS_边框属性)
+css#border-bottom-style	设置下边框的样式。(CSS_边框属性)
+css#border-bottom-width	设置下边框的宽度。(CSS_边框属性)
+css#border-color	设置四条边框的颜色。(CSS_边框属性)
+css#border-left	在一个声明中设置所有的左边框属性。(CSS_边框属性)
+css#border-left-color	设置左边框的颜色。(CSS_边框属性)
+css#border-left-style	设置左边框的样式。(CSS_边框属性)
+css#border-left-width	设置左边框的宽度。(CSS_边框属性)
+css#border-right	   在一个声明中设置所有的右边框属性。(CSS_边框属性)
+css#border-right-color	设置右边框的颜色。(CSS_边框属性)
+css#border-right-style	设置右边框的样式。(CSS_边框属性)
+css#border-right-width	设置右边框的宽度。(CSS_边框属性)
+css#border-style	设置四条边框的样式。(CSS_边框属性)
+css#border-style:none	定义无边框。
+css#border-style:hidden	与none相同不过应用于表时除外，对于表，hidden用于解决边框冲突。
+css#border-style:dotted	定义点状边框。在大多数浏览器中呈现为实线。
+css#border-style:dashed	定义虚线在大多数浏览器中呈现为实线。
+css#border-style:solid	定义实线。
+css#border-style:double	定义双线。双线的宽度等于border-width 的值。
+css#border-style:groove	定义3D凹槽边框。其效果取决于border-color的值。
+css#border-style:ridge	定义3D垄状边框。其效果取决于border-color的值。
+css#border-style:inset	定义3Dinset 边框。其效果取决于border-color的值。
+css#border-style:outset	定义3Doutset 边框。其效果取决于border-color的值。
+css#border-style:inherit	规定应该从父元素继承边框样式。
+css#border-top	在一个声明中设置所有的上边框属性。(CSS_边框属性)
+css#border-top-color	设置上边框的颜色。(CSS_边框属性)
+css#border-top-style	设置上边框的样式。(CSS_边框属性)
+css#border-top-width	设置上边框的宽度。(CSS_边框属性)
+css#border-width	设置四条边框的宽度。(CSS_边框属性)
+css#outline	在一个声明中设置所有的轮廓属性。(CSS_边框属性)
+css#outline-color	设置轮廓的颜色。(CSS_边框属性)
+css#outline-style	设置轮廓的样式。(CSS_边框属性)
+css#outline-width	设置轮廓的宽度。(CSS_边框属性)
+css#border-bottom-left-radius	定义边框左下角的形状。(CSS_边框属性)
+css#border-bottom-right-radius	定义边框右下角的形状。(CSS_边框属性)
+css#border-image	简写属性，设置所有 border-image-*属性。(CSS_边框属性)
+css#border-image-outset	规定边框图像区域超出边框的量。(CSS_边框属性)
+css#border-image-repeat	图像边框是否应平铺(repeated)、铺满(rounded)或拉伸(stretched)。(CSS_边框属性)
+css#border-image-slice	规定图像边框的向内偏移。(CSS_边框属性)
+css#border-image-source	规定用作边框的图片。(CSS_边框属性)
+css#border-image-width	规定图片边框的宽度。(CSS_边框属性)
+css#border-radius	简写属性，设置所有四个 border-*-radius 属性。(CSS_边框属性)
+css#border-top-left-radius	定义边框左上角的形状。(CSS_边框属性)
+css#border-top-right-radius	定义边框右下角的形状。(CSS_边框属性)
+css#box-decoration-brea	k(CSS_边框属性)
+css#box-shadow	向方框添加一个或多个阴影。(CSS_边框属性)
+css#CSS_Box属性
+css#overflow-x	如果内容溢出了元素内容区域，是否对内容的左/右边缘进行裁剪。(CSS_Box属性)
+css#overflow-y	如果内容溢出了元素内容区域，是否对内容的上/下边缘进行裁剪。(CSS_Box属性)
+css#overflow-style	规定溢出元素的首选滚动方法。(CSS_Box属性)
+css#rotation	围绕由rotation-point属性定义的点对元素进行旋转。(CSS_Box属性)
+css#rotation-point	定义距离上左边框边缘的偏移点。(CSS_Box属性)
+css#CSS_Color属性
+css#color-profile	允许使用源的颜色配置文件的默认以外的规范。(CSS_Color属性)
+css#opacity	规定书签的级别。(CSS_Color属性)
+css#rendering-intent	允许使用颜色配置文件渲染意图的默认以外的规范。(CSS_Color属性)
+css#Content	for Paged Media 属性(CSS_Color属性)
+css#bookmark-label	规定书签的标记。(CSS_Color属性)
+css#bookmark-level	规定书签的级别。(CSS_Color属性)
+css#bookmark-target	规定书签链接的目标。(CSS_Color属性)
+css#float-offset	将元素放在float属性通常放置的位置的相反方向。(CSS_Color属性)
+css#hyphenate-after	规定连字单词中连字符之后的最小字符数。(CSS_Color属性)
+css#hyphenate-before	规定连字单词中连字符之前的最小字符数。(CSS_Color属性)
+css#hyphenate-character	规定当发生断字时显示的字符串。(CSS_Color属性)
+css#hyphenate-lines	指示元素中连续断字连线的最大数。(CSS_Color属性)
+css#hyphenate-resource	规定帮助浏览器确定断字点的外部资源（逗号分隔的列表）。(CSS_Color属性)
+css#hyphens	设置如何对单词进行拆分，以改善段落的布局。(CSS_Color属性)
+css#image-resolution	规定图像的正确分辨率。(CSS_Color属性)
+css#marks	向文档添加裁切标记或十字标记。(CSS_Color属性)
+css#string-se	t(CSS_Color属性)
+css#CSS_尺寸属性（Dimension）
+css#height	设置元素高度。
+css#max-height	设置元素的最大高度。
+css#max-width	设置元素的最大宽度。
+css#min-height	设置元素的最小高度。
+css#min-width	设置元素的最小宽度。
+css#width	设置元素的宽度。
+css#CSS_可伸缩框属性（Flexible	Box）
+css#box-align	规定如何对齐框的子元素。
+css#box-direction	规定框的子元素的显示方向。
+css#box-flex	规定框的子元素是否可伸缩。
+css#box-flex-group	将可伸缩元素分配到柔性分组。
+css#box-lines	规定当超出父元素框的空间时，是否换行显示。
+css#box-ordinal-group	规定框的子元素的显示次序。
+css#box-orient	规定框的子元素是否应水平或垂直排列。
+css#box-pack	规定水平框中的水平位置或者垂直框中的垂直位置。
+css#CSS_字体属性（Font）
+css#font	在一个声明中设置所有字体属性。
+css#font-family	规定文本的字体系列。
+css#font-size	规定文本的字体尺寸。
+css#font-size-adjust	为元素规定 aspect 值。
+css#font-stretch	收缩或拉伸当前的字体系列。
+css#font-style	规定文本的字体样式。
+css#font-variant	规定是否以小型大写字母的字体显示文本。
+css#font-weight	规定字体的粗细。
+css#CSS_内容生成（Generated	Content）
+css#content	与:before以及:after伪元素配合使用，来插入生成内容。
+css#counter-increment	递增或递减一个或多个计数器。
+css#counter-reset	创建或重置一个或多个计数器。
+css#quotes	设置嵌套引用的引号类型。
+css#crop	允许被替换元素仅仅是对象的矩形区域，而不是整个对象。
+css#move-to	从流中删除元素，然后在文档中后面的点上重新插入。
+css#page-policy	确定元素基于页面的occurrence应用于计数器还是字符串值。
+css#CSS_Grid属性
+css#grid-columns	规定网格中每个列的宽度。
+css#grid-rows	规定网格中每个列的高度。
+css#CSS_Hyperlink属性
+css#target	简写属性，设置target-name、target-new以及target-position属性。
+css#target-name	规定在何处打开链接（链接的目标）。
+css#target-new	规定目标链接在新窗口还是在已有窗口的新标签页中打开。
+css#target-position	规定在何处放置新的目标链接。
+css#CSS_列表属性（List）
+css#list-style	在一个声明中设置所有的列表属性。
+css#list-style-image	将图象设置为列表项标记。
+css#list-style-position	设置列表项标记的放置位置。
+css#list-style-type	设置列表项标记的类型。
+css#marker-offse	t
+css#CSS_外边距属性（Margin）
+css#margin	在一个声明中设置所有外边距属性。
+css#margin-bottom	设置元素的下外边距。
+css#margin-left	设置元素的左外边距。
+css#margin-right	设置元素的右外边距。
+css#margin-top	设置元素的上外边距。
+css#Marquee	属性
+css#marquee-direction	设置移动内容的方向。
+css#marquee-play-count	设置内容移动多少次。
+css#marquee-speed	设置内容滚动得多快。
+css#marquee-style	设置移动内容的样式。
+css#CSS_多列属性（Multi-column）
+css#column-count	规定元素应该被分隔的列数。
+css#column-fill	规定如何填充列。
+css#column-gap	规定列之间的间隔。
+css#column-rule	设置所有 column-rule-* 属性的简写属性。
+css#column-rule-color	规定列之间规则的颜色。
+css#column-rule-style	规定列之间规则的样式。
+css#column-rule-width	规定列之间规则的宽度。
+css#column-span	规定元素应该横跨的列数。
+css#column-width	规定列的宽度。
+css#columns	规定设置column-width和column-count的简写属性。
+css#CSS_内边距属性（Padding）
+css#padding	在一个声明中设置所有内边距属性。
+css#padding-bottom	设置元素的下内边距。
+css#padding-left	设置元素的左内边距。
+css#padding-right	设置元素的右内边距。
+css#padding-top	设置元素的上内边距。
+css#CSS_PagedMedia属性
+css#fit	示意如何对width和height属性均不是auto的被替换元素进行缩放。
+css#fit-position	定义盒内对象的对齐方式。
+css#image-orientation	规定用户代理应用于图像的顺时针方向旋转。
+css#page	规定元素应该被显示的页面特定类型。
+css#size	规定页面内容包含框的尺寸和方向。
+css#CSS_定位属性（Positioning）
+css#bottom	设置定位元素下外边距边界与其包含块下边界之间的偏移。
+css#clear	规定元素的哪一侧不允许其他浮动元素。
+css#clip	剪裁绝对定位元素。
+css#cursor	规定要显示的光标的类型（形状）。
+css#display	规定元素应该生成的框的类型。
+css#display:none	此元素不会被显示。
+css#display:block	此元素将显示为块级元素，此元素前后会带有换行符。
+css#display:inline	默认。此元素会被显示为内联元素，元素前后没有换行符。
+css#display:inline-block	行内块元素。（CSS2.1 新增的值）
+css#display:list-item	此元素会作为列表显示。
+css#display:run-in	此元素会根据上下文作为块级元素或内联元素显示。
+css#display:table	此元素会作为块级表格来显示（类似 <table>），表格前后带有换行符。
+css#display:inline-table	此元素会作为内联表格来显示（类似 <table>），表格前后没有换行符。
+css#display:table-row-group	此元素会作为一个或多个行的分组来显示（类似 <tbody>）。
+css#display:table-header-group	此元素会作为一个或多个行的分组来显示（类似 <thead>）。
+css#display:table-footer-group	此元素会作为一个或多个行的分组来显示（类似 <tfoot>）。
+css#display:table-row	此元素会作为一个表格行显示（类似 <tr>）。
+css#display:table-column-group	此元素会作为一个或多个列的分组来显示（类似 <colgroup>）。
+css#display:table-column	此元素会作为一个单元格列显示（类似 <col>）
+css#display:table-cell	此元素会作为一个表格单元格显示（类似 <td> 和 <th>）
+css#display:table-caption	此元素会作为一个表格标题显示（类似 <caption>）
+css#display:inherit	规定应该从父元素继承 display 属性的值。
+css#float	规定框是否应该浮动。
+css#float:left	设置定位元素左外边距边界与其包含块左边界之间的偏移
+css#float:overflow	规定当内容溢出元素框时发生的事情
+css#float:position	规定元素的定位类型
+css#float:right	设置定位元素右外边距边界与其包含块右边界之间的偏移
+css#float:top	设置定位元素的上外边距边界与其包含块上边界之间的偏移
+css#float:vertical-align	设置元素的垂直对齐方式
+css#float:visibility	规定元素是否可见
+css#float:z-index	设置元素的堆叠顺序
+css#CSS_打印属性（Print）
+css#orphans	设置当元素内部发生分页时必须在页面底部保留的最少行数
+css#page-break-after	设置元素后的分页行为
+css#page-break-before	设置元素前的分页行为
+css#page-break-inside	设置元素内部的分页行为
+css#widows	设置当元素内部发生分页时必须在页面顶部保留的最少行数
+css#CSS_表格属性（Table）
+css#border-collapse	规定是否合并表格边框
+css#border-spacing	规定相邻单元格边框之间的距离
+css#caption-side	规定表格标题的位置
+css#empty-cells	规定是否显示表格中的空单元格上的边框和背景
+css#table-layout	设置用于表格的布局算法
+css#CSS_文本属性（Text）
+css#color	设置文本的颜色
+css#direction	规定文本的方向/书写方向
+css#letter-spacing	设置字符间距
+css#line-height	设置行高
+css#text-align	规定文本的水平对齐方式
+css#text-align:left	把文本排列到左边默认值：由浏览器决定
+css#text-align:right	把文本排列到右边
+css#text-align:center	把文本排列到中间
+css#text-align:justify	实现两端对齐文本效果
+css#text-align:inherit	规定应该从父元素继承text-align属性的值
+css#text-decoration	规定添加到文本的装饰效果
+css#text-decoration:none	默认。定义标准的文本
+css#text-decoration:underline	定义文本下的一条线
+css#text-decoration:overline	定义文本上的一条线
+css#text-decoration:line-through	定义穿过文本下的一条线
+css#text-decoration:blink	定义闪烁的文本
+css#text-decoration:inherit	规定应该从父元素继承 text-decoration 属性的值
+css#text-indent	规定文本块首行的缩进
+css#text-shadow	规定添加到文本的阴影效果
+css#text-transform	控制文本的大小写
+css#unicode-bidi	设置文本方向
+css#white-space	规定如何处理元素中的空白。
+css#word-spacing	设置单词间距。
+css#hanging-punctuation	规定标点字符是否位于线框之外。
+css#punctuation-trim	规定是否对标点字符进行修剪。
+css#text-align-last	设置如何对齐最后一行或紧挨着强制换行符之前的行。
+css#text-emphasis	向元素的文本应用重点标记以及重点标记的前景色。
+css#text-justify	规定当text-align设置为justify时所使用的对齐方法。
+css#text-outline	规定文本的轮廓。
+css#text-overflow	规定当文本溢出包含元素时发生的事情。
+css#text-shadow	向文本添加阴影。
+css#text-wrap	规定文本的换行规则。
+css#word-break	规定非中日韩文本的换行规则。
+css#word-wrap	允许对长的不可分割的单词进行分割并换行到下一行。
+css#CSS_2D/3D	转换属性（Transform）
+css#transform	向元素应用2D或3D转换。
+css#transform-origin	允许你改变被转换元素的位置。
+css#transform-style	规定被嵌套元素如何在 3D 空间中显示。
+css#perspective	规定3D元素的透视效果。
+css#perspective-origin	规定3D元素的底部位置。
+css#backface-visibility	定义元素在不面对屏幕时是否可见。
+css#CSS_过渡属性（Transition）
+css#transition	简写属性，用于在一个属性中设置四个过渡属性。
+css#transition-property	规定应用过渡的CSS属性的名称。
+css#transition-duration	定义过渡效果花费的时间。
+css#transition-timing-function	规定过渡效果的时间曲线。
+css#transition-delay	规定过渡效果何时开始。
+css#CSS_用户界面属性（User-interface）
+css#appearance	允许您将元素设置为标准用户界面元素的外观
+css#box-sizing	允许您以确切的方式定义适应某个区域的具体内容。
+css#icon	为创作者提供使用图标化等价物来设置元素样式的能力。
+css#nav-down	规定在使用arrow-down导航键时向何处导航。
+css#nav-index	设置元素的tab键控制次序。
+css#nav-left	规定在使用arrow-left导航键时向何处导航。
+css#nav-right	规定在使用arrow-right导航键时向何处导航。
+css#nav-up	规定在使用arrow-up导航键时向何处导航。
+css#outline-offset	对轮廓进行偏移，并在超出边框边缘的位置绘制轮廓。
+css#resize	规定是否可由用户对元素的尺寸进行调整。
+sass#import	引入其他文件@import 'reset';
+sass#extend	import the vaiable

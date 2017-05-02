@@ -23,7 +23,7 @@ function! Htmlomnicomplete(findstart, base)
         let line = getline('.')
         let idx = col('.')
 		for item in s:htmlomnilist
-			let linesplit = split(item, " ")
+			let linesplit = split(item, "\t")
 			if !empty(linesplit)
 				if (match(linesplit[0],'^'.a:base)==0)
 					if len(linesplit) > 1
