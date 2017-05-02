@@ -1,0 +1,34 @@
+* tmux-shortcut
+	Ctrl + b d -> dettach
+    Ctrl + b c -> new window
+    Ctrl + b 0 -> goto window 0
+    Ctrl + b ” -> split window V
+    Ctrl + b % -> split window horizontal in 2 pannel spliten
+    Ctrl + b w -> show windowlist
+    Ctrl + b ! -> close all window
+    Ctrl + b n -> next window
+    Ctrl + b p -> previous window
+    Ctrl + b l -> last window
+    Ctrl + b , -> rename window
+    Ctrl + b k -> delete window
+    ctrl + b x -> delete current pane
+    Ctrl + b o -> switch panel
+    ctrl + b up/down -> switch to panel up/down
+    ctrl + b q <nr> -> show panel numbers and switch to it directly
+    ctrl + b ! -> move current pane to new window
+    ctrl + b s -> send pane to other window
+    Ctrl + b [ -> switch to buffer (like emacs)
+    Ctrl + Space -> set marker
+    Ctrl + w -> cut region
+    Alt + w -> copy region
+    Esc -> leave buffer
+    Ctrl + b ] -> paste last copied buffer
+    ctrl + b = -> choose paste buffer
+    ctrl + b : capture-pane -> copy all visible pane output
+    ctrl + b : save-buffer -> write paste buffer to file
+    ctrl + space -> toggle different pane layouts
+    ctrl + b : resize-pane -D 20 -> shrink down
+    ctrl + b : resize-pane -U 20 -> shrink up
+    ctrl + b <left/right/up/down> -> resize current pane to left/right/up/down
+    ctrl + b : break-pane -> convert pane to window
+    ctrl + b : source-file ~/.tmux.conf -> reload config

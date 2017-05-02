@@ -1,0 +1,6 @@
+cat ~/.ssh/id_rsa.pub  | ssh wrsadmin@128.224.162.165 'cat > ~/.ssh//authorized_keys'
+
+~/.ssh/config
+Host server
+	User wrsadmin
+

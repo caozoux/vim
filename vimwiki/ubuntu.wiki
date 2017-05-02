@@ -19,3 +19,8 @@ sudo chown nobody:nogroup /var/nfs
   vi /etc/ssh/sshd_config 
   Port 22  <----modify
   /etc/init.d/sshd restart
+  
+* [[tmux]]
+* [[ssh]]
+* dynamay libray patch
+  export LD_LIBRARY_PATH=$yourPath:$LD_LIBRARY_PATH
