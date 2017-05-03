@@ -119,6 +119,20 @@ function! MefastMarklines(markchar)
 	execute cmd
 endfunction
 
+
+"得到路径中的文件名
+function! GetFilenameWithoutPath(filename)
+	let filebasename=""
+python << EOF
+import os
+import vim
+filename = vim.bindeval("a:filename")
+basename = os.path.basename(filename)
+vim.command("let filebasename=\""+basename+"\"")
+EOF
+	return filebasename
+endfunction
+
 func! MeDbg()
 	call MeFastFormatPrintk()
 endfunc
