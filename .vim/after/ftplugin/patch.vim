@@ -1,3 +1,8 @@
+if exists("b:did_ftplugin")
+  finish
+endif
+let b:did_ftplugin = 1  " Don't load another plugin for this buffer
+
 function! ClearBufAll(buffername)
 	let oldwinid = win_getid()
 	let delwinid = bufwinid(a:buffername)
@@ -33,11 +38,40 @@ function! DelPatchItem()
 		call JumToPatchItemHead()
 	endif
 	let startnumber = line('.')
-	let endnumber=search("^@@ -")
+
+	let endnumber=search("^@@ -", 'nW')
+	if 0 == endnumber
+		"patchitem is last
+		let endnumber=search("^-- ", 'nW')
+	else
+		"确认是否是patchitem所在的目标文件结尾
+		call cursor(startnumber, 0)
+		let oldnumber = endnumber
+		let endnumber=search("^diff", 'nW')
+		if endnumber != 0
+			if endnumber > oldnumber
+				let endnumber = oldnumber
+			endif
+		else
+			let endnumber = oldnumber
+		endif
+	endif
 	let delline_cnt=endnumber-startnumber
 	call cursor(startnumber, 0)
 	execute "normal ". delline_cnt. "dd"
-	""execute "normal 13dd"
+
+	"确认目标文件的patchitem已经没有了，如果是，清除它
+	let line = getline(line('.'))
+	let line1 = getline(startnumber-1)
+	let postion=match(line1, "^+++ b")
+	if postion == 0
+		let postion=match(line, "^diff ")
+		if postion == 0
+			call cursor(startnumber-4, 0)
+			execute "normal 4dd"
+		endif
+	endif
+
 endfunction
 
 function! GetPatchItemFile()
@@ -65,12 +99,45 @@ function! JumPathItemStartInTarget(start)
 
 endfunction
 
+function! OpenMergePatch(patchdir)
+
+	let patchname=""
+python << EOF
+import os
+import vim
+
+number=open("./.git/rebase-apply/next").read()
+number=number[:-1]
+num=4-len(number)
+for i in range(num):
+	number= "0"+number
+dirname=vim.bindeval("a:patchdir")
+filename=dirname+"/"+number+"-*"
+res=os.popen("ls "+filename).readlines()
+filename=res[0][:-1]
+vim.command("let patchname = \""+filename+"\"")
+EOF
+	"let patchname="cach/0003-\\*"
+	echo ":edit " patchname
+	execute ":edit " patchname
+
+endfunction
+
 function! GetPatchConflict()
 	let gitapplyerr=[]
 	let patchname=""
 	let patchitem_head=""
 	let patchitem_start=[]
 	let patchitem_end=[]
+
+	execute ":only"
+	"清除patchcmdbuf的内容
+	let patchcmdbuf_winid = bufwinid("patchcmdbuf")
+	if patchcmdbuf_winid == -1
+		let backwinid = win_getid()
+		execute ":7sp patchcmdbuf"
+		call win_gotoid(backwinid)
+	endif
 	call ClearBufAll("patchcmdbuf")
 python << EOF
 import os
@@ -83,14 +150,24 @@ patchcmdbuf=""
 for b in vim.buffers:
 	if b.name.find("patchcmdbuf") >= 0:
 		patchcmdbuf = b
-		patchcmdbuf.append("".join(gitapplybuf))
-for line in  gitapplybuf:
-	res=re.search(":[0-9]*\n", line)
-	if res:
-		conflictnumber= res.group(0)[1:-1]
-		vim.command("call insert(gitapplyerr, \"@@ -"+str(conflictnumber)+"\")")
-vim.command("let patchname = \""+patchbuffer.name+"\"")
+		#patchcmdbuf.append("".join(gitapplybuf))
+		patchcmdbuf.append(gitapplybuf)
+
+if len(gitapplybuf) == 0:
+	#it is pass
+	patchcmdbuf.append("patch has been passed")
+else:
+	for line in  gitapplybuf:
+		res=re.search(":[0-9]*\n", line)
+		if res:
+			conflictnumber= res.group(0)[1:-1]
+			vim.command("call insert(gitapplyerr, \"@@ -"+str(conflictnumber)+"\")")
+	vim.command("let patchname = \""+patchbuffer.name+"\"")
 EOF
+	if empty(gitapplyerr)
+		return
+	endif
+
 	let patchwind_id = win_getid()
 	"跳转到git applay 出错的地方
 	let err_line = JumToSerach(gitapplyerr[0])
@@ -128,3 +205,14 @@ EOF
 	call cursor(err_line, 0)
 	normal! zz
 endfunction
+
+let patchcmdbuf_winid = bufwinid("patchcmdbuf")
+if patchcmdbuf_winid == -1
+	execute ":7sp patchcmdbuf"
+	execute ":close"
+endif
+
+map <c-x>d <ESC>:source /home/wrsadmin/.vim/after/ftplugin/patch.vim<CR>:call DelPatchItem()<CR>
+map <c-x>t <ESC>:source /home/wrsadmin/.vim/after/ftplugin/patch.vim<CR>:call GetPatchConflict()<CR>
+map <c-x>f <ESC>:source /home/wrsadmin/.vim/after/ftplugin/patch.vim<CR>:call OpenMergePatch("cach")<CR>
+vnoremap c :s/^[+-\s]//<CR>:w<CR>
