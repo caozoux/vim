@@ -1,5 +1,5 @@
 let s:objfunclist=[]
-let g:objdictionary={"vim#r1char()": "test"}
+let g:objdictionary={}
 "set iskeyword+=#
 function! Objomnicomplete(findstart, base)
     if a:findstart == 1
@@ -42,10 +42,10 @@ python << EOF
 import os
 import vim
 from vimscript import vimobjcomplete
-comManger= vimobjcomplete.ObjCompleteManger("/home/zoucao/.vim/after/ftplugin/obj_dictionary.txt", "/home/zoucao/.vim/after/ftplugin/obj_dictionary_extern.txt")
+home=vim.bindeval("home")
+comManger= vimobjcomplete.ObjCompleteManger(home+"/.vim/after/ftplugin/obj_dictionary.txt", home+"/.vim/after/ftplugin/obj_dictionary_extern.txt")
 comManger.transferToHead()
 objextern_dict=vim.bindeval('g:objdictionary');
-objextern_dict.update({'setline()' : 'sfg'})
 for obj in comManger.headObjList:
 	vim.command("call insert(s:objfunclist,"+"\""+obj.headline+"\""+")")
 	extern_str = comManger.getExtern(obj.head)
@@ -54,7 +54,7 @@ for obj in comManger.headObjList:
 EOF
 endfunc
 
-set objfunc=Objomnicomplete
+"set objfunc=Objomnicomplete
 
-""set omnifunc=Vimomnicomplete
+set omnifunc=Vimomnicomplete
 call Objftpinit()
