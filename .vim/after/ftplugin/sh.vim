@@ -1,5 +1,12 @@
+if exists("b:did_ftplugin")
+  finish
+endif
+let b:did_ftplugin = 1  " Don't load another plugin for this buffer
+
 let s:objfunclist=[]
 let s:objdictionary={}
+let s:objdiction_file=""
+let s:objdiction_exfile=""
 set iskeyword+=#
 function! ObjomnicompleteSh(findstart, base)
     if a:findstart == 1
@@ -36,13 +43,14 @@ endfunction
 func! ObjftpinitSh()
 	let home=system("echo $HOME")
 	let home=strpart(home,0, len(home)-1)
-	"let s:objfunclist = readfile(home . "/.vim/after/ftplugin/obj_dictionary.txt")
-	let b:adid_ftplugin = 1
+	let s:objdiction_file = home."/.vim/after/ftplugin/objcomplete/shell_obj.txt")
+	let s:objdiction_exfile = home."/.vim/after/ftplugin/objcomplete/shell_obj_extern.txt")
 python << EOF
 import os
 import vim
 from vimscript import vimobjcomplete
-comManger= vimobjcomplete.ObjCompleteManger("/home/zoucao/.vim/after/ftplugin/objcomplete/shell_obj.txt", "/home/zoucao/.vim/after/ftplugin/objcomplete/shell_obj_extern.txt")
+home=vim.bindeval("home")
+comManger= vimobjcomplete.ObjCompleteManger(home+"/.vim/after/ftplugin/objcomplete/shell_obj.txt", home+"/.vim/after/ftplugin/objcomplete/shell_obj_extern.txt")
 comManger.transferToHead()
 objextern_dict=vim.bindeval('s:objdictionary');
 for obj in comManger.headObjList:
@@ -53,7 +61,21 @@ for obj in comManger.headObjList:
 EOF
 endfunc
 
-set objfunc=ObjomnicompleteSh
+if exists("&objfunc")
+	set objfunc=ObjomnicompleteSh
+endif
 
-""set omnifunc=Vimomnicomplete
+"更新当前的objfunc的字典
+function! ObjomnicompleteShUpdate()
+	let s:objfunclist=[]
+	let s:objdictionary={}
+	call ObjftpinitSh()
+endfunction
+
+"打开当前的obj dictionary files,编辑并保存"
+function! ObjomnicompleteShOpen()
+	execute ":edit "s:objdiction_file
+	execute ":edit "s:objdiction_exfile
+endfunction
+
 call ObjftpinitSh()
