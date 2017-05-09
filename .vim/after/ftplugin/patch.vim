@@ -130,12 +130,14 @@ function! GetPatchConflict()
 	let patchitem_start=[]
 	let patchitem_end=[]
 
+	let backwinid = win_getid()
+	echo backwinid
 	execute ":only"
 	"清除patchcmdbuf的内容
 	let patchcmdbuf_winid = bufwinid("patchcmdbuf")
 	if patchcmdbuf_winid == -1
-		let backwinid = win_getid()
 		execute ":7sp patchcmdbuf"
+		setlocal buftype=nofile
 		call win_gotoid(backwinid)
 	endif
 	call ClearBufAll("patchcmdbuf")
@@ -145,6 +147,7 @@ import vim
 import re
 patchbuffer = vim.current.buffer
 gitapplybuf=os.popen("git -C /fslink/kernel-4.1.x apply "+patchbuffer.name+" 2>&1"+" | grep \"error: patch failed:\" ").readlines();
+gitapplynofile=os.popen("git -C /fslink/kernel-4.1.x apply "+patchbuffer.name+" 2>&1"+" | grep \"No such file\" ").readlines();
 patchcmdbuf=""
 #insert the git apply error to patchcmdbuf
 for b in vim.buffers:
@@ -155,7 +158,10 @@ for b in vim.buffers:
 
 if len(gitapplybuf) == 0:
 	#it is pass
-	patchcmdbuf.append("patch has been passed")
+	if len(gitapplynofile) == 0:
+		patchcmdbuf.append("patch has been passed")
+	else:
+		patchcmdbuf.append("".join(gitapplynofile))
 else:
 	for line in  gitapplybuf:
 		res=re.search(":[0-9]*\n", line)
