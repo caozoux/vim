@@ -397,3 +397,22 @@ nav-right	规定在使用arrow-right导航键时向何处导航。
 nav-up	规定在使用arrow-up导航键时向何处导航。
 outline-offset	对轮廓进行偏移，并在超出边框边缘的位置绘制轮廓。
 resize	规定是否可由用户对元素的尺寸进行调整。
+unquote($string)	删除字符串中的引号；
+quote($string)	给字符串添加引号。
+percentage($value)	将一个不带单位的数转换成百分比值；
+round($value)	将数值四舍五入，转换成一个最接近的整数；
+ceil($value)	将大于自己的小数转换成下一位整数；
+floor($value)	将一个数去除他的小数部分；
+abs($value)	返回一个数的绝对值；
+min($numbers…)	找出几个数值之间的最小值；
+max($numbers…)	找出几个数值之间的最大值。
+length($list)	返回一个列表的长度值；
+nth($list, $n)	返回一个列表中指定的某个标签值
+join($list1, $list2, [$separator])	将两个列给连接在一起，变成一个列表；
+append($list1, $val, [$separator])	将某个值放在列表的最后；
+zip($lists…)	将几个列表结合成一个多维的列表；
+index($list, $value)	返回一个值在列表中的位置值
+type-of($value)	返回一个值的类型
+unit($number)	返回一个值的单位；
+unitless($number)	判断一个值是否带有带位
+comparable($number-1, $number-2)	判断两个值是否可以做加、减和合并
