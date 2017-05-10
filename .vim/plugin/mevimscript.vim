@@ -113,13 +113,6 @@ function! MeFastFormatLineV2(printStr, dataStr)
 	execute "d"
 endfunction
 
-"fast to mask lines in the end by add markchar
-function! MefastMarklines(markchar)
-	let cmd ="s/\(\s*\)/\1#/"
-	execute cmd
-endfunction
-
-
 "得到路径中的文件名
 function! GetFilenameWithoutPath(filename)
 	let filebasename=""
@@ -137,3 +130,14 @@ func! MeDbg()
 	call MeFastFormatPrintk()
 endfunc
 
+"处理entry键, 检测{
+function! EntryKeyExter()
+	let line = getline(".")
+	let start = col('.')
+	if line[start] == "{"
+	   normal! o}
+	   normal! ko
+	else
+	   normal! o
+	endif
+endfunction
