@@ -34,7 +34,7 @@ function! Objomnicomplete(findstart, base)
     endif
 endfunction
 
-func! Objftpinit()
+func! ObjDictionUpdate(f_diction, exf_diction)
 	let home=system("echo $HOME")
 	let home=strpart(home,0, len(home)-1)
 	let b:adid_ftplugin = 1
@@ -43,8 +43,10 @@ python << EOF
 import os
 import vim
 from vimscript import vimobjcomplete
+f_diction = vim.bindeval("a:f_diction")
+exf_diction = vim.bindeval("a:exf_diction")
 home=vim.bindeval("home")
-comManger= vimobjcomplete.ObjCompleteManger(home+"/.vim/after/ftplugin/obj_dictionary.txt", home+"/.vim/after/ftplugin/obj_dictionary_extern.txt")
+comManger= vimobjcomplete.ObjCompleteManger(home+f_diction[1:], home+exf_diction[1:])
 comManger.transferToHead()
 objextern_dict=vim.bindeval('s:objdictionary');
 for obj in comManger.headObjList:
@@ -59,6 +61,4 @@ if exists("&objfunc")
 	set objfunc=Objomnicomplete
 endif
 
-set omnifunc=Vimomnicomplete
-call Objftpinit()
-
+call ObjDictionUpdate("~/.vim/after/ftplugin/obj_dictionary.txt", "~/.vim/after/ftplugin/obj_dictionary_extern.txt")
