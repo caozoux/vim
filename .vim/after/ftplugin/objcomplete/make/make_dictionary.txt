@@ -1,0 +1,29 @@
+make#PHONY	伪目标
+make#include	包含别的Makefile include <filename>
+make#$<	依赖目标集
+make#$@	目标集
+make#VPATH	文件搜索VPATH := src:../include,两个目录src, ../include
+make#$()	bar:=$(foo:.o=.c)
+make#ifeq	ifeq($(CC), gcc)) else endif
+make#subst	$(subst FROM,TO,TEXT)
+make#$(patsubst PATTERN,REPLACEMENT,TEXT)	
+make#$(strip STRINT)	去空格
+make#$(findstring FIND,IN)	
+make#$(filter PATTERN…,TEXT)	过滤掉字串“TEXT”中所有不符合模式
+make#$(filter-out PATTERN...,TEXT)	反过滤函数
+make#$(sort LIST)	排序函数
+make#$(word N,TEXT)	取字串“TEXT”中第“N”个单词
+make#$(wordlist S,E,TEXT)	从字串“TEXT”中取出从“S”开始到“E”的单词串
+make#$(firstword NAMES…)	
+make#$(dir NAMES…)	取目录函数
+make#$(notdir NAMES…)	取文件名函数
+make#$(suffix NAMES…)	从文件名序列“NAMES…”中取出各个文件名的后缀
+make#$(basename NAMES…)	从文件名序列“NAMES…”中取出各个文件名的前缀部分
+make#$(addsuffix SUFFIX,NAMES…)	为“NAMES…”中的每一个文件名添加后缀“SUFFIX”
+make#$(addprefix PREFIX,NAMES…)	为“NAMES…”中的每一个文件名添加前缀“PREFIX”
+make#$(join LIST1,LIST2)	将字串“LIST1”和字串“LIST2”各单词进行对应连接
+make#$(wildcard PATTERN)	列出当前目录下所有符合模式“PATTERN”格式的文件名。
+make#$(foreach VAR,LIST,TEXT)	$(foreach dir,$(dirs),$(wildcard $(dir)/*))
+make#note1 	模式匹配 $(OBJS): %.o : %.c
+make#note2 	模式匹配 $(OBJS): $(OUT_DIR)%.o : %.c, 重$(OBJS) cut掉$(OUT_DIR), 依赖与cut掉的%.o, 在替换为%.c
+
