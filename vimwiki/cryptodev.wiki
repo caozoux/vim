@@ -1,0 +1,4 @@
+# openssl speed -evp aes-128-cbc
+	3s on 16 size blocks: 3506326 aes-128-cbc's in 3.00s
+	3s on 64 size blocks: 1060720 aes-128-cbc's in 3.00s
+

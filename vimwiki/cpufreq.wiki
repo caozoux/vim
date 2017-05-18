@@ -1,0 +1,23 @@
+* cpu策略
+performance ：CPU会固定工作在其支持的最高运行频率上；
+powersave ：CPU会固定工作在其支持的最低运行频率上。因此这两种 governors 都属于静态 governor ，即在使用它们时 CPU 的运行频率不会根据系统运行时负载的变化动态作出调整。这两种 governors 对应的是两种极端的应用场景，使用 performance governor 体现的是对系统高性能的最大追求，而使用 powersave governor 则是对系统低功耗的最大追求。
+Userspace：最早的 cpufreq 子系统通过 userspace governor 为用户提供了这种灵活性。系统将变频策略的决策权交给了用户态应用程序，并提供了相应的接口供用户态应用程序调节 CPU 运行频率使用。 （可以使用Dominik 等人开发了cpufrequtils 工具包 ）
+ondemand ：userspace是内核态的检测，效率低。而ondemand正是人们长期以来希望看到的一个完全在内核态下工作并且能够以更加细粒度的时间间隔对系统负载情况进行采样分析的 governor。
+conservative ： ondemand governor 的最初实现是在可选的频率范围内调低至下一个可用频率。这种降频策略的主导思想是尽量减小对系统性能的负面影响，从而不会使得系统性能在短时间内迅速降低以影响用户体验。但是在 ondemand governor 的这种最初实现版本在社区发布后，大量用户的使用结果表明这种担心实际上是多余的， ondemand governor在降频时对于目标频率的选择完全可以更加激进。因此最新的 ondemand governor 在降频时会在所有可选频率中一次性选择出可以保证 CPU 工作在 80% 以上负荷的频率，当然如果没有任何一个可选频率满足要求的话则会选择 CPU 支持的最低运行频率。大量用户的测试结果表明这种新的算法可以在不影响系统性能的前提下做到更高效的节能。在算法改进后， ondemand governor 的名字并没有改变，而 ondemand governor 最初的实现也保存了下来，并且由于其算法的保守性而得名 conservative 。
+Ondemand降频更加激进，conservative降频比较缓慢保守，事实使用ondemand的效果也是比较好的。
+
+* 接口
+cpuinfo_max_freq  cpuinfo_min_freq： 分别给出了 CPU 硬件所支持的最高运行频率及最低运行频率，
+cpuinfo_cur_freq 则会从 CPU 硬件寄存器中读取 CPU 当前所处的运行频率。
+Governor在选择合适的运行频率时只会在 scaling_max_freq 和 scaling_min_freq 所确定的频率范围内进行选择
+scaling_cur_freq 返回的是 cpufreq 模块缓存的 CPU 当前运行频率，而不会对 CPU 硬件寄存器进行检查。
+scaling_available_governors 会告诉用户当前有哪些 governors 可供用户使用
+scaling_driver 则会显示该 CPU 所使用的变频驱动程序
+Scaling_governor 则会显示当前的管理策略，往这个上echo其他类型会有相应的转变。
+scaling_setspeed：需将governor类型切换为userspace，才会出现，往这个文件echo数值，会切换主频
+以下是将governor切换为ondemand后生成的ondemand文件夹下出现的配置文件。（conservative就不说了，不准备使用）
+sampling_rate：当前使用的采样间隔 ，单位：微秒
+sampling_rate_min：允许使用的最短采样间隔
+sampling_rate_max：允许使用的最长采样间隔
+up_threshold ：表明了系统负载超过什么百分比时 ondemand governor 会自动提高 CPU 的运行频率
+ignore_nice_load：ignore_nice_load 文件可以设置为 0 或 1（0 是默认设置）。当这个参数设置为 1 时，任何具有 “nice”值的处理器不计入总处理器利用率。在设置为 0 时，所有处理器都计入利用率。

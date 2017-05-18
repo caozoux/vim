@@ -5,3 +5,4 @@
 	CONFIG_READABLE_ASM
 2) gdb vmlinux
 3) target remove $ttydev
+4) [[qemu-witch-gdb]]

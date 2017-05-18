@@ -1,0 +1,8 @@
+start
+MOV
+		move x0, 0x1001
+LDR
+		ldr w0, =0xe6e8800c
+strb
+		strb w1, [x0]
+end

@@ -1,0 +1,4 @@
+1 wrlinux-8
+	/buildarea/raid0/czou/wrlinux-x8/wrlinux-x/wrlinux/configure --enable-board=qemuarm64 --enable-rootfs=glibc-small -
+	make start-target TOPTS="-w"  ---> start qume board
+	./scripts/gdb

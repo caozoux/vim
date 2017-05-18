@@ -1,0 +1,135 @@
+cmp-eq	Equal Z==1
+cmp-ne	not Equal Z=0=
+cmp-hs	higher or same C==1
+cmp-lo	lower C==0
+cmp-pl	create or equalthan n==0
+cmp-vs	overflow set V=1
+cmp-vc	overflow clear V=0
+cmp-hi	higher c==1 && z==0
+cmp-ls	less !(c==0 && z==0)
+cmp-ge	Signed greater than or eque N==V
+cmp-lt	Signed less than N!=V
+cmp-gt	Signed greater than Z==0 && N==V
+cmp-le	Signed less than or equal !(Z==0 && N==V))
+BLR	BLR Xm Branch and Link Register: unconditionally jumps to address in Xm, writing the address of the next 	sequential instruction to register X30.
+BR	BR Xm Branch Register: jumps to address in Xm, with a hint to the CPU that this is not a subroutine return.
+RET	RET {Xm} Return: jumps to register Xm, with a hint to the CPU that this is a subroutine return. An assembler shall 	default to register X30 if Xm is omitted.
+LDR	LDR Wt, addr Load Register: loads a word from memory addressed by addr to Wt.
+LDR	LDR Xt, addr Load Register (extended): loads a doubleword from memory addressed by addr to Xt.
+LDRB	LDRB Wt, addr Load Byte: loads a byte from memory addressed by addr, then zero-extends it to Wt.
+LDRSB	LDRSB Wt, addr Load Signed Byte: loads a byte from memory addressed by addr, then sign-extends it into Wt.
+LDRSB	LDRSB Xt, addr Load Signed Byte (extended): loads a byte from memory addressed by addr, then sign-extends it into Xt.
+LDRH	LDRH Wt, addr Load Halfword: loads a halfword from memory addressed by addr, then zero-extends it into Wt.
+LDRSH	LDRSH Wt, addr Load Signed Halfword: loads a halfword from memory addressed by addr, then sign-extends it into Wt.
+LDRSH	LDRSH Xt, addr Load Signed Halfword (extended): loads a halfword from memory addressed by addr, then sign-extends it into Xt.
+LDRSW	LDRSW Xt, addr Load Signed Word (extended): loads a word from memory addressed by addr, then sign-extends it into Xt.
+STR	STR Wt, addr Store Register: stores word from Wt to memory addressed by addr.
+STR	STR Xt, addr Store Register (extended): stores doubleword from Xt to memory addressed by addr.
+STRB	STRB Wt, addr Store Byte: stores byte from Wt to memory addressed by addr.
+STRH	STRH Wt, addr Store Halfword: stores halfword from Wt to memory addressed by addr.
+LDUR	LDUR Wt, [base,#simm9] Load (Unscaled) Register: loads a word from memory addressed by base+simm9 to Wt.
+LDUR	LDUR Xt, [base,#simm9] Load (Unscaled) Register (extended): loads a doubleword from memory addressed by base+simm9 to Xt.
+LDURB	LDURB Wt, [base,#simm9] Load (Unscaled) Byte: loads a byte from memory addressed by base+simm9, then zero-extends it into Wt.
+LDURSB	LDURSB Wt, [base,#simm9] Load (Unscaled) Signed Byte: loads a byte from memory addressed by base+simm9, then sign-extends it into Wt.
+LDURSB	LDURSB Xt, [base,#simm9] Load (Unscaled) Signed Byte (extended): loads a byte from memory addressed by base+simm9, then sign-extends it into Xt.
+LDURH	LDURH Wt, [base,#simm9] Load  Load (Unscaled) Halfword: loads a halfword from memory addressed by base+simm9, then zero-extends it into Wt.
+LDURSH	LDURSH Wt, [base,#simm9] Load  Load (Unscaled) Signed Halfword: loads a halfword from memory addressed by base+simm9, then sign- extends it into Wt. 
+LDURSH	LDURSH Xt, [base,#simm9] Load  Load (Unscaled) Signed Halfword (extended): loads a halfword from memory addressed by base+simm9, then sign-extends it into Xt.
+LDURSW	LDURSW Xt, [base,#simm9] Load (Unscaled) Signed Word (extended): loads a word from memory addressed by base+simm9, then sign-extends it into Xt.
+STUR	STUR Wt, [base,#simm9] Store (Unscaled) Register: stores word from Wt to memory addressed by base+simm9.
+STUR	STUR Xt, [base,#simm9] Store (Unscaled) Register (extended): stores doubleword from Xt to memory addressed by base+simm9.
+STURB	STURB Wt, [base,#simm9] Store (Unscaled) Byte: stores byte from Wt to memory addressed by base+simm9.
+STURH	STURH Wt, [base,#simm9] Store (Unscaled) Halfword: stores halfword from Wt to memory addressed by base+simm9.
+LDR	LDR Wt, label | =value Load Literal Register (32-bit): loads a word from memory addressed by label to Wt.
+LDR	LDR Xt, label | =value Load Literal Register (64-bit): loads a doubleword from memory addressed by label to Xt.
+LDRSW	LDRSW Xt, label | =value Load Literal Signed Word (extended): loads a word from memory addressed by label, then sign-extends it into Xt.
+LDR	LDR Wt, label | =value Load Literal Register (32-bit): loads a word from memory addressed by label to Wt.
+LDR	LDR Xt, label | =value Load Literal Register (64-bit): loads a doubleword from memory addressed by label to Xt.
+LDRSW	LDRSW Xt, label | =value Load Literal
+LDP	LDP Wt1, Wt2, addr Load Pair Registers: loads two words from memory addressed by addr to Wt1 and Wt2.
+LDP	LDP Xt1, Xt2, addr Load Pair Registers (extended): loads two doublewords from memory addressed by addr to Xt1 and Xt2.
+LDPSW	LDPSW Xt1, Xt2, addr Load Pair Signed Words (extended) loads two words from memory addressed by addr, then sign-extends them into Xt1 and Xt2.
+STP	STP Wt1, Wt2, addr Store Pair Registers: stores two words from Wt1 and Wt2 to memory addressed by addr.
+STP	STP Xt1, Xt2, addr Store Pair Registers (extended): stores two doublewords from Xt1 and Xt2 to memory addressed by addr.
+LDNP	LDNP Wt1, Wt2, [base,#imm] Load Non-temporal Pair: loads two words from memory addressed by base+imm to Wt1 and Wt2, with a non-temporal hint.
+LDNP	LDNP Xt1, Xt2, [base,#imm] Load Non-temporal Pair (extended): loads two doublewords from memory addressed by base+imm to Xt1 and Xt2, with a non-temporal hint.
+STNP	STNP Wt1, Wt2, [base,#imm] Store Non-temporal Pair: stores two words from Wt1 and Wt2 to memory addressed by base+imm, with a non-temporal hint.
+STNP	STNP Xt1, Xt2, [base,#imm] Store Non-temporal Pair (extended): stores two doublewords from Xt1 and Xt2 to memory addressed by base+imm, with a non-temporal hint.
+LDTR	LDTR Wt, [base,#simm9] Load Unprivileged Register: loads word from memory addressed by base+simm9 to Wt, using EL0 privileges when at EL1.
+LDTR	LDTR Xt, [base,#simm9] Load Unprivileged Register (extended): loads doubleword from memory addressed by base+simm9 to Xt, using EL0 privileges when at EL1.
+LDTRB	LDTRB Wt, [base,#simm9] Load Unprivileged Byte: loads a byte from memory addressed by base+simm9, then zero-extends it into Wt, using EL0 privileges when at EL1.
+LDTRSB	LDTRSB Wt, [base,#simm9] Load Unprivileged Signed Byte: loads a byte from memory addressed by base+simm9, then sign-extends it into Wt, using EL0 privileges when at EL1.
+LDTRSB	LDTRSB Xt, [base,#simm9] Load Unprivileged Signed Byte (extended): loads a byte from memory addressed by base+simm9, then sign-extends it into Xt, using EL0 privileges when at EL1.
+LDTRH	LDTRH Wt, [base,#simm9] Load 	 Load Unprivileged Halfword: loads a halfword from memory addressed by base+simm9, then zero- extends it into Wt, using EL0 privileges when at EL1.
+LDTRSH	LDTRSH Wt, [base,#simm9] Load Unprivileged Signed Halfword: loads a halfword from memory addressed by base+simm9, then sign-extends it into Wt, using EL0 privileges when at EL1.
+LDTRSH	LDTRSH Xt, [base,#simm9] Load Unprivileged Signed Halfword (extended): loads a halfword from memory addressed by base+simm9, then sign-extends it into Xt, using EL0 privileges when at EL1.
+LDTRSW	LDTRSW Xt, [base,#simm9] Load Unprivileged Signed Word (extended): loads a word from memory addressed by base+simm9, then sign-extends it into Xt, using EL0 privileges when at EL1.
+STTR	STTR Wt, [base,#simm9] Store Unprivileged Register: stores a word from Wt to memory addressed by base+simm9, using EL0 privileges when at EL1.
+STTR	STTR Xt, [base,#simm9] Store Unprivileged Register (extended): stores a doubleword from Xt to memory addressed by base+simm9, using EL0 privileges when at EL1.
+STTRB	STTRB Wt, [base,#simm9] Store Unprivileged Byte: stores a byte from Wt to memory addressed by base+simm9, using EL0 privileges when at EL1.
+STTRH	STTRH Wt, [base,#simm9] Store Unprivileged Halfword: stores a halfword from Wt to memory addressed by base+simm9, using EL0 privileges when at EL1.
+LDXR	LDXR Wt, [base{,#0}] Load Exclusive Register: loads a word from memory addressed by base to Wt. Records the physical address as an exclusive access.
+LDXR	LDXR Xt, [base{,#0}] Load Exclusive Register (extended): loads a doubleword from memory addressed by base to Xt. Records the physical address as an exclusive access.
+LDXRB	LDXRB Wt, [base{,#0}] Load Exclusive Byte: loads a byte from memory addressed by base, then zero-extends it into Wt. Records the physical address as an exclusive access.
+LDXRH	LDXRH Wt, [base{,#0}] Load Exclusive Halfword: loads a halfword from memory addressed by base, then zero-extends it into Wt. Records the physical address as an exclusive access.
+LDXP	LDXP Wt, Wt2, [base{,#0}] Load Exclusive Pair Registers: loads two words from memory addressed by base, and to Wt and Wt2. Records the physical address as an exclusive access.
+LDXP	LDXP Xt, Xt2, [base{,#0}] Load Exclusive Pair Registers (extended): loads two doublewords from memory addressed by base to Xt and Xt2. Records the physical address as an exclusive access.
+STXR	STXR Ws, Wt, [base{,#0}] Store Exclusive Register: stores word from Wt to memory addressed by base, and sets Ws to the returned exclusive access status.
+STXR	STXR Ws, Xt, [base{,#0}] Store Exclusive Register (extended): stores doubleword from Xt to memory addressed by base, and sets Ws to the returned exclusive access status.
+STXRB	STXRB Ws, Wt, [base{,#0}] Store Exclusive Byte: stores byte from Wt to memory addressed by base, and sets Ws to the returned exclusive access status.
+STXRH	STXRH Ws, Wt, [base{,#0}] Store Exclusive Halfword: stores halfword from Xt to memory addressed by base, and sets Ws to the returned exclusive access status.
+STXP	STXP Ws, Wt, Wt2, [base{,#0}] Store Exclusive Pair: stores two words from Wt and Wt2 to memory addressed by base, and sets Ws to the returned exclusive access status.
+STXP	STXP Ws, Xt, Xt2, [base{,#0}] Store Exclusive Pair (extended): stores two doublewords from Xt and Xt2 to memory addressed by base, and sets Ws to the returned exclusive access status.
+LDAR	LDAR Wt, [base{,#0}] Load-Acquire Register: loads a word from memory addressed by base to Wt.
+LDAR	LDAR Xt, [base{,#0}] Load-Acquire Register (extended): loads a doubleword from memory addressed by base to Xt.
+LDARB	LDARB Wt, [base{,#0}] Load-Acquire Byte: loads a byte from memory addressed by base, then zero-extends it into Wt.
+LDARH	LDARH Wt, [base{,#0}] Load-Acquire Halfword: loads a halfword from memory addressed by base, then zero-extends it into Wt.
+STLR	STLR Wt, [base{,#0}] Store-Release Register: stores a word from Wt to memory addressed by base.
+STLR	STLR Xt, [base{,#0}] Store-Release Register (extended): stores a doubleword from Xt to memory addressed by base.
+STLRB	STLRB Wt, [base{,#0}] Store-Release Byte: stores a byte from Wt to memory addressed by base.
+STLRH	STLRH Wt, [base{,#0}] Store-Release Halfword: stores a halfword from Wt to memory addressed by base.
+LDAXR	LDAXR Wt, [base{,#0}] Load-Acquire Exclusive Register: loads word from memory addressed by base to Wt. Records the physical address as an exclusive access.
+LDAXR	LDAXR Xt, [base{,#0}] Load-Acquire Exclusive Register (extended): loads doubleword from memory addressed by base to Xt. Records the physical address as an exclusive access.
+LDAXRB	LDAXRB Wt, [base{,#0}] Load-Acquire Exclusive Byte: loads byte from memory addressed by base, then zero-extends it into Wt. Records the physical address as an exclusive access.
+LDAXRH	LDAXRH Wt, [base{,#0}] Load-Acquire Exclusive Halfword: loads halfword from memory addressed by base, then zero-extends it into Wt. Records the physical address as an exclusive access.
+LDAXP	LDAXP Wt, Wt2, [base{,#0}] Load-Acquire Exclusive Pair Registers: loads two words from memory addressed by base to Wt and Wt2. Records the physical address as an exclusive access.
+LDAXP	LDAXP Xt, Xt2, [base{,#0}] Load-Acquire Exclusive Pair Registers (extended): loads two doublewords from memory addressed by base to Xt and Xt2. Records the physical address as an exclusive access.
+STLXR	STLXR Ws, Wt, [base{,#0}] Store-Release Exclusive Register: stores word from Wt to memory addressed by base, and sets Ws to the returned exclusive access status.
+STLXR	STLXR Ws, Xt, [base{,#0}] Store-Release Exclusive Register (extended): stores doubleword from Xt to memory addressed by base, and sets Ws to the returned exclusive access status.
+STLXRB	STLXRB Ws, Wt, [base{,#0}] Store-Release Exclusive Byte: stores byte from Wt to memory addressed by base, and sets Ws to the returned exclusive access status.
+STLXRH	STLXRH Ws, Xt|Wt, [base{,#0}] Store-Release Exclusive Halfword: stores the halfword from Wt to memory addressed by base, and sets Ws to the returned exclusive access status.
+STLXP	STLXP Ws, Wt, Wt2, [base{,#0}] Store-Release Exclusive Pair: stores two words from Wt and Wt2 to memory addressed by base, and sets Ws to the returned exclusive access status.
+STLXP	STLXP Ws, Xt, Xt2, [base{,#0}] Store-Release Exclusive Pair (extended): stores two doubleword
+ADD	ADD Wd|WSP, Wn|WSP, #aimm Add (immediate): Wd|WSP = Wn|WSP + aimm.
+ADD	ADD Xd|SP, Xn|SP, #aimm Add (extended immediate): Xd|SP = Xn|SP + aimm.
+ADDS	ADDS Wd, Wn|WSP, #aimm Add and set flags (immediate): Wd = Wn|WSP + aimm, setting the condition flags.
+ADDS	ADDS Xd, Xn|SP, #aimm Add and set flags (extended immediate): Xd = Xn|SP + aimm, setting the condition flags.
+SUB	SUB Wd|WSP, Wn|WSP, #aimm Subtract (immediate): Wd|WSP = Wn|WSP - aimm.
+SUB	SUB Xd|SP, Xn|SP, #aimm Subtract (extended immediate): Xd|SP = Xn|SP - aimm.
+SUBS	SUBS Wd, Wn|WSP, #aimm Subtract and set flags (immediate): Wd = Wn|WSP - aimm, setting the condition flags.
+SUBS	SUBS Xd, Xn|SP, #aimm Subtract and set flags (extended immediate): Xd = Xn|SP - aimm, setting the condition flags.
+CMP	CMP Wn|WSP, #aimm Compare (immediate): alias for SUBS WZR,Wn|WSP,#aimm.
+CMP	CMP Xn|SP, #aimm Compare (extended immediate): alias for SUBS XZR,Xn|SP,#aimm.
+CMN	CMN Wn|WSP, #aimm Compare negative (immediate): alias for ADDS WZR,Wn|WSP,#aimm.
+CMN	CMN Xn|SP, #aimm Compare negative (extended immediate): alias for ADDS XZR,Xn|SP,#aimm.
+MOV	MOV Wd|WSP, Wn|WSP Move (register): alias for ADD Wd|WSP,Wn|WSP,#0, but only when one or other of the registers is WSP. In other cases the ORR Wd,WZR,Wn instruction is used.
+MOV	MOV Xd|SP, Xn|SP Move (extended register): alias for ADD Xd|SP,Xn|SP,#0, but only when one or other of the registers is SP. In other cases the ORR Xd,XZR,Xn instruction is used.
+AND	AND Wd|WSP, Wn, #bimm32 Bitwise AND (immediate): Wd|WSP = Wn AND bimm32.
+AND	AND Xd|SP, Xn, #bimm64 Bitwise AND (extended immediate): Xd|SP = Xn AND bimm64.
+ANDS	ANDS Wd, Wn, #bimm32 Bitwise AND and Set Flags (immediate): Wd = Wn AND bimm32, setting N & Z condition flags based on the result and clearing the C & V flags.
+ANDS	ANDS Xd, Xn, #bimm64 Bitwise AND and Set Flags (extended immediate): Xd = Xn AND bimm64, setting N & Z condition flags based on the result and clearing the C & V flags.
+EOR	EOR Wd|WSP, Wn, #bimm32 Bitwise exclusive OR (immediate): Wd|WSP = Wn EOR bimm32.
+EOR	EOR Xd|SP, Xn, #bimm64 Bitwise exclusive OR (extended immediate): Xd|SP = Xn EOR bimm64.
+ORR	ORR Wd|WSP, Wn, #bimm32 Bitwise inclusive OR (immediate): Wd|WSP = Wn OR bimm32.
+ORR	ORR Xd|SP, Xn, #bimm64 Bitwise inclusive OR (extended immediate): Xd|SP = Xn OR bimm64.
+MOVI	MOVI Wd, #bimm32 Move bitmask (immediate): alias for ORR Wd,WZR,#bimm32, but may disassemble as MOV, see below.
+MOVI	MOVI Xd, #bimm64 Move bitmask (extended immediate): alias for ORR Xd,XZR,#bimm64, but may disassemble as MOV, see below. TST 	 	 TST 	 TST Wn, #bimm32 Bitwise test (immediate): alias for ANDS WZR,Wn,#bimm32. TST Xn, #bimm64Bitwise 	 Bitwise test (extended immediate): alias for ANDS XZR,Xn,#bimm64 MOVZ Wt, #uimm16{, LSL #pos} Move 	 Move with Zero (immediate): Wt = LSL(uimm16, pos). Usually disassembled as MOV, see below.
+MOVZ	MOVZ Xt, #uimm16{, LSL #pos} Move with Zero (extended immediate): Xt = LSL(uimm16, pos).Usually 	 Usually disassembled as MOV, see below. 
+MOVN	MOVN Wt, #uimm16{, LSL #pos} Move 	 Move with NOT (immediate): Wt = NOT(LSL(uimm16, pos)). Usually disassembled as MOV, see below.
+MOVN	MOVN Xt, #uimm16{, LSL #pos} Move with NOT (extended immediate): Xt = NOT(LSL(uimm16, pos)). Usually disassembled as MOV, see below.
+MOVK	MOVK Wt, #uimm16{, LSL #pos} Move with Keep (immediate): Wt<pos+15:pos> = uimm16.
+MOVK	MOVK Xt, #uimm16{, LSL #pos} Move with Keep (extended immediate): Xt<pos+15:pos> = uimm16.
+MOV	MOV Wd, #simm32 A synthetic assembler instruction which generates a single MOVZ, MOVN or MOVI instruction that loads a 32-bit immediate value into register Wd. An assembler error shall result if the immediate cannot be created by a single one of these instructions. If there is a choice, then to ensure reversability an assembler must prefer a MOVZ to MOVN, and MOVZ or MOVN to MOVI. A disassembler may output MOVI, MOVZ and MOVN as a MOV mnemonic, except when MOVI has an immediate that could be generated by a MOVZ or MOVN instruction, or where a MOVN has an immediate that could be encoded by MOVZ, or where MOVZ/MOVN #0 have a shift amount other than LSL #0, in which case the machine-instruction mnemonic must be used.
+MOV	MOV Xd, #simm64 As MOV but for loading a 64-bit immediate into register Xd.
+LSL  Xt, Xt, #uimmm16	左移uimm16位
+LSR  Xt, Xt, #uimmm16	右移uimm16位
