@@ -1,4 +1,6 @@
-let s:objfunclist=[]
+"target txt
+let s:objfunclist=[] 
+"target extern context
 let s:objdictionary={}
 "set iskeyword+=#
 "objfunc的回调函数，类似omnifunc
@@ -34,11 +36,20 @@ function! Objomnicomplete(findstart, base)
     endif
 endfunction
 
+function! ObjCompleteSetMode(mode)
+	let s:objfunclist=[]
+	let s:objdictionary={}
+	if a:mode == "kernel"
+		call ObjDictionUpdate("~/.vim/after/ftplugin/objcomplete/kernel/api_dictionary.txt","~/.vim/after/ftplugin/objcomplete/kernel/api_dictionary_extern.txt")
+	endif
+endfunction
+
 func! ObjDictionUpdate(f_diction, exf_diction)
 	let home=system("echo $HOME")
 	let home=strpart(home,0, len(home)-1)
 	let b:adid_ftplugin = 1
 python << EOF
+
 
 import os
 import vim
