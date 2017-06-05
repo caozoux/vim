@@ -113,6 +113,15 @@ function! MeFastFormatLineV2(printStr, dataStr)
 	execute "d"
 endfunction
 
+function! PrintkPast()
+	let save_cursor = getpos('.')
+	let linetxt = getline(line('.'))
+	let showcontext=[]
+	call add(showcontext, linetxt)
+	call add(showcontext, "printk(\"zz %s %d \\n\", __func__, __LINE__);")
+	call setline(line('.'), join(showcontext, ''))
+endfunction
+
 "得到路径中的文件名
 function! GetFilenameWithoutPath(filename)
 	let filebasename=""
