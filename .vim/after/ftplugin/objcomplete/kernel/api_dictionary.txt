@@ -1,0 +1,11 @@
+mem#idmap_pg_dir	 kernel启动是的mmu页表基地址
+mem#PGDIR_SHIFT 	页表映射的内存大小，一般为arm64:21
+kernel#ioremap 	void __iomem * ioremap(address, size)
+kernel#ioremap_nocache 	void __iomem *ioremap_nocache(address, size)
+mem#mm_struct 	没一个task都有一个struct mm_struct来管理内存，内核为init_mm作为全局的mm_struct描述符
+mem#pte_index 	(((addr) >> PAGE_SHIFT) & (PTRS_PER_PTE - 1))
+mem#pgd_index(addr) 	pgd_index(((addr) >> PGDIR_SHIFT) & (PTRS_PER_PGD - 1))
+mem#pgd = pgd_offset_k(addr) 	pgd_offset(&init_mm, addr)
+init#early_initcall 	early_initcall(rcar_sysc_pd_init);
+notifer#blocking_notifier_call_chain 	blocking_notifier_call_chain(&dev->bus->p->bus_notifier,BUS_NOTIFY_ADD_DEVICE, dev)
+

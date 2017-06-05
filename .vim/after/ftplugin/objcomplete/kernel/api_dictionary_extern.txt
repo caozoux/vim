@@ -1,0 +1,9 @@
+start
+mm_struc
+		struct vm_area_struct *mmap;        /* list of VMAs */
+		struct rb_root mm_rb;
+		unsigned long mmap_base;        /* base of mmap area */
+		pgd_t * pgd; //存放页表的首地址, 通过pgd+vir_addr>>PGDIR_SHIFT&(PTRS_PED_GD-1),得到pgd 的入口点
+		unsigned long start_code, end_code, start_data, end_data; //进程的代码空间
+		unsigned long arg_start, arg_end, env_start, env_end;
+end
