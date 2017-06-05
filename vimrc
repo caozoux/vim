@@ -272,6 +272,8 @@ map <C-x>k <ESC>:call PyMeTest()<CR>
 "runtime /home/wrsadmin/github/vim/wind.vim
 map <C-x>v <ESC>:call Patch_vsplit_open()<CR>
 map <C-x>c <ESC>"+p
+imap <c-x><c-n> a<ESC>x:call PrintkPast()<CR>
+map  <c-x><c-n> oa<ESC>x:call PrintkPast()<CR>
 
 "let g:EclimTodoSearchExtensions = ['java', 'py', 'php', 'jsp', 'xml', 'html']
 "set autcompletion for Eclim
