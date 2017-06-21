@@ -8,4 +8,28 @@ mem#pgd_index(addr) 	pgd_index(((addr) >> PGDIR_SHIFT) & (PTRS_PER_PGD - 1))
 mem#pgd = pgd_offset_k(addr) 	pgd_offset(&init_mm, addr)
 init#early_initcall 	early_initcall(rcar_sysc_pd_init);
 notifer#blocking_notifier_call_chain 	blocking_notifier_call_chain(&dev->bus->p->bus_notifier,BUS_NOTIFY_ADD_DEVICE, dev)
-
+smp#this_cpu_ptr(&cpu_data) 	
+smp#smp_processor_id()
+smp#DECLARE_PER_CPU(type, name) 	声明每CPU变量name，类型为type 通过setup_per_cpu_areas拷贝一份
+smp#DEFINE_PER_CPU(type, name) 	定义每CPU变量name，类型为type
+smp#alloc_percpu(type) 	动态为type类型的每CPU变量分配空间，并返回它的地址
+smp#free_percpu(pointer) 	释放为动态分配的每CPU变量的空间，pointer是起始地址
+smp#per_cpu(var, cpu) 	获取编号cpu的处理器上面的变量var的副本
+smp#get_cpu_var(var) 	获取本处理器上面的变量var的副本，该函数关闭进程抢占，主要由__get_cpu_var来完成具体的访问
+smp#get_cpu_ptr(var) 	 获取本处理器上面的变量var的副本的指针，该函数关闭进程抢占，主要由__get_cpu_var来完成具体的访问
+smp#put_cpu_var(var) 	 & put_cpu_ptr(var)表示每CPU变量的访问结束，恢复进程抢占
+smp#__get_cpu_var(var) 	 获取本处理器上面的变量var的副本，该函数不关闭进程抢占
+atomic_read(v)	Return *v
+atomic_set(v,i)	Set *v to i
+atomic_add(i,v)	Add i to *v
+atomic_sub(i,v)	Subtract i from *v
+atomic_sub_and_test(i, v)	Subtract i from *v and return 1 if the result is zero; 0 otherwise
+atomic_inc(v)	Add 1 to *v
+atomic_dec(v)	Subtract 1 from *v
+atomic_dec_and_test(v)	Subtract 1 from *v and return 1 if the result is zero; 0 otherwise
+atomic_inc_and_test(v)	Add 1 to *v and return 1 if the result is zero; 0 otherwise
+atomic_add_negative(i, v)	Add i to *v and return 1 if the result is negative; 0 otherwise
+atomic_inc_return(v)	Add 1 to *v and return the new value of *v
+atomic_dec_return(v)	Subtract 1 from *v and return the new value of *v
+atomic_add_return(i, v)	Add i to *v and return the new value of *v
+atomic_sub_return(i, v)	Subtract i from *v and return the new value of *v
