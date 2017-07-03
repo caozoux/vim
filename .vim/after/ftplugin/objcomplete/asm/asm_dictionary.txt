@@ -133,3 +133,5 @@ MOV	MOV Wd, #simm32 A synthetic assembler instruction which generates a single M
 MOV	MOV Xd, #simm64 As MOV but for loading a 64-bit immediate into register Xd.
 LSL  Xt, Xt, #uimmm16	左移uimm16位
 LSR  Xt, Xt, #uimmm16	右移uimm16位
+mrs	r0, cpsr 	程序状态寄存器(CPSR戒SPSR)读取
+msr	cpsr,r0 	程序状态寄存器(CPSR戒SPSR)写入

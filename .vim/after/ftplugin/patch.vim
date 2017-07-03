@@ -145,9 +145,10 @@ python << EOF
 import os
 import vim
 import re
+gitdir=os.popen("pwd").read()
 patchbuffer = vim.current.buffer
-gitapplybuf=os.popen("git -C /fslink/kernel-4.1.x apply "+patchbuffer.name+" 2>&1"+" | grep \"error: patch failed:\" ").readlines();
-gitapplynofile=os.popen("git -C /fslink/kernel-4.1.x apply "+patchbuffer.name+" 2>&1"+" | grep \"No such file\" ").readlines();
+gitapplybuf=os.popen("git -C "+gitdir[:-1]+" apply "+patchbuffer.name+" 2>&1"+" | grep \"error: patch failed:\" ").readlines();
+gitapplynofile=os.popen("git -C "+gitdir[:-1]+" apply "+patchbuffer.name+" 2>&1"+" | grep \"No such file\" ").readlines();
 patchcmdbuf=""
 #insert the git apply error to patchcmdbuf
 for b in vim.buffers:
@@ -218,7 +219,7 @@ if patchcmdbuf_winid == -1
 	execute ":close"
 endif
 
-map <c-x>d <ESC>:source /home/wrsadmin/.vim/after/ftplugin/patch.vim<CR>:call DelPatchItem()<CR>
-map <c-x>t <ESC>:source /home/wrsadmin/.vim/after/ftplugin/patch.vim<CR>:call GetPatchConflict()<CR>
-map <c-x>f <ESC>:source /home/wrsadmin/.vim/after/ftplugin/patch.vim<CR>:call OpenMergePatch("cach")<CR>
+map <c-x>d <ESC>:call DelPatchItem()<CR>
+map <c-x>t <ESC>:call GetPatchConflict()<CR>
+map <c-x>f <ESC>:call OpenMergePatch("cach")<CR>
 vnoremap c :s/^[+-\s]//<CR>:w<CR>

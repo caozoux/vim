@@ -52,6 +52,9 @@ for obj in comManger.headObjList:
 EOF
 endfunc
 
-set objfunc=Objhtmlomnicomplete 
+if exists("&objfunc")
+	set objfunc=Objhtmlomnicomplete 
+endif
+
 ""set omnifunc=Vimomnicomplete
 call Objhtmlftpinit()

@@ -166,7 +166,7 @@ getqflist()	([{what}])将quickfix窗口中各项作为列表返回
 setqflist()	({list}[, {action}[, {what}]])修改一个quickfix列表
 getloclist()	({nr}[, {what}])将location窗口中的各项作为列表返回 a
 setloclist()	({nr}, {list}[, {action}[, {what}]])修改一个 location 列表
-omplete()	设置找到的匹配项
+complete()	设置找到的匹配项
 complete_add()	({expr})添加一个匹配项
 complete_check()	()检查当前补全是否应该被放弃
 pumvisible()	()检查弹出菜单是否已显示
