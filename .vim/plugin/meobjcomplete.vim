@@ -2,6 +2,12 @@
 let s:objfunclist=[] 
 "target extern context
 let s:objdictionary={}
+let s:objfunc_dictonarydirfile="~/.vim/after/ftplugin/objcomplete/"
+"保存扩展字典文件名
+let s:objfunc_dictonaryextfile=""
+let s:objfunc_dictonaryfile=""
+"保存扩展字典文件名
+let s:objfunc_dictonaryextfile=""
 "set iskeyword+=#
 "objfunc的回调函数，类似omnifunc
 function! Objomnicomplete(findstart, base)
@@ -41,6 +47,10 @@ function! ObjCompleteSetMode(mode)
 	let s:objdictionary={}
 	if a:mode == "kernel"
 		call ObjDictionUpdate("~/.vim/after/ftplugin/objcomplete/kernel/api_dictionary.txt","~/.vim/after/ftplugin/objcomplete/kernel/api_dictionary_extern.txt")
+	else if a:mode == "qt"
+		let s:objfunc_dictonaryfile=s:objfunc_dictonarydirfile+"qt/qt_dictionary.txt" 
+		let s:objfunc_dictonaryextfile=s:objfunc_dictonarydirfile+"qt/qt_dictionary_extern.txt" 
+		call ObjDictionUpdate(s:objfunc_dictonaryfile, s:objfunc_dictonaryextfile)
 	endif
 endfunction
 
@@ -72,4 +82,23 @@ if exists("&objfunc")
 	set objfunc=Objomnicomplete
 endif
 
-call ObjDictionUpdate("~/.vim/after/ftplugin/obj_dictionary.txt", "~/.vim/after/ftplugin/obj_dictionary_extern.txt")
+function! SetObjCompleteMode(mode)
+	if a:mde == "qt":
+	endif
+endfunction
+
+function! ObjCompleteModeDetect()
+	if filereadable("./.objmode")
+		let buflist = readfile("./.objmode")
+		let buf = join(buflist)
+		for line in buflist
+			if match(line, "objmode=.*") >= 0
+				let mode=strpart(line, 8, strlen(line)-8) 
+				call ObjCompleteSetMode(mode)
+				break
+			endif
+		endfor
+	endif
+endfunction
+
+"call ObjDictionUpdate("~/.vim/after/ftplugin/obj_dictionary.txt", "~/.vim/after/ftplugin/obj_dictionary_extern.txt")
