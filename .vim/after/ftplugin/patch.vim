@@ -1,7 +1,7 @@
-if exists("b:did_ftplugin")
-  finish
-endif
-let b:did_ftplugin = 1  " Don't load another plugin for this buffer
+"if exists("b:did_ftplugin")
+"  finish
+"endif
+"let b:did_ftplugin = 1  " Don't load another plugin for this buffer
 
 function! ClearBufAll(buffername)
 	let oldwinid = win_getid()
@@ -213,6 +213,146 @@ EOF
 	normal! zz
 endfunction
 
+function! JumToPatchItemEnd()
+	let cur_option = line('.')
+	let line = getline(".")
+	let var1 = search("^@@.*", 'W')
+	call cursor(cur_option, 0)
+
+	"如果是做后一个item, 末尾要么是diff 或者 --
+	let var2 = search("^diff", 'W')
+	if var2 < var1
+		"是patch 一个file的最后一行
+		normal! k 
+		return
+	endif
+	"cursor(cur_option, 0)
+
+	"call search("^-- $", 'W')
+	"let var3 = line('.')
+		
+	normal! k 
+endfunction
+
+
+function! DoMerge(targfile)
+	let basename = GetFilenameWithoutPath(a:targfile)
+	let patchwind_id = win_getid()
+	let patchitem_end=[]
+	let patchitem_buf=[]
+	let search_end=""
+
+	call JumToPatchItemHead()
+	let s_var=line('.')
+	let s_var = s_var+3
+
+	call JumToPatchItemEnd()
+	let e_var=line('.')
+
+	for i in  range(e_var-s_var)
+		let line = getline(s_var+i)
+		call add(patchitem_buf, line)
+	endfor
+
+	for i in range(3)
+		let line = getline(e_var-2+i)
+      	let line= substitute(line, '^ ', '', 'g')
+		let line= substitute(line, "\t", "\\t", 'g')
+		let line= substitute(line, "*", "\\\\*", 'g')
+		call add(patchitem_end, line)
+		call add(patchitem_end, "\\_.")
+	endfor
+
+	let search_end = join(patchitem_end, '')
+	"let search_end= substitute(search_end, "\t", "\\\\t", 'g')
+	call win_gotoid(bufwinid(basename))
+	let targfile_id = win_getid()
+	if search(search_end) <= 0
+		echo search_end
+		return
+	endif
+
+	let handle_lines=[]
+	let t_number_end = line('.')
+	let t_number_end = t_number_end - 1
+	let index=0
+	let patchitem_size  = len(patchitem_buf)
+	"call append(t_number_end, patchitem_buf)
+	for i in  range(1, patchitem_size)
+		let index= patchitem_size-i
+		let line = patchitem_buf[index]
+		if line[0] == "+"
+			call append(t_number_end, line)
+			call add(handle_lines, patchitem_buf[index])
+			"let t_number_end -= 1
+		elseif line[0] == "-"
+			let t = 0
+		elseif line[0] == " "
+			let t = 0
+		endif
+	endfor
+
+	call win_gotoid(patchwind_id)
+	call cursor(e_var-3, 0)
+
+	let cur_option = line('.')
+	let patchitem_size  = len(handle_lines)
+	for i in range(patchitem_size)
+		normal dd
+		normal k
+	endfor
+
+endfunction
+
+function! MergePatchitem()
+	let patchitem_start=[]
+	let patchitem_end=[]
+	let patchwind_id = win_getid()
+	call JumToPatchItemHead()
+	let var=line('.')
+	let curretn_position=var
+	let line = getline('.')
+	let patchitem_head = substitute(line, "^@@.*@@ ", "", 0)
+
+	let var = var + 2
+	for i in range(3)
+		call add(patchitem_start, getline(var+i))
+	endfor
+
+	"跳转到patchitem目标文件位置
+	call GetPatchItemFile()
+	let line = getline('.')
+	"得到了patchitem 目标文件"
+	let patchmodify_file = substitute(line, "--- a/", "", 0)
+
+	let basename = GetFilenameWithoutPath(patchmodify_file)
+	"确认当前文件是打开的
+	if bufwinid(basename) == -1
+		execute ":vsplit " patchmodify_file
+	else
+		"没有vspllit,这里跳转到目标文件
+		call win_gotoid(bufwinid(basename))
+	endif
+	let srcfilewind_id = win_getid()
+	"跳转到patchitem在目标文件的位置
+	call JumToSerach(patchitem_head)
+	normal! zz
+
+	"跳回patch文件出错的patchitem
+	call win_gotoid(patchwind_id)
+	call cursor(curretn_position, 0)
+	normal! zz
+
+	"得到patch item 末尾3行
+	call JumToPatchItemEnd()
+	let var=line('.')
+	for i in range(3)
+		call add(patchitem_end, getline(var-3+i))
+	endfor
+	call cursor(curretn_position, 0)
+	call DoMerge(basename)
+endfunction
+
 let patchcmdbuf_winid = bufwinid("patchcmdbuf")
 if patchcmdbuf_winid == -1
 	execute ":7sp patchcmdbuf"
@@ -222,4 +362,5 @@ endif
 map <c-x>d <ESC>:call DelPatchItem()<CR>
 map <c-x>t <ESC>:call GetPatchConflict()<CR>
 map <c-x>f <ESC>:call OpenMergePatch("cach")<CR>
+map <c-x>c <ESC>:source ~/.vim/after/ftplugin/patch.vim<CR> <ESC>:call MergePatchitem()<CR>
 vnoremap c :s/^[+-\s]//<CR>:w<CR>
