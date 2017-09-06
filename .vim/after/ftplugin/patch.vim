@@ -69,6 +69,12 @@ function! DelPatchItem()
 		if postion == 0
 			call cursor(startnumber-4, 0)
 			execute "normal 4dd"
+		else
+			let postion=match(line, "^-- ")
+			if postion == 0
+				call cursor(startnumber-4, 0)
+				execute "normal 4dd"
+			endif
 		endif
 	endif
 
@@ -215,23 +221,37 @@ endfunction
 
 function! JumToPatchItemEnd()
 	let cur_option = line('.')
-	let line = getline(".")
 	let var1 = search("^@@.*", 'W')
-	call cursor(cur_option, 0)
 
-	"如果是做后一个item, 末尾要么是diff 或者 --
-	let var2 = search("^diff", 'W')
-	if var2 < var1
-		"是patch 一个file的最后一行
-		normal! k 
+	"是patch 做后一个item
+	if var1 == 0
+		call search("^-- $", 'W')
+		call cursor(line('.')-1, 0)
+		return	
+	endif
+
+	call cursor(cur_option, 0)
+	let var2 = search("^diff ", 'W')
+	if var2 == 0
+		call cursor(var1-1, 0)
 		return
 	endif
-	"cursor(cur_option, 0)
 
-	"call search("^-- $", 'W')
-	"let var3 = line('.')
-		
-	normal! k 
+	if var1 > var2
+		call cursor(var2-1, 0)
+		return
+	endif
+	call cursor(var1-1, 0)
+
+	return
+	"是patch file中做后一个item
+	let line = getline(var1-1)
+	if match(line, "^+++ b") == 0
+		call cursor(var1-6, 0)
+		return
+	endif
+	call cursor(var1-1, 0)
+
 endfunction
 
 
@@ -239,8 +259,12 @@ function! DoMerge(targfile)
 	let basename = GetFilenameWithoutPath(a:targfile)
 	let patchwind_id = win_getid()
 	let patchitem_end=[]
+	let patchitem_srt=[]
 	let patchitem_buf=[]
 	let search_end=""
+	let search_srt=""
+	let t_number_end=0
+	let t_number_srt=0
 
 	call JumToPatchItemHead()
 	let s_var=line('.')
@@ -249,11 +273,24 @@ function! DoMerge(targfile)
 	call JumToPatchItemEnd()
 	let e_var=line('.')
 
-	for i in  range(e_var-s_var)
-		let line = getline(s_var+i)
+	for i in  range(e_var-s_var-3)
+		let line = getline(s_var+i+1)
 		call add(patchitem_buf, line)
 	endfor
 
+
+	"得到item前3行
+	for i in range(3)
+		let line = getline(s_var-2+i)
+      	let line= substitute(line, '^ ', '', 'g')
+		let line= substitute(line, "\t", "\\t", 'g')
+		let line= substitute(line, "*", "\\\\*", 'g')
+		call add(patchitem_srt, line)
+		call add(patchitem_srt, "\\_.")
+	endfor
+	let search_srt = join(patchitem_srt, '')
+
+	"得到item后3行
 	for i in range(3)
 		let line = getline(e_var-2+i)
       	let line= substitute(line, '^ ', '', 'g')
@@ -262,45 +299,108 @@ function! DoMerge(targfile)
 		call add(patchitem_end, line)
 		call add(patchitem_end, "\\_.")
 	endfor
-
 	let search_end = join(patchitem_end, '')
 	"let search_end= substitute(search_end, "\t", "\\\\t", 'g')
+
+	"跳转到patch item 目标文件， 匹配item首3行或者尾3行
 	call win_gotoid(bufwinid(basename))
 	let targfile_id = win_getid()
-	if search(search_end) <= 0
-		echo search_end
-		return
+
+	if search(search_srt) <= 0
+		"echo search_srt
+		if search(search_end) <= 0
+			echo search_end
+			return
+		else
+			let t_number_end = line('.')
+			let t_number_end = t_number_end - 1
+		endif
+	else
+		call win_gotoid(patchwind_id)
+		call JumToPatchItemHead()
+		call win_gotoid(targfile_id)
+		let t_number_srt = line('.')
+		let t_number_srt = t_number_srt + 2
+		call cursor(t_number_srt, 0)
 	endif
 
 	let handle_lines=[]
-	let t_number_end = line('.')
-	let t_number_end = t_number_end - 1
 	let index=0
 	let patchitem_size  = len(patchitem_buf)
-	"call append(t_number_end, patchitem_buf)
-	for i in  range(1, patchitem_size)
-		let index= patchitem_size-i
-		let line = patchitem_buf[index]
-		if line[0] == "+"
-			call append(t_number_end, line)
-			call add(handle_lines, patchitem_buf[index])
-			"let t_number_end -= 1
-		elseif line[0] == "-"
-			let t = 0
-		elseif line[0] == " "
-			let t = 0
-		endif
-	endfor
 
-	call win_gotoid(patchwind_id)
-	call cursor(e_var-3, 0)
+	"从尾部往上merge
+	if t_number_end != 0
+		"call append(t_number_end, patchitem_buf)
+		for i in  range(1, patchitem_size)
+			let index= patchitem_size-i
+			let line = patchitem_buf[index]
+			if line[0] == "+"
+				call append(t_number_end, line)
+				call add(handle_lines, patchitem_buf[index])
+				"let t_number_end -= 1
+			elseif line[0] == "-"
+				let t = 0
+			elseif line[0] == " "
+				let t = 0
+			endif
+		endfor
+		call win_gotoid(patchwind_id)
+		call cursor(e_var-3, 0)
 
-	let cur_option = line('.')
-	let patchitem_size  = len(handle_lines)
-	for i in range(patchitem_size)
-		normal dd
-		normal k
-	endfor
+		let cur_option = line('.')
+		let patchitem_size  = len(handle_lines)
+		for i in range(patchitem_size)
+			normal dd
+			normal k
+		endfor
+	endif
+
+	"从首部往下merge
+	if t_number_srt != 0
+		let t_number_srt = t_number_srt + 1
+		normal j
+		for i in  range(34)
+		"for i in  range(patchitem_size)
+			let line = patchitem_buf[i]
+			if line[0] == "+"
+				call append(t_number_srt-1, line)
+				let t_number_srt = t_number_srt + 1
+				call cursor(t_number_srt, 0)
+				"跳转套patch，删除已经处理的"+"行
+				call win_gotoid(patchwind_id)
+				call cursor(s_var+1, 0)
+				normal dd
+				call win_gotoid(targfile_id)
+			 	sleep 1m
+			elseif line[0] == "-"
+				let cmp_str_src = getline(t_number_srt)
+				let cmp_str_dst = substitute(line, "^-", "", 0)
+				if cmp_str_src == cmp_str_dst
+					normal dd
+				else
+					return
+				endif
+				"跳转套patch，删除已经处理的"-"行
+				call win_gotoid(patchwind_id)
+				call cursor(s_var+1, 0)
+				normal dd
+				call win_gotoid(targfile_id)
+			 	sleep 1m
+			elseif line[0] == " "
+				let cmp_str_src = getline(t_number_srt)
+				let cmp_str_dst = substitute(line, "^ ", "", 0)
+				if cmp_str_src == cmp_str_dst
+					let t_number_srt = t_number_srt + 1
+					"让s_var 向上+1
+					let s_var = s_var + 1
+					normal j
+				else
+					return
+				endif
+			endif
+		endfor
+		""call append(t_number_srt, patchitem_buf)
+	endif
 
 endfunction
 
