@@ -283,22 +283,48 @@ function! DoMerge(targfile)
 	for i in range(3)
 		let line = getline(s_var-2+i)
       	let line= substitute(line, '^ ', '', 'g')
-		let line= substitute(line, "\t", "\\t", 'g')
+		let line= substitute(line, "\\", "\\\\\\\\", 'g')
+		let line= substitute(line, "\t", "\\\\t", 'g')
 		let line= substitute(line, "*", "\\\\*", 'g')
-		call add(patchitem_srt, line)
-		call add(patchitem_srt, "\\_.")
+		let line= substitute(line, "\[", "\\\\[", 'g')
+		let line= substitute(line, "\]", "\\\\]", 'g')
+		"最后一行不用\_., \_.表示任何字符包括在新行,去掉，第一行加入^
+		if i == 2
+			let line= substitute(line, "$", "\\\\n", 'g')
+			call add(patchitem_srt, line)
+		else
+			if i == 0
+				let line= substitute(line, "^", "^", 'g')
+			endif
+			call add(patchitem_srt, line)
+			call add(patchitem_srt, "\\_.")
+		endif
 	endfor
 	let search_srt = join(patchitem_srt, '')
+	"echo search_srt
+	"return 
 
 	"得到item后3行
 	for i in range(3)
 		let line = getline(e_var-2+i)
       	let line= substitute(line, '^ ', '', 'g')
-		let line= substitute(line, "\t", "\\t", 'g')
+		let line= substitute(line, "\t", "\\\\t", 'g')
 		let line= substitute(line, "*", "\\\\*", 'g')
-		call add(patchitem_end, line)
-		call add(patchitem_end, "\\_.")
+		let line= substitute(line, "\[", "\\\\[", 'g')
+		let line= substitute(line, "\]", "\\\\]", 'g')
+		"最后一行不用\_., \_.表示任何字符包括在新行,去掉，第一行加入^
+		if i == 2
+			let line= substitute(line, "$", "\n", 'g')
+			call add(patchitem_end, line)
+		elseif i == 0
+			let line= substitute(line, "^", "^", 'g')
+			call add(patchitem_end, line)
+		else
+			call add(patchitem_end, line)
+			call add(patchitem_end, "\\_.")
+		endif
 	endfor
+
 	let search_end = join(patchitem_end, '')
 	"let search_end= substitute(search_end, "\t", "\\\\t", 'g')
 
@@ -321,37 +347,52 @@ function! DoMerge(targfile)
 		call win_gotoid(targfile_id)
 		let t_number_srt = line('.')
 		let t_number_srt = t_number_srt + 2
+		let t_number_end = 0
 		call cursor(t_number_srt, 0)
 	endif
 
 	let handle_lines=[]
 	let index=0
 	let patchitem_size  = len(patchitem_buf)
+	let e_var -= 3
 
 	"从尾部往上merge
 	if t_number_end != 0
 		"call append(t_number_end, patchitem_buf)
-		for i in  range(1, patchitem_size)
-			let index= patchitem_size-i
+		for i in  range(patchitem_size)
+			let index= patchitem_size-i-1
 			let line = patchitem_buf[index]
 			if line[0] == "+"
-				call append(t_number_end, line)
-				call add(handle_lines, patchitem_buf[index])
-				"let t_number_end -= 1
+				call append(t_number_end-1, line)
+				call win_gotoid(patchwind_id)
+				call cursor(e_var, 0)
+				let patch_line=getline('.')
+				let patch_line= substitute(patch_line, "^", "`", 0)
+				normal dd
+				let e_var = e_var - 1
+				call append(e_var, patch_line)
+				call win_gotoid(targfile_id)
+			 	sleep 1m
 			elseif line[0] == "-"
-				let t = 0
+				let cmp_str_src = getline(t_number_end)
+				let cmp_str_dst = substitute(line, "^-", "", 0)
+				if cmp_str_src == cmp_str_dst
+					normal dd
+					call win_gotoid(patchwind_id)
+					call cursor(e_var, 0)
+					let patch_line= substitute(line, "^", "`", 0)
+					normal dd
+					call append(e_var-1, patch_line)
+					let e_var = e_var - 1
+					call win_gotoid(targfile_id)
+					sleep 1m
+				else
+					return
+				endif
+				return
 			elseif line[0] == " "
-				let t = 0
+				return
 			endif
-		endfor
-		call win_gotoid(patchwind_id)
-		call cursor(e_var-3, 0)
-
-		let cur_option = line('.')
-		let patchitem_size  = len(handle_lines)
-		for i in range(patchitem_size)
-			normal dd
-			normal k
 		endfor
 	endif
 
@@ -359,8 +400,8 @@ function! DoMerge(targfile)
 	if t_number_srt != 0
 		let t_number_srt = t_number_srt + 1
 		normal j
-		for i in  range(34)
-		"for i in  range(patchitem_size)
+		""for i in  range(1)
+		for i in  range(patchitem_size)
 			let line = patchitem_buf[i]
 			if line[0] == "+"
 				call append(t_number_srt-1, line)
@@ -369,7 +410,11 @@ function! DoMerge(targfile)
 				"跳转套patch，删除已经处理的"+"行
 				call win_gotoid(patchwind_id)
 				call cursor(s_var+1, 0)
+				let patch_line=getline('.')
+				let patch_line= substitute(patch_line, "^", "`", 0)
 				normal dd
+				call append(s_var, patch_line)
+				let s_var = s_var + 1
 				call win_gotoid(targfile_id)
 			 	sleep 1m
 			elseif line[0] == "-"
