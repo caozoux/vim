@@ -33,3 +33,4 @@ atomic_inc_return(v)	Add 1 to *v and return the new value of *v
 atomic_dec_return(v)	Subtract 1 from *v and return the new value of *v
 atomic_add_return(i, v)	Add i to *v and return the new value of *v
 atomic_sub_return(i, v)	Subtract i from *v and return the new value of *v
+time_after(a,b) 	you can use fime_after(yourtimer, jiffies)	to get a dely 	

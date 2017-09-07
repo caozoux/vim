@@ -5,4 +5,8 @@ LDR
 		ldr w0, =0xe6e8800c
 strb
 		strb w1, [x0]
+LDMFD
+		LDMFD SP!, {R1-R7,LR} 出栈
+STMFD
+		STMFD SP!, {R1-R7,PC} 入栈
 end

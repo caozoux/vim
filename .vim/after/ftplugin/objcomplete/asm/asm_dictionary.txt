@@ -135,3 +135,32 @@ LSL  Xt, Xt, #uimmm16	左移uimm16位
 LSR  Xt, Xt, #uimmm16	右移uimm16位
 mrs	r0, cpsr 	程序状态寄存器(CPSR戒SPSR)读取
 msr	cpsr,r0 	程序状态寄存器(CPSR戒SPSR)写入
+LDMIA R1!, {R2-R7,R12} 		将R1所指向的地址的数据读出到R2-R7，R12，R1自动更新
+STMIA R0!, {R2-R7,R12} 		将R3-R6,R10中的数值保存到R0指向的地址，R0自动更新
+LDMFD SP!, {R1-R7,LR} 出栈
+STMFD SP!, {R1-R7,PC} 入栈
+IA 	每次传送后地址加4 
+IB 	每次传动前地址加4
+DA 	每次传送后地址减4
+DB 	每次传送前地址减4
+FD 	满递减堆栈
+ED 	空递增堆栈
+FA 	满递增堆栈
+EA 	空递增堆栈 
+ADR 	R0 , DISP_TAB 令将基于PC相对偏移的地址读取到存储器中
+bss#set	.set start, 0x40
+bss#equ	start  .equ, 0x40
+bss#gloable	用于使程序当前位置满足一定的对齐方式
+bss#align	用于使程序当前位置满足一定的对齐方式
+bss#section	用来定义一个段的伪指令
+bss#data 	用来定义一个数据段
+bss#text 	用来定义一个代码段
+bss#include 	用来包含一个头文件   
+bss#arm 	定义以下代码使用arm指令集编译
+bss#code 32 	同.arm
+bss#.code 16 	同.thumb
+bss#thumb 	定义以下代码使用thumb指令集编译
+bss#extern 	用于声明一个外部符号，用于兼容性其他汇编
+bss#weak 	用于声明一个弱符号，如果这个符号没有定义，编译就忽略，而不会报错
+bss#end 	表示汇编结束
+
