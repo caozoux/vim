@@ -10,6 +10,7 @@
 * [[vlmtool]]
 * [[ubuntu]]
 * [[yocto]]
+* [[stop-watchdog]]
 
 
 work follow:
@@ -18,3 +19,8 @@ work follow:
 3. submit the ites to http://ip/Disclosureform/tabid/79/Default.aspx,
 4. set test request in Rally
 5. send request test in bsp group mail
+
+--with-init=[ sysvinit | systemd ]]
+
+mkimage -A arm -T ramdisk -C gzip -d ../export/images/wrlinux-image-initramfs-altera-socfpga.cpio.gz ../export/images/altera-socfpga-initramfs.gz.uboot
+

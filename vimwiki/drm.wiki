@@ -1,0 +1,71 @@
+static struct drm_driver rcar_du_driver = {
+	.driver_features	= DRIVER_GEM | DRIVER_MODESET | DRIVER_PRIME
+				| DRIVER_ATOMIC,
+	.lastclose		= rcar_du_lastclose,
+	.get_vblank_counter	= drm_vblank_no_hw_counter,
+	.enable_vblank		= rcar_du_enable_vblank,
+	.disable_vblank		= rcar_du_disable_vblank,
+	.gem_free_object_unlocked = drm_gem_cma_free_object,
+	.gem_vm_ops		= &drm_gem_cma_vm_ops,
+	.prime_handle_to_fd	= drm_gem_prime_handle_to_fd,
+	.prime_fd_to_handle	= drm_gem_prime_fd_to_handle,
+	.gem_prime_import	= drm_gem_prime_import,
+	.gem_prime_export	= drm_gem_prime_export,
+	.gem_prime_get_sg_table	= drm_gem_cma_prime_get_sg_table,
+	.gem_prime_import_sg_table = drm_gem_cma_prime_import_sg_table,
+	.gem_prime_vmap		= drm_gem_cma_prime_vmap,
+	.gem_prime_vunmap	= drm_gem_cma_prime_vunmap,
+	.gem_prime_mmap		= drm_gem_cma_prime_mmap,
+	.dumb_create		= rcar_du_dumb_create,
+	.dumb_map_offset	= drm_gem_cma_dumb_map_offset,
+	.dumb_destroy		= drm_gem_dumb_destroy,
+	.fops			= &rcar_du_fops,
+	.name			= "rcar-du",
+	.desc			= "Renesas R-Car Display Unit",
+	.date			= "20130110",
+	.major			= 1,
+	.minor			= 0,
+	.ioctls			= rcar_du_ioctls,
+	.num_ioctls		= ARRAY_SIZE(rcar_du_ioctls),
+};
+
+
+
+struct drm_framebuffer {
+	/**
+	 * @pitches: Line stride per buffer. For userspace created object this
+	 * is copied from drm_mode_fb_cmd2.
+	 */
+	unsigned int pitches[4];
+	/**
+	 * @offsets: Offset from buffer start to the actual pixel data in bytes,
+	 * per buffer. For userspace created object this is copied from
+	 * drm_mode_fb_cmd2.
+	 *
+	 * Note that this is a linear offset and does not take into account
+	 * tiling or buffer laytou per @modifier. It meant to be used when the
+	 * actual pixel data for this framebuffer plane starts at an offset,
+	 * e.g.  when multiple planes are allocated within the same backing
+	 * storage buffer object. For tiled layouts this generally means it
+	 * @offsets must at least be tile-size aligned, but hardware often has
+	 * stricter requirements.
+	 *
+	 * This should not be used to specifiy x/y pixel offsets into the buffer
+	 * data (even for linear buffers). Specifying an x/y pixel offset is
+	 * instead done through the source rectangle in struct &drm_plane_state.
+	 */
+	unsigned int offsets[4];
+	/**
+	 * @width: Logical width of the visible area of the framebuffer, in
+	 * pixels.
+	 */
+	unsigned int width;
+	/**
+	 * @height: Logical height of the visible area of the framebuffer, in
+	 * pixels.
+	 */
+	unsigned int height;
+	/**
+	 * @pixel_format: DRM FOURCC code describing the pixel format.
+	 */
+	uint32_t pixel_format; /* fourcc format */

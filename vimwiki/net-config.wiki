@@ -1,4 +1,4 @@
-route add default gw 128.224.162.1 netmask 0.0.0.0 
+rFSL_MC_BUSoute add default gw 128.224.162.1 netmask 0.0.0.0 
 
 route del -net 128.224.162.0  netmask 255.255.255.0 dev eth0
 route add -net 128.224.162.0  netmask 255.255.255.0 dev eth0

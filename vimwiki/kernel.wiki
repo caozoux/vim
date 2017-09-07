@@ -99,3 +99,7 @@
 * [[audio_driver]]
 * [[bitmap]]
 * [[kernel-sys-interface]]
+* [[drm]]
+* [[mdio_bus]]
+* [[ethernet_phy]]
+CFLAGS_smp.o = -O0

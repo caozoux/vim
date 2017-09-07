@@ -24,3 +24,6 @@ sudo chown nobody:nogroup /var/nfs
 * [[ssh]]
 * dynamay libray patch
   export LD_LIBRARY_PATH=$yourPath:$LD_LIBRARY_PATH
+* proxy-tty:
+  sudo  ./agent-proxy 4440^4441 0 /dev/ttyUSB0,115200
+  g

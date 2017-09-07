@@ -1,0 +1,6 @@
+systemctl start display-manager.service
+
+/lib/systemd/system/xserver-nodm.service
+/etc/systemd/system/display-manager.service -> /lib/systemd/system/xserver-nodm.service
+systemctl stop xserver-nodm.service
+systemctl start xserver-nodm.service
