@@ -1,0 +1,5 @@
+
+board_init_f
+initcall_run_list
+
+lists_driver_lookup_name  driver and device匹配
