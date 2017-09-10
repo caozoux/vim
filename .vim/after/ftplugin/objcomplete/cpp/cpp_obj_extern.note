@@ -1,0 +1,9 @@
+start
+boost#timer#cpu_timer
+	int main(int argc, char *argv[])
+	{
+		boost::timer::auto_cpu_timer r("%w\n");
+		return 0;
+	}
+	0.000139
+end
