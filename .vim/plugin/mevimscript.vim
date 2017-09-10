@@ -57,23 +57,43 @@ func! Patch_vsplit_open()
 	endif
 endfunc
 
-function! AutoBlacker()
+"只能处理不相同的匹配符合，"和', issame 应为1
+function! AutoBlacker(pchar, issame)
 	if (&paste)
 		return
 	endif
-	let pat = '[^=] {'
+	let partern_s = ['{', "\"", "'", "[", "("]
+	let partern_e = ['}', "\"", "'", "]", ")"]
 	let save_cursor = getpos('.')
 	let new_position= save_cursor[1] + 1
-	let result = matchstr(getline(save_cursor[1]), pat)
-	if (search(pat, 'b', save_cursor[1]))
-	   normal! o}
-	   normal! ko    
-		":call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
-		:call cursor(new_position, save_cursor[2], save_cursor[3])
-	else 
-	   normal! a}
-		:call cursor(save_cursor[1], save_cursor[2], save_cursor[3])
+	let cur_line = getline(save_cursor[1])
+	let index = index(partern_s, a:pchar)
+	let partern_s_c = partern_s[index]
+	let partern_e_c = partern_e[index]
+	if index >= 0
+		let find_cnt_e = 0
+		let find_cnt_c = 0
+		for i in  range(strlen(cur_line))
+			if cur_line[i] == partern_s_c
+				let find_cnt_c += 1	
+			elseif cur_line[i] == partern_e_c
+				let find_cnt_e += 1	
+			endif	
+		endfor
+		"如果不是匹配的，只输入parter_s_c就可以了
+		if a:issame
+			if find_cnt_c%2 == 1
+				execute "normal! a".partern_s_c
+				return
+			endif	
+		else
+			if find_cnt_e != find_cnt_c
+				execute "normal! a".partern_s_c
+				return
+			endif
+		endif
 	endif
+	execute "normal! a".partern_s_c.partern_e_c
 endfunction
 
 "通过空格字符，快速生成linePatarn 的结构
