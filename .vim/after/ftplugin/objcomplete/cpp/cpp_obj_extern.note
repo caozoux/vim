@@ -6,4 +6,38 @@ boost#timer#cpu_timer
 		return 0;
 	}
 	0.000139
+boost#asio#io_service
+	boost::asio::io_service server;
+	socket_ptr p_socket(new tcp::socket(server));
+	
+		tcp::acceptor accpet(server, tcp::endpoint(tcp::v4(), 9010));
+	std::cout<<"start server, listen: "<<port<<std::endl;
+	accpet.accept(*p_socket);
+	size_t length = sock->read_some(boost::asio::buffer(data), error);
+boost#asio#ip#tcp#socket
+	socket对象构造需要io_server的对象
+	typedef boost::shared_ptr<tcp::socket> socket_ptr;
+	socket_ptr p_socket(new tcp::socket(io_server));
+	boost::asio::write(*sock, boost::asio::buffer(data, length));
+boost#asio#ip#tcp#accept
+	accpet构造函数帮顶io_server
+	tcp::acceptor accpet(io_server, tcp::endpoint(tcp::v4(), 9010));
+	accept方法绑定socket,有链接返回
+	accpet.accept(*socket)
+boost#thread3
+	class thread2_struct 
+	{
+	public:
+		thread2_struct(const char* who) : m_who(who) { }
+		void operator()()
+		{
+			std::cout << m_who << "says, \"Hello World.\"" << std::endl;
+		}
+		const char* m_who;
+	};
+	void thread2_test()
+	{
+		boost::thread thrd(thread2_struct("Bob"));
+		thrd.join();
+	}
 end

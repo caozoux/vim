@@ -1,2 +1,12 @@
 boost#timer#cpu_timer	打印对象创建到销毁使用的时间
 boost#timer#cpu_timer	t1.elapsed().wall(); start()
+boost#asio#io_service	asio通信
+boost#asio#ip#tcp#socket	socket_ptr p_socket(new tcp::socket(server));
+boost#asio#ip#tcp#accept	tcp::acceptor accpet(server, tcp::endpoint(tcp::v4(), 9010));
+boost#this_thread#sleep	boost::this_thread::sleep_for(boost::chrono::seconds(3));
+boost#thread1	boost::thread thrd(&helloworld);void helloworld()
+boost#thread2	boost::thread thrd(boost::bind(&thread3, \"Bob\")); void thread3(const char* who)
+boost#thread3	boost::thread thrd(thread2_struct(\"Bob\"));绑定对象
+boost#thread_group	thrds.create_thread(factorial(i*10, results[i]));
+boost#mutex#scoped_lock	boost::mutex mutex;boost::mutex::scoped_lock lock(mutex);
+boost#condition 	boost::condition buffer_not_full;buffer_not_full.notify_one();buffer_not_full.wait(lk); scoped_lock lk(mutex);
