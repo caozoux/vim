@@ -289,44 +289,46 @@ function! DoMerge(targfile)
 		let line= substitute(line, "\[", "\\\\[", 'g')
 		let line= substitute(line, "\]", "\\\\]", 'g')
 		"最后一行不用\_., \_.表示任何字符包括在新行,去掉，第一行加入^
-		if i == 2
-			let line= substitute(line, "$", "\\\\n", 'g')
-			call add(patchitem_srt, line)
-		else
-			if i == 0
-				let line= substitute(line, "^", "^", 'g')
-			endif
+		if i == 0
+			let line= substitute(line, "^", "^", 'g')
 			call add(patchitem_srt, line)
 			call add(patchitem_srt, "\\_.")
+		else
+			let line= substitute(line, "$", "\\\\n", '')
+			call add(patchitem_srt, line)
 		endif
 	endfor
 	let search_srt = join(patchitem_srt, '')
-	"echo search_srt
-	"return 
+	""echo search_srt
+	""return 
 
 	"得到item后3行
 	for i in range(3)
 		let line = getline(e_var-2+i)
       	let line= substitute(line, '^ ', '', 'g')
+		let line= substitute(line, "\\", "\\\\\\\\", 'g')
 		let line= substitute(line, "\t", "\\\\t", 'g')
 		let line= substitute(line, "*", "\\\\*", 'g')
 		let line= substitute(line, "\[", "\\\\[", 'g')
 		let line= substitute(line, "\]", "\\\\]", 'g')
 		"最后一行不用\_., \_.表示任何字符包括在新行,去掉，第一行加入^
-		if i == 2
-			let line= substitute(line, "$", "\n", 'g')
-			call add(patchitem_end, line)
-		elseif i == 0
+		if i == 0
 			let line= substitute(line, "^", "^", 'g')
 			call add(patchitem_end, line)
-		else
-			call add(patchitem_end, line)
 			call add(patchitem_end, "\\_.")
+		else
+			if len(line) == 0
+				let line= substitute(line, "$", "\\\\n", '')
+			else
+				let line= substitute(line, "$", "\\\\n", '')
+				call add(patchitem_end, line)
+			endif 
 		endif
 	endfor
 
 	let search_end = join(patchitem_end, '')
-	"let search_end= substitute(search_end, "\t", "\\\\t", 'g')
+	""echo search_end
+	"return 
 
 	"跳转到patch item 目标文件， 匹配item首3行或者尾3行
 	call win_gotoid(bufwinid(basename))
@@ -363,7 +365,8 @@ function! DoMerge(targfile)
 			let index= patchitem_size-i-1
 			let line = patchitem_buf[index]
 			if line[0] == "+"
-				call append(t_number_end-1, line)
+				call append(t_number_end, line)
+				"将处理的行在行首加字符^
 				call win_gotoid(patchwind_id)
 				call cursor(e_var, 0)
 				let patch_line=getline('.')
@@ -377,6 +380,7 @@ function! DoMerge(targfile)
 				let cmp_str_src = getline(t_number_end)
 				let cmp_str_dst = substitute(line, "^-", "", 0)
 				if cmp_str_src == cmp_str_dst
+					"将处理的行在行首加字符^
 					normal dd
 					call win_gotoid(patchwind_id)
 					call cursor(e_var, 0)
@@ -422,14 +426,16 @@ function! DoMerge(targfile)
 				let cmp_str_dst = substitute(line, "^-", "", 0)
 				if cmp_str_src == cmp_str_dst
 					normal dd
+					call win_gotoid(patchwind_id)
+					call cursor(s_var+1, 0)
+					let patch_line= substitute(line, "^", "`", 0)
+					normal dd
+					call append(s_var, patch_line)
+					let s_var = s_var + 1
+					call win_gotoid(targfile_id)
 				else
 					return
 				endif
-				"跳转套patch，删除已经处理的"-"行
-				call win_gotoid(patchwind_id)
-				call cursor(s_var+1, 0)
-				normal dd
-				call win_gotoid(targfile_id)
 			 	sleep 1m
 			elseif line[0] == " "
 				let cmp_str_src = getline(t_number_srt)
