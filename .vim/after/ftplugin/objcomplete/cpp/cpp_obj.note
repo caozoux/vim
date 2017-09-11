@@ -1,0 +1,2 @@
+boost#timer#cpu_timer	打印对象创建到销毁使用的时间
+boost#timer#cpu_timer	t1.elapsed().wall(); start()

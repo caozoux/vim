@@ -58,6 +58,9 @@ func! ObjDictionUpdate(f_diction, exf_diction)
 	let home=system("echo $HOME")
 	let home=strpart(home,0, len(home)-1)
 	let b:adid_ftplugin = 1
+
+	let s:objfunc_dictonaryfile=a:f_diction
+	let s:objfunc_dictonaryextfile=a:exf_diction
 python << EOF
 
 
@@ -99,6 +102,10 @@ function! ObjCompleteModeDetect()
 			endif
 		endfor
 	endif
+endfunction
+
+function! ObjOpenDictFile()
+	execute ":edit " s:objfunc_dictonaryfile
 endfunction
 
 "call ObjDictionUpdate("~/.vim/after/ftplugin/obj_dictionary.txt", "~/.vim/after/ftplugin/obj_dictionary_extern.txt")

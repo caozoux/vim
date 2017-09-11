@@ -1,0 +1,98 @@
+cmake#add_library	add_library(archive archive.cpp zip.cpp lzma.cpp) 设置编译目标为library
+cmake#add_executable	add_executable(mytool mytool.cpp) 设置可执行程序文件名
+cmake#cmake_parse_arguments	null
+cmake#cmake_host_system_information	null
+cmake#cmake_minimum_required	cmake_minimum_required(VERSION 3.5)
+cmake#cmake_parse_arguments	null
+cmake#cmake_policy	null
+cmake#configure_file	cmake配置文件，使用输入文件 foo.h.in  定义传入到cmake中,并生成foo.h配置文件
+cmake#continue	null
+cmake#execute_process	null
+cmake#file	null
+cmake#find_file	find_file (<VAR> name1 [path1 path2 ...])
+cmake#find_library	find_library(<VAR> name | NAMES [name])
+cmake#find_package	null
+cmake#find_path	null
+cmake#find_program	null
+cmake#function	null
+cmake#get_cmake_property	null
+cmake#get_directory_property	null
+cmake#get_filename_component	null
+cmake#get_property	null
+cmake#include	null
+cmake#list	数组操作函数,GET/LENGTH/APPEND/FILTER/FIND/INSERT/REMOVE../SORT
+cmake#macro	null
+cmake#mark_as_advanced	null
+cmake#math	math(EXPR <output-variable> <math-expression>),math(EXPR negative \"1 - 2\")
+cmake#message	null
+cmake#option	option(OPTION_VAR \"test cmake option\" ON)
+cmake#return	null
+cmake#separate_arguments	separate_arguments(<var> <NATIVE|UNIX|WINDOWS>_COMMAND \"<args>\")
+cmake#set_directory_properties	null
+cmake#set_property	null
+cmake#set	null
+cmake#site_name	null
+cmake#string	null
+cmake#unset	null
+cmake#variable_watch	null
+cmake#add_compile_options	add_compile_options(-W -g -O0)
+cmake#add_custom_command	null
+cmake#add_custom_target	null
+cmake#add_definitions	add_definitions(-DFOO -DBAR ...),加入编译选项预定宏
+cmake#add_dependencies	null
+cmake#add_executable	null
+cmake#add_library	null
+cmake#add_subdirectory	add_subdirectory(source_dir [binary_dir] [EXCLUDE_FROM_ALL])
+cmake#add_test	add_test (test_run2 my_test.bin 1 2)
+cmake#aux_source_directory	AUX_SOURCE_DIRECTORY(src DIR_SRCS)把src所有文件加入到变量DIR_SRCS
+cmake#build_command	null
+cmake#create_test_sourcelist	null
+cmake#define_property	null
+cmake#enable_language	null
+cmake#enable_testing	refer add_test
+cmake#export	null
+cmake#fltk_wrap_ui	null
+cmake#get_source_file_property	null
+cmake#get_target_property	null
+cmake#get_test_property	null
+cmake#include_directories	include_directories(name1 name2)
+cmake#include_external_msproject	null
+cmake#include_regular_expression	null
+cmake#install	null
+cmake#link_directories	link_directories(dir1 dir2)
+cmake#link_libraries	link_libraries(lib1 lib2)链接库，被add_library或add_executable使用
+cmake#load_cache	null
+cmake#project	null
+cmake#qt_wrap_cpp	null
+cmake#qt_wrap_ui	null
+cmake#remove_definitions	null
+cmake#set_source_files_properties	null
+cmake#set_target_properties	null
+cmake#set_tests_properties	null
+cmake#source_group	null
+cmake#target_compile_definitions	null
+cmake#target_compile_features	null
+cmake#target_compile_options	null
+cmake#target_include_directories	null
+cmake#target_link_libraries	target_link_libraries(target lib1 lib2)
+cmake#target_sources	null
+cmake#try_compile	null
+cmake#try_run	null
+cmake#build_name	null
+cmake#exec_program	null
+cmake#export_library_dependencies	null
+cmake#install_files	install(TARGETS mySharedLib DESTINATION /some/full/path)
+cmake#install_programs	null
+cmake#install_targets	null
+cmake#load_command	null
+cmake#make_directory	null
+cmake#output_required_files	null
+cmake#remove	null
+cmake#subdir_depends	null
+cmake#subdirs	null
+cmake#use_mangled_mesa	null
+cmake#utility_source	null
+cmake#variable_requires	null
+cmake#write_file	null
+cmake#foreach	null
+cmake#while	null

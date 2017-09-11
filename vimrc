@@ -250,10 +250,10 @@ map <F7> :call MakeSelect() <CR><CR>
 map <F8>> :cp<CR>
 map <F9> :cn<CR>
 map <F1> :w<CR><CR><CR>
-inoremap [ <ESC>a[]<ESC>ha
-inoremap " <ESC>a""<ESC>ha
-inoremap ' <ESC>a''<ESC>ha
-inoremap ( <ESC>a()<ESC>ha
+inoremap [ <ESC>:call AutoBlacker("[", 0)<CR><ESC>ha
+inoremap " <ESC>:call AutoBlacker("\"", 1)<CR><ESC>ha
+inoremap ' <ESC>:call AutoBlacker("'", 1)<CR><ESC>ha
+inoremap ( <ESC>:call AutoBlacker("(", 0)<CR><ESC>ha
 
 map <C_c> <ESC>
 vnoremap c "+y
@@ -316,3 +316,8 @@ let g:acp_behavior = {
 let g:user_emmet_expandabbr_key = '<C-e>'
 "let g:user_emmet_expandabbr_key='<Tab>'
 "imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+"加入note作为note filetype, objfunc将会使用他
+augroup filetypedetect
+au BufNewFile,BufRead *.note	setf note
+augroup END

@@ -46,4 +46,7 @@ vim#setline()
 	setline(".", repl)
 vim#substitute()
 	let repl = substitute(line, '\a', "*", "g")
+vim#execute	execute
+	链接符号.,不会有空格
+	execute "normal! a".partern_s_c.partern_e_c
 end

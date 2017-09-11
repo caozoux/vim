@@ -239,3 +239,4 @@ vim#variable#b:name	variable local to a buffer
 vim#variable#w:name	variable local to a window
 vim#variabl#eg:name	global variable (also in a function)
 vim#variable#v:name	variable predefined by Vim
+vim#execute	execute an Ex command and get the output

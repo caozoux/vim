@@ -1,2 +1,2 @@
-* dynamic printk
+* dynamic printkTIOCMIWAIT:
   echo -n "file drivers/usb/class/cdc-acm.c +p" > /sys/kernel/debug/dynamic_debug/control"

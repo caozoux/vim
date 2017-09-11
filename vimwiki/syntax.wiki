@@ -16,9 +16,32 @@ echo line('$')  整个buffer行
 		highlight link xType Type:  规则复用, xType 和 Type一样
 		setlocal iskeyword+=- :     修改ketword的定义，默认-.这些标点为一个word的结束判断，这里修改它
 		
+	1.1.1 		
+		syntax-arguments
+			conceal
+			cchar
+			contained
+			containedin
+			nextgroup
+			transparent
+			skipwhite
+			skipnl
+			skipempty
 
+	1.1.2  Syntax patterns
+		ms	Match Start	offset for the start of the matched text
+		me	Match End	offset for the end of the matched text
+		hs	Highlight Start	offset for where the highlighting starts
+		he	Highlight End	offset for where the highlighting ends
+		rs	Region Start	offset for where the body of a region starts
+		re	Region End	offset for where the body of a region ends
+		lc	Leading Context	offset past "leading context" of pattern
+	
 	1.2 Keyword
 	-----------------
+		指定特殊字符为keyword
+		syntax iskeyword #
+		
 		syntax keyword {group} {keyword} ...
 		syntax keyword xStatement n[ext]:    n ne nex next都算xStatement监管
 		
@@ -28,12 +51,31 @@ echo line('$')  整个buffer行
 
 	1.2 Match
 	-----------------
+	syntax match {group-name} [{options}]
+			[excludenl]
+			[keepend]
+			{pattern}
+			[{options}]
+		
 		syntax match xIdentifier /\<\l\+\>/
 			
 	1.3 Regions
 	-----------------
+	syntax  region {group-name} [{options}]
+			[matchgroup={group-name}]
+			[keepend]
+			[extend]
+			[excludenl]
+			start={start_pattern} ..
+			[skip={skip_pattern}]
+			end={end_pattern} ..
+			[{options}]
+		
 		syntax region xString start=/"/ end=/"/
 		syntax region xString start=/"/ skip=/\\"/ end=/"/   "A string with a double quote (\") in it", 忽视\"符号
+		@@ region 会有覆盖的问题， 下面的First将永远不会工作，会被Second覆盖， 转换为match 并加入\_.\{-}, \_.表示换行符，\{-}表示尽少匹配
+		:syn region First  start="("  end=":"  <---      syn match First  "(\_.\{-}:" 
+		:syn region Second start="("  end=";"  <---      :syn match Second "(\_.\{-};"
 	
 	1.nested
 	-----------------
