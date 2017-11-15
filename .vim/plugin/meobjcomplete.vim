@@ -47,7 +47,7 @@ function! ObjCompleteSetMode(mode)
 	let s:objdictionary={}
 	if a:mode == "kernel"
 		call ObjDictionUpdate("~/.vim/after/ftplugin/objcomplete/kernel/api_dictionary.txt","~/.vim/after/ftplugin/objcomplete/kernel/api_dictionary_extern.txt")
-	else if a:mode == "qt"
+	elseif a:mode == "qt"
 		let s:objfunc_dictonaryfile=s:objfunc_dictonarydirfile+"qt/qt_dictionary.txt" 
 		let s:objfunc_dictonaryextfile=s:objfunc_dictonarydirfile+"qt/qt_dictionary_extern.txt" 
 		call ObjDictionUpdate(s:objfunc_dictonaryfile, s:objfunc_dictonaryextfile)
