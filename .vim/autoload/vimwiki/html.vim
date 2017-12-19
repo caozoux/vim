@@ -1014,7 +1014,11 @@ function! s:process_tag_h(line, id) "{{{
 
     let h_id = 'toc_'.h_number
 
-    let h_part = '<h'.h_level.' id="'.h_id.'"'
+    if h_level== 6
+      let h_part = '<div class="h6_class"><h'.h_level.' id="'.h_id.'"'
+    else
+      let h_part = '<h'.h_level.' id="'.h_id.'"'
+    endif
 
     if centered
       let h_part .= ' class="justcenter">'
@@ -1033,7 +1037,12 @@ function! s:process_tag_h(line, id) "{{{
       let h_text = num.' '.h_text
     endif
 
-    let line = h_part.h_text.'</h'.h_level.'>'
+    if h_level == 6
+      let line = h_part.h_text.'</h'.h_level.'></div>'
+    else
+      let line = h_part.h_text.'</h'.h_level.'>'
+    endif
+
     let processed = 1
   endif
   return [processed, line, h_level, h_text, h_id]
