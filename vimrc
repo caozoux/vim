@@ -201,8 +201,16 @@ let g:Powerline_symbols = 'fancy'
 "-------------------------------- vimwiki ------------------------------------
 let g:vimwiki_use_mouse = 1
 "let g:vimwiki_list = [{'path': '~/.vim/vimwiki/',
-"            \ 'path_html': '~/.vim/vimwiki/html/',
-"            \ 'html_header': '~/.vim/vimwiki/template/header.tpl',}]
+"           \ 'libse': '~/.vim/vimwiki/libse/',}]
+let wiki_root = {}
+let wiki_root.path = '~/vimwiki/'
+let wiki_root.path_html = '~/vimwiki/html/'
+
+let wiki_libse = {}
+let wiki_libse.path = '~/vimwiki/libse/'
+let wiki_libse.path_html = '~/vimwiki/libse/html/'
+
+let g:vimwiki_list = [wiki_root, wiki_libse]
 
 "set expandtab
 set tabstop=4
