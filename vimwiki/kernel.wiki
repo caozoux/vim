@@ -1,62 +1,9 @@
-* device tree
-    * [[device-document]]
-    * [[code-init]]
-    * [[of_driver]]
-    * [[devicetree-document]]
-
-* memory
-    * [[memory-map]]
-    * [[内存泄露]]
-    * [[mmu]]
-
-* irq
-	* [[irq_layer]] 
-	在linux里，中断处理分为顶半（top half），底半(bottom half)，在顶半里处理优先
-	级比较高的事情，要求占用中断时间尽量的短，在处理完成后，就激活底半，有底半处
-	理其余任务。底半的处理方式主要有soft_irq, tasklet, workqueue三种，他们在使用
-	方式和适用情况上各有不同。soft_irq用在对底半执行时间要求比较紧急或者非常重要
-	的场合，主要为一些subsystem用，一般driver基本上用不上。 
-	== tasklet和work queue ==
-	在普通的driver里用的相对较多，主要区别是tasklet是在中断上下文执行,而work queue
-	是在process上下文，因此可以执行可能sleep的操作。
-	* [[chip]]
-	* [[thread_irq]]
-	* [[gpio-irq]]
-	* [[irq-disabe]]
-	* [[irq-setup]]
-	* [[irq-domain]]
-	* [[irq-desc]]
-	* [[smp_irq]]
-	* [[except]]
-	* [[irq_type]]
+* [[device_tree]]
+* [[memory]]
+* [[irq]]
 * [[sdio]]
-	* bus,driver,device
-		sdio_bus_match
-		sdio_bus_uevent
-		sdio_bus_probe
-		sdio_bus_remove
-		= sdio_add_func =
-			# add the sdio devices to bus
-			int sdio_add_func(struct sdio_func *func)
-			{
-				int ret;
-
-				dev_set_name(&func->dev, "%s:%d", mmc_card_id(func->card), func->num);
-
-				sdio_set_of_node(func);
-				sdio_acpi_set_handle(func);
-				ret = device_add(&func->dev);
-				if (ret == 0) {
-					sdio_func_set_present(func);
-					acpi_dev_pm_attach(&func->dev, false);
-				}
-
-				return ret;
-			}
-		= sdio_remove_func =
 * [[kernel-config]]
 * [[RCU]]
-   数据同步,RCU适用于需要频繁的读取数据，而相应修改数据并不多的情景
 * [[wifi]]
 * [[resource]]
 * [[mem_region]]
@@ -102,4 +49,5 @@
 * [[drm]]
 * [[mdio_bus]]
 * [[ethernet_phy]]
+* [[intel_architecture]]
 CFLAGS_smp.o = -O0

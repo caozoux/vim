@@ -1,0 +1,5 @@
+* interrupt
+* 中断绑定, smp_apic_timer_interrupt 设置到apic_timer_interrupt, 中断号为LOCAL_TIMER_VECTOR
+  BUILD_INTERRUPT(apic_timer_interrupt,LOCAL_TIMER_VECTOR) 
+  apicinterrupt LOCAL_TIMER_VECTOR apic_timer_interrupt smp_apic_timer_interrupt
+ 
