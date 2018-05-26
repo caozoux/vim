@@ -1,0 +1,9 @@
+* session
+  session的主要特点是当session的leader退出后，session中的所有其它进程将会收到SIGHUP信号，其默认行为是终止进程，即session的leader退出后，session中的其它进程也会退出。
+  调用setsid函数即可，session中的第一个进程即为这个session的leade
+  
+* prcocess group
+  进程组主要用在shell里面，shell负责进程组的管理，包括创建、销毁等。（这里shell就是session的leader）
+  对大部分进程来说，它自己就是进程组的leader，并且进程组里面就只有它自己一个进程
+  shell里面执行类似ls|more这样的以管道连接起来的命令时，两个进程就属于同一个进程组，ls是进程组的leader。
+  shell里面启动一个进程后，一般都会将该进程放到一个单独的进程组，然后该进程fork的所有进程都会属于该进程组，比如多进程的程序，它的所有进程都会属于同一个进程组，当在shell里面按下CTRL+C时，该程序的所有进程都会收到SIGINT而退出

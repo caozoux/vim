@@ -7,3 +7,6 @@ sudo sh ./altera-linux/bin/make_sdimage.sh -k zImage,socfpga.dtb,soc_system.rbf,
 
 
 [[*command_i2c]]
+
+[[*command_ps]]
+[[perf]]

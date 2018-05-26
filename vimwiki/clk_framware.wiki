@@ -1,0 +1,94 @@
+* struct clk_hw
+   1: struct clk_hw {
+   2:         struct clk *clk;
+   3:         const struct clk_init_data *init;
+   4: };
+* struct clk_init_data  
+   1: struct clk_init_data {
+   2:         const char              *name;
+   3:         const struct clk_ops    *ops;
+   4:         const char              **parent_names;
+   5:         u8                      num_parents;
+   6:         unsigned long           flags;
+   7: };
+   flags:
+		CLK_SET_RATE_GATE，表示在改变该clock的rate时，必须gated（关闭）； 
+		CLK_SET_PARENT_GATE，表示在改变该clock的parent时，必须gated（关闭）； 
+		CLK_SET_RATE_PARENT，表示改变该clock的rate时，要将该改变传递到上层parent（下面再详细说明）； 
+		CLK_IGNORE_UNUSED，忽略disable unused的调用； 
+		CLK_IS_ROOT，该clock为root clock，没有parent； 
+		CLK_IS_BASIC，不再使用了； 
+		CLK_GET_RATE_NOCACHE，get rate时，不要从缓存中拿，而是从新计算
+   
+* [[clk_ops]]
+* framware
+  系统中，每一个clock都有一个struct clk_hw变量描述，clock provider需要使用register相关的接口，将这些clock注册到kernel，clock framework的核心代码会把它们转换为struct clk变量，并以tree的形式组织起来
+  12: struct clk *clk_register(struct device *dev, struct clk_hw *hw);
+  13: struct clk *devm_clk_register(struct device *dev, struct clk_hw *hw);
+  14:  
+  15: void clk_unregister(struct clk *clk);
+  16: void devm_clk_unregister(struct device *dev, struct clk *clk);
+  1. clock分类及register 
+  	1) fixed rate clock
+  		这一类clock具有固定的频率，不能开关、不能调整频率、不能选择parent、不需要提供任何的clk_ops回调函数，是最简单的一类clock。
+  		   6: struct clk_fixed_rate {
+		   7:         struct          clk_hw hw;
+		   8:         unsigned long   fixed_rate;
+		   9:         u8              flags;
+		  10: };
+		  11:  
+		  12: extern const struct clk_ops clk_fixed_rate_ops;
+		  13: struct clk *clk_register_fixed_rate(struct device *dev, const char *name,
+		  14:                 const char *parent_name, unsigned long flags,
+		  15:                 unsigned long fixed_rate);
+  	2) gate clock
+  		这一类clock只可开关
+  		   1: struct clk *clk_register_gate(struct device *dev, const char *name,
+		   2:                 const char *parent_name, unsigned long flags,
+		   3:                 void __iomem *reg, u8 bit_idx,
+		   4:                 u8 clk_gate_flags, spinlock_t *lock);
+			name，clock的名称；
+			parent_name，parent clock的名称，没有的话可留空；
+			flags，可参考3.1中的说明；
+			reg，控制该clock开关的寄存器地址（虚拟地址）；
+			bit_idx，控制clock开关的bit位（是1开，还是0开，可通过下面gate特有的flag指定）；
+			clk_gate_flags，gate clock特有的flag，当前只有一种：CLK_GATE_SET_TO_DISABLE，clock开关控制的方式，如果置位，表示写1关闭clock，反之亦然；
+			lock，如果clock开关时需要互斥，可提供一个spinlock。
+  	3) divider clock
+  		这一类clock可以设置分频值
+  		   1: struct clk *clk_register_divider(struct device *dev, const char *name,
+		   2:                 const char *parent_name, unsigned long flags,
+		   3:                 void __iomem *reg, u8 shift, u8 width,
+		   4:                 u8 clk_divider_flags, spinlock_t *lock);
+				reg，控制clock分频比的寄存器；
+				shift，控制分频比的bit在寄存器中的偏移；
+				width，控制分频比的bit位数，默认情况下，实际的divider值是寄存器值加1。如果有其它例外，可使用下面的的flag指示；
+				clk_divider_flags，divider clock特有的flag，包括：
+				CLK_DIVIDER_ONE_BASED，实际的divider值就是寄存器值（0是无效的，除非设置CLK_DIVIDER_ALLOW_ZERO flag）； 
+				CLK_DIVIDER_POWER_OF_TWO，实际的divider值是寄存器值得2次方； 
+				CLK_DIVIDER_ALLOW_ZERO，divider值可以为0（不改变，视硬件支持而定）
+  	4) mux clock
+		这一类clock可以选择多个parent，因为会实现.get_parent/.set_parent/.recalc_rate回调，
+		   1: struct clk *clk_register_mux(struct device *dev, const char *name,
+		   2:                 const char **parent_names, u8 num_parents, unsigned long flags,
+		   3:                 void __iomem *reg, u8 shift, u8 width,
+		   4:                 u8 clk_mux_flags, spinlock_t *lock);
+				parent_names，一个字符串数组，用于描述所有可能的parent clock；
+				num_parents，parent clock的个数；
+				reg、shift、width，选择parent的寄存器、偏移、宽度，默认情况下，寄存器值为0时，对应第一个parent，依此类推。如有例外，可通过下面的flags，以及另外一个接口实现；
+				clk_mux_flags，mux clock特有的flag：
+				CLK_MUX_INDEX_ONE，寄存器值不是从0开始，而是从1开始； 
+				CLK_MUX_INDEX_BIT，寄存器值为2的幂。
+  	5) mux clock
+  		这一类clock具有固定的factor（即multiplier和divider），clock的频率是由parent clock的频率，乘以mul，除以div，多用于一些具有固定分频系数的clock。由于parent clock的频率可以改变，因而fix factor clock也可该改变频率，因此也会提供.recalc_rate/.set_rate/.round_rate等回调。
+ 
+	6) composite clock		
+		mux、divider、gate等clock的组合
+		   1: struct clk *clk_register_composite(struct device *dev, const char *name,
+		   2:                 const char **parent_names, int num_parents,
+		   3:                 struct clk_hw *mux_hw, const struct clk_ops *mux_ops,
+		   4:                 struct clk_hw *rate_hw, const struct clk_ops *rate_ops,
+		   5:                 struct clk_hw *gate_hw, const struct clk_ops *gate_ops,
+		   6:                 unsigned long flags);
+			   
+* 

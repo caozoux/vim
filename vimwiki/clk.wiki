@@ -8,3 +8,4 @@
   /drivers/clk/clk.c中的clk_enable最终调用的是clk中ops里的方法。
   
 * [[clock_event]]
+* [[clk_framware]]

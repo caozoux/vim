@@ -1,0 +1,13 @@
+*	编译阶段：
+  	servlet容器编译servlet源文件，生成servlet类
+* 	初始化阶段：
+	加载与JSP对应的servlet类，创建其实例，并调用它的初始化方法
+	调用 jspInit 方法
+  	
+* 	执行阶段：
+	调用与JSP对应的servlet实例的服务方法
+	调用方法： void _jspService(HttpServletRequest request,
+                 HttpServletResponse response)
+* 	销毁阶段：
+	调用与JSP对应的servlet实例的销毁方法，然后销毁servlet实例
+	jspDestroy()

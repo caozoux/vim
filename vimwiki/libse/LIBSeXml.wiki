@@ -1,0 +1,11 @@
+======bool createXmlTemplate()======
+======bool addNode(string itemName)======
+======bool addNode(string itemName, string text)======
+======bool delNode(string itemName)======
+======bool addNodeAttr(string nodename, string attrName, string attrText)======
+======bool delNodeAttr(string nodename, string attrName, string attrText)======
+======bool UpdateNodeAttr(string nodename, string attrName, string attrText)======
+======bool UpdateNodeText(string nodename, string text)======
+======string getNodeAttrValue(string nodename, string attrName)======
+======string getNodeText(string nodename)======
+
