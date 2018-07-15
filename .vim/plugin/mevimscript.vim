@@ -98,7 +98,7 @@ endfunction
 
 "通过空格字符，快速生成linePatarn 的结构
 "参数$@, $1 ,$2,$....
-function! MeFastFormatLineV2(printStr, dataStr)
+function! MeFastFormatLineV2(printStr, dataStr, format)
 	normal! ^
 	let save_cursor = getpos('.')
 	let linetxt = getline(line('.'))
@@ -119,7 +119,8 @@ function! MeFastFormatLineV2(printStr, dataStr)
 	call add(showcontext, a:printStr)
 	for item in wordlist
 		call add(wordextend, item)
-		call add(wordextend, ":%08x ")
+		"call add(wordextend, ":%08x ")
+		call add(wordextend, a:format)
 	endfor
 	call add(wordextend, "\\n\",__func__")
 	for item in wordlist
