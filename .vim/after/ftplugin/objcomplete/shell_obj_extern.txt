@@ -37,4 +37,7 @@ awkoperate
 		++ --	增加或减少，作为前缀或后缀
 		$	字段引用
 		in	数组成员
+getopts
+		$OPTARG 当前参数
+		$OPTIND 下标
 end

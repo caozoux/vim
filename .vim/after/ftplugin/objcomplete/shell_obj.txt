@@ -24,3 +24,4 @@ shell#sed22	sed -e '/test/h' -e '$G example-----在sed处理文件的时候，�
 shell#sed23	sed -e '/test/h' -e '/check/x' example -----互换模式空间和保持缓冲区的内容。也就是把包含test与check的行互换。  
 awkenv_var	awk环境变量
 awkoperate	awk运算符
+getopts 	args
