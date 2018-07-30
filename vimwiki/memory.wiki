@@ -1,4 +1,5 @@
 * [[memory-map]]
 * [[内存泄露]]
 * [[mmu]]
+* [[hugepage]]
 

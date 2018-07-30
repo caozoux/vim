@@ -8,6 +8,7 @@
 * [[Makefile]]
 * [[gdb]]
 * [[gcc]]
+* [[crash]]
 * [[linux_program]]
 * [[commad]]
 * [[ctags-cscope]]
