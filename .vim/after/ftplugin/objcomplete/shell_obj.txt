@@ -1,4 +1,8 @@
 awkenv_var	awk环境变量
 awkoperate	awk运算符
-getopts 	args
-shell#sed
+getopts	args
+sed	sed通用命令
+env	通用变量
+cutstring	截取字符串
+data	shell的数据结构
+pattern	shell的字符截取

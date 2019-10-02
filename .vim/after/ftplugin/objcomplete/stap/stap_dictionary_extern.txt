@@ -1,0 +1,22 @@
+start
+script
+		stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}
+		stap -r 2.6.32-53.el6 -e 'probe vfs.read {exit()}' -m simple -p4
+		stap -F -o /tmp/pfaults.log -S 1,2 pfaults.stp
+example	
+		/usr/share/doc/systemtap-version/examples/io/iotime.stp
+event
+		syscall.system_call
+		syscall.system_call
+		kernel.function("function") 可以hook整个文件probe kernel.function("*@net/socket.c") { }
+		kernel.trace("tracepoint")
+		module("module").function("function")
+		timer.ms(milliseconds)
+		timer.us(microseconds)
+		timer.us(microseconds)
+		timer.hz(hertz)
+		timer.jiffies(jiffies)
+
+
+
+end

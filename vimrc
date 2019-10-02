@@ -251,6 +251,10 @@ colorscheme zenburn
 
 au BufRead,BufNewFile *.patch set filetype=patch
 
+augroup filetypedetect
+au BufNewFile,BufRead *.stap     setf stap
+augroup END
+
 map <F6> :make clean<CR><CR><CR>
 "map <F7> :make<CR><CR><CR> :copen<CR><CR>
 map <F7> :call MakeSelect() <CR><CR>

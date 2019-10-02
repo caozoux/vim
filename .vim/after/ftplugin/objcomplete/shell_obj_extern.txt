@@ -40,7 +40,7 @@ awkoperate
 getopts
 		$OPTARG 当前参数
 		$OPTIND 下标
-shell#sed
+sed
 		shell#sed1	sed 's/test/mytest/g' example$ sed '2d' example-----删除example文件的第二行。  
 		shell#sed2	sed '2,$d' example-----删除example文件的第二行到末尾所有行。  
 		shell#sed3	sed '$d' example-----删除example文件的最后一行。  
@@ -65,4 +65,23 @@ shell#sed
 		shell#sed21	sed '10q' example-----打印完第10行后，退出sed。  
 		shell#sed22	sed -e '/test/h' -e '$G example-----在sed处理文件的时候，每一行都被保存在一个叫模式空间的临时缓冲区中，除非行被删除或者输出被取消，否则所有被处理的行都将 打印在屏幕上。接着模式空间被清空，并存入新的一行等待处理。在这个例子里，匹配test的行被找到后，将存入模式空间，h命令将其复制并存入一个称为保 持缓存区的特殊缓冲区内。第二条语句的意思是，当到达最后一行后，G命令取出保持缓冲区的行，然后把它放回模式空间中，且追加到现在已经存在于模式空间中 的行的末尾。在这个例子中就是追加到最后一行。简单来说，任何包含test的行都被复制并追加到该文件的末尾。  
 		shell#sed23	sed -e '/test/h' -e '/check/x' example -----互换模式空间和保持缓冲区的内容。也就是把包含test与check的行互换。  
+
+env
+		$? 获取返回值
+
+cutstring
+		echo ${var#*//} 其中 var 是变量名，# 号是运算符，*// 表示从左边开始删除第一个 // 号及左边的所有字符即删除 http://
+		echo ${var##*/} ##*/ 表示从左边开始删除最后（最右边）一个 / 号及左边的所有字符即删除 http://www.aaa.com/, 123.htm
+		echo ${var%/*} %/* 表示从右边开始，删除第一个 / 号及右边的字符结果是：http://www.aaa.com
+		echo ${var%%/*} %%/* 表示从右边开始，删除最后（最左边）一个 / 号及右边的字符结果是：http:
+		echo ${var:0:5} 其中的 0 表示左边第一个字符开始，5 表示字符的总个数。结果是：http:
+		echo ${var:0-7:3}其中的 0-7 表示右边算起第七个字符开始，3 表示字符的个数结果是：123
+		echo ${var:0-7}表示从右边第七个字符开始，一直到结束。结果是：123.htm
+data
+		arr_number=(1 2 3 4 5); 一对括号表示数组，数组中元素之间使用"空格"来隔开
+		${#arr_number[@]} 长度
+		清除某个元素：unset arr_number[1]，这里清除下标为1的数组
+		清空整个数组：unset arr_number;
+		分片访问${arr_number[@]:1:4}，这里分片访问从下标为1开始，元素个数为4
+		for v in ${arr_number[@]}; do
 end
