@@ -1,3 +1,4 @@
 mem#idmap_pg_dir	 kernel启动是的mmu页表基地址
 open#args 	O_RDONLY,O_WRONLY,O_RDWR
+linux#signal	信号列表
 setsockopt#option 	SO_KEEPALIVE,TCP_CORK

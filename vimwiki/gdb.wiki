@@ -26,3 +26,7 @@ http://blog.csdn.net/dadalan/article/details/3758025
 * [[gdb-server]]
 * [[objdump]]
 * [[gdb_useful_command]]
+ 
+
+1. i line *0xfffaddr
+

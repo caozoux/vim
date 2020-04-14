@@ -1,0 +1,20 @@
+example	
+script
+event 	systemtap event call
+pid()	The process (task group) id of the current thread.
+tid()	The ID of the current thread.
+uid()	The ID of the current user.
+cpu()	The current CPU number.
+gettimeofday_s()	The number of seconds since UNIX epoch (January 1, 1970).
+ctime()	Convert number of seconds since UNIX epoch to date.
+pp()	A string describing the probe point currently being handled.
+thread_indent)()	
+probefunc()	 the probe function
+execname()	 The name of the current process.
+get_cycles()	 Snapshot of hardware cycle counter.
+ppfunc()	If known, the the function name in which this probe was placed.
+target() 	hook current script
+$$vars	If available, a pretty-printed listing of all local variables in scope.
+print_backtrace()	If possible, print a kernel backtrace.
+print_ubacktrace()	If possible, print a user-space backtrace.
+

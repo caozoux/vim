@@ -1,0 +1,44 @@
+* 
+stap -v -e 'probe vfs.read {printf("read performed\n"); exit)}
+stap -r 2.6.32-53.el6 -e 'probe vfs.read {exit()}' -m simple -p4
+/usr/share/doc/systemtap-version/examples/io/iotime.stp
+
+stap -F -o /tmp/pfaults.log -S 1,2 pfaults.stp
+
+function function_name(arguments){statements}
+ probe event {function_name(arguments)}
+
+syscall.system_call
+vfs.file_operation
+kernel.function("function")
+kernel.trace("tracepoint")
+kernel.trace("tracepoint")
+module("module").function("function")
+
+timer.ms(milliseconds) timer.us(microseconds) timer.ns(nanoseconds) timer.hz(hertz) timer.jiffies(jiffies)
+
+
+probe kernel.function("*@net/socket.c") { }
+probe kernel.function("*@net/socket.c").return { }
+
+
+tid()
+The ID of the current thread.
+uid()
+The ID of the current user.
+cpu()
+The current CPU number.
+gettimeofday_s()
+The number of seconds since UNIX epoch (January 1, 1970).
+ctime()
+Convert number of seconds since UNIX epoch to date.
+pp()
+A string describing the probe point currently being handled.
+thread_indent()
+This particular function is quite useful, providing you with a way to better organize your print results. The function takes one argument, an indentation delta, which indicates how many spaces to add or remove from a thread's "indentation counter". It then returns a string with some generic trace data along with an appropriate number of indentation [[spaces.]]
+
+probe kernel.function("*@net/socket.c") {
+printf ("%s -> %s\n", thread_indent(1), probefunc()) }
+
+
+
