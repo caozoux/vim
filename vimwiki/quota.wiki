@@ -1,0 +1,4 @@
+1. enable
+mount -o xxx,usrquota,grpquota
+quotaon /quota
+repquota -a

@@ -50,4 +50,5 @@
 * [[mdio_bus]]
 * [[ethernet_phy]]
 * [[intel_architecture]]
+* [[fs]]
 CFLAGS_smp.o = -O0

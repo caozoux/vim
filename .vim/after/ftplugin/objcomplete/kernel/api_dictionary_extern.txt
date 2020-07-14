@@ -6,4 +6,28 @@ mm_struc
 		pgd_t * pgd; //存放页表的首地址, 通过pgd+vir_addr>>PGDIR_SHIFT&(PTRS_PED_GD-1),得到pgd 的入口点
 		unsigned long start_code, end_code, start_data, end_data; //进程的代码空间
 		unsigned long arg_start, arg_end, env_start, env_end;
+module_param
+	module_param(name, type, num, perm);
+		type支持的基本类型有:
+		bool   :布尔类型
+		invbool:颠倒了值的bool类型;
+		charp  :字符指针类型,内存为用户提供的字符串分配;
+		int    :整型
+		long   :长整型
+		short  :短整型
+		uint   :无符号整型
+		ulong  :无符号长整型
+		ushort :无符号短整型
+		#define S_IRWXU 00700
+		#define S_IRUSR 00400
+		#define S_IWUSR 00200
+		#define S_IXUSR 00100
+		#define S_IRWXG 00070
+		#define S_IRGRP 00040
+		#define S_IWGRP 00020
+		#define S_IXGRP 00010
+		#define S_IRWXO 00007
+		#define S_IROTH 00004
+		#define S_IWOTH 00002
+		#define S_IXOTH 00001
 end
