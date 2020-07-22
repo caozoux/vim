@@ -232,6 +232,8 @@ au CursorHold * checktime
 set clipboard=unnamed
 set clipboard=unnamedplus
 
+"let nerdtreeIgnore=['\.o', '\.mod.o', '\.mod.c','\.ko']
+let NERDTreeIgnore=['\.o', '\.mod.o', '\.mod.c','\.ko', 'Module.symvers']
 "----------------------------- highlight ----------------------------------
 highlight Folded ctermfg=0 ctermbg=7
 set cursorline
@@ -284,6 +286,7 @@ map <C-x>k <ESC>:call PyMeTest()<CR>
 "runtime /home/wrsadmin/github/vim/wind.vim
 map <C-x>v <ESC>:call Patch_vsplit_open()<CR>
 map <C-x>c <ESC>"+p
+map <C-x>z <ESC>:call Me_zf_funcs(0)<CR>
 imap <c-x><c-n> a<ESC>x:call PrintkPast()<CR>
 map  <c-x><c-n> oa<ESC>x:call PrintkPast()<CR>
 
