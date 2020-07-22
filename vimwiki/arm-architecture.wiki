@@ -1,2 +1,3 @@
 * [[arm-mem-typed]]
 * [[generate-interrupt-control]](gic)
+* [[assemble]]

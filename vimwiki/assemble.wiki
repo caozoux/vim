@@ -4,3 +4,10 @@ mrc p15, 0, \rx, c1, c0
 tst \rx, #1  
 ldreq   \rx, = S3C24XX_PA_UART  
 ldrne   \rx, = S3C24XX_VA_UART 
+
+# 循环
+   b .
+   
+# data
+ excpt_msg:
+ asciz "Unhandled Exception in EL3.\nx30 =\t\t0x

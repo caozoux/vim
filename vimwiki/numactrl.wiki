@@ -1,0 +1,2 @@
+numactl -C 0  -m  2 ./stream  测试node0 -> node2  cpu0 在node1
+numactl -C 24 -m 2 ./stream  测试node1 -> node2   cpu0 在node2

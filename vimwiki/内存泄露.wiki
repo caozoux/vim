@@ -1,1 +1,3 @@
- echo m > /proc/sysrq-trigge
+1. echo m > /proc/sysrq-trigge
+2. KASAN
+3. SLUB_DEBUG
