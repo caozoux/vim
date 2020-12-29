@@ -1,0 +1,16 @@
+start
+Maps#BPF_STACK_TRACE
+	# 添加stack_strack对象到HASH中
+	key.w_k_stack_id = stack_traces.get_stackid(ctx, BPF_F_REUSE_STACKID);	
+	for k, v in sorted(counts.items(), key=lambda counts: counts[1].value)
+	aker_kernel_stack = [] if k.w_k_stack_id < 1 else
+	 reversed(list(stack_traces.walk(k.w_k_stack_id))[1:])
+	 for addr in waker_kernel_stack:
+		printb(b"    %-16x %s" % (addr, b.ksym(addr)))
+		printb(b"    %-16s %s" % (b"waker:", k.waker))
+		print("        %d\n" % v.value)
+
+InlineFunc#bpf_probe_read_user()
+	This attempts to safely read size bytes from user address space to the BPF stack, so that BPF can later operate on it. For safety, all user address space memory reads must pass through bpf_probe_read_user().
+	int bpf_probe_read_user(void *dst, int size, const void *src)
+end

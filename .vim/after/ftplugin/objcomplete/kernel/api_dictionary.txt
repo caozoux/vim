@@ -35,4 +35,6 @@ atomic_add_return(i, v)	Add i to *v and return the new value of *v
 atomic_sub_return(i, v)	Subtract i from *v and return the new value of *v
 time_after(a,b) 	you can use fime_after(yourtimer, jiffies)	to get a dely 	
 module_param 	module param
+list_for_each 	list_for_each(pos, head)
+list_for_each_safe 	list_for_each_safe(pos, n, head)
 

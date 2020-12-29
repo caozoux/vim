@@ -56,6 +56,10 @@ function! ObjCompleteSetMode(mode)
 		let s:objfunc_dictonaryfile=s:objfunc_dictonarydirfile."c_or_cpp/c_or_cpp_dictionary.txt" 
 		let s:objfunc_dictonaryextfile=s:objfunc_dictonarydirfile."c_or_cpp/c_or_cpp_dictionary_ex.txt" 
 		call ObjDictionUpdate(s:objfunc_dictonaryfile, s:objfunc_dictonaryextfile)
+	elseif a:mode == "python_bcc"
+		let s:objfunc_dictonaryfile=s:objfunc_dictonarydirfile."pybcc/api_dictionary.txt"
+		let s:objfunc_dictonaryextfile=s:objfunc_dictonarydirfile."pybcc/api_dictionary_extern.txt"
+		call ObjDictionUpdate(s:objfunc_dictonaryfile, s:objfunc_dictonaryextfile)
 	endif
 endfunction
 
@@ -114,7 +118,8 @@ function! ObjCompleteModeShow()
 	let objlist=['Select ObjCompleteMode:',
 					\ '1. kernel',                                                                                                                                                         
 					\ '2. qt',
-					\ '3. c_or_cpp']
+					\ '3. c_or_cpp',
+					\ '4. python_bcc']
 	let select = inputlist(objlist)
 	if  select  == 1
 		call ObjCompleteSetMode("kernel")
@@ -122,6 +127,8 @@ function! ObjCompleteModeShow()
 		call ObjCompleteSetMode("qt")
 	elseif select == 3
 		call ObjCompleteSetMode("c_or_cpp")
+	elseif select == 4
+		call ObjCompleteSetMode("python_bcc")
 	endif
 endfunction
 

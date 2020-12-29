@@ -2,3 +2,57 @@ snippet fun
 def ${1:name}():
 
 endsnippet
+
+
+snippet bcctext
+from __future__ import print_function
+from bcc import BPF
+from time import sleep, strftime
+import argparse
+
+
+bpf_text = """
+#include <uapi/linux/ptrace.h>
+#include <linux/blkdev.h>
+
+typedef struct disk_key {
+    char disk[DISK_NAME_LEN];
+    u64 slot;
+} disk_key_t;
+
+typedef struct flag_key {
+    u64 flags;
+    u64 slot;
+} flag_key_t;
+
+BPF_HASH(start, struct request *);
+
+// time block I/O
+int trace_req_start(struct pt_regs *ctx, struct request *req)
+{
+    u64 ts = bpf_ktime_get_ns();
+    start.update(&req, &ts);
+    return 0;
+}
+
+// output
+int trace_req_done(struct pt_regs *ctx, struct request *req)
+{
+    u64 *tsp, delta;
+
+    // fetch timestamp and calculate delta
+    tsp = start.lookup(&req);
+    if (tsp == 0) {
+        return 0;   // missed issue
+    }
+    delta = bpf_ktime_get_ns() - *tsp;
+
+
+    start.delete(&req);
+    return 0;
+}
+"""
+
+# load BPF program
+b = BPF(text=bpf_text)
+endsnippet

@@ -1,0 +1,87 @@
+Event#kprobes	通过kprobe_关键字kprobe 函数， 第一个参数为struct pt_regs *ctx,
+Event#kretprobes	通过kretprobe_关键字kprobe 函数， 第一个参数为struct pt_regs *ctx,
+Event#Tracepoints	TRACEPOINT_PROBE(random, urandom_read), event title + event  
+Event#uprobes	
+Event#uretprobes	
+Event#probes	
+Event#Tracepoints	RAW_TRACEPOINT_PROBE(sched_switch)
+Event#syscall	int syscall__execve(struct pt_regs *ctx,const char __user *filename,const char __user *const __user *__argv,const char __user *const __user *__envp)
+Event#kfuncs	KFUNC_PROBE(do_sys_open, int dfd, const char *filename, int flags, int mode)
+Event#kretfuncs	 KRETFUNC_PROBE(event, typeof(arg1) arg1, typeof(arg2) arge ..., int ret)kk
+Event#probes	
+Event#iterators	
+InlineFunc#bpf_probe_read_kernel()	int bpf_probe_read_kernel(void *dst, int size, const void *src)
+InlineFunc#bpf_probe_read_kernel_str()	int bpf_probe_read_kernel_str(void *dst, int size, const void *src)
+InlineFunc#bpf_ktime_get_ns()	u64 bpf_ktime_get_ns(void)
+InlineFunc#bpf_get_current_pid_tgid()	u64 bpf_get_current_pid_tgid(void)
+InlineFunc#bpf_get_current_uid_gid()	u64 bpf_get_current_uid_gid(void)
+InlineFunc#bpf_get_current_comm()	bpf_get_current_comm(char *buf, int size_of_buf)
+InlineFunc#bpf_get_current_task()	struct task_struct *t = (struct task_struct *)bpf_get_current_task();
+InlineFunc#bpf_log2l()	unsigned int bpf_log2l(unsigned long v)
+InlineFunc#bpf_get_prandom_u32()	u32 bpf_get_prandom_u32()
+InlineFunc#bpf_probe_read_user()	int bpf_probe_read_user(void *dst, int size, const void *src)
+InlineFunc#bpf_probe_read_user_str()	int bpf_probe_read_user_str(void *dst, int size, const void *src)
+InlineFunc#bpf_get_ns_current_pid_tgid()	u32 bpf_get_ns_current_pid_tgid(u64 dev, u64 ino, struct bpf_pidns_info* nsdata, u32 size)
+InlineFunc#Debugging	
+InlineFunc#bpf_override_return()	
+Output#bpf_trace_printk()	
+Output#BPF_PERF_OUTPUT	
+Output#perf_submit()	
+Output#BPF_RINGBUF_OUTPUT	
+Output#ringbuf_output()	
+Output#ringbuf_reserve()	
+Output#ringbuf_submit()	
+Output#ringbuf_discard()	
+Maps#BPF_TABLE	BPF_TABLE(MAPTYPE, uint32_t, long, dropcnt, 256);
+Maps#BPF_HASH	BPF_HASH(start, struct request *);
+Maps#BPF_ARRAY	BPF_ARRAY(name [, leaf_type [, size]])
+Maps#BPF_HISTOGRAM	BPF_HISTOGRAM(name, key_type=int, size=64)
+Maps#BPF_STACK_TRACE	BPF_STACK_TRACE(stack_traces, 1024);
+Maps#BPF_PERF_ARRAY	BPF_PERF_ARRAY(cpu_cycles, NUM_CPUS);
+Maps#BPF_PERCPU_ARRAY	BPF_PERCPU_ARRAY(counts, u64, 32);
+Maps#BPF_LPM_TRIE	
+Maps#BPF_PROG_ARRAY	
+Maps#BPF_DEVMAP	
+Maps#BPF_CPUMAP	
+Maps#BPF_XSKMAP	
+Maps#BPF_ARRAY_OF_MAPS	
+Maps#BPF_HASH_OF_MAPS	
+Maps#BPF_STACK	BPF_STACK(stack, struct event, 10240);
+Maps#BPF_QUEUE	BPF_QUEUE(queue, struct event, 10240);
+Maps#map.lookup()	
+Maps#map.lookup_or_try_init()	
+Maps#map.delete()	
+Maps#map.update()	
+Maps#map.insert()	
+Maps#map.increment()	
+Maps#map.get_stackid()	
+Maps#map.perf_read()	
+Maps#map.call()	
+Maps#map.redirect_map()	
+Maps#map.push()	
+Maps#map.pop()	
+Maps#map.peek()	
+pyEvent#sattach_kprobe()	
+pyEvent#attach_kretprobe()	
+pyEvent#attach_tracepoint()	
+pyEvent#attach_uprobe()	
+pyEvent#attach_uretprobe()	
+pyEvent#USDT.enable_probe()	
+pyEvent#attach_raw_tracepoint()	
+pyDebugOutput#trace_print()	
+pyDebugOutput#trace_fields()	
+pyDebugOutput#Output	
+pyDebugOutput#perf_buffer_poll()	
+pyDebugOutput#ring_buffer_poll()	
+pyDebugOutput#ring_buffer_consume()	
+pyMaps#get_table()	
+pyMaps#open_perf_buffer()	
+pyMaps#items()	
+pyMaps#values()	
+pyMaps#clear()	
+pyMaps#print_log2_hist()	
+pyMaps#print_linear_hist()	
+pyMaps#open_ring_buffer()	
+pyMaps#push()	
+pyMaps#pop()	
+pyMaps#peek()	
