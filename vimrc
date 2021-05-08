@@ -277,7 +277,7 @@ inoremap <C-d> <RIGHT><DEL>
 map <C-x>w <ESC>:w<CR>
 map <C-x>x <ESC>:wq<CR>
 map <C-x>q <ESC>:q!<CR>
-map <C-x>z <ESC>:call ObjOpenDictFile()<CR>
+map <C-x>a <ESC>:call ObjOpenDictFile()<CR>
 map <C-n>  <ESC>:call Me_pr_func2(1)<CR>
 map <C-x>q <ESC>:q!<CR>
 map <C-x>l <ESC>:sourc ~/.vim/plugin/metest.vim<CR>

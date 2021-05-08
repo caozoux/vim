@@ -70,7 +70,7 @@ func! ObjDictionUpdate(f_diction, exf_diction)
 
 	let s:objfunc_dictonaryfile=a:f_diction
 	let s:objfunc_dictonaryextfile=a:exf_diction
-python << EOF
+python3 << EOF
 
 
 import os
