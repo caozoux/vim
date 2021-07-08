@@ -146,7 +146,7 @@ endfunction
 "得到路径中的文件名
 function! GetFilenameWithoutPath(filename)
 	let filebasename=""
-python << EOF
+python3 << EOF
 import os
 import vim
 filename = vim.bindeval("a:filename")

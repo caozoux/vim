@@ -133,38 +133,38 @@ let g:miniBufExplModSelTarget = 1
 
 "------------------------------- cscope ------------------------------------
 if has("cscope")
-   set csprg=/usr/bin/cscope     
-   set csto=0                   
-   set cst                     
-   set cscopequickfix=s-,c-,d-,i-,t-,e-
+   set csprg=/usr/bin/cscope
+   set csto=0
+   set cst
+   set cscopequickfix=i-,t-
    set nocsverb
-   if filereadable("cscope.out")   
+   if filereadable("cscope.out")
        cs add cscope.out        
-   elseif $CSCOPE_DB != ""        
+   elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB        
    endif
-   cs add ~/github/shell/cscope/cscope.out
+   "cs add ~/github/shell/cscope/cscope.out
    set csverb
-   let Cscope_OpenQuickfixWindow = 0
+   let Cscope_OpenQuickfixWindow = 1
 
     map <F4> :cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
 	imap <F4> <ESC>:cs add ./cscope.out .<CR><CR><CR> :cs reset<CR>
 
 	"get the declare
-	nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-a>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 	"get the define
-	nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-a>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 	"get the function called
-	nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-a>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 	"get the specific string
-	nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-a>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 	" egrep mode find
-	nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-a>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 	" find specific file name
-	nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-	nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	nmap <C-a>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+	nmap <C-a>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 	" find the number of called function in this function
-	nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+	nmap <C-a>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
 
@@ -308,24 +308,24 @@ let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
 "nnoremap <leader>lo :lopen<CR> "open locationlist
 "nnoremap <leader>lc :lclose<CR>    "close locationlist
-inoremap <leader><leader> <C-x><C-o>
-let g:acp_behaviorJavaEclimLength = 3
+"inoremap <leader><leader> <C-x><C-o>
+"let g:acp_behaviorJavaEclimLength = 3
 
 "function MeetsForJavaEclim(context)
 "  return g:acp_behaviorJavaEclimLength >= 0 &&
 "        \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
 "endfunction
 
-function MeetsForJavaEclim(context)
-endfunction
+"function MeetsForJavaEclim(context)
+"endfunction
 
-let g:acp_behavior = {
-    \ 'java': [{
-      \ 'command': "\<c-x>\<c-u>",
-      \ 'completefunc' : 'eclim#java#complete#CodeComplete',
-      \ 'meets'        : 'MeetsForJavaEclim',
-    \ }]
-  \ }
+"let g:acp_behavior = {
+"    \ 'java': [{
+"      \ 'command': "\<c-x>\<c-u>",
+"      \ 'completefunc' : 'eclim#java#complete#CodeComplete',
+"      \ 'meets'        : 'MeetsForJavaEclim',
+"    \ }]
+"  \ }
 
 "let  g:acp_behaviorJavaEclimLength = g:acp_behaviorJavaEclimLength
 let g:user_emmet_expandabbr_key = '<C-e>'
