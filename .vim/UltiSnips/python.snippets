@@ -3,6 +3,33 @@ def ${1:name}():
 
 endsnippet
 
+snippet ebpf_kprobe
+#!/usr/bin/python
+
+from __future__ import print_function
+from bcc import BPF
+from time import sleep
+
+# load BPF program
+b = BPF(text="""
+#include <uapi/linux/ptrace.h>
+#include <linux/blkdev.h>
+int kprobe__blk_account_io_done(struct pt_regs *ctx, struct request *req)
+{
+	return 0;
+}
+""")
+
+# header
+print("Tracing... Hit Ctrl-C to end.")
+
+# trace until Ctrl-C
+try:
+	sleep(99999999)
+except KeyboardInterrupt:
+	print()
+endsnippet
+
 
 snippet bcctext
 from __future__ import print_function

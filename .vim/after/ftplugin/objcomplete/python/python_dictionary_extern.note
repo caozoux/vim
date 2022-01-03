@@ -1,0 +1,6 @@
+start
+vim#matchstr()
+		matchstr({expr}, {pat}[, {start}[, {count}]])
+		echo matchstr("testing", "ing") ---> ing
+		echo matchstr("testing", "ing", 2)
+end

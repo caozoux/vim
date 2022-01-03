@@ -43,12 +43,13 @@ Plugin 'burnettk/vim-angular'
 Plugin 'mxw/vim-jsx' 
 Plugin 'marijnh/tern_for_vim'
 "Plugin 'tpope/vim-pathogen'
-"Plugin 'davidhalter/jedi-vim'   "python autocomplete plugin 
+Plugin 'davidhalter/jedi-vim'   "python autocomplete plugin 
 Plugin 'jnurmine/Zenburn'       "color config
 Plugin 'altercation/vim-colors-solarized' "color config
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}   "powerline
 Plugin 'pboettch/vim-cmake-syntax' "cmake syntax
-Plugin 'vim-scripts/Conque-GDB'
+Plugin 'fatih/vim-go'
+Plugin 'majutsushi/tagbar'
 
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
@@ -336,3 +337,5 @@ let g:user_emmet_expandabbr_key = '<C-e>'
 augroup filetypedetect
 au BufNewFile,BufRead *.note	setf note
 augroup END
+
+set hlsearch

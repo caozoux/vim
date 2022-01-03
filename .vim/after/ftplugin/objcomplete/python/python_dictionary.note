@@ -1,0 +1,1 @@
+vim#r1char()	得到一个 ASCII 值对应的字符
