@@ -48,7 +48,6 @@ Plugin 'jnurmine/Zenburn'       "color config
 Plugin 'altercation/vim-colors-solarized' "color config
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}   "powerline
 Plugin 'pboettch/vim-cmake-syntax' "cmake syntax
-Plugin 'vim-scripts/Conque-GDB'
 
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
