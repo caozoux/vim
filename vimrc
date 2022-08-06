@@ -1,5 +1,7 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
+filetype plugin on
+syntax on
+"filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -42,6 +44,7 @@ Plugin 'heavenshell/vim-jsdoc', {'for': ['javascript', 'jsx']}
 Plugin 'burnettk/vim-angular'
 Plugin 'mxw/vim-jsx' 
 Plugin 'marijnh/tern_for_vim'
+Plugin 'vimwiki/vimwiki.git'
 "Plugin 'tpope/vim-pathogen'
 "Plugin 'davidhalter/jedi-vim'   "python autocomplete plugin 
 Plugin 'jnurmine/Zenburn'       "color config
@@ -193,7 +196,6 @@ let showmarks_hlline_upper = 1
 
 "-------------------------------- powerline --------------------------------------
 set guifont=PowerlineSymbols\ for\ Powerline
-set nocompatible
 set t_Co=256
 let g:Powerline_symbols = 'fancy'
 
@@ -219,9 +221,7 @@ set shiftwidth=4
 set autoindent
 set smartindent
 
-set nocompatible
 let python_highlight_all=1
-syntax on
 
 set number
 set autowrite
@@ -244,7 +244,6 @@ colorscheme zenburn
 "---------------------------------------------------------------------------
 "filetype plugin indent on
 "autocmd FileType python setlocal et sta sw=4 sts=4
-"filetype plugin on
 "let g:pydiction_location='~/.vim/after/ftplugin/pydiction/complete-dict'
 "set ofu=syntaxcomplete
 "autocmd FileType python　set omnifunc=pythoncomplete#Complete 
