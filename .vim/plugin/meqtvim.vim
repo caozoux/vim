@@ -8,7 +8,7 @@ endfunction
 func! MakeSelect()
 python import sys
 python import os
-python << EOF
+python3 << EOF
 if os.path.isfile("./.qtVim"):
 	isQtVim=1
 	cmdQtVim=open(".qtVim").read()
