@@ -1,1 +1,3 @@
-* [[systemd-sreivce]]
+* [[systemd-serivce]]
+* [[[cpupower]]]
+* [[cmdline]]

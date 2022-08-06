@@ -1,0 +1,2 @@
+cpupower -c all frequency-set -g performance
+cpupower --cpu all frequency-set --freq 1.5GHz
