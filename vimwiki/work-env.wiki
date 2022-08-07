@@ -11,6 +11,8 @@
 * [[ubuntu]]
 * [[yocto]]
 * [[stop-watchdog]]
+* [[gcc]]
+* [[bluefield]]
 
 
 work follow:

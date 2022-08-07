@@ -1,4 +1,6 @@
-f [[device_tree]]
+* [[crash]]
+* [[systemtap]]
+* [[device_tree]]
 * [[memory]]
 * [[irq]]
 * [[sdio]]

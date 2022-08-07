@@ -1,0 +1,13 @@
+=file into json=
+	* json file
+		1. Example1
+			a) normal config
+			b) Example norma json:
+				{
+					"srcdir":"/export/disk1T/github/cloud-kernel/",
+					"builddir": "/export/disk1T/github/cache/cloud-kernel"
+				}
+	* example code
+		fd=open(filename, "w")
+		json.dump(benchmarkdict, fd)
+		fd.close()

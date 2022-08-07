@@ -1,0 +1,16 @@
+= rshim github =
+	* download
+	1. link
+		a) [[gtthub:https://github.com/Mellanox/rshim.git|rshimsrc_github]]
+		b) [[https://www.mellanox.com/downloads/BlueField/RSHIM/rshim_2.0.6-1.ga97dc5d_amd64.deb|rshim.deb]]
+		b) [[https://www.mellanox.com/downloads/BlueField/RSHIM/rshim-2.0.6-1.ga97dc5d.el7.centos.x86_64.rpm|rshim.rpm]]
+	2. install
+		a) make -C /lib/modules/`uname -r`/build M=$PWD INSTALL_MOD_DIR=extra/rshim modules_install
+			1. rshim.ko           rshim common code including console support 
+			2. rshim_net.ko       rshim network driver
+	3. os device
+		a)  /dev/rshim<N>/rshim
+		b)  /dev/rshim<N>/misc
+		c)  /dev/rshim<N>/console
+		c)  /dev/rshim<N>/boot
+	4. [[https://developer.nvidia.com/networking/doca|sdk]]

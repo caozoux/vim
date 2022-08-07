@@ -1,0 +1,6 @@
+= docker command =                                                                                                                                                                                                                       
+    * commit
+        # example:  docker commit -a "runoob.com" -m "my apache" a404c6c174a2  mymysql:v1 
+    * tag
+        # example:  docker tag ubuntu:15.10 jb51/ubuntu:v3
+
