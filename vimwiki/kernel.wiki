@@ -1,3 +1,4 @@
+* [[diagnose-tools]]
 * [[crash]]
 * [[systemtap]]
 * [[device_tree]]

@@ -1,28 +1,32 @@
-rFSL_MC_BUSoute add default gw 128.224.162.1 netmask 0.0.0.0 
+= net config=
+== route ==
+	1. route command
+		a)  default gw:
+			route add default gw 128.224.162.1 netmask 0.0.0.0 
+		b)  add route
+			route add default gw 128.224.162.1 netmask 0.0.0.0 
+		c)  del route
+			route del -net 128.224.162.0  netmask 255.255.255.0 dev eth0
+== waln==
+	1.  wlan
+		a)  Example:
+			WiFi:
+				# rfkill unblock wlan
+				# ifconfig wlan0 up 
+				# iwlist  wlan0  scanning
+				# iwconfig wlan0 essid your_essid_host
+				# dhclient wlan0
+== bridge==
+	* brctl
+		1. Example
+			其中一个网口收到的报文会被复制给其他网口并发送出去, 然而桥接却并不是在物理层实现的，而是在数据链路层
+			其一是在编译内核里把CONFIG_BRIDGE或CONDIG_BRIDGE_MODULE编译选项打开；其二是安装brctl工具
+			modprobe bridge
+			brctl addbr br0
+			brctl addif br0 eth0
+			brctl addif br0 eth1
+			ip link set br0 up
+			ip addr add 10.1.1.18/16 brd + dev br0
+			route add default gw 10.1.1.1 dev br0
+			brctl show
 
-route del -net 128.224.162.0  netmask 255.255.255.0 dev eth0
-route add -net 128.224.162.0  netmask 255.255.255.0 dev eth0
-
-
-* wlan
-408 WiFi:
-409     # rfkill unblock wlan
-410     # ifconfig wlan0 up 
-411     # iwlist  wlan0  scanning
-412     # iwconfig wlan0 essid your_essid_host
-413     # dhclient wlan0
-
-* [[brctl]]
-其中一个网口收到的报文会被复制给其他网口并发送出去, 然而桥接却并不是在物理层实现的，而是在数据链路层
-其一是在编译内核里把CONFIG_BRIDGE或CONDIG_BRIDGE_MODULE编译选项打开；其二是安装brctl工具
-modprobe bridge
-brctl addbr br0
-brctl addif br0 eth0
-brctl addif br0 eth1
-ip link set br0 up
-ip addr add 10.1.1.18/16 brd + dev br0
-route add default gw 10.1.1.1 dev br0
-brctl show
-
-* [[route]]
-* [[ip_command]]
