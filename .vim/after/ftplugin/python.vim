@@ -7,3 +7,5 @@ let home=strpart(home,0, len(home)-1)
 let s:objdiction_file= "~/.vim/after/ftplugin/objcomplete/python/python_dictionary.note"
 let s:objdiction_exfile="~/.vim/after/ftplugin/objcomplete/python/python_dictionary_extern.note"
 call ObjDictionUpdate(s:objdiction_file, s:objdiction_exfile)
+" inoremap <c-d> <ESC>:call MeFastGoFormatLineV2("Printf("", ", ", ":%v ")<CR>
+inoremap <c-d> <ESC>:call MeFastGoFormatLineV2("print(\"", ", ", ":%v ")<CR>

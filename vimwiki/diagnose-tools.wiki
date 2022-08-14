@@ -1,2 +1,75 @@
+= make =
+	1. KERNEL_BUILD_PATH
 = command =
 	* irq-trace
+== delay-trace ==
+	* OUTPUT
+	* summarry
+		1. hook func: sched_process_exit
+== load-monitor ==
+== perf ==
+== exit-monitor ==
+== syscall-delay ==
+== utilization ==
+== tcp-retrans ==
+== rw-top ==
+== fs-cache ==
+== sysirq-delay ==
+== mutex-monitor ==
+== alloc-top ==
+== high-order ==
+== drop-packet ==
+== fs-orphan ==
+== exec-monitor ==
+== fs-shm ==
+== irq-stats ==
+== irq-trace ==
+== kprobe ==
+== mm-leak ==
+== syssched-delay ==
+== ping-delay ==
+	* OUTPUT
+		1. out1
+				PD_ETH_RECV:         272296490950
+				PD_GRO_RECV:         272296491246
+			PD_GRO_RECV_ERR:                    0
+				PD_RECV_SKB:         272296492201
+		   PD_RECV_SKB_DROP:                    0
+				  PD_IP_RCV:         272296493223
+		   PD_IP_RCV_FINISH:         272296493815
+			   PD_DST_INPUT:         272296494982
+		   PD_LOCAL_DELIVER:         272296495129
+	PD_LOCAL_DELIVER_FINISH:         272296495186
+    	        PD_ICMP_RCV:         272296497254
+             	 PD_IP_SEND:         272296181957
+          	  PD_QUEUE_XMIT:         272296238226
+                PD_DEV_XMIT:         272296241068
+	* summarry
+		1. PD_ETH_RECV => hook func: eth_type_trans, then get icmp type
+		2. PD_GRO_RECV => hook func: napi_gro_receive
+		3. PD_GRO_RECV_RECV => hook func: napi_gro_receive
+		4. PD_RECV_SKB => hook func: __netif_receive_skb_core , it will be called process_backlog(napi-poll default function)
+		5. PD_IP_RCV => hook func: ip_rcv
+		6. PD_IP_RCV => hook func: icmp_rcv
+		7. PD_ICMP_RCV => hook func: icmp_rcv
+		8. PD_IP_SEND => hook func: ip_send_skb
+		9. PD_DEV_XMIT => hook func: net_dev_xmit
+				
+
+== ping-delay6 ==
+== reboot ==
+== uprobe ==
+== sys-cost ==
+== testcase ==
+== test-memcpy ==
+== test-pi ==
+== test-md5 ==
+== test-run-trace ==
+== net-bandwidth ==
+== sig-info ==
+== task-monitor ==
+== rw-sem ==
+== rss-monitor ==
+== memcg-stats ==
+== throttle-delay ==
+

@@ -37,7 +37,7 @@ func! Objhtmlftpinit()
 	let home=system("echo $HOME")
 	let home=strpart(home,0, len(home)-1)
 	let b:adid_ftplugin = 1
-python << EOF
+python3 << EOF
 import os
 import vim
 from vimscript import vimobjcomplete
@@ -57,4 +57,4 @@ if exists("&objfunc")
 endif
 
 ""set omnifunc=Vimomnicomplete
-call Objhtmlftpinit()
+"call Objhtmlftpinit()

@@ -1,0 +1,6 @@
+= windows =
+	* size
+		a) CTRL-W + increase
+		b) CTRL-W - decrease
+	* close
+		a) CTRL-o

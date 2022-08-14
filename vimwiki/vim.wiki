@@ -8,3 +8,4 @@
 * [[script]]
 * [[vim-event]]
 * [[mevimwiki]]
+* [[mevim_script]]

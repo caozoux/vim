@@ -13,4 +13,21 @@ Maps#BPF_STACK_TRACE
 InlineFunc#bpf_probe_read_user()
 	This attempts to safely read size bytes from user address space to the BPF stack, so that BPF can later operate on it. For safety, all user address space memory reads must pass through bpf_probe_read_user().
 	int bpf_probe_read_user(void *dst, int size, const void *src)
+
+Event#kprobes
+	b.attach_kprobe(event="blk_start_request", fn_name="trace_req_start")
+	int trace_req_start(struct pt_regs *ctx, struct request *req)
+
+Maps#BPF_HISTOGRAM
+	c:
+		BPF_HISTOGRAM(dist);
+		dist.increment(bpf_log2l(delta));
+	python:
+		dist.print_log2_hist(label, "disk")
+
+pyEvent#attach_tracepoint()	
+	int trace_kvm_entry(struct pt_regs *ctx)
+	b.attach_tracepoint(tp="kvm:kvm_entry", fn_name="trace_kvm_entry")
+
+Output#bpf_trace_printk()	
 end

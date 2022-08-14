@@ -1,0 +1,7 @@
+= diskmout =
+	* img
+		a)  fdisk -l openEuler-22.03-LTS-raspi-aarch64.img
+			1. openEuler-22.03-LTS-raspi-aarch64.img1 *    8192  593919  585728  286M  c W95 FAT32
+			2. openEuler-22.03-LTS-raspi-aarch64.img2       593920 1593343  999424  488M 82 Linux swap
+			3. openEuler-22.03-LTS-raspi-aarch64.img3       1593344 4546559 2953216  1.4G 83 Linux
+		b) sudo mount -o loop,offset=$((1593344*512)) openEuler-22.03-LTS-raspi-aarch64.img linux

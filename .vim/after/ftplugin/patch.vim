@@ -108,7 +108,7 @@ endfunction
 function! OpenMergePatch(patchdir)
 
 	let patchname=""
-python << EOF
+python3 << EOF
 import os
 import vim
 
@@ -147,7 +147,7 @@ function! GetPatchConflict()
 		call win_gotoid(backwinid)
 	endif
 	call ClearBufAll("patchcmdbuf")
-python << EOF
+python3 << EOF
 import os
 import vim
 import re
