@@ -1,5 +1,6 @@
 * [[diagnose-tools]]
 * [[crash]]
+* [[kdump]]
 * [[systemtap]]
 * [[device_tree]]
 * [[memory]]
@@ -53,3 +54,4 @@
 * [[perf]]
 * [[fs]]
 * [[preempt_rt]]
+* [[grub]]

@@ -1,1 +1,18 @@
 rdi, rsi, rdx, rcx, r8, r9。 。当参数为 7 个以上时， 前 6 个与前面一样， 但后面的依次从 "右向左" 放入栈中
+= list =
+	p net_namespace_list
+	list -o net.list -s net.ipvs -H 0xffffffff881871f0
+	mod -s ip_vs /home/zc/github/cache/kernel-4.18/net/netfilter/ipvs/ip_vs.ko
+	list ip_vs_proto_data.next 0xffff88b87d3b94c0
+	* o
+	* 
+= gdb  =
+	* gdb module as addrline
+		1. list *(some_function+0x12c)
+		2. 
+= vmlinux  =
+	* get source line (xt_replace_table+0x96)
+	* gdb vmlinux -> dis xt_replace_table 得到 -》0xffffffff816ad736 <+150>:	mov    %rax,(%r14)
+	* addr2line -f -e cache/kernel-4.18/vmlinux 0xffffffff816ad736 -> /home/zc/github/kernel-4.18.0/net/netfilter/x_tables.c:1328
+
+

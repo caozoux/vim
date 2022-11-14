@@ -1,0 +1,4 @@
+ca
+= makedumpfile =
+	* makedumpfile -l --message-level 7 -d 31 /proc/vmcore /tmp/tmp/aa
+	* /sbin/kexec -s -d -p --command-line=BOOT_IMAGE=(hd0,msdos1)/vmlinuz-4.18.0-408.el8.x86_64 ro resume=UUID=e1eb7709-4fd7-4b4e-82da-f4852ee1eee2 console=ttyS0,115200n8 irqpoll nr_cpus=1 reset_devices cgroup_disable=memory mce=off numa=off udev.children-max=2 panic=10 rootflags=nofail acpi_no_memhotplug transparent_hugepage=never nokaslr novmcoredd hest_disable disable_cpu_apicid=0 --initrd=/boot/initramfs-4.18.0-408.el8.x86_64kdump.img /boot/vmlinuz-4.18.0-408.el8.x86_64
