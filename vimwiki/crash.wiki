@@ -14,5 +14,15 @@ rdi, rsi, rdx, rcx, r8, r9。 。当参数为 7 个以上时， 前 6 个与前�
 	* get source line (xt_replace_table+0x96)
 	* gdb vmlinux -> dis xt_replace_table 得到 -》0xffffffff816ad736 <+150>:	mov    %rax,(%r14)
 	* addr2line -f -e cache/kernel-4.18/vmlinux 0xffffffff816ad736 -> /home/zc/github/kernel-4.18.0/net/netfilter/x_tables.c:1328
+	
+= cmd =
+== kmem ==
+== list ==
+	* -h list -o xt_table.list  -s xt_table.name -h 0xffffa0c4d7992be8
+	* -H  list -o net.list -s net.ipvs -H 0xffffffff881871f0
+		1. p net_namespace_list 这个是指针头部，地址是0xffffffff881871f0
+
+== search ==
+
 
 
