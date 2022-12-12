@@ -8,6 +8,7 @@
 * [[uboot-top]]
 * [[IPV4-IPV6]]
 * [[arm-architecture]]
+* [[x86-architecture]]
 * [[android]]
 * [[qemu]]
 * [[mysql]]

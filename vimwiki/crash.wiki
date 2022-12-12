@@ -21,8 +21,32 @@ rdi, rsi, rdx, rcx, r8, r9。 。当参数为 7 个以上时， 前 6 个与前�
 	* -h list -o xt_table.list  -s xt_table.name -h 0xffffa0c4d7992be8
 	* -H  list -o net.list -s net.ipvs -H 0xffffffff881871f0
 		1. p net_namespace_list 这个是指针头部，地址是0xffffffff881871f0
+	* -H  list -o net.list -s net.ipvs -H 0xffffffff881871f0
+	* list -o rwsem_waiter.list -s rwsem_waiter.type -h 0xffffb9cbc15c3dc0
 
 == search ==
+== sym ==
+== ptov==
+== percpu ==
+	* 获取每个cpu变量的基址
+		1. kmem -o
+			1. CPU 0: ffff8f0080200000
+			2. CPU 1: ffff8f0080240000
+			3. CPU 2: ffff8f0080280000
+			4. CPU 3: ffff8f00802c0000
+			5. CPU 42: ffff8f313f400000
+		2. struct kmem_cash.cpu_slub
+			  crash> struct kmem_cache.cpu_slab 0xffff8ed2070aadc0 -x
+			  cpu_slab = 0x2b4c0		
+			a) 	
+		3. struct kmem_cash.cpu_slub:42 =  ffff8f313f400000 + 0x2b4c0
+
+
+
+ 
+  
+  
+
 
 
 

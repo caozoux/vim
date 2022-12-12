@@ -1,5 +1,6 @@
 * [[diagnose-tools]]
 * [[crash]]
+* [[bpf]]
 * [[kdump]]
 * [[systemtap]]
 * [[device_tree]]

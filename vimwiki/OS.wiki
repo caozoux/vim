@@ -13,3 +13,4 @@
 * [[userprivate]]
 * [[disk]]
 * [[rpm]]
+* [[ethtool]]

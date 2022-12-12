@@ -1,0 +1,7 @@
+*  general protection fault: 0000 [#1] SMP NOPTI
+	1. 	asm ("movabsq $0x0011223344556677,%rcx \n"
+	2.       "callq *0x20(%rcx) \n"
+	3.  );
+*  kernel tried to execute NX-protected page 
+	1.  testfunc = addr;
+	2.  testfunc->func1();
