@@ -1,2 +1,2 @@
 * [[bpftrae]]
-* bcc-tools
+* [[bcc-tools]]

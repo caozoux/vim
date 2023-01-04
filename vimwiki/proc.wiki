@@ -1,1 +1,2 @@
 [[config]]
+[[proc_stat]]

@@ -1,0 +1,3 @@
+* out/.kat_compoents/tools/loadtask -s
+	* sysmonitor
+		1. 

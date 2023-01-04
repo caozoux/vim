@@ -1,0 +1,4 @@
+= kprobe =
+	1. attach
+		* b.attach_kprobe(event="vfs_unlink", fn_name="trace_req_start")
+		* trace_req_done(struct pt_regs *ctx, struct dentry *dentry, struct inode **delegated_inode) // first argument is struct pt_regs *ctx
