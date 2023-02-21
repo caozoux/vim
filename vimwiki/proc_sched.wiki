@@ -1,0 +1,23 @@
+* schedstat
+	1. code
+				"cpu%d %u 0 %u %u %u %u %llu %llu %lu",
+				cpu, rq->yld_count,
+				rq->sched_count, rq->sched_goidle,
+				rq->ttwu_count, rq->ttwu_local,
+				rq->rq_cpu_time,
+				rq->rq_sched_info.run_delay, rq->rq_sched_info.pcount);	
+	2. 
+* stat
+	1. user 用户态时间
+	2. nice 用户态时间(低优先级，nice>0)
+	3. system 内核态时间
+	4. idle 空闲时间
+	5. iowait I/O等待时间
+	6. irq 硬中断
+	7. softirq 软中断
+
+
+
+
+
+iowait时间是不可靠值，理由如下：

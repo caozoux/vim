@@ -1,2 +1,3 @@
 [[config]]
 [[proc_stat]]
+[[proc_sched]]

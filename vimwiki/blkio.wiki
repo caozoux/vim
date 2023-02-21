@@ -1,0 +1,23 @@
+* control
+	1.  interfaco_e
+blkio.bfq.io_service_bytes
+blkio.bfq.io_serviced_recursive
+blkio.throttle.io_serviced_recursive
+
+blkio.throttle.io_service_bytes_recursive
+blkio.bfq.io_service_bytes_recursive
+
+blkio.throttle.read_bps_device
+blkio.throttle.write_iops_device
+blkio.throttle.io_serviced
+blkio.bfq.io_serviced
+
+blkio.throttle.read_iops_device
+blkio.throttle.write_bps_device
+cgroup.sane_behavior
+release_agent
+blkio.reset_stats
+cgroup.clone_children
+cgroup.unaware_procfs
+cgroup.procs
+

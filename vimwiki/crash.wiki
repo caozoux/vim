@@ -1,11 +1,47 @@
 rdi, rsi, rdx, rcx, r8, r9。 。当参数为 7 个以上时， 前 6 个与前面一样， 但后面的依次从 "右向左" 放入栈中
+= module =
+	1. mod -s ip_vs /home/zc/github/cache/kernel-4.18/net/netfilter/ipvs/ip_vs.ko
 = list =
-	p net_namespace_list
-	list -o net.list -s net.ipvs -H 0xffffffff881871f0
-	mod -s ip_vs /home/zc/github/cache/kernel-4.18/net/netfilter/ipvs/ip_vs.ko
-	list ip_vs_proto_data.next 0xffff88b87d3b94c0
-	* o
-	* 
+	1. net
+		1. p net_namespace_list
+			a) list -o net.list -s net.ipvs -H 0xffffffff881871f0
+	2. block
+		a) p super_blocks
+		b) list -o super_block.s_list -s super_block.s_id  -s super_block.s_fs_info -s super_block.s_root -H 0xffff9630c7c13000
+	3. dentry
+		a) list -o dentry.d_child  -H 0xffff942bdcc42df8 (dentry.d_subdirs   list_add(&dentry->d_child, &parent->d_subdirs);)
+			1. 	crash> list -o dentry.d_child  -s dentry.d_name.name -H  0xffff942b943c7438
+					ffff942b943e4218
+					  d_name.name = 0xffff942b943e4250 "33"
+					ffff942b943e7de8
+					  d_name.name = 0xffff942b943e7e20 "22"
+	4. inode
+		a)  struct inode.i_dentry  ffff96af2ecef728
+			1.  struct dentry.d_u -x
+				struct dentry {
+					 union {
+					  [0xb0] } d_u;
+				}
+				struct inode.i_dentry  ffff96af2ecef728
+				i_dentry = {
+				  first = 0xffff96aded8005f0
+				}
+			2.  0xffff96aded8005f0 - 0xb0 = struct dentry 0xffff96aded800540 
+= tree =
+	1. tree -t radix -r address_space.page_tree ffff88012d364de0
+	2. tree -t xarray -r address_space.i_pages   0xffff96af2ecef8a0
+	3. tree -t x -N 0xffff94c23c1566ca -s page.flags,_refcount -x
+		1. address_space.i_pages 0xffff94c235e76828
+			1. crash> address_space.i_pages 0xffff94c235e76828
+				  i_pages = {
+					... [ xa_lock field not shown ] ...
+					xa_flags = 1, 
+					xa_head = 0xffff94c23c1566ca
+				  }
+				crash> tree -t x -N 0xffff94c23c1566ca
+				fffffcc005aa8380
+			2. tree -t x -N 0xffff94c23c1566ca -s page.flags,_refcount -x
+		2. 	
 = gdb  =
 	* gdb module as addrline
 		1. list *(some_function+0x12c)
@@ -17,6 +53,10 @@ rdi, rsi, rdx, rcx, r8, r9。 。当参数为 7 个以上时， 前 6 个与前�
 	
 = cmd =
 == kmem ==
+	1. kmem address
+		1. crash> kmem  ffff942c4d0ddbd8
+				  PAGE       PHYSICAL      MAPPING       INDEX CNT FLAGS
+			fffff5a4c4343740 10d0dd000 dead000000000400        1  0 17ffffc0000000
 == list ==
 	* -h list -o xt_table.list  -s xt_table.name -h 0xffffa0c4d7992be8
 	* -H  list -o net.list -s net.ipvs -H 0xffffffff881871f0
