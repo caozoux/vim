@@ -57,6 +57,26 @@ rdi, rsi, rdx, rcx, r8, r9。 。当参数为 7 个以上时， 前 6 个与前�
 		1. crash> kmem  ffff942c4d0ddbd8
 				  PAGE       PHYSICAL      MAPPING       INDEX CNT FLAGS
 			fffff5a4c4343740 10d0dd000 dead000000000400        1  0 17ffffc0000000
+		2. crash> kmem -p ffff968781e29f38 ===> get page of the address
+					  PAGE         PHYSICAL      MAPPING       INDEX CNT FLAGS
+				ffffe0b05f078a40 57c1e29000 ffff96707ae776b0     3cd9  1 57ffffc0000028 uptodate,lru
+		3. crash> kmem -g ffffe0b05f078a40 
+					FLAGS: ffffe0b05f078a40
+					  PAGE-FLAG       BIT  VALUE
+					  PG_active         6  0000040
+					  PG_owner_priv_1   9  0000200
+					  PG_reserved      11  0000800
+					  PG_head          15  0008000
+					  PG_mappedtodisk  16  0010000
+					  PG_reclaim       17  0020000
+					  PG_swapbacked    18  0040000
+					  PG_idle          24  1000000
+					  PG_workingset    25  2000000
+					  PG_checked        9  0000200
+					  PG_swapcache      9  0000200
+					  PG_pinned         9  0000200
+					  PG_foreign        9  0000200
+					  PG_isolated      17  0020000
 == list ==
 	* -h list -o xt_table.list  -s xt_table.name -h 0xffffa0c4d7992be8
 	* -H  list -o net.list -s net.ipvs -H 0xffffffff881871f0
@@ -81,12 +101,6 @@ rdi, rsi, rdx, rcx, r8, r9。 。当参数为 7 个以上时， 前 6 个与前�
 			a) 	
 		3. struct kmem_cash.cpu_slub:42 =  ffff8f313f400000 + 0x2b4c0
 
-
-
- 
-  
-  
-
-
-
+== makedumpfile ==
+	1.  sudo makedumpfile -c -d 31 /proc/kcore  dumpfile
 
