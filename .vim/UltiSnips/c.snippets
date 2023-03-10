@@ -8,3 +8,17 @@ snippet ft
 * arg:
 *******************************************************************************/
 endsnippet
+
+snippet kb
+int register_kprobe(struct kprobe *p);
+void unregister_kprobe(struct kprobe *p);
+static int __kprobes kprobe_handler(struct kprobe *p, struct pt_regs *regs)
+{
+	return 0;
+}
+
+struct kprobe kp1 = {
+    .pre_handler = kprobe_handler,
+};
+endsnippet
+
