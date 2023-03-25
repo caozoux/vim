@@ -1,3 +1,7 @@
 [[config]]
-[[proc_stat]]
 [[proc_sched]]
+[[diskstats]]
+[[stat]]
+[[proc_tcp]]
+[[vmstat]]
+

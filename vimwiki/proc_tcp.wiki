@@ -1,0 +1,2 @@
+/proc/sys/net/core/somaxconn 进程全链接数目限制
+/proc/sys/net/IPv4/tcp_max_syn_backlog 进程半链接数目限制

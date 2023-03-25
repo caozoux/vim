@@ -1,0 +1,36 @@
+= blktrace =
+== command ==
+	1. blktrace -d /dev/sda
+	2.  blktrace -d /dev/sda | blkpares -i -
+	3. blkpares -i -
+	4. blkparse -i sda -d sda.blktrace.bin
+== blkparse ==	
+	1. 输出
+		第一个字段：8,0 这个字段是设备号 major device ID 和 minor device ID。
+		第二个字段：3 表示 CPU
+		第三个字段：11 序列号
+		第四个字段：0.009507758 Time Stamp 是时间偏移
+		第五个字段：PID 本次 I/O 对应的进程 ID
+		第六个字段：Event，这个字段非常重要，反映了 I/O 进行到了哪一步
+		第七个字段：R 表示 Read， W 是 Write，D 表示 block，B 表示 Barrier Operation
+		第八个字段：223490+56，表示的是起始 block number 和 number of blocks，即我们常说的Offset 和 Size
+		第九个字段：进程名
+	2. event
+	   C -- complete A previously issued request has been completed.  The output will detail the sector and size of that request, as well as the success or failure of it.
+       D -- issued A request that previously resided on the block layer queue or in the i/o scheduler has been sent to the driver.
+       I -- inserted A request is being sent to the i/o scheduler for addition to the internal queue and later service by the driver. The request is fully formed at this time.
+       Q -- queued This notes intent to queue i/o at the given location.  No real requests exists yet.
+       B -- bounced The data pages attached to this bio are not reachable by the hardware and must be bounced to a lower memory location. This causes a big slowdown in i/o performance, since the data must be copied to/from kernel  buffers.  Usu‐
+           ally this can be fixed with using better hardware -- either a better i/o controller, or a platform with an IOMMU.
+       M -- back merge A previously inserted request exists that ends on the boundary of where this i/o begins, so the i/o scheduler can merge them together.
+       F -- front merge Same as the back merge, except this i/o ends where a previously inserted requests starts.
+       M --front or back merge One of the above
+       M -- front or back merge One of the above.
+       G -- get request To send any type of request to a block device, a struct request container must be allocated first.
+       S -- sleep No available request structures were available, so the issuer has to wait for one to be freed.
+       P -- plug When i/o is queued to a previously empty block device queue, Linux will plug the queue in anticipation of future ios being added before this data is needed.
+       U -- unplug Some request data already queued in the device, start sending requests to the driver. This may happen automatically if a timeout period has passed (see next entry) or if a number of requests have been added to the queue.
+       T -- unplug due to timer If nobody requests the i/o that was queued after plugging the queue, Linux will automatically unplug it after a defined period has passed.
+       X  --  split  On  raid  or device mapper setups, an incoming i/o may straddle a device or internal zone and needs to be chopped up into smaller pieces for service. This may indicate a performance problem due to a bad setup of that raid/dm
+           device, but may also just be part of normal boundary conditions. dm is notably bad at this and will clone lots of i/o.
+       A -- remap For stacked devices, incoming i/o is remapped to device below it in the i/o stack. The remap action details what exactly is being remapped to what.

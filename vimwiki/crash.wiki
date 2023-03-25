@@ -8,6 +8,15 @@ rdi, rsi, rdx, rcx, r8, r9。 。当参数为 7 个以上时， 前 6 个与前�
 	2. block
 		a) p super_blocks
 		b) list -o super_block.s_list -s super_block.s_id  -s super_block.s_fs_info -s super_block.s_root -H 0xffff9630c7c13000
+		c) request_queue and reqest
+			a) crash> struct super_block.s_bdev ffff8b341dc23000
+				  s_bdev = 0xffff8b2b532b1a40
+				  struct gendisk.queue 0xffff8b24e7413800
+				  queue = 0xffff8a3aa206ba50
+			      struct request_queue.queue_ctx 0xffff8a3aa206ba50 
+	              struct blk_mq_ctx 0x2c97b6604b80:78			
+
+struct blk_mq_ctx 0x2c97b6604b80:78
 	3. dentry
 		a) list -o dentry.d_child  -H 0xffff942bdcc42df8 (dentry.d_subdirs   list_add(&dentry->d_child, &parent->d_subdirs);)
 			1. 	crash> list -o dentry.d_child  -s dentry.d_name.name -H  0xffff942b943c7438
