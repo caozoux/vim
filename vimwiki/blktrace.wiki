@@ -24,8 +24,7 @@
            ally this can be fixed with using better hardware -- either a better i/o controller, or a platform with an IOMMU.
        M -- back merge A previously inserted request exists that ends on the boundary of where this i/o begins, so the i/o scheduler can merge them together.
        F -- front merge Same as the back merge, except this i/o ends where a previously inserted requests starts.
-       M --front or back merge One of the above
-       M -- front or back merge One of the above.
+       M -- front or back merge One of the above
        G -- get request To send any type of request to a block device, a struct request container must be allocated first.
        S -- sleep No available request structures were available, so the issuer has to wait for one to be freed.
        P -- plug When i/o is queued to a previously empty block device queue, Linux will plug the queue in anticipation of future ios being added before this data is needed.

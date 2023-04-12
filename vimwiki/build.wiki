@@ -1,9 +1,13 @@
-Kconfig
-source "arch/arm/mach-s3c64xx/Kconfig"
+= Kconfig =
+	1. Kconfig
+		a) source "arch/arm/mach-s3c64xx/Kconfig"
 
-增加而外的编译选项
-EXTRA_CFLAGS +=
- LDFLAGS +=
- 2     EXTRA_CFLAGS += -DDEBUG
-   3     ccflags-y := -DDEBUG
+= CFLAGS =
+	1. 增加而外的编译选项
+		a) EXTRA_CFLAGS +=
+		b) LDFLAGS +=
+		c) EXTRA_CFLAGS += -DDEBUG
+		d) ccflags-y := -DDEBUG
 
+= modules =
+	1. make O=../cache/cloud-kernel/ M=drivers/nvme

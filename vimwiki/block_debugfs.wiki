@@ -1,0 +1,117 @@
+= sys =
+== first ==
+	1. apm_only
+	2. poll_stat 
+	3. requeue_list 
+		a) struct list_head    requeue_list;
+	4. rq_hang 
+		a) blk_mq_debugfs_rq_hang_show
+		b) ffff927670e02bc0 {.op=READ, .cmd_flags=META|PRIO, .rq_flags=IO_STAT, .state=idle, .tag=171, .internal_tag=-1, .start_time_ns=15462579570, .io_start_time_ns=0, .current_time=57204860228, .bio = ffff92766f0ec3c0, .sector = 4194400, .len=4096, .bio_pages = { ffffea2e08834580 }}
+
+
+	5. state 
+		a) SAME_COMP|NONROT|IO_STAT|INIT_DONE|NO_SG_MERGE|POLL|WC|FUA|STATS|REGISTERED|30
+	6. write_hints 
+		a)  hint0: 0
+			hint1: 0
+			hint2: 0
+			hint3: 0
+			hint4: 0
+	7. zone_wlock 
+	
+== hctx0 ==
+	1. active : seq_printf(m, "%d\n", atomic_read(&hctx->nr_active));
+	2. busy : tags->bitmap_tags __blk_mq_tag_busykk
+	3. cpu0 
+		1. completed
+		2. dispatched
+		3. merged
+		4. rq_list
+	4. ctx_map : 00000000: 00
+	5. dispatch 
+		1. 	000000004d03b407 {.op=READ, .cmd_flags=META|PRIO, .rq_flags=IO_STAT, .state=idle, .tag=427, .internal_tag=-1}
+			00000000fdc77ee5 {.op=WRITE, .cmd_flags=, .rq_flags=IO_STAT, .state=idle, .tag=421, .internal_tag=-1}
+			00000000688c22b7 {.op=WRITE, .cmd_flags=NOMERGE, .rq_flags=IO_STAT, .state=idle, .tag=422, .internal_tag=-1}
+
+	6. dispatch_busy : seq_printf(m, "%u\n", hctx->dispatch_busy);
+	7. dispatched 
+		a)       0	0
+				 1	0
+				 2	0
+				 4	0
+				 8	0
+				16	0
+				32+	0
+	8. flags : alloc_policy=FIFO SHOULD_MERGE
+	9. io_poll 
+	10. queued seq_printf(m, "%lu\n", hctx->queued);
+	11. run seq_printf(m, "%lu\n", hctx->run);
+	12. sched_tags 
+		a)  nr_tags=1023
+			nr_reserved_tags=0
+			active_queues=0
+			bitmap_tags:
+			depth=1023
+			busy=0
+			bits_per_word=64
+			map_nr=16
+			alloc_hint={183, 711, 970, 23, 841, 352, 958, 33, 376, 973, 23, 998, 212, 556, 404, 300}
+			wake_batch=8
+			wake_index=0
+			ws={
+				{.wait_cnt=8, .wait=inactive},
+				{.wait_cnt=8, .wait=inactive},
+				{.wait_cnt=8, .wait=inactive},
+				{.wait_cnt=8, .wait=inactive},
+				{.wait_cnt=8, .wait=inactive},
+				{.wait_cnt=8, .wait=inactive},
+				{.wait_cnt=8, .wait=inactive},
+				{.wait_cnt=8, .wait=inactive},
+			}
+			round_robin=0
+			min_shallow_depth=4294967295
+
+	13. sched_tags_bitmap 
+	14. state 
+	15. tags 
+	16. tags_bitmap
+		a)  00000000: 0000 0000 0000 0000 0000 0000 0000 0000
+			00000010: 0000 0000 0000 0000 0000 0000 0000 0000
+			00000020: 0000 0000 0000 0000 0000 0000 0000 0000
+			00000030: 0000 0000 0000 0000 0000 0000 0000 0000
+			00000040: 0000 0000 0000 0000 0000 0000 0000 0000
+			00000050: 0000 0000 0000 0000 0000 0000 0000 0000
+			00000060: 0000 0000 0000 0000 0000 0000 0000 0000
+			00000070: 0000 0000 0000 0000 0000 0000 0000 0000
+
+blk_mq_make_request
+	blk_mq_sched_insert_request
+		if e->type->ops.mq.insert_requests)
+			e->type->ops.mq.insert_requests(hctx, &list, at_head);
+				bfq_insert_requests,
+				kyber_insert_requests,
+				dd_insert_requests
+		__blk_mq_insert_request(hctx, rq, at_head);	
+			list_add(&rq->queuelist, &ctx->rq_list);
+
+blk_mq_do_dispatch_ctx
+__blk_mq_sched_bio_merge
+
+blk_mq_sched_insert_request
+&ctx->rq_list,
+flush_busy_ctx
+
+dispatch_rq_from_ctx
+
+blk_mq_do_dispatch_ctx
+__blk_mq_insert_req_list -->
+
+
+__blk_mq_delay_run_hw_queue blk_mq_run_work_fn blk_mq_delay_run_hw_queues blk_mq_run_hw_queues
+
+__blk_mq_run_hw_queue
+	blk_mq_sched_dispatch_requests
+		__blk_mq_do_dispatch_sched
+			q = e->type->ops.mq.dispatch_request(hctx);kk
+			blk_mq_dispatch_hctx_list
+				blk_mq_dispatch_rq_list

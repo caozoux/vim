@@ -1,0 +1,2 @@
+= buildin module =
+	1. 编译带Kconfig的驱动

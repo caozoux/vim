@@ -1,0 +1,4 @@
+gitam
+= git am config item =
+* git rebase
+	1. .git/rebase-apply/next

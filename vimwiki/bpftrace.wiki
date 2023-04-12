@@ -1,0 +1,4 @@
+= spec =
+== kprobe ==
+	* kprobe 
+		*  bpftrace -e 'kretprobe:do_sys_open { printf("returned: %d\n", retval); }'

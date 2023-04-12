@@ -14,5 +14,6 @@
 * [[mysql]]
 * [[web]]
 * [[qt]]
-* [[OS]]
+* [[O]]
 * [[docker]]
+* [[test]]
