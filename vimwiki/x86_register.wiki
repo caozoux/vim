@@ -16,14 +16,6 @@
 	6. TF：  跟踪标志
 	7. IF ： 中断标志
 
-
-
-
-
-
-
-
-
-
-
+* arguments
+	* rdi, rsi, rdx, rcx, r8, r9
 

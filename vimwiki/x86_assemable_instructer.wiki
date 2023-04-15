@@ -1,0 +1,7 @@
+
+= instructer =
+	1. leaveq 
+		a) movq %rbp, %rsp
+		b) popq %rbp
+	2. retq
+		a) popq %rip

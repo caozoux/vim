@@ -113,3 +113,10 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 == makedumpfile ==
 	1.  sudo makedumpfile -c -d 31 /proc/kcore  dumpfile
 
+== extern ==
+=== install ===
+	1. yum install crash crash-trace-command
+	2. crash>  extend /usr/lib64/crash/extensions/trace.so
+	3. https://access.redhat.com/solutions/239433
+=== usage ===
+	1. trace show 
