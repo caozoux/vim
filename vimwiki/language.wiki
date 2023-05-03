@@ -1,3 +1,44 @@
+= Introduction =
+== yufa ==
+    1. let
+    2. while
+    3. if
+    4. for
+== Variables ==
+=== Variables type ==
+    1. s: local variables
+    2. b: variable local to a buffer
+    3. w: variable local to a window
+    4. g: global variable
+    5. v: variable predefined by Vim
+=== del variables ==
+    1. unlet  s:count
+    2. unlet! s:count
+=== check variables ==
+    1. if !exists("s:call_count")
+	the local variables used there will not be
+	automatically freed.  The next time the script executes, it can still use the
+	old value.  Example: >
+		:if !exists("s:call_count")
+		:  let s:call_count = 0
+		:endif
+		:let s:call_count = s:call_count + 1
+		:echo "called" s:call_count "times"
+=== string variables ==
+    1. let name = "peter"
+
+=== special variables ==
+    1. list as follow:
+	\t		<Tab>
+	\n		<NL>, line break
+	\r		<CR>, <Enter>
+	\e		<Esc>
+	\b		<BS>, backspace
+	\"		"
+	\\		\, backslash
+	\<Esc>		<Esc>
+	\<C-W>		CTRL-W
+
 *usr_41.txt*	For Vim version 7.4.  Last change: 2013 Feb 20
 
 		     VIM USER MANUAL - by Bram Moolenaar

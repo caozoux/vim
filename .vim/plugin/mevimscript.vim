@@ -172,6 +172,41 @@ function! MeFastFormatLineV2(printStr, dataStr, format)
 	execute "d"
 endfunction
 
+"通过空格字符，快速生成linePatarn 的结构
+"参数$@, $1 ,$2,$....
+function! MePythonPrint(printStr, dataStr, format)
+	normal! ^
+	let save_cursor = getpos('.')
+	let linetxt = getline(line('.'))
+	let idx =0
+	while idx < strlen(linetxt)
+		if linetxt[idx] =~ '\w'
+            break
+		else
+			let idx += 1
+		endif
+	endwhile
+	let wordlist = split(strpart(linetxt, idx))
+	let showcontext=[]
+	let wordextend=[]
+	if idx > 0
+		call add(showcontext,strpart(linetxt, 0, idx))
+	endif
+	call add(showcontext, a:printStr)
+	""for item in wordlist
+	""	call add(wordextend, item)
+	""endfor
+	for item in wordlist
+		"call add(wordextend, " ,(u32)")
+		call add(wordextend, a:dataStr)
+		call add(wordextend, item)
+	endfor
+	call add(wordextend, ");")
+	call extend(showcontext,wordextend)
+	call append(line('.'), join(showcontext, ''))
+	execute "d"
+endfunction
+
 function! PrintkPast()
 	let save_cursor = getpos('.')
 	let linetxt = getline(line('.'))
