@@ -1,4 +1,18 @@
 = vmstat =
+= 1 =
+	1. workingset_refault
+		a) 第一次访问page cache称为fault
+		b) 第二次访问page cache称为refault
+	2. workingset_activate
+		a) 第二次访问page cache并触发miss后， 计算refault_distance, 满足条件设置 workingset_activate
+	3. workingset_restore 
+		a) page cache被删除时，会调用workingset_eviction, 设置page workingset, 如果页面在驱逐前处于活动状态, cache miss比较严重
+	4. workingset_nodes
+	5. workingset_nodereclaim
+
+
+
+= vmstat all =
 	nr_free_pages 197098
 	nr_zone_inactive_anon 46957
 	nr_zone_active_anon 80311

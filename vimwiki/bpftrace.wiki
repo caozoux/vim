@@ -2,3 +2,6 @@
 == kprobe ==
 	* kprobe 
 		*  bpftrace -e 'kretprobe:do_sys_open { printf("returned: %d\n", retval); }'
+		* sudo bpftrace --include linux/dcache.h  -e 'kretprobe:__d_lookup_rcu { if (comm == "test") { printf("%lx\n", ((struct dentry*)retval)->d_flags); }}'
+== kstack ==
+	1.  @[kstack()] = count();

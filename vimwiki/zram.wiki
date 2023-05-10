@@ -1,0 +1,9 @@
+= zram enable =
+	1. enable
+		1. modprobe zram num_devices=1
+		2. /sys/block/zram0/comp_algorithm 
+		3.  /sys/block/zram0/disksize
+		4. echo "512M" | sudo tee /sys/block/zram0/disksize 
+		5. /proc/sys/vm/page-cluster
+		6. /proc/sys/vm/swappiness
+	2. 

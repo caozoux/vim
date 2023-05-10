@@ -4,4 +4,5 @@
 [[stat]]
 [[proc_tcp]]
 [[vmstat]]
+[[slabinfo]]
 

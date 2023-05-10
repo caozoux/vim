@@ -1,0 +1,8 @@
+Name：Object名字
+Active_objs：已经**的投入使用的object个数
+Num_objs：为这个object分配的小内存块个数
+Objsize：每一个内存块的大小
+Objperslab：每一个Slab分区包含的object个数
+Pagesperslab：每个Slab分区包含的page的个数
+Active_slabs：已经**的投入使用的Slab分区个数
+Num_slabs：为这个object分配的Slab分区个数

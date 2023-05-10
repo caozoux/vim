@@ -1,5 +1,6 @@
 * [[diagnose-tools]]
 * [[crash]]
+* [[sar]]
 * [[bpf]]
 * [[kdump]]
 * [[systemtap]]
@@ -62,3 +63,5 @@
 * [[cgroup]]
 * [[blktrace]]
 * [[block]]
+* [[linux_net]]
+* [[monitor-tools]]
