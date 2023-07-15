@@ -16,7 +16,34 @@
 	6. irq 硬中断
 	7. softirq 软中断
 
-
+* sched
+	se.exec_start                                :      40196266.571673 - 此进程最近被调度到的开始执行时刻
+	se.vruntime                                  :        345923.390089 - 虚拟运行时间
+	se.sum_exec_runtime                          :          6425.544149 - 需要迁移当前进程到其他cpu时累加此字段
+	se.nr_migrations                             :                  346
+	nr_switches                                  :                 5062 - 被动调度
+	nr_voluntary_switches                        :                 4071 - [[主动调度]]
+	nr_involuntary_switches                      :                  991
+	se.load.weight                               :              1048576
+	se.runnable_weight                           :              1048576
+	se.avg.load_sum                              :                  177
+	se.avg.runnable_load_sum                     :                  177
+	se.avg.util_sum                              :               180770
+	se.avg.load_avg                              :                    3
+	se.avg.runnable_load_avg                     :                    3
+	se.avg.util_avg                              :                    3
+	se.avg.last_update_time                      :       40196266570752
+	se.avg.util_est.ewma                         :                    9
+	se.avg.util_est.enqueued                     :                    0
+	policy                                       :                    0
+	prio                                         :                  120
+	clock-delta                                  :                   48
+	mm->numa_scan_seq                            :                    0
+	numa_pages_migrated                          :                    0
+	numa_preferred_nid                           :                   -1
+	total_numa_faults                            :                    0
+	current_node=0, numa_group_id=0
+	numa_faults node=0 task_private=0 task_shared=0 group_private=0 group_shared=0
 
 
 

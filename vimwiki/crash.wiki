@@ -95,7 +95,14 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 
 == search ==
 == sym ==
-== ptov==
+== page to virtual==
+	1. kmem -p 0xffffea000d973f70
+		PAGE        PHYSICAL      MAPPING       INDEX CNT FLAGS
+		ffffea000d973f70 3e2122000 ffff88042731f1f8        0  1 400000000800d8
+	2. ptov 3e2122000
+		VIRTUAL           PHYSICAL
+		ffff8803e2122000  3e2122000 
+
 == percpu ==
 	* 获取每个cpu变量的基址
 		1. kmem -o

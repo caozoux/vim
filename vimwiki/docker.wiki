@@ -3,4 +3,6 @@
         # example:  docker commit -a "runoob.com" -m "my apache" a404c6c174a2  mymysql:v1 
     * tag
         # example:  docker tag ubuntu:15.10 jb51/ubuntu:v3
+	* run	
+		1. docker run --privileged=true --rm -v /media/ssd1/zoucao/:/mnt -e SYSTEM_SUPPORT=1 $commitid  bash -c "cd /buildroot;"	
 
