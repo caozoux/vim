@@ -1,14 +1,34 @@
 * diststats
-	(rd_ios) : 读操作的次数
-	(rd_merges):合并读操作的次数。如果两个读操作读取相邻的数据块，那么可以被合并成1个。
-	(rd_sectors): 读取的扇区数量
-	(rd_ticks):读操作消耗的时间（以毫秒为单位）。每个读操作从__make_request()开始计时，到end_that_request_last()为止，包括了在队列中等待的时间。
-	(wr_ios):写操作的次数
-	(wr_merges):合并写操作的次数
-	(wr_sectors): 写入的扇区数量
-	(wr_ticks): 写操作消耗的时间（以毫秒为单位）
-	(in_flight): 当前未完成的I/O数量。在I/O请求进入队列时该值加1，在I/O结束时该值减1。 注意：是I/O请求进入队列时，而不是提交给硬盘设备时
-	(io_ticks)该设备用于处理I/O的自然时间(wall-clock time)
-	(time_in_queue): 对字段#10(io_ticks)的加权值
+	1. (rd_ios) : 读操作的次数
+	2. (rd_merges):合并读操作的次数。如果两个读操作读取相邻的数据块，那么可以被合并成1个。
+	3. (rd_sectors): 读取的扇区数量
+	4. (rd_ticks):读操作消耗的时间（以毫秒为单位）。每个读操作从__make_request()开始计时，到end_that_request_last()为止，包括了在队列中等待的时间。
+	5. (wr_ios):写操作的次数
+	6. (wr_merges):合并写操作的次数
+	7. (wr_sectors): 写入的扇区数量
+	8. (wr_ticks): 写操作消耗的时间（以毫秒为单位）
+	9. (in_flight): 当前未完成的I/O数量。在I/O请求进入队列时该值加1，在I/O结束时该值减1。 注意：是I/O请求进入队列时，而不是提交给硬盘设备时
+	10. (io_ticks)该设备用于处理I/O的自然时间(wall-clock time)
+	11. (time_in_queue): 对字段#10(io_ticks)的加权值
+* kernel code
+	1. part_stat_read(hd, merges[STAT_READ]),
+	2. part_stat_read(hd, sectors[STAT_READ]),
+	3. (unsigned int)part_stat_read_msecs(hd, STAT_READ),
+	4. part_stat_read(hd, ios[STAT_WRITE]),
+	5. part_stat_read(hd, merges[STAT_WRITE]),
+	6. part_stat_read(hd, sectors[STAT_WRITE]),
+	7. (unsigned int)part_stat_read_msecs(hd, STAT_WRITE),
+	8. inflight[0],
+	9. jiffies_to_msecs(part_stat_read(hd, io_ticks)),
+	10. jiffies_to_msecs(part_stat_read(hd, time_in_queue)),
+	11. part_stat_read(hd, ios[STAT_DISCARD]),
+	12. part_stat_read(hd, merges[STAT_DISCARD]),
+	13. part_stat_read(hd, sectors[STAT_DISCARD]),
+	14. (unsigned int)part_stat_read_msecs(hd, STAT_DISCARD),
+	15. (unsigned int)part_stat_read_d2c_msecs(hd, STAT_READ),
+	16. (unsigned int)part_stat_read_d2c_msecs(hd, STAT_WRITE),
+	17. (unsigned int)part_stat_read_d2c_msecs(hd, STAT_DISCARD)
+		
+		
 * blk_account_io_done
 * blk_account_io_completion

@@ -5,3 +5,10 @@
 		* sudo bpftrace --include linux/dcache.h  -e 'kretprobe:__d_lookup_rcu { if (comm == "test") { printf("%lx\n", ((struct dentry*)retval)->d_flags); }}'
 == kstack ==
 	1.  @[kstack()] = count();
+	2. 
+== interval ==
+	1.  example code
+		interval:s:2
+		{
+ 
+		}	
