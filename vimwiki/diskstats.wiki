@@ -29,15 +29,32 @@
 	16. (unsigned int)part_stat_read_d2c_msecs(hd, STAT_WRITE),
 	17. (unsigned int)part_stat_read_d2c_msecs(hd, STAT_DISCARD)
 		
-		
 * blk_account_io_done
 * blk_account_io_completion
 * iostat
 	*  rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
-		1. svctm
-		2. await 
-			1. （△rd_ticks +△ wr_ticks）/（△rd_ios + △wr_ios）
-		3. r_await
-		4. w_await
+		1. wrqm/s: 每秒进行 merge 的写操作数目。即 wmerge/s
+		2. r/s: 每秒完成的读 I/O 设备次数。即 rio/s
+		3. w/s: 每秒完成的写 I/O 设备次数。即 wio/s
+		4. rkB/s: 每秒读K字节数。是 rsect/s 的一半，因为每扇区大小为512字节。
+		5. wkB/s: 每秒写K字节数。是 wsect/s 的一半。
+		6. avgrq-sz: 平均每次设备I/O操作的数据大小 (扇区)。 每个请求平均大小，单位是扇区数，一般在200~400之间算是正常和理想的状态，如果这个值比较小，比方说只在100左右，
+		说明太多的IO请求没有被合并，或者大的IO请求被“打散”，在写操作时，过多小的请求会造成磁盘磁头的频繁移动，降低IO性能。
+			a) （△r/s +△ w/s）/（△rd_ios + △wr_ios）
+		7. avqqu-sz平均请求队列长度，这个值在正常的系统中不应超过113太多，如果在200左右，甚至上千那说明发生了IO拥塞，
+		而系统还在向IO请求队列中放请求（有一个例外是在执行sync,fsync操作时，该值到达最大值8192是正常的）
+			a) in_flight 个数
+		8. rsec/s: 每秒读扇区数。即 rsect/s
+		9. wsec/s: 每秒写扇区数。即 wsect/s
+		10. r_await:每个读操作平均所需的时间
+		不仅包括硬盘设备读操作的时间，还包括了在kernel队列中等待的时间。
+		11. w_await:每个写操作平均所需的时间
+		不仅包括硬盘设备写操作的时间，还包括了在kernel队列中等待的时间。
+		12. await: 平均每次设备I/O操作的等待时间 (毫秒)。（主要看这个，重点）
+			a) （△rd_ticks +△ wr_ticks）/（△rd_ios + △wr_ios）
+		13. svctm: 平均每次设备I/O操作的服务时间 (毫秒)。
+		14 %util: 一秒中有百分之多少的时间用于 I/O 操作，即被io消耗的cpu百分比
+
 * io util
 	* (r/s + w/s) * (svctm / 1000)
+	
