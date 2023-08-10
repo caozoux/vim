@@ -1,1 +1,10 @@
-* 
+ethtool -S eth01 | grep -E "rx_discards_phy|rx_buffer_passed_thres_phy|tx_pause_ctrl_phy|tx_queue_stopped|tx_queue_wake|rx_steer_missed_packets|pci_signal_integrity" |  awk '($2 > 0)'
+     tx_queue_stopped: 13327
+     tx_queue_wake: 13327
+     rx_steer_missed_packets: 4841091
+     tx_pause_ctrl_phy: 3884389762
+     rx_discards_phy: 21130510678
+     rx_buffer_passed_thres_phy: 3585552516
+     rx_pci_signal_integrity: 11998
+     tx_pci_signal_integrity: 35"
+

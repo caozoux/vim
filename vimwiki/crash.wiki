@@ -11,6 +11,7 @@ rdi, rsi, rdx, rcx, r8, r9。 。当参数为 7 个以上时， 前 6 个与前�
 		c) request_queue and reqest
 			a) crash> struct super_block.s_bdev ffff8b341dc23000
 				  s_bdev = 0xffff8b2b532b1a40
+                  struct block_device.bd_disk	ffff8b341dc23000		
 				  struct gendisk.queue 0xffff8b24e7413800
 				  queue = 0xffff8a3aa206ba50
 			      struct request_queue.queue_ctx 0xffff8a3aa206ba50 
@@ -120,6 +121,8 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 == makedumpfile ==
 	1.  sudo makedumpfile -c -d 31 /proc/kcore  dumpfile
 
+===crash_struct_cmd===
+[[kernfs_crash_command]]
 == extern ==
 === install ===
 	1. yum install crash crash-trace-command
@@ -127,3 +130,4 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 	3. https://access.redhat.com/solutions/239433
 === usage ===
 	1. trace show 
+	2. 

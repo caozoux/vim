@@ -1,0 +1,5 @@
+struct super_block.s_root xx
+struct dentry.d_inode xx
+struct inode.i_private  xx
+struct kernfs_node.dir.root  xx
+struct kernfs_root 

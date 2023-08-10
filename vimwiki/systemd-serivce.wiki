@@ -1,0 +1,3 @@
+[[/etc/systemd/journald.conf]]
+15 #Storage=persistent
+ 16 Storage=none
