@@ -131,3 +131,5 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 === usage ===
 	1. trace show 
 	2. 
+== asm ==	
+	[[asm_x86]]	
