@@ -5,4 +5,8 @@
 [[proc_tcp]]
 [[vmstat]]
 [[slabinfo]]
+[[free]]
+[[oom]]
+[[core_dump]]
+[[netstat]]
 

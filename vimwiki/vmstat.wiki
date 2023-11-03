@@ -7,12 +7,12 @@
 		a) 第二次访问page cache并触发miss后， 计算refault_distance, 满足条件设置 workingset_activate
 	3. workingset_restore 
 		a) page cache被删除时，会调用workingset_eviction, 设置page workingset, 如果页面在驱逐前处于活动状态, cache miss比较严重
-	4. workingset_nodes
-	5. workingset_nodereclaim
-	6. pgsteal_kswapd   		表示kswap全局回收了多少内存
-	7. pgsteal_direct   		表示直接回收了多少呢次
-	8. pgscan_kswapd    		kswap扫描了多少内存
-	9. pgscan_direct    		表示直接回收扫描了多少内存
+	4.  workingset_nodes
+	5.  workingset_nodereclaim
+	6.  pgsteal_kswapd   		表示kswap全局回收了多少内存
+	7.  pgsteal_direct   		表示直接回收了多少呢次
+	8.  pgscan_kswapd    		kswap扫描了多少内存
+	9.  [[pgscan_direct]]    		表示直接回收扫描了多少内存
 	10. pgscan_direct_throttle  cgroup 回收的内存
 
 
@@ -142,143 +142,6 @@
 	thp_split_page 4
 	thp_split_page_failed 0
 	thp_deferred_split_page 6462
-	thp_split_pmd 200
-	thp_split_pud 0
-	thp_zero_page_alloc 2
-	thp_zero_page_alloc_failed 0
-	thp_swpout 0
-	thp_swpout_fallback 4
-	balloon_inflate 0
-	balloon_deflate 0
-	balloon_migrate 0
-	swap_ra 191
-	swap_ra_hit 97
-	[zc@localhost ~]$ cat /proc/vmstat
-	nr_free_pages 198595
-	nr_zone_inactive_anon 46956
-	nr_zone_active_anon 79263
-	nr_zone_inactive_file 160877
-	nr_zone_active_file 149623
-	nr_zone_unevictable 0
-	nr_zone_write_pending 3
-	nr_mlock 0
-	nr_page_table_pages 5519
-	nr_kernel_stack 5312
-	nr_bounce 0
-	nr_zspages 0
-	nr_free_cma 0
-	numa_hit 8788508
-	numa_miss 0
-	numa_foreign 0
-	numa_interleave 80130
-	numa_local 8788508
-	numa_other 0
-	nr_inactive_anon 46956
-	nr_active_anon 79263
-	nr_inactive_file 160877
-	nr_active_file 149623
-	nr_unevictable 0
-	nr_slab_reclaimable 38598
-	nr_slab_unreclaimable 154964
-	nr_isolated_anon 0
-	nr_isolated_file 0
-	workingset_nodes 1055
-	workingset_refault 3172
-	workingset_activate 2697
-	workingset_nodereclaim 465
-	nr_anon_pages 110765
-	nr_mapped 56743
-	nr_file_pages 323485
-	nr_dirty 3
-	nr_writeback 0
-	nr_writeback_temp 0
-	nr_shmem 12787
-	nr_shmem_hugepages 0
-	nr_shmem_pmdmapped 0
-	nr_anon_transparent_hugepages 122
-	nr_unstable 0
-	nr_vmscan_write 4394
-	nr_vmscan_immediate_reclaim 0
-	nr_dirtied 72929
-	nr_written 72938
-	nr_kernel_misc_reclaimable 0
-	workingset_restore 92
-	nr_dirty_threshold 143910
-	nr_dirty_background_threshold 47931
-	pgpgin 1568765
-	pgpgout 537049
-	pswpin 637
-	pswpout 4394
-	pgalloc_dma 1089
-	pgalloc_dma32 13719469
-	pgalloc_normal 1944941
-	pgalloc_movable 0
-	allocstall_dma 0
-	allocstall_dma32 0
-	allocstall_normal 0
-	allocstall_movable 1
-	pgskip_dma 0
-	pgskip_dma32 0
-	pgskip_normal 0
-	pgskip_movable 0
-	pgfree 15867906
-	pgactivate 215238
-	pgdeactivate 239560
-	pglazyfree 0
-	pgfault 10170792
-	pgmajfault 2190
-	pglazyfreed 0
-	pgrefill 105756
-	pgsteal_kswapd 92457
-	pgsteal_direct 1117
-	pgscan_kswapd 122917
-	pgscan_direct 1345
-	pgscan_direct_throttle 0
-	zone_reclaim_failed 0
-	pginodesteal 0
-	slabs_scanned 38635
-	kswapd_inodesteal 198
-	kswapd_low_wmark_hit_quickly 7
-	kswapd_high_wmark_hit_quickly 10
-	pageoutrun 25
-	pgrotated 3347
-	drop_pagecache 0
-	drop_slab 0
-	oom_kill 0
-	numa_pte_updates 0
-	numa_huge_pte_updates 0
-	numa_hint_faults 0
-	numa_hint_faults_local 0
-	numa_pages_migrated 0
-	pgmigrate_success 3050
-	pgmigrate_fail 3
-	compact_migrate_scanned 3462
-	compact_free_scanned 217695
-	compact_isolated 6288
-	compact_stall 6
-	compact_fail 0
-	compact_success 6
-	compact_daemon_wake 0
-	compact_daemon_migrate_scanned 0
-	compact_daemon_free_scanned 0
-	htlb_buddy_alloc_success 0
-	htlb_buddy_alloc_fail 0
-	unevictable_pgs_culled 75062
-	unevictable_pgs_scanned 0
-	unevictable_pgs_rescued 0
-	unevictable_pgs_mlocked 0
-	unevictable_pgs_munlocked 0
-	unevictable_pgs_cleared 0
-	unevictable_pgs_stranded 0
-	thp_fault_alloc 6296
-	thp_fault_fallback 125
-	thp_collapse_alloc 1231
-	thp_collapse_alloc_failed 0
-	thp_file_alloc 0
-	thp_file_mapped 0
-	thp_split_page 4
-	thp_split_page_failed 0
-	thp_deferred_split_page 6468
 	thp_split_pmd 200
 	thp_split_pud 0
 	thp_zero_page_alloc 2

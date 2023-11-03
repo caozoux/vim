@@ -3,14 +3,41 @@ def ${1:name}():
 
 endsnippet
 
+snippet bcctemp
 
-snippet bcckprobe
-def ${1:name}():
+#!/usr/bin/python
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from bcc import BPF
+from bcc.utils import printb
+from collections import defaultdict
+from time import strftime
+
+bpf_text = """
+#include <linux/mm.h>
+
+int kprobe_func(struct pt_regs *ctx) {
+    return 0;
+}
+
+
+"""
+
+b = BPF(text=bpf_text)
+b.attach_kprobe(event="func", fn_name="kprobe_func")
+
+exiting = 0
+
+print("start trace..\n")
+while 1:
+    try:
+        sleep(1)
+    except KeyboardInterrupt:
+        exiting = 1
+    if exiting:
+        exit(1)
 
 endsnippet
-
-snippet bcctrace
-def ${1:name}():
-
-endsnippet
-

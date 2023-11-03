@@ -1,0 +1,7 @@
+= kernel =
+	1. vmlinux.h
+		a) pahole -J vmlinux
+		b) pahole --btf_encode_detached external.btf vmlinux
+	2. pahole
+		a) git clone https://kernel.googlesource.com/pub/scm/devel/pahole/pahole
+	3. pahole --btf_encode_detached "vmlinux.btf" usr/lib/debug/lib/modules/4.19.91-26.an8.x86_64/vmlinux

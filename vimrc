@@ -252,6 +252,7 @@ colorscheme zenburn
 "autocmd FileType python runtime! autoload/pythoncomplete.vim
 
 au BufRead,BufNewFile *.patch set filetype=patch
+au BufRead,BufNewFile *.bpy set filetype=bpy
 
 augroup filetypedetect
 au BufNewFile,BufRead *.stap     setf stap

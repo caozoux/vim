@@ -1,9 +1,10 @@
 = blktrace =
 == command ==
 	1. blktrace -d /dev/sda
-	2.  blktrace -d /dev/sda | blkpares -i -
+	2. blktrace -d /dev/sda | blkpares -i -
 	3. blkpares -i -
 	4. blkparse -i sda -d sda.blktrace.bin
+	5. btt -i  sda.blktrace.bin
 == blkparse ==	
 	1. 输出
 		第一个字段：8,0 这个字段是设备号 major device ID 和 minor device ID。

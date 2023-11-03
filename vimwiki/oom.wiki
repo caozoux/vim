@@ -1,0 +1,4 @@
+= oom priority =
+	1. oom_adj
+	2. oom_score      主要包括两部分，系统打分和用户打分。系统打分就是根据进程的物理内存消耗量（进程自身的空间、swap空间、页缓存空间）
+	3. oom_score_adj  用户打分就是 oom_score_adj 的值。如果用户指定 oom_score_adj 的值为 -1000，也就是表示禁止 OOM killer 杀死该进程。
