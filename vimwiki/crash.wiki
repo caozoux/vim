@@ -104,6 +104,9 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 		VIRTUAL           PHYSICAL
 		ffff8803e2122000  3e2122000 
 
+== bt ==
+	1. bt -p
+	2. bt -p pid -f 线上每个函数的sp栈数据kca
 == percpu ==
 	* 获取每个cpu变量的基址
 		1. kmem -o

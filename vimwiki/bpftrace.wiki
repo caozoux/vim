@@ -12,3 +12,5 @@
 		{
  
 		}	
+== watchpoint ==
+	1. watchpoint probe type requires 4 argument
