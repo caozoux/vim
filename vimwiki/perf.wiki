@@ -1,0 +1,8 @@
+= perf =
+== event ==
+	1. probe
+		a) perf probe --add do_nanosleep
+		b) perf record -e probe:do_nanosleep -a sleep 5
+		c) perf script
+		d) perf probe --del do_nanosleep
+
