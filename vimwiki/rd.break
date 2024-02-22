@@ -1,0 +1,1 @@
+/usr/bin/systemctl --no-block --force switch-root /sysroot
