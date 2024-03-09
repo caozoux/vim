@@ -34,3 +34,19 @@
        X  --  split  On  raid  or device mapper setups, an incoming i/o may straddle a device or internal zone and needs to be chopped up into smaller pieces for service. This may indicate a performance problem due to a bad setup of that raid/dm
            device, but may also just be part of normal boundary conditions. dm is notably bad at this and will clone lots of i/o.
        A -- remap For stacked devices, incoming i/o is remapped to device below it in the i/o stack. The remap action details what exactly is being remapped to what.
+	3. 
+		Q2Q —发送到block layer的请求之间的时间
+		Q2G — 从block I/O 排队到获得分配给它的请求的时间
+		G2I — 从请求被分配到它被插入设备队列的时间
+		Q2M — 从block I/O 排队到与现有请求合并的时间
+		I2D —从请求被插入设备队列到实际向设备发出请求的时间
+		M2D — 从block I/O 与现有请求合并到向设备发出请求的时间
+		D2C — 设备请求的服务时间
+		Q2C —请求在block layer中花费的总时间
+	4. exprise
+		  Q -- queued 发起IO请求。
+		  G -- get request 要将任何类型的请求发送到块设备，必须首先分配一个struct request容器。
+		  I -- inserted 正在向 i/o 调度程序发送一个请求，以将其添加到内部队列中并由驱动程序稍后提供服务。 此时请求已完全形成。
+		  D -- issued 先前驻留在block layer队列或 i/o 调度程序中的请求已发送到驱动程序。
+		  C -- complete 先前发出的请求已完成。输出将详细说明该请求的扇区和大小，以及成功或失败。
+

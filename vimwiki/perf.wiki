@@ -5,4 +5,10 @@
 		b) perf record -e probe:do_nanosleep -a sleep 5
 		c) perf script
 		d) perf probe --del do_nanosleep
+		
+== 火焰图 ==
+		a) perf record -F 99 -a -g -p 17518 -- sleep 5
+		b) perf script > stacks1
+		c) ./FlameGraph/stackcollapse-perf.pl perf.unfold &> perf.folded
+		d) ./FlameGraph/flamegraph.pl perf.folded > perf.svg
 

@@ -10,6 +10,7 @@
 	9. (in_flight): 当前未完成的I/O数量。在I/O请求进入队列时该值加1，在I/O结束时该值减1。 注意：是I/O请求进入队列时，而不是提交给硬盘设备时
 	10. (io_ticks)该设备用于处理I/O的自然时间(wall-clock time)
 	11. (time_in_queue): 对字段#10(io_ticks)的加权值
+	12. r_wait [[Δrd_ticks/Δrd_ios]]
 * kernel code
 	1. part_stat_read(hd, merges[STAT_READ]),
 	2. part_stat_read(hd, sectors[STAT_READ]),
