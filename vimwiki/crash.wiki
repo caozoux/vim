@@ -126,6 +126,7 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 
 ===crash_struct_cmd===
 [[kernfs_crash_command]]
+[[crash_cfs_rq]]
 == extern ==
 === install ===
 	1. yum install crash crash-trace-command

@@ -1,0 +1,13 @@
+	1. cfs_rq
+		a) struct task_group *tg
+			1. struct cgroup_subsys_state css
+				a) struct cgroup *cgroup;
+					1. struct kernfs_node *kn;
+						a) const char *name; --> 获得cpu cgroup的路径
+				b) struct cgroup_subsys *ss;
+				c) struct cgroup_subsys_state *parent;
+			2. struct task_group *parent --> 获得cpu cgroup 的上一个路径
+			3. struct list_head siblings/children
+			4. struct sched_entity **se; --> percpu cpu cgroup调度实体
+			5. struct cfs_rq **cfs_rq;   --> percpu cpu cgroup的cfs_rq
+

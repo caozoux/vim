@@ -1,0 +1,7 @@
+= loadavg: /proc/loadavg =
+	"722.02 449.07 380.10 59/98848 367714"
+	1. load1:  722.02
+	2. load5:  449.02
+	3. load15: 380.10
+	4. R tasks: 59  		nr_running()
+	5. total tasks: 367714  nr_threads

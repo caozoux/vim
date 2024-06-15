@@ -10,4 +10,5 @@
 [[core_dump]]
 [[netstat]]
 [[zoneinfo]]
+[[loadavg]]
 
