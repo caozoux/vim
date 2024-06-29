@@ -11,4 +11,7 @@
 		b) perf script > stacks1
 		c) ./FlameGraph/stackcollapse-perf.pl perf.unfold &> perf.folded
 		d) ./FlameGraph/flamegraph.pl perf.folded > perf.svg
+== offcpu ==
+		a) offcputime -K -f 10 > log
+		b) ./FlameGraph/flamegraph.pl log > perf.svg
 

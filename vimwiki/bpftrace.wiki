@@ -3,6 +3,8 @@
 	* kprobe 
 		*  bpftrace -e 'kretprobe:do_sys_open { printf("returned: %d\n", retval); }'
 		* sudo bpftrace --include linux/dcache.h  -e 'kretprobe:__d_lookup_rcu { if (comm == "test") { printf("%lx\n", ((struct dentry*)retval)->d_flags); }}'
+		* mount_load_proc_self_moun
+== tracepoint ==
 == kstack ==
 	1.  @[kstack()] = count();
 	2. 
@@ -14,3 +16,8 @@
 		}	
 == watchpoint ==
 	1. watchpoint probe type requires 4 argument
+= symbol =
+	1. sudo bpftrace -l 'uprobe:/usr/lib/debug/usr/lib/systemd/systemd.debug:mount_load_proc_self_mount
+	2. sudo bpftrace -l 'uprobe:test:test1'
+	   stdin:1:1-18: WARNING: attaching to uprobe target file 'test' but matched 3 binaries
+	   uprobe:test:test1

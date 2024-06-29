@@ -1,0 +1,3 @@
+= extern =
+	1. extend /mnt/crash-trace/trace.so
+

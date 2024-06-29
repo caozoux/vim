@@ -1,0 +1,54 @@
+= scan =
+	1. rq->sd
+	2. sd->parent, sd->name
+		crash-8.0.2> rq.sd ffff8bf0bf62af40
+		  sd = 0xffff8be1844aee00,
+		crash-8.0.2> sched_domain.parent,name 0xffff8be1844aee00
+		  parent = 0xffff8be184832200,
+		  name = 0xffffffff86942ccf "SMT",
+		crash-8.0.2> sched_domain.parent,name 0xffff8be184832200
+		  parent = 0xffff8be184844800,
+		  name = 0xffffffff8693787b "MC",
+		crash-8.0.2> sched_domain.parent,name 0xffff8be184844800
+		  parent = 0x0,
+		  name = 0xffffffff86954b7b "NUMA",	
+	3. 
+= sched_domain =
+* NUMA  [                             ]
+* MC   [             ] [             ]
+* SMT  [     ] [     ] [     ] [     ]
+	1. "SMT"
+		a) span_weight = 2
+		b) span = 0000000010000001 //亲和的cpu: cpu0和cpu28
+		c) level = 0 
+		c) struct sched_domain __rcu *parent -> 指向MC
+		d) struct sched_domain __rcu *child // 为NULL
+		d) struct sched_group  *groups// 链表只有2个
+	2. "MC"
+		a) span_weight = 28
+		b) span = 0055555555555555  //亲和的cpu: socket
+		c) level = 2
+		c) struct sched_domain __rcu *parent -> 指向NUMA
+		d) struct sched_domain __rcu *child 
+		d) struct sched_group  *groups// 链表只有14个, 14*2 = 28核
+	2. "MC"
+	3. "NUMA"
+		a) span_weight = 56
+		b) span = 00ffffffffffffff //亲和的cpu: 整机
+		c) level = 5
+		c) struct sched_domain __rcu *parent  NULL
+		d) struct sched_domain __rcu *child  -> 指向MC
+		d) struct sched_group  *groups// 链表只有2个, tow MC sched_domains
+= sched_group =
+	1. struct sched_group  *next
+	2. unsigned int        group_weight;
+		1. capacity:1024   //cpu的算力之和
+		2. min_capacity:1024  //最小可用于cfs任务的算力(对于单个cpu而言的)
+		3. max_capacity:1024  //最大可用于cfs任务的算力(对于单个cpu而言的)
+		4. next_update   ////下一次更新算力的时间点
+		5. imbalance:0     //sg中是否有由于affinity原因产生不均衡的问题
+	3. struct sched_group_capacity *sgc;
+	4. unsigned long       cpumask[]
+== SMT ==	
+	1. group_weight = 1
+	2. cpumask 0000000000000002
