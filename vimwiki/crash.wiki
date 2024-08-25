@@ -128,6 +128,7 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 [[kernfs_crash_command]]
 [[crash_cfs_rq]]
 [[[sched_domain]]]
+[[cgroup_css]]
 == extern ==
 [[extern_commnad]]
 === install ===
@@ -139,3 +140,5 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 	2. 
 == asm ==	
 	[[asm_x86]]	
+= makedumpfile =	
+	makedumpfile --num-threads 32 -l -x vmlinux -d31 /proc/kcore vmcore_1

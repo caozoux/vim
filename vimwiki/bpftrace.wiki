@@ -16,6 +16,7 @@
 		}	
 == watchpoint ==
 	1. watchpoint probe type requires 4 argument
+	2. bpftrace -e 'watchpoint:0xffff8c97b4620af8:4:w { printf("x was \n")'
 = symbol =
 	1. sudo bpftrace -l 'uprobe:/usr/lib/debug/usr/lib/systemd/systemd.debug:mount_load_proc_self_mount
 	2. sudo bpftrace -l 'uprobe:test:test1'
