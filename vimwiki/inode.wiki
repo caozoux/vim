@@ -1,0 +1,7 @@
+inode
+
+= refcount =
+	1.inode.i_count 
+= dentry =
+	1.inode->struct hlist_head i_dentry;
+	2. dentry->d_alias -> i_dentry
