@@ -1,13 +1,17 @@
 = spec =
 == kprobe ==
 	* kprobe 
-		*  bpftrace -e 'kretprobe:do_sys_open { printf("returned: %d\n", retval); }'
+		* bpftrace -e 'kretprobe:do_sys_open { printf("returned: %d\n", retval); }'
 		* sudo bpftrace --include linux/dcache.h  -e 'kretprobe:__d_lookup_rcu { if (comm == "test") { printf("%lx\n", ((struct dentry*)retval)->d_flags); }}'
 		* mount_load_proc_self_moun
+== vairiable ==
 == tracepoint ==
 == kstack ==
 	1.  @[kstack()] = count();
 	2. 
+== curtask ==
+	1.  (struct task_struct *)curtask
+		a) get_current_task
 == interval ==
 	1.  example code
 		interval:s:2

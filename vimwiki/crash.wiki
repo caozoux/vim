@@ -87,6 +87,9 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 					  PG_pinned         9  0000200
 					  PG_foreign        9  0000200
 					  PG_isolated      17  0020000
+	2. pmd/pte
+		1. vmalloc_base/vmemmap_base/page_offset_base
+		2. page_to_pfn = (kaddr - page_offset_base) >> 12
 == list ==
 	* -h list -o xt_table.list  -s xt_table.name -h 0xffffa0c4d7992be8
 	* -H  list -o net.list -s net.ipvs -H 0xffffffff881871f0
@@ -103,6 +106,7 @@ struct blk_mq_ctx 0x2c97b6604b80:78
 	2. ptov 3e2122000
 		VIRTUAL           PHYSICAL
 		ffff8803e2122000  3e2122000 
+	3. 
 
 == bt ==
 	1. bt -p

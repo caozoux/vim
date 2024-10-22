@@ -2,6 +2,18 @@
 	1. attach
 		* b.attach_kprobe(event="vfs_unlink", fn_name="trace_req_start")
 		* trace_req_done(struct pt_regs *ctx, struct dentry *dentry, struct inode **delegated_inode) // first argument is struct pt_regs *ctx
+	2. tracepoint
+	2.1 RAW_TRACEPOINT_PROBE
+		1. example
+			RAW_TRACEPOINT_PROBE(sched_wakeup) {
+				struct task_struct *p = (struct task_struct *)ctx->args[0];
+		    }
+	2.2 normal trace
+		1. example
+			TRACEPOINT_PROBE(kmem, kmalloc) {	
+				gen_alloc_enter((struct pt_regs *)args, args->bytes_alloc)
+		    }
+	
 = data =	
 	1. BPF_HASH(start, u32)
 	2. BPF_ARRAY(avg, u64, 2)
