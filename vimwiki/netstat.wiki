@@ -115,5 +115,70 @@
 	113. TCPDeliveredCE 
 	114. TCPAckCompressed 
 	115. TCPWqueueTooBi
-
+= tpcExt_v2 =
+	1. SyncookiesSent : 在sysctl_tcp_syncookies选项打开后接收到syn而进行syn cookies计算的次数
+	SyncookiesRecv : 在CONFIG_SYN_COOKIES配置打开后接收ack而进行syn cookies检测计算成功的次数
+	SyncookiesFailed : 在CONFIG_SYN_COOKIES配置打开后接收ack而进行syn cookies检测计算失败的次数
+	EmbryonicRsts : 服务端由于3次握手没有成功因为接收到了一个reset包而导致向客户端发送reset包的次数
+	PruneCalled : 由于接收缓存空间不足而进行tcp内存回收的次数
+	RcvPruned : 由于接收缓存空间不足而进行tcp内存回收后空间还是不够的次数
+	OfoPruned : 由于接收缓存空间不足而进行tcp无序数据回收的次数
+	OutOfWindowIcmps : icmp协议栈处理ICMP_DEST_UNREACH, ICMP_TIME_EXCEED, ICMP_QUENCH类型包时，是超出tcp窗口类型的包个数
+	LockDroppedIcmps : icmp协议栈处理ICMP_DEST_UNREACH, ICMP_TIME_EXCEED, ICMP_QUENCH类型包时，当时sock正被用户程序锁定的包个数
+	ArpFilter : 被arp协议栈过滤掉的包的个数，过滤后就不会响应arp_reply包
+	TW : timewait状态sock超时后被回收的个数
+	TWRecycled : 试图进行timewait状态sock回收的次数，当新sock进行connect而hash时与原有的sock或timewait状态的sock冲突时，会触发回收工作.
+	TWKilled : 使用PAWS机制后释放timewait状态sock的个数
+	PAWSPassive : 服务器方在接收到syn而且在重用timewait状态的sock时，因时间截检查而失败导致syn失效的次数.
+	PAWSActive : 客户端在接收到syn+ack包但因时间截超出预取而被reset的连接数.
+	PAWSEstab : 连接已经建立中接收到时间截项错误的数据包的个数.
+	DelayedACKs : 延迟ack包发送的次数.
+	DelayedACKLocked : 发送延迟ack时，用户已经锁定了sock而导致ack再次延迟的次数.
+	DelayedACKLost : 延迟ack丢失而进行从发的次数
+	ListenOverflows : Listen状态的sock因syn过多导致请求数量超过了sock的最大backlog的数量的次数
+	ListenDrops : 或者是因为请求数量超出或者是其他错误原因例如内存不足等导致Listen状态sock分配子sock失败的次数.
+	TCPPrequeued : 系统调用中处理tcp协议栈的skb包的次数.
+	TCPDirectCopyFromBacklog : 在网络软中断中就已经拷贝到用户空间的字节数.
+	TCPDirectCopyFromPrequeue : 直接从prequeue队列拷贝到用户空间的数据字节数.
+	TCPPrequeueDropped : 没有使用总是0
+	TCPHPHits : tcp协议栈快速路径处理数据被动拷贝到用户空间的次数
+	TCPHPHitsToUser : tcp协议栈快速路径处理数据主动拷贝到用户空间的次数
+	TCPPureAcks : tcp协议栈接收到纯ack包的次数
+	TCPHPAcks : tcp协议接收到预期顺序ack包的次数
+	TCPRenoRecovery : 进入到快速重传恢复状态的次数，说明有数据包丢失 ??
+	TCPSackRecovery : 进入到拥塞控制状态的次数 ??
+	TCPSACKReneging : 主机发送的SACK被拒绝的次数，说明接收端拥塞十分严重或有bug
+	TCPFACKReorder : tcp协议栈在接收到FACK包而进行乱序包阀值调整的次数 ??
+	TCPSACKReorder : tcp协议栈在接收到SACK包而进行乱序包阀值调整的次数 ??
+	TCPRenoReorder : tcp协议栈在拥塞状态而进行乱序包阀值调整的次数 ??
+	TCPTSReorder : tcp协议栈在接收到时间截包而进行乱序包阀值调整的次数 ??
+	TCPFullUndo : tcp协议栈撤销了所有需要重传的数据包. ??
+	TCPPartialUndo : tcp协议栈撤销了部分需要重传的数据包. ??
+	TCPDSACKUndo : 撤销了发送DSACK包的次数，DSACK要求重传所有需要重传的数据.
+	TCPLossUndo : 撤销发送快速恢复数据包的次数.
+	TCPLoss : tcp协议栈丢失数据包而进行恢复的次数.
+	TCPLostRetransmit : tcp协议栈丢失重传的数据包的次数.
+	TCPRenoFailures : 拥塞控制恢复失败次数.
+	TCPSackFailures : tcp协议sack恢复数据失败次数.
+	TCPLossFailures : tcp协议栈丢失数据包而进行恢复失败的次数
+	TCPFastRetrans : tcp协议栈发送快速重传数据的次数.
+	TCPForwardRetrans : tcp协议栈发送一般重传数据的次数.
+	TCPSlowStartRetrans : tcp协议栈执行慢启动重传数据的次数.
+	TCPTimeouts : tcp数据在指定时间内没有受到应答ack而超时的次数
+	TCPRenoRecoveryFail : 快速重传包丢失导致快速重传恢复机制失败的次数 ??
+	TCPSackRecoveryFail : 从拥塞控制状态恢复失败的次数 ??
+	TCPSchedulerFailed : tcp在发送延迟ack而进行数据后备队列的接收处理的次数.
+	TCPRcvCollapsed : tcp在丢弃重复完整数据包时的次数.
+	TCPDSACKOldSent : 发送过期的相同sack的次数
+	TCPDSACKOfoSent : 发送超前的相同sack的次数
+	TCPDSACKRecv : 接收到相同sack包的次数
+	TCPDSACKOfoRecv : 接收到相同超前的sack包次数 ??
+	TCPAbortOnSyn : 接收到错误的syn包(序号错误)导致连接被reset的次数.
+	TCPAbortOnData : 当sock状态在TCP_FIN_WAIT1或TCP_FIN_WAIT2状态已经进入半连接但还是接收到数据而引起连接被reset的次数.
+	TCPAbortOnClose : 当sock关闭时还有相关数据未读的次数.
+	TCPAbortOnMemory : 当sock关闭时由于内存不足而直接被reset的次数.
+	TCPAbortOnTimeout : tcp协议栈各定时器超时重复次数超过最大限制而关闭sock的次数.
+	TCPAbortOnLinger : 当sock关闭时状态是TCP_FIN_WAIT2状态直接被reset的次数.
+	TCPAbortFailed : tcp协议栈在发送reset包而发送失败的次数.
+	TCPMemoryPressures : 分配skb失败导致进入协议栈内存紧缺状态的次数.
 

@@ -1,1 +1,8 @@
-*
+= tcpdump =
+== usage ==
+	1. tcpdump -i 网卡
+	2. tcpdump -nn 
+	3. tcpdump port xx 指定端口
+	4. tcpdump host xx.xx.xx.xx 指定ip源
+	5. tcpdump -w xx.txt 指定文件
+	6. tcpdump -r xx.txt 解析文件

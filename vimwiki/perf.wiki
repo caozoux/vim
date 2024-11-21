@@ -14,4 +14,6 @@
 == offcpu ==
 		a) offcputime -K -f 10 > log
 		b) ./FlameGraph/flamegraph.pl log > perf.svg
+== pmu ==		
+	a) sudo perf stat -e cpu/event=0xd3,umask=0x02,name=MEM_LOAD_L3_MISS_RETIRED.REMOTE_DRAM/,cpu/event=0xd3,umask=0x01,name=MEM_LOAD_L3_MISS_RETIRED.LOCAL_DRAM/,cpu-clock -p 1402279 -- sleep 3
 
