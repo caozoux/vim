@@ -1,0 +1,31 @@
+= 查找进程namespace =
+	1. net -s 3372
+	2. crash> sock ffffa0eb826bce00 | grep net
+		skc_net_refcnt = 1 '\001',
+		skc_net = {
+		  net = 0xffffffffb9c409c0 <init_net>
+	  sk_destruct = 0xffffffffb7b64b40 <inet_sock_destruct>,
+	3.  
+	4. crash> struct net.nf 0xffffffffb9c409c0 
+	  nf = {
+		proc_netfilter = 0xffffa0eb809ec240,
+		nf_loggers = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+		nf_log_dir_header = 0xffffa0eb80228600,
+		nf_lwtnl_dir_header = 0xffffa0eb801f0100,
+		hooks_ipv4 = {0xffffa0eb96fd4600, 0xffffa0eb94cec480, 0xffffa0eb96fd4180, 0xffffa0eb940a4b00, 0xffffa0eb96fd4680},
+		hooks_ipv6 = {0xffffa0eb93e2bb40, 0x0, 0xffffa0eb80e12100, 0xffffa0eb80e12140, 0xffffa0eb80e120c0},
+		hooks_arp = {0x0, 0x0, 0x0},
+		hooks_bridge = {0xffffa0eb93e2ba40, 0xffffa0eb93e2ba80, 0xffffa0eb92027420, 0x0, 0xffffa0eb93e2bb00},
+		defrag_ipv4_users = 1,
+		defrag_ipv6_users = 0
+	  },
+	5. nf_hook_entries 0xffffa0eb940a4b00
+		struct nf_hook_entries {
+		  num_hook_entries = 7,
+		  hooks = 0xffffa0eb940a4b08
+		}
+
+= namespace遍历 =
+	1. net
+		1. p net_namespace_list
+			a) list -o net.list -s net.ipvs -H 0xffffffff881871f0
