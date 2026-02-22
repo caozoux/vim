@@ -244,3 +244,60 @@ function! EntryKeyExter()
 	   normal! o
 	endif
 endfunction
+
+" quick_visual_to_terminal.vim
+" 简化版本 - 快速发送可视选择到终端
+function! QuickVisualToTerminal()
+    " 快速版本：直接发送到第一个找到的终端
+
+    " 1. 检查可视模式
+	let mode_val = mode()
+    "if mode() !~# '[vV␖]'
+    "    echo "请在可视模式下使用". mode_val
+    "    return
+    "endif
+
+    " 2. 获取信息
+    let start_line = line("'<")
+    let end_line = line("'>")
+    let filename = expand('%:p')
+
+    " 3. 构建输出
+    let output = "目标" . filename . ':' . start_line . '-' . end_line . " line"
+
+    " 4. 查找终端
+    let term_bufnr = 0
+    for bufnr in range(1, bufnr('$'))
+        if buflisted(bufnr) && getbufvar(bufnr, '&buftype') == 'terminal'
+            let term_bufnr = bufnr
+            break
+        endif
+    endfor
+
+    if term_bufnr == 0
+        echo "未找到终端窗口，请先运行 :terminal"
+        return
+    endif
+
+    " 5. 发送到终端
+    if exists('*term_sendkeys')
+        call term_sendkeys(term_bufnr, output)
+        echo "已发送: " . output
+    else
+        echo "Vim 版本不支持 term_sendkeys"
+        echo "输出: " . output
+    endif
+
+    " 6. 切换到终端窗口
+    for winnr in range(1, winnr('$'))
+        if winbufnr(winnr) == term_bufnr
+            execute winnr . 'wincmd w'
+            break
+        endif
+    endfor
+endfunction
+
+" 命令和快捷键
+command! -range QVTT call QuickVisualToTerminal()
+xnoremap <leader>qt :QVTT<CR>
+xnoremap <leader>qo :call QuickVisualToTerminal()<CR>

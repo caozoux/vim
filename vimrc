@@ -53,6 +53,7 @@ Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}   "powerline
 Plugin 'pboettch/vim-cmake-syntax' "cmake syntax
 Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
+Plugin 'plasticboy/vim-Markdown'
 
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
@@ -339,3 +340,9 @@ au BufNewFile,BufRead *.note	setf note
 augroup END
 
 set hlsearch
+
+
+" 命令和快捷键
+command! -range QVTT call QuickVisualToTerminal()
+xnoremap <leader>qt :QVTT<CR>
+xnoremap <leader>qo :call QuickVisualToTerminal()<CR>
